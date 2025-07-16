@@ -5,6 +5,22 @@ from sqlalchemy import func, and_, or_
 from ..models import db, WasteEntry, Bin, Zone, Collection, User
 from ..utils.decorators import admin_required
 import json
+import importlib.util
+import sys
+from pathlib import Path
+
+# --- Dynamic Import for ML Model ---
+# This robustly imports the prediction function from the sibling 'ml-models' directory.
+# This is necessary because 'ml-models' is not a standard package and contains a hyphen.
+try:
+    ml_models_path = Path(__file__).resolve().parent.parent.parent.parent / "ml-models"
+    prediction_script_path = ml_models_path / "waste_prediction.py"
+    spec = importlib.util.spec_from_file_location("waste_prediction", prediction_script_path)
+    waste_prediction_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(waste_prediction_module)
+    predict_waste_for_zone = waste_prediction_module.predict_waste_for_zone
+except ImportError as e:
+    predict_waste_for_zone = None
 
 analytics_bp = Blueprint('analytics', __name__)
 
@@ -318,36 +334,32 @@ def get_environmental_impact():
 def get_predictive_insights():
     """Get AI-powered predictive insights"""
     try:
-        # This would integrate with ML models
-        # For now, providing mock predictions based on historical data
-        
         days_ahead = request.args.get('days', 7, type=int)
-        
-        # Historical average for prediction
-        historical_avg = db.session.query(
-            func.avg(func.sum(WasteEntry.quantity))
-        ).filter(
-            WasteEntry.timestamp >= datetime.utcnow() - timedelta(days=30)
-        ).group_by(func.date(WasteEntry.timestamp)).scalar() or 0
-        
-        # Generate predictions (mock data - would use ML model)
-        predictions = []
-        for i in range(days_ahead):
-            future_date = datetime.utcnow() + timedelta(days=i+1)
-            # Add some variance to make it realistic
-            variance = 0.1 * historical_avg * (0.5 - abs(0.5 - (i % 7) / 7))
-            predicted_waste = historical_avg + variance
-            
-            predictions.append({
-                'date': future_date.strftime('%Y-%m-%d'),
-                'predicted_waste_kg': round(predicted_waste, 2),
-                'confidence': round(85 - (i * 2), 2)  # Decreasing confidence over time
-            })
-        
+
+        if not predict_waste_for_zone:
+            return jsonify({'success': False, 'message': 'ML prediction model could not be loaded.'}), 500
+
+        # Get user and their zone
+        user_id = get_jwt_identity()
+        user = User.query.get(user_id)
+        if not user or not user.zone_id:
+            return jsonify({'success': False, 'message': 'User or Zone not found'}), 404
+
+        zone_id = user.zone_id
+        predictions = predict_waste_for_zone(zone_id=zone_id, days_ahead=days_ahead)
+
+        if not predictions:
+            return jsonify({
+               'success': True,
+               'data': {
+                   'waste_predictions': [],
+                   'bin_alerts': []
+               }})
+
         # Identify bins likely to be full soon
         high_fill_bins = Bin.query.filter(Bin.fill_level >= 70).all()
         alerts = []
-        
+
         for bin_obj in high_fill_bins:
             # Estimate time to full based on recent fill rate
             recent_entries = WasteEntry.query.filter(
@@ -356,7 +368,7 @@ def get_predictive_insights():
                     WasteEntry.timestamp >= datetime.utcnow() - timedelta(days=7)
                 )
             ).count()
-            
+
             if recent_entries > 0:
                 fill_rate = recent_entries / 7  # entries per day
                 remaining_capacity = 100 - bin_obj.fill_level
@@ -370,18 +382,17 @@ def get_predictive_insights():
                         'estimated_days_to_full': round(days_to_full, 1),
                         'priority': 'high' if days_to_full <= 1 else 'medium'
                     })
-        
+
         return jsonify({
-            'success': True,
-            'data': {
-                'waste_predictions': predictions,
-                'bin_alerts': alerts,
-                'insights': {
-                    'avg_daily_waste': round(historical_avg, 2),
-                    'bins_needing_attention': len(alerts),
-                    'prediction_period': days_ahead
-                }
-            }
+           'success': True,
+           'data': {
+               'waste_predictions': predictions,
+               'bin_alerts': alerts,
+               'insights': {
+                   'bins_needing_attention': len(alerts),
+                   'prediction_period': days_ahead
+               }
+           }
         })
     except Exception as e:
         return jsonify({'success': False, 'message': str(e)}), 500

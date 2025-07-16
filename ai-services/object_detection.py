@@ -38,12 +38,12 @@ class WasteObjectDetector:
         """Load pre-trained models"""
         try:
             # Load YOLO model for real-time detection
-            self.yolo_model = YOLO('yolov8n.pt')
+            self.yolo_model = YOLO('c:/Users/Ayush/delhi-waste-management/ai-services/models/waste_model.pt')
             
             # Load custom waste detection model
-            self.tensorflow_model = tf.keras.models.load_model(
-                'models/waste_detection_model.h5'
-            )
+            # self.tensorflow_model = tf.keras.models.load_model(
+            #     'models/waste_detection_model.h5'
+            # )
             
             self.logger.info("Object detection models loaded successfully")
         except Exception as e:
@@ -65,13 +65,15 @@ class WasteObjectDetector:
                 boxes = result.boxes
                 if boxes is not None:
                     for box in boxes:
-                        detection = {
-                            'class': self.waste_classes[int(box.cls)],
-                            'confidence': float(box.conf),
-                            'bbox': box.xyxy.tolist()[0],
-                            'area': self._calculate_area(box.xyxy.tolist()[0])
-                        }
-                        detections.append(detection)
+                        class_index = int(box.cls)
+                        if class_index < len(self.yolo_model.names):
+                            detection = {
+                                'class': self.yolo_model.names[class_index],
+                                'confidence': float(box.conf),
+                                'bbox': box.xyxy.tolist()[0],
+                                'area': self._calculate_area(box.xyxy.tolist()[0])
+                            }
+                            detections.append(detection)
             
             # Additional analysis
             analysis = await self._analyze_waste_composition(detections)
@@ -123,7 +125,7 @@ class RealTimeDetector:
         self.video_capture = None
         self.is_running = False
     
-    async def start_video_detection(self, source: str = 0):
+    async def start_video_detection(self, source: int = 0):
         """Start real-time detection from video source"""
         self.video_capture = cv2.VideoCapture(source)
         self.is_running = True
@@ -202,73 +204,30 @@ class BatchProcessor:
         
         return results
 
-class ModelTrainer:
-    """Train custom object detection models"""
-    
-    def __init__(self):
-        self.logger = logging.getLogger(__name__)
-    
-    def train_yolo_model(self, dataset_path: str, epochs: int = 100):
-        """Train custom YOLO model"""
-        try:
-            model = YOLO('yolov8n.pt')
-            
-            # Train the model
-            results = model.train(
-                data=f"{dataset_path}/data.yaml",
-                epochs=epochs,
-                imgsz=640,
-                batch=16,
-                name='waste_detection'
-            )
-            
-            # Save the trained model
-            model.save('models/custom_waste_yolo.pt')
-            
-            return results
-            
-        except Exception as e:
-            self.logger.error(f"Error training YOLO model: {e}")
-            return None
-    
-    def create_tensorflow_model(self, input_shape: Tuple[int, int, int] = (224, 224, 3)):
-        """Create TensorFlow model for waste classification"""
-        model = tf.keras.Sequential([
-            tf.keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape),
-            tf.keras.layers.MaxPooling2D(2, 2),
-            tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
-            tf.keras.layers.MaxPooling2D(2, 2),
-            tf.keras.layers.Conv2D(128, (3, 3), activation='relu'),
-            tf.keras.layers.MaxPooling2D(2, 2),
-            tf.keras.layers.Flatten(),
-            tf.keras.layers.Dense(512, activation='relu'),
-            tf.keras.layers.Dropout(0.5),
-            tf.keras.layers.Dense(len(self.detector.waste_classes), activation='softmax')
-        ])
-        
-        model.compile(
-            optimizer='adam',
-            loss='categorical_crossentropy',
-            metrics=['accuracy']
-        )
-        
-        return model
 
 # Example usage
 async def main():
-    # Initialize detector
-    detector = WasteObjectDetector()
-    
-    # Example image detection
-    with open('sample_waste_image.jpg', 'rb') as f:
-        image_data = f.read()
-    
-    results = await detector.detect_objects(image_data)
-    print(json.dumps(results, indent=2))
-    
-    # Real-time detection
-    real_time = RealTimeDetector()
-    await real_time.start_video_detection()
+    # This is an example and won't run without a sample image.
+    # Create a dummy image file named 'sample_waste_image.jpg' to test.
+    try:
+        from PIL import Image
+        dummy_image = Image.new('RGB', (600, 400), color = 'red')
+        dummy_image.save('sample_waste_image.jpg')
+
+        # Initialize detector
+        detector = WasteObjectDetector()
+        
+        # Example image detection
+        with open('sample_waste_image.jpg', 'rb') as f:
+            image_data = f.read()
+        
+        results = await detector.detect_objects(image_data)
+        print(json.dumps(results, indent=2))
+    except FileNotFoundError:
+        print("Please create a 'sample_waste_image.jpg' to run the example.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())

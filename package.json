@@ -1,0 +1,54 @@
+{
+  "name": "advanced-waste-management-system",
+  "version": "1.0.0",
+  "description": "Revolutionary waste management system with AI, blockchain, and Web3 integration",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "blockchain"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm run install:frontend && npm run install:blockchain && npm run install:backend",
+    "install:frontend": "cd frontend && npm install",
+    "install:blockchain": "cd blockchain && npm install",
+    "install:backend": "cd backend && pip install -r requirements.txt",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:blockchain": "cd blockchain && npm run node",
+    "test:frontend": "cd frontend && npm test",
+    "test:blockchain": "cd blockchain && npm test",
+    "test:backend": "cd backend && python -m pytest",
+    "build:frontend": "cd frontend && npm run build",
+    "compile:blockchain": "cd blockchain && npm run compile",
+    "deploy:blockchain": "cd blockchain && npm run deploy",
+    "lint": "npm run lint:frontend && npm run lint:blockchain",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:blockchain": "cd blockchain && npx eslint .",
+    "clean": "npm run clean:frontend && npm run clean:blockchain",
+    "clean:frontend": "cd frontend && rm -rf node_modules dist",
+    "clean:blockchain": "cd blockchain && rm -rf node_modules artifacts cache"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/advanced-waste-management-system.git"
+  },
+  "keywords": [
+    "waste-management",
+    "blockchain",
+    "ai",
+    "web3",
+    "sustainability",
+    "nft",
+    "defi",
+    "dao"
+  ],
+  "author": "Advanced Waste Management Team",
+  "license": "MIT"
+}

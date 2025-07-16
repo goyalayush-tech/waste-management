@@ -126,90 +126,6 @@ class WastePredictionModel:
         print(f"Model loaded from {filepath}")
 
 
-class RouteOptimizer:
-    """Route optimization for waste collection"""
-    
-    def __init__(self):
-        self.model = GradientBoostingRegressor(n_estimators=100, random_state=42)
-        self.scaler = StandardScaler()
-        
-    def calculate_distance_matrix(self, locations):
-        """Calculate distance matrix between locations"""
-        n = len(locations)
-        distances = np.zeros((n, n))
-        
-        for i in range(n):
-            for j in range(n):
-                if i != j:
-                    # Haversine distance calculation
-                    lat1, lon1 = locations[i]
-                    lat2, lon2 = locations[j]
-                    
-                    R = 6371  # Earth's radius in km
-                    dlat = np.radians(lat2 - lat1)
-                    dlon = np.radians(lon2 - lon1)
-                    
-                    a = (np.sin(dlat/2)**2 + 
-                         np.cos(np.radians(lat1)) * np.cos(np.radians(lat2)) * 
-                         np.sin(dlon/2)**2)
-                    c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1-a))
-                    distances[i][j] = R * c
-        
-        return distances
-    
-    def optimize_route(self, bins_data, vehicle_capacity=5000):
-        """Optimize collection route using greedy algorithm"""
-        # Filter bins that need collection (>80% full)
-        bins_to_collect = [
-            bin for bin in bins_data 
-            if bin['current_level'] >= 80
-        ]
-        
-        if not bins_to_collect:
-            return []
-        
-        # Extract locations
-        locations = [(bin['latitude'], bin['longitude']) for bin in bins_to_collect]
-        distances = self.calculate_distance_matrix(locations)
-        
-        # Greedy nearest neighbor algorithm
-        n = len(bins_to_collect)
-        unvisited = set(range(1, n))  # Start from depot (index 0)
-        route = [0]
-        current_load = 0
-        
-        current = 0
-        while unvisited:
-            # Find nearest unvisited bin
-            nearest = min(unvisited, key=lambda x: distances[current][x])
-            
-            # Check if adding this bin exceeds capacity
-            bin_weight = bins_to_collect[nearest]['current_level'] * 0.5  # Estimate weight
-            
-            if current_load + bin_weight <= vehicle_capacity:
-                route.append(nearest)
-                current_load += bin_weight
-                current = nearest
-                unvisited.remove(nearest)
-            else:
-                # Return to depot and start new route
-                break
-        
-        # Convert indices back to bin data
-        optimized_route = [bins_to_collect[i] for i in route]
-        
-        # Calculate route statistics
-        total_distance = sum(distances[route[i]][route[i+1]] for i in range(len(route)-1))
-        
-        return {
-            'route': optimized_route,
-            'total_distance': total_distance,
-            'estimated_time': total_distance * 2,  # 2 minutes per km
-            'bins_count': len(route) - 1,  # Exclude depot
-            'load_utilization': (current_load / vehicle_capacity) * 100
-        }
-
-
 def generate_training_data():
     """Generate synthetic training data for the model"""
     print("Generating training data...")
@@ -303,48 +219,58 @@ def predict_waste_for_zone(zone_id, days_ahead=7):
         waste_model.load_model('models/waste_prediction_model.pkl')
         
         # Prepare prediction data
-        predictions = []
-        base_date = datetime.now()
-        
-        # Zone data (in production, fetch from database)
-        zone_data = {
-            1: {'population': 887978, 'area': 60.86},
-            2: {'population': 2731929, 'area': 250.48},
-            3: {'population': 1709346, 'area': 64.0},
-            4: {'population': 2543243, 'area': 129.38},
-            5: {'population': 582320, 'area': 25.0}
-        }
-        
-        zone_info = zone_data.get(zone_id, zone_data[1])
-        
-        for i in range(days_ahead):
-            pred_date = base_date + timedelta(days=i)
+        from backend.app.models import Zone
+
+        try:
+            # 1. Fetch zone information from the database
+            zone = Zone.query.get(zone_id)
+            if not zone:
+                raise ValueError(f"Zone with ID {zone_id} not found")
             
-            # Create prediction input
-            pred_input = pd.DataFrame([{
-                'date': pred_date,
-                'zone_population': zone_info['population'],
-                'zone_area': zone_info['area'],
-                'temperature': 25.0,  # Default values
-                'humidity': 60.0,
-                'rainfall': 0.0,
-                'avg_last_week': 1000.0,  # Placeholder
-                'trend': 0.0
-            }])
+            predictions = []
+            base_date = datetime.now()
             
-            prediction = waste_model.predict(pred_input)[0]
+            for i in range(days_ahead):
+                pred_date = base_date + timedelta(days=i)
+                
+                # 2. Fetch weather data (replace with your weather API integration)
+                weather_data = {  # Placeholder, replace with API call
+                    'temperature': 25.0,
+                    'humidity': 60.0,
+                    'rainfall': 0.0
+                }
+
+                # 3. Calculate historical features (replace with your logic)
+                historical_data = {  # Placeholders, replace with database queries
+                    'avg_last_week': 1000.0,
+                    'trend': 0.0
+                }
+                
+                # Create prediction input
+                pred_input = pd.DataFrame([{
+                    'date': pred_date,
+                    'zone_population': zone.population,
+                    'zone_area': zone.area,
+                    'temperature': weather_data['temperature'],
+                    'humidity': weather_data['humidity'],
+                    'rainfall': weather_data['rainfall'],
+                    'avg_last_week': historical_data['avg_last_week'],
+                    'trend': historical_data['trend']
+                }])
+                
+                prediction = waste_model.predict(pred_input)[0]
+                
+                predictions.append({
+                    'date': pred_date.isoformat(),
+                    'predicted_waste': round(prediction, 2),
+                    'zone_id': zone_id
+                })
             
-            predictions.append({
-                'date': pred_date.isoformat(),
-                'predicted_waste': round(prediction, 2),
-                'zone_id': zone_id
-            })
-        
-        return predictions
-        
-    except Exception as e:
-        print(f"Prediction error: {e}")
-        return []
+            return predictions
+            
+        except Exception as e:
+            print(f"Prediction error: {e}")
+            return []
 
 
 if __name__ == "__main__":

@@ -1,0 +1,30 @@
+{
+  "name": "waste-management-blockchain",
+  "version": "1.0.0",
+  "description": "Smart contracts for advanced waste management system",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.js",
+    "node": "hardhat node",
+    "verify": "hardhat verify"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@openzeppelin/contracts-upgradeable": "^5.0.0",
+    "hardhat": "^2.19.0",
+    "chai": "^4.3.7",
+    "ethers": "^6.8.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solidity-coverage": "^0.8.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ipfs-http-client": "^60.0.1",
+    "axios": "^1.6.0",
+    "web3": "^6.9.0"
+  }
+}

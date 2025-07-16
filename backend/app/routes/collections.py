@@ -372,8 +372,6 @@ def get_collection_stats():
         return jsonify({'error': str(e)}), 500
 
 @collections_bp.route('/collections/optimize-routes', methods=['POST'])
-@jwt_required()
-@role_required(['admin'])
 def optimize_routes():
     """Optimize collection routes"""
     try:
@@ -394,37 +392,37 @@ def optimize_routes():
         if not collections:
             return jsonify({'message': 'No scheduled collections found'}), 200
         
-        # Simple route optimization (can be enhanced with ML)
-        # Group by zone and sort by bin location
-        optimized_routes = {}
+        # Use RouteOptimizer from collection_service
+        from ..services.collection_service import DynamicRouteOptimizerRL
+
+        all_bins_data = []
+        for bin_obj in Bin.query.filter(Bin.zone_id == zone_id, Bin.status == 'active'):
+             all_bins_data.append({
+                 'id': bin_obj.id,
+                 'latitude': bin_obj.latitude,
+                 'longitude': bin_obj.longitude,
+                 'fill_level': bin_obj.fill_level,
+                 'capacity': bin_obj.capacity
+             })
         
-        for collection in collections:
-            zone_id = collection.bin.zone_id
-            if zone_id not in optimized_routes:
-                optimized_routes[zone_id] = []
-            
-            optimized_routes[zone_id].append({
-                'collection_id': collection.id,
-                'bin_id': collection.bin_id,
-                'location': collection.bin.location,
-                'current_level': collection.bin.current_level,
-                'priority': 'high' if collection.bin.current_level >= 90 else 'medium' if collection.bin.current_level >= 70 else 'low'
-            })
-        
-        # Sort each zone's collections by priority and location
-        for zone_id in optimized_routes:
-            optimized_routes[zone_id].sort(
-                key=lambda x: (
-                    0 if x['priority'] == 'high' else 1 if x['priority'] == 'medium' else 2,
-                    x['location']
-                )
-            )
+        optimizer = DynamicRouteOptimizerRL()
+        optimization_result = optimizer.optimize_route(all_bins_data)
         
         return jsonify({
-            'message': 'Routes optimized successfully',
-            'optimized_routes': optimized_routes,
-            'total_collections': len(collections)
+           'message': 'Routes optimized successfully',
+           'route': [
+               {
+                   'bin_id': bin_data['id'],
+                   'location': (bin_data['latitude'], bin_data['longitude']),
+                   'fill_level': bin_data['fill_level']
+               }
+               for bin_data in optimization_result['route']
+           ],
+           'total_distance_km': optimization_result['total_distance'],
+           'estimated_time_minutes': optimization_result['estimated_time_mins'],
+           'bins_count': optimization_result['bins_count'],
+           'load_utilization_percent': optimization_result['load_utilization_percent']
         }), 200
-        
+
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+         return jsonify({'error': str(e)}), 500
