@@ -1,0 +1,323 @@
+/* Advanced Waste Management System Styles */
+
+.App {
+  text-align: center;
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #141414;
+  color: #ffffff;
+}
+
+/* Page Layout */
+.page-header {
+  margin-bottom: 24px;
+}
+
+.metrics-row {
+  margin-bottom: 24px;
+}
+
+/* Contamination Detection Styles */
+.contamination-detection-page {
+  padding: 24px;
+}
+
+.contamination-tabs .ant-tabs-content-holder {
+  padding: 24px 0;
+}
+
+.upload-card .image-preview {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.upload-card .image-preview img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.results-card .loading-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.results-card .no-results {
+  text-align: center;
+  padding: 40px;
+  color: #8c8c8c;
+}
+
+.detection-results .result-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.detection-results .status-tag {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.contamination-details .detail-item {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contamination-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.batch-flagging {
+  margin-top: 16px;
+}
+
+/* Waste Analysis Styles */
+.waste-analysis-page {
+  padding: 24px;
+}
+
+.analysis-tabs .ant-tabs-content-holder {
+  padding: 24px 0;
+}
+
+.analysis-mode-selector {
+  margin-bottom: 16px;
+}
+
+.analysis-results .classification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.analysis-results .classification-info h4 {
+  margin-bottom: 4px;
+  color: #1890ff;
+}
+
+.analysis-results .confidence-indicator {
+  text-align: center;
+}
+
+.analysis-results .metrics-grid {
+  margin: 16px 0;
+}
+
+.analysis-results .metric-card .metric-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.analysis-results .metric-info {
+  flex: 1;
+}
+
+.analysis-results .composition-item {
+  margin-bottom: 8px;
+}
+
+.analysis-results .composition-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.analysis-results .sensor-contributions .ant-row {
+  gap: 8px;
+}
+
+/* Sensor Calibration Styles */
+.sensor-calibration {
+  padding: 24px;
+}
+
+.calibration-header {
+  margin-bottom: 24px;
+}
+
+.calibration-actions {
+  margin-bottom: 24px;
+}
+
+.sensor-card .calibration-steps ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.calibration-progress {
+  text-align: center;
+}
+
+.calibration-progress .ant-steps {
+  margin-top: 24px;
+}
+
+/* Real-time Monitoring Styles */
+.real-time-monitoring {
+  padding: 24px;
+}
+
+.monitoring-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.monitoring-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quick-actions .ant-btn {
+  margin-bottom: 8px;
+}
+
+/* Analysis History Styles */
+.analysis-history {
+  padding: 24px;
+}
+
+.history-header {
+  margin-bottom: 24px;
+}
+
+/* Visualization Styles */
+.visualization-card .canvas-container {
+  text-align: center;
+}
+
+.visualization-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.visualization-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Remediation Styles */
+.remediation-card .no-suggestions {
+  text-align: center;
+  padding: 40px;
+  color: #8c8c8c;
+}
+
+.remediation-card .action-buttons {
+  margin-top: 16px;
+}
+
+.remediation-card .efficiency-indicator {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: rgba(82, 196, 26, 0.1);
+  border-radius: 6px;
+}
+
+/* Flagged Batches Styles */
+.flagged-batches-card .no-batches {
+  text-align: center;
+  padding: 24px;
+  color: #8c8c8c;
+}
+
+/* Stats Styles */
+.contamination-stats .ant-row {
+  margin-bottom: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contamination-detection-page,
+  .waste-analysis-page,
+  .sensor-calibration,
+  .real-time-monitoring,
+  .analysis-history {
+    padding: 16px;
+  }
+  
+  .analysis-results .classification-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .monitoring-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
+
+/* Dark Theme Overrides */
+.ant-card {
+  background-color: #1f1f1f;
+  border-color: #303030;
+}
+
+.ant-card-head {
+  border-bottom-color: #303030;
+}
+
+.ant-table {
+  background-color: #1f1f1f;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #262626;
+  border-bottom-color: #303030;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom-color: #303030;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: #262626;
+}
+
+.ant-tabs-tab {
+  color: #d9d9d9;
+}
+
+.ant-tabs-tab-active {
+  color: #00b96b;
+}
+
+.ant-tabs-ink-bar {
+  background-color: #00b96b;
+}
+
+.ant-progress-text {
+  color: #d9d9d9;
+}
+
+.ant-statistic-title {
+  color: #8c8c8c;
+}
+
+.ant-statistic-content {
+  color: #d9d9d9;
+}

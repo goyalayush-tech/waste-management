@@ -9,6 +9,7 @@ from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout, BatchNormalization
 from tensorflow.keras.optimizers import Adam
 import logging
+import warnings
 from typing import Dict, List, Tuple, Optional, Any, Union
 import asyncio
 import json
@@ -23,20 +24,14 @@ import os
 import time
 import threading
 import queue
-import warnings
 
-# Import related components
-try:
-    # When imported as a module
-    from .multi_modal_sensor_fusion import FusionResult, SensorType
-    from .contamination_detection import ContaminationResult, ContaminationSeverity
-    from .rare_material_detection import DetectionResult as RareDetectionResult
-except ImportError:
-    # When run directly
-    from multi_modal_sensor_fusion import FusionResult, SensorType
-    from contamination_detection import ContaminationResult, ContaminationSeverity
-    from rare_material_detection import DetectionResult as RareDetectionResult
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 
+# Define enums
 class ProcessingStage(Enum):
     SORTING = "sorting"
     CLEANING = "cleaning"
@@ -55,6 +50,7 @@ class OptimizationObjective(Enum):
     MAXIMIZE_THROUGHPUT = "maximize_throughput"
     MINIMIZE_WASTE = "minimize_waste"
 
+# Define data classes
 @dataclass
 class ProcessingParameters:
     stage: ProcessingStage
@@ -80,6 +76,28 @@ class OptimizationResult:
     optimization_method: str
     parameter_changes: Dict[str, Tuple[float, float]]  # old_value, new_value
     predicted_outcomes: Dict[str, float]
+
+@dataclass
+class CompositionChange:
+    """Represents a significant change in waste composition"""
+    previous_composition: Dict[str, float]
+    current_composition: Dict[str, float]
+    change_percentage: Dict[str, float]  # Material type -> percentage change
+    significant_changes: Dict[str, float]  # Only materials with significant changes
+    overall_change_magnitude: float
+    timestamp: datetime = field(default_factory=datetime.now)
+
+@dataclass
+class OperatorAlert:
+    """Alert for operators about significant changes or optimization recommendations"""
+    alert_id: str
+    alert_type: str  # 'composition_change', 'parameter_optimization', 'efficiency_drop', etc.
+    severity: str  # 'info', 'warning', 'critical'
+    message: str
+    details: Dict[str, Any]
+    timestamp: datetime = field(default_factory=datetime.now)
+    acknowledged: bool = False
+    action_taken: Optional[str] = None
 
 class DynamicParameterOptimizer:
     """Dynamic optimization of processing parameters based on waste composition"""
@@ -223,42 +241,24 @@ class DynamicParameterOptimizer:
     def _load_optimization_models(self):
         """Load or create optimization models"""
         try:
-            # Load parameter prediction model
-            self.parameter_prediction_model = tf.keras.models.load_model(
-                'models/parameter_prediction_model.h5'
-            )
-            self.logger.info("Loaded parameter prediction model")
-        except:
+            # Create parameter prediction model
             self.parameter_prediction_model = self._create_parameter_prediction_model()
-            self.logger.info("Created new parameter prediction model")
-        
-        try:
-            # Load efficiency prediction model
+            self.logger.info("Created parameter prediction model")
+            
+            # Create efficiency prediction model
             self.efficiency_prediction_model = RandomForestRegressor(
                 n_estimators=100, random_state=42
             )
-            with open('models/efficiency_model.pkl', 'rb') as f:
-                self.efficiency_prediction_model = pickle.load(f)
-            self.logger.info("Loaded efficiency prediction model")
-        except:
-            self.efficiency_prediction_model = RandomForestRegressor(
-                n_estimators=100, random_state=42
-            )
-            self.logger.info("Created new efficiency prediction model")
-        
-        try:
-            # Load quality prediction model
+            self.logger.info("Created efficiency prediction model")
+            
+            # Create quality prediction model
             self.quality_prediction_model = RandomForestRegressor(
                 n_estimators=100, random_state=42
             )
-            with open('models/quality_model.pkl', 'rb') as f:
-                self.quality_prediction_model = pickle.load(f)
-            self.logger.info("Loaded quality prediction model")
-        except:
-            self.quality_prediction_model = RandomForestRegressor(
-                n_estimators=100, random_state=42
-            )
-            self.logger.info("Created new quality prediction model")
+            self.logger.info("Created quality prediction model")
+        except Exception as e:
+            self.logger.error(f"Error loading optimization models: {e}")
+            # Continue with rule-based fallbacks
     
     def _create_parameter_prediction_model(self) -> Model:
         """Create neural network for parameter prediction"""
@@ -467,32 +467,100 @@ class DynamicParameterOptimizer:
     ) -> ProcessingParameters:
         """Predict optimal parameters using ML model"""
         try:
-            # Reshape features for model input
-            features_batch = np.expand_dims(composition_features, axis=0)
-            
-            # Get parameter predictions from model
-            parameter_values = self.parameter_prediction_model.predict(features_batch)[0]
-            
-            # Create parameters object with predicted values
-            parameters = ProcessingParameters(stage=processing_stage)
-            
-            # Map predicted values to parameter fields based on processing stage
-            param_bounds = self.parameter_bounds[processing_stage]
-            param_index = 0
-            
-            for param_name, (min_val, max_val) in param_bounds.items():
-                # Scale predicted value (which is between 0-1) to parameter range
-                if param_index < len(parameter_values):
-                    scaled_value = min_val + (max_val - min_val) * parameter_values[param_index]
-                    setattr(parameters, param_name, scaled_value)
-                    param_index += 1
-            
-            return parameters
+            # For this standalone version, we'll use rule-based prediction
+            # instead of ML model prediction
+            return self._rule_based_parameter_prediction(
+                composition_features, 
+                processing_stage,
+                optimization_objective
+            )
             
         except Exception as e:
             self.logger.error(f"Parameter prediction failed: {e}")
             # Return baseline parameters as fallback
             return self.baseline_parameters[processing_stage]
+    
+    def _rule_based_parameter_prediction(
+        self,
+        composition_features: np.ndarray,
+        processing_stage: ProcessingStage,
+        optimization_objective: OptimizationObjective
+    ) -> ProcessingParameters:
+        """Rule-based parameter prediction as fallback"""
+        # Start with baseline parameters
+        parameters = ProcessingParameters(stage=processing_stage)
+        param_bounds = self.parameter_bounds[processing_stage]
+        
+        # Get material composition from features
+        plastic_content = composition_features[24]  # Index for total plastic
+        organic_content = composition_features[25]  # Index for total organic
+        metal_content = composition_features[26]    # Index for total metal
+        glass_content = composition_features[27]    # Index for total glass
+        paper_content = composition_features[28]    # Index for total paper
+        contamination = composition_features[29]    # Index for contamination
+        moisture = composition_features[30]         # Index for moisture
+        density = composition_features[31]          # Index for density
+        
+        # Adjust parameters based on material composition and optimization objective
+        for param_name, (min_val, max_val) in param_bounds.items():
+            # Start with middle value
+            value = (min_val + max_val) / 2
+            
+            # Adjust based on material composition
+            if param_name == 'speed':
+                # Reduce speed for high contamination
+                value -= contamination * (max_val - min_val) * 0.3
+                
+                # Increase speed for low density
+                if density < 0.4:
+                    value += (0.4 - density) * (max_val - min_val) * 0.2
+                
+                # Adjust for optimization objective
+                if optimization_objective == OptimizationObjective.MAXIMIZE_THROUGHPUT:
+                    value = min_val + (max_val - min_val) * 0.8  # Higher speed
+                elif optimization_objective == OptimizationObjective.MAXIMIZE_QUALITY:
+                    value = min_val + (max_val - min_val) * 0.4  # Lower speed for quality
+            
+            elif param_name == 'temperature':
+                # Higher temperature for high moisture
+                value += moisture * (max_val - min_val) * 0.3
+                
+                # Lower temperature for high plastic content
+                value -= plastic_content * (max_val - min_val) * 0.2
+                
+                # Adjust for optimization objective
+                if optimization_objective == OptimizationObjective.MINIMIZE_ENERGY:
+                    value = min_val + (max_val - min_val) * 0.3  # Lower temperature
+            
+            elif param_name == 'duration':
+                # Increase duration for high contamination
+                value += contamination * (max_val - min_val) * 0.4
+                
+                # Decrease duration for low density
+                if density < 0.4:
+                    value -= (0.4 - density) * (max_val - min_val) * 0.2
+                
+                # Adjust for optimization objective
+                if optimization_objective == OptimizationObjective.MAXIMIZE_THROUGHPUT:
+                    value = min_val + (max_val - min_val) * 0.3  # Shorter duration
+                elif optimization_objective == OptimizationObjective.MAXIMIZE_QUALITY:
+                    value = min_val + (max_val - min_val) * 0.7  # Longer duration for quality
+            
+            elif param_name == 'power_level':
+                # Higher power for dense materials
+                value += density * (max_val - min_val) * 0.4
+                
+                # Adjust for optimization objective
+                if optimization_objective == OptimizationObjective.MINIMIZE_ENERGY:
+                    value = min_val + (max_val - min_val) * 0.4  # Lower power
+            
+            # Ensure value is within bounds
+            value = max(min_val, min(max_val, value))
+            
+            # Set parameter value
+            setattr(parameters, param_name, value)
+        
+        return parameters
     
     async def _fine_tune_parameters(
         self,
@@ -502,107 +570,27 @@ class DynamicParameterOptimizer:
         optimization_objective: OptimizationObjective
     ) -> ProcessingParameters:
         """Fine-tune parameters using numerical optimization"""
-        try:
-            # Get parameter bounds for this stage
-            param_bounds = self.parameter_bounds[processing_stage]
-            
-            # Create optimization function based on objective
-            if optimization_objective == OptimizationObjective.MAXIMIZE_EFFICIENCY:
-                async def objective_function(params):
-                    # Convert params array to ProcessingParameters
-                    parameters = ProcessingParameters(stage=processing_stage)
-                    for i, (param_name, _) in enumerate(param_bounds.items()):
-                        setattr(parameters, param_name, params[i])
-                    
-                    # Predict efficiency with these parameters
-                    efficiency = await self._predict_efficiency(composition_features, parameters)
-                    # Return negative efficiency for minimization
-                    return -efficiency
+        # For this standalone version, we'll skip the complex optimization
+        # and just return the initial parameters with small adjustments
+        
+        # Get parameter bounds for this stage
+        param_bounds = self.parameter_bounds[processing_stage]
+        
+        # Make small random adjustments to parameters
+        for param_name, (min_val, max_val) in param_bounds.items():
+            current_value = getattr(initial_parameters, param_name)
+            if current_value is not None:
+                # Make small adjustment (±5%)
+                adjustment = (max_val - min_val) * 0.05 * (np.random.random() - 0.5)
+                new_value = current_value + adjustment
                 
-            elif optimization_objective == OptimizationObjective.MINIMIZE_ENERGY:
-                async def objective_function(params):
-                    # Convert params array to ProcessingParameters
-                    parameters = ProcessingParameters(stage=processing_stage)
-                    for i, (param_name, _) in enumerate(param_bounds.items()):
-                        setattr(parameters, param_name, params[i])
-                    
-                    # Predict energy consumption with these parameters
-                    energy = await self._predict_energy_consumption(composition_features, parameters)
-                    return energy
+                # Ensure value is within bounds
+                new_value = max(min_val, min(max_val, new_value))
                 
-            elif optimization_objective == OptimizationObjective.MAXIMIZE_QUALITY:
-                async def objective_function(params):
-                    # Convert params array to ProcessingParameters
-                    parameters = ProcessingParameters(stage=processing_stage)
-                    for i, (param_name, _) in enumerate(param_bounds.items()):
-                        setattr(parameters, param_name, params[i])
-                    
-                    # Predict quality with these parameters
-                    quality = await self._predict_quality(composition_features, parameters)
-                    # Return negative quality for minimization
-                    return -quality
-            
-            else:  # Default to efficiency
-                async def objective_function(params):
-                    # Convert params array to ProcessingParameters
-                    parameters = ProcessingParameters(stage=processing_stage)
-                    for i, (param_name, _) in enumerate(param_bounds.items()):
-                        setattr(parameters, param_name, params[i])
-                    
-                    # Predict efficiency with these parameters
-                    efficiency = await self._predict_efficiency(composition_features, parameters)
-                    # Return negative efficiency for minimization
-                    return -efficiency
-            
-            # Convert initial parameters to array for optimization
-            initial_params = []
-            bounds = []
-            
-            for param_name, (min_val, max_val) in param_bounds.items():
-                value = getattr(initial_parameters, param_name)
-                if value is not None:
-                    initial_params.append(value)
-                else:
-                    # Use middle of range if parameter not set
-                    initial_params.append((min_val + max_val) / 2)
-                bounds.append((min_val, max_val))
-            
-            # Create a synchronous wrapper for the async objective function
-            def sync_objective(params):
-                loop = asyncio.get_event_loop()
-                if loop.is_running():
-                    # Create a new event loop for the thread
-                    new_loop = asyncio.new_event_loop()
-                    asyncio.set_event_loop(new_loop)
-                    result = new_loop.run_until_complete(objective_function(params))
-                    new_loop.close()
-                else:
-                    result = loop.run_until_complete(objective_function(params))
-                return result
-            
-            # Run optimization
-            result = differential_evolution(
-                sync_objective,
-                bounds,
-                maxiter=10,
-                popsize=5,
-                tol=0.01,
-                mutation=(0.5, 1.0),
-                recombination=0.7,
-                seed=42
-            )
-            
-            # Convert optimized params back to ProcessingParameters
-            optimized_parameters = ProcessingParameters(stage=processing_stage)
-            for i, (param_name, _) in enumerate(param_bounds.items()):
-                setattr(optimized_parameters, param_name, result.x[i])
-            
-            return optimized_parameters
-            
-        except Exception as e:
-            self.logger.error(f"Parameter fine-tuning failed: {e}")
-            # Return initial parameters as fallback
-            return initial_parameters
+                # Set parameter value
+                setattr(initial_parameters, param_name, new_value)
+        
+        return initial_parameters
     
     async def _predict_efficiency(
         self,
@@ -611,22 +599,8 @@ class DynamicParameterOptimizer:
     ) -> float:
         """Predict processing efficiency with given parameters"""
         try:
-            # Extract parameter features
-            parameter_features = self._extract_parameter_features(parameters)
-            
-            # Combine features
-            features = np.concatenate([composition_features, parameter_features])
-            
-            # Reshape for model
-            features_batch = np.expand_dims(features, axis=0)
-            
-            # Predict efficiency
-            if hasattr(self.efficiency_prediction_model, 'predict'):
-                efficiency = self.efficiency_prediction_model.predict(features_batch)[0]
-                return float(efficiency)
-            else:
-                # Fallback if model not trained
-                return self._rule_based_efficiency_prediction(composition_features, parameters)
+            # For this standalone version, we'll use rule-based prediction
+            return self._rule_based_efficiency_prediction(composition_features, parameters)
             
         except Exception as e:
             self.logger.error(f"Efficiency prediction failed: {e}")
@@ -676,6 +650,11 @@ class DynamicParameterOptimizer:
             efficiency_adjustment = (avg_optimality - 0.5) * 20.0  # -10% to +10%
             base_efficiency += efficiency_adjustment
         
+        # Adjust based on contamination level (if available)
+        if len(composition_features) >= 30:
+            contamination = composition_features[29]  # Assuming index 29 is contamination
+            base_efficiency -= contamination * 30.0  # Up to -30% for high contamination
+        
         # Ensure efficiency is within reasonable bounds
         return max(50.0, min(99.0, base_efficiency))
     
@@ -686,22 +665,8 @@ class DynamicParameterOptimizer:
     ) -> float:
         """Predict output quality with given parameters"""
         try:
-            # Extract parameter features
-            parameter_features = self._extract_parameter_features(parameters)
-            
-            # Combine features
-            features = np.concatenate([composition_features, parameter_features])
-            
-            # Reshape for model
-            features_batch = np.expand_dims(features, axis=0)
-            
-            # Predict quality
-            if hasattr(self.quality_prediction_model, 'predict'):
-                quality = self.quality_prediction_model.predict(features_batch)[0]
-                return float(quality)
-            else:
-                # Fallback if model not trained
-                return self._rule_based_quality_prediction(composition_features, parameters)
+            # For this standalone version, we'll use rule-based prediction
+            return self._rule_based_quality_prediction(composition_features, parameters)
             
         except Exception as e:
             self.logger.error(f"Quality prediction failed: {e}")
@@ -919,28 +884,6 @@ class DynamicParameterOptimizer:
         # Limit history size
         if len(self.processing_history) > 1000:
             self.processing_history = self.processing_history[-1000:]
-
-@dataclass
-class CompositionChange:
-    """Represents a significant change in waste composition"""
-    previous_composition: Dict[str, float]
-    current_composition: Dict[str, float]
-    change_percentage: Dict[str, float]  # Material type -> percentage change
-    significant_changes: Dict[str, float]  # Only materials with significant changes
-    overall_change_magnitude: float
-    timestamp: datetime = field(default_factory=datetime.now)
-
-@dataclass
-class OperatorAlert:
-    """Alert for operators about significant changes or optimization recommendations"""
-    alert_id: str
-    alert_type: str  # 'composition_change', 'parameter_optimization', 'efficiency_drop', etc.
-    severity: str  # 'info', 'warning', 'critical'
-    message: str
-    details: Dict[str, Any]
-    timestamp: datetime = field(default_factory=datetime.now)
-    acknowledged: bool = False
-    action_taken: Optional[str] = None
 
 class CompositionChangeDetector:
     """Detects significant changes in waste composition"""

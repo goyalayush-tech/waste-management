@@ -1,31 +1,23 @@
 {
   "name": "advanced-waste-management-system",
   "version": "1.0.0",
-  "description": "Revolutionary waste management system with AI, blockchain, and Web3 integration",
+  "description": "Revolutionary waste management system with AI and IoT integration",
   "private": true,
   "workspaces": [
-    "frontend",
-    "blockchain"
+    "frontend"
   ],
   "scripts": {
-    "install:all": "npm install && npm run install:frontend && npm run install:blockchain && npm run install:backend",
+    "install:all": "npm install && npm run install:frontend && npm run install:backend",
     "install:frontend": "cd frontend && npm install",
-    "install:blockchain": "cd blockchain && npm install",
     "install:backend": "cd backend && pip install -r requirements.txt",
     "dev:frontend": "cd frontend && npm run dev",
-    "dev:blockchain": "cd blockchain && npm run node",
     "test:frontend": "cd frontend && npm test",
-    "test:blockchain": "cd blockchain && npm test",
     "test:backend": "cd backend && python -m pytest",
     "build:frontend": "cd frontend && npm run build",
-    "compile:blockchain": "cd blockchain && npm run compile",
-    "deploy:blockchain": "cd blockchain && npm run deploy",
-    "lint": "npm run lint:frontend && npm run lint:blockchain",
+    "lint": "npm run lint:frontend",
     "lint:frontend": "cd frontend && npm run lint",
-    "lint:blockchain": "cd blockchain && npx eslint .",
-    "clean": "npm run clean:frontend && npm run clean:blockchain",
-    "clean:frontend": "cd frontend && rm -rf node_modules dist",
-    "clean:blockchain": "cd blockchain && rm -rf node_modules artifacts cache"
+    "clean": "npm run clean:frontend",
+    "clean:frontend": "cd frontend && rm -rf node_modules dist"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
@@ -41,13 +33,12 @@
   },
   "keywords": [
     "waste-management",
-    "blockchain",
     "ai",
-    "web3",
+    "iot",
     "sustainability",
-    "nft",
-    "defi",
-    "dao"
+    "analytics",
+    "machine-learning",
+    "automation"
   ],
   "author": "Advanced Waste Management Team",
   "license": "MIT"

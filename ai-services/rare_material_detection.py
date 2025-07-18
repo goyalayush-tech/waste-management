@@ -40,6 +40,13 @@ class MaterialValue(Enum):
     HIGH = 3     # $100-1000 per kg
     VERY_HIGH = 4 # $1000-10000 per kg
     EXTREME = 5   # >$10000 per kg
+    
+class NotificationPriority(Enum):
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+    URGENT = "urgent"
+    CRITICAL = "critical"
 
 @dataclass
 class RareMaterial:
@@ -1317,4 +1324,230 @@ if __name__ == "__main__":
             print(f"\nHandling Protocol for {material_type}:")
             print(json.dumps(protocol, indent=2))
     
-    asyncio.run(test_rare_material_detection())
+    asyncio.run(test_rare_material_detection())    
+async def customize_handling_protocol(
+        self,
+        base_protocol: HandlingProtocol,
+        quantity: float = 0.0,
+        purity: float = 0.0,
+        custom_requirements: Optional[List[str]] = None
+    ) -> HandlingProtocol:
+        """
+        Customize handling protocol based on quantity, purity, and custom requirements
+        """
+        try:
+            # Create a copy of the base protocol
+            customized_protocol = HandlingProtocol(
+                protocol_id=base_protocol.protocol_id + f"_Q{quantity:.1f}_P{purity:.1f}",
+                material_type=base_protocol.material_type,
+                safety_requirements=base_protocol.safety_requirements.copy(),
+                equipment_needed=base_protocol.equipment_needed.copy(),
+                extraction_steps=base_protocol.extraction_steps.copy(),
+                storage_conditions=base_protocol.storage_conditions.copy(),
+                transportation_requirements=base_protocol.transportation_requirements.copy(),
+                regulatory_compliance=base_protocol.regulatory_compliance.copy()
+            )
+            
+            # Adjust based on quantity
+            if quantity > 1.0:  # Large quantity
+                customized_protocol.safety_requirements.append("Enhanced ventilation required")
+                customized_protocol.safety_requirements.append("Multiple personnel required")
+                customized_protocol.equipment_needed.append("Bulk handling equipment")
+                customized_protocol.transportation_requirements.append("Specialized transport vehicle")
+            elif quantity > 0.1:  # Medium quantity
+                customized_protocol.safety_requirements.append("Standard ventilation required")
+                customized_protocol.equipment_needed.append("Standard handling equipment")
+            else:  # Small quantity
+                customized_protocol.safety_requirements.append("Minimal ventilation required")
+                customized_protocol.equipment_needed.append("Precision handling tools")
+            
+            # Adjust based on purity
+            if purity > 90.0:  # High purity
+                customized_protocol.extraction_steps.append("Skip initial purification steps")
+                customized_protocol.extraction_steps.append("Proceed directly to final refinement")
+                customized_protocol.storage_conditions["purity_level"] = "high"
+            elif purity > 50.0:  # Medium purity
+                customized_protocol.extraction_steps.append("Standard purification process")
+                customized_protocol.storage_conditions["purity_level"] = "medium"
+            else:  # Low purity
+                customized_protocol.extraction_steps.append("Enhanced initial separation required")
+                customized_protocol.extraction_steps.append("Multiple purification cycles")
+                customized_protocol.storage_conditions["purity_level"] = "low"
+            
+            # Add custom requirements if provided
+            if custom_requirements:
+                for req in custom_requirements:
+                    if "safety" in req.lower():
+                        customized_protocol.safety_requirements.append(req)
+                    elif "equipment" in req.lower():
+                        customized_protocol.equipment_needed.append(req)
+                    elif "extraction" in req.lower() or "process" in req.lower():
+                        customized_protocol.extraction_steps.append(req)
+                    elif "storage" in req.lower():
+                        customized_protocol.storage_conditions["custom"] = req
+                    elif "transport" in req.lower():
+                        customized_protocol.transportation_requirements.append(req)
+                    elif "regulation" in req.lower() or "compliance" in req.lower():
+                        customized_protocol.regulatory_compliance.append(req)
+                    else:
+                        # Default to safety requirements
+                        customized_protocol.safety_requirements.append(req)
+            
+            return customized_protocol
+            
+        except Exception as e:
+            self.logger.error(f"Error customizing handling protocol: {e}")
+            # Return the base protocol if customization fails
+            return base_protocol
+    
+    async def send_stakeholder_notifications(
+        self,
+        materials: List[RareMaterial],
+        stakeholders: List[str],
+        priority_threshold: NotificationPriority,
+        notification_channels: List[str],
+        custom_message: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Send notifications to stakeholders about rare material discoveries
+        """
+        try:
+            # Calculate total value of materials
+            total_value = sum(m.market_value_per_kg * m.quantity_detected * (m.purity_percentage / 100.0) for m in materials)
+            
+            # Determine notification priority based on value
+            priority = NotificationPriority.LOW
+            if total_value > 100000:
+                priority = NotificationPriority.CRITICAL
+            elif total_value > 10000:
+                priority = NotificationPriority.URGENT
+            elif total_value > 1000:
+                priority = NotificationPriority.HIGH
+            elif total_value > 100:
+                priority = NotificationPriority.MEDIUM
+            
+            # Check if priority meets threshold
+            if priority.value < priority_threshold.value:
+                return {
+                    "notification_id": "",
+                    "status": "skipped",
+                    "reason": f"Priority {priority.value} below threshold {priority_threshold.value}",
+                    "stakeholders_notified": [],
+                    "channels_used": [],
+                    "priority": priority.value
+                }
+            
+            # Generate notification message
+            message = custom_message if custom_message else self._generate_notification_message(materials, total_value)
+            
+            # In a real system, this would send actual notifications through various channels
+            # For now, we'll simulate the notification process
+            
+            notification_id = f"NOTIFY_{datetime.now().strftime('%Y%m%d%H%M%S')}_{hash(str(materials)) % 10000:04d}"
+            
+            # Log the notification
+            self.logger.info(f"Sending notification {notification_id} to {len(stakeholders)} stakeholders via {notification_channels}")
+            self.logger.info(f"Notification message: {message}")
+            
+            # Return notification results
+            return {
+                "notification_id": notification_id,
+                "status": "sent",
+                "stakeholders_notified": stakeholders,
+                "channels_used": notification_channels,
+                "priority": priority.value,
+                "message": message
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Error sending stakeholder notifications: {e}")
+            return {
+                "notification_id": "",
+                "status": "failed",
+                "error": str(e),
+                "stakeholders_notified": [],
+                "channels_used": [],
+                "priority": NotificationPriority.LOW.value
+            }
+    
+    def _generate_notification_message(self, materials: List[RareMaterial], total_value: float) -> str:
+        """
+        Generate notification message for stakeholders
+        """
+        # Create message header
+        if len(materials) == 1:
+            material = materials[0]
+            header = f"ALERT: {material.material_name.title()} ({material.material_type.value}) detected"
+        else:
+            header = f"ALERT: {len(materials)} rare materials detected"
+        
+        # Create message body
+        body = f"Total estimated value: ${total_value:.2f}\n\n"
+        
+        # Add details for each material
+        for material in materials:
+            material_value = material.market_value_per_kg * material.quantity_detected * (material.purity_percentage / 100.0)
+            body += f"- {material.material_name.title()}: {material.quantity_detected:.3f}kg at {material.purity_percentage:.1f}% purity (${material_value:.2f})\n"
+        
+        # Add handling instructions
+        if any(m.material_type == RareMaterialType.PRECIOUS_METALS for m in materials):
+            body += "\nSpecial handling required for precious metals. Secure storage needed."
+        
+        if any(m.material_type == RareMaterialType.RARE_EARTH_ELEMENTS for m in materials):
+            body += "\nCAUTION: Rare earth elements detected. Follow radiation safety protocols."
+        
+        # Add timestamp
+        body += f"\n\nTimestamp: {datetime.now().isoformat()}"
+        
+        return f"{header}\n\n{body}"   
+ def _create_test_material(
+        self,
+        material_name: str,
+        material_type: RareMaterialType,
+        market_value_per_kg: float,
+        quantity_detected: float,
+        purity_percentage: float
+    ) -> RareMaterial:
+        """
+        Create a test material for testing purposes
+        """
+        # Get chemical formula from database if available
+        chemical_formula = ""
+        if material_type in self.rare_materials_database:
+            if material_name in self.rare_materials_database[material_type]:
+                chemical_formula = self.rare_materials_database[material_type][material_name].get('formula', '')
+        
+        # Determine extraction difficulty based on purity
+        extraction_difficulty = self._assess_extraction_difficulty(material_name, purity_percentage / 100.0)
+        
+        # Determine market demand
+        market_demand = self._assess_market_demand(material_name)
+        
+        # Get applications from database if available
+        applications = []
+        if material_type in self.rare_materials_database:
+            if material_name in self.rare_materials_database[material_type]:
+                applications = self.rare_materials_database[material_type][material_name].get('applications', [])
+        
+        # Determine handling requirements
+        handling_requirements = []
+        if material_type == RareMaterialType.PRECIOUS_METALS:
+            handling_requirements = ["secure_storage", "chain_of_custody"]
+        elif material_type == RareMaterialType.RARE_EARTH_ELEMENTS:
+            handling_requirements = ["radiation_safety", "specialized_containers"]
+        else:
+            handling_requirements = ["standard_storage"]
+        
+        return RareMaterial(
+            material_name=material_name,
+            material_type=material_type,
+            chemical_formula=chemical_formula,
+            market_value_per_kg=market_value_per_kg,
+            purity_percentage=purity_percentage,
+            quantity_detected=quantity_detected,
+            confidence=0.9,  # High confidence for test material
+            extraction_difficulty=extraction_difficulty,
+            market_demand=market_demand,
+            applications=applications,
+            handling_requirements=handling_requirements
+        )
