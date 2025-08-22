@@ -1,23 +1,39 @@
 {
-  "name": "advanced-waste-management-system",
+  "name": "integrated-waste-epr-system",
   "version": "1.0.0",
-  "description": "Revolutionary waste management system with AI and IoT integration",
+  "description": "Integrated Waste Verification & EPR Compliance System with AI, blockchain, OCR, and audit engine",
   "private": true,
   "workspaces": [
-    "frontend"
+    "frontend",
+    "blockchain"
   ],
   "scripts": {
-    "install:all": "npm install && npm run install:frontend && npm run install:backend",
+    "install:all": "npm install && npm run install:frontend && npm run install:backend && npm run install:blockchain && npm run install:ai",
     "install:frontend": "cd frontend && npm install",
-    "install:backend": "cd backend && pip install -r requirements.txt",
+    "install:backend": "cd backend && npm install",
+    "install:blockchain": "cd blockchain && npm install",
+    "install:ai": "cd ai-services && pip install -r requirements.txt",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:ai\"",
     "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:blockchain": "cd blockchain && npm run node",
+    "dev:ai": "cd ai-services && python -m uvicorn main:app --reload --port 8001",
+    "test": "npm run test:frontend && npm run test:backend && npm run test:blockchain && npm run test:ai",
     "test:frontend": "cd frontend && npm test",
-    "test:backend": "cd backend && python -m pytest",
+    "test:backend": "cd backend && npm test",
+    "test:blockchain": "cd blockchain && npm test",
+    "test:ai": "cd ai-services && python -m pytest",
+    "build": "npm run build:frontend",
     "build:frontend": "cd frontend && npm run build",
-    "lint": "npm run lint:frontend",
+    "lint": "npm run lint:frontend && npm run lint:backend",
     "lint:frontend": "cd frontend && npm run lint",
-    "clean": "npm run clean:frontend",
-    "clean:frontend": "cd frontend && rm -rf node_modules dist"
+    "lint:backend": "cd backend && npm run lint",
+    "clean": "npm run clean:frontend && npm run clean:backend && npm run clean:blockchain",
+    "clean:frontend": "cd frontend && rm -rf node_modules dist",
+    "clean:backend": "cd backend && rm -rf node_modules",
+  "clean:blockchain": "cd blockchain && rm -rf node_modules",
+  "index:code": "node scripts/code-index.js",
+  "index:search": "node scripts/code-index-query.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

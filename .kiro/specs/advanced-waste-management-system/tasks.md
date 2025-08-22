@@ -72,7 +72,9 @@
   - Write performance tests for real-time parameter optimization
   - _Requirements: 1.4_
 
-- [-] 2. NFT-Based Waste Certificates and Digital Twin System
+- [x] 2. NFT-Based Waste Certificates and Digital Twin System
+
+
 
 
 
@@ -258,14 +260,27 @@
   - Create proposal execution automation with smart contract integration
   - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-- [ ] 6.1 Quadratic Voting DAO System
+- [x] 6.1 Quadratic Voting DAO System
+
+
+
+
+
   - Write smart contracts implementing quadratic voting to prevent whale dominance
   - Create proposal submission and voting interface with gas optimization
   - Build vote weight calculation system based on token holdings and participation
   - Write comprehensive tests for voting mechanism security and fairness
   - _Requirements: 6.1_
 
-- [ ] 6.2 Automated Proposal Execution
+- [-] 6.2 Automated Proposal Execution
+
+
+
+
+
+
+
+
   - Implement smart contract system for automatic proposal execution upon passing
   - Create parameter change automation for system configuration updates
   - Build fund allocation automation for approved treasury spending

@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { 
-  Card, 
-  Button, 
   Upload, 
   message, 
-  Spin, 
   Tabs, 
-  Progress, 
   Row, 
   Col, 
   Statistic, 
   Alert, 
   Space, 
   Typography, 
-  Tag,
-  Divider
+  Tag
 } from 'antd';
+import Card from '../../components/Shared/Card';
+import Button from '../../components/Shared/Button';
+import LoadingSpinner from '../../components/Shared/LoadingSpinner';
+import ErrorBoundary from '../../components/Shared/ErrorBoundary';
+import { RESPONSIVE_CONFIGS } from '../../utils/responsive';
+import '../shared-styles.css';
 import { 
   UploadOutlined, 
   ScanOutlined, 
@@ -30,8 +31,7 @@ import { RootState } from '../../store/store';
 import { 
   analyzeWasteMultiModal, 
   calibrateSensors, 
-  getRealTimeData,
-  addSensorData
+  getRealTimeData
 } from '../../store/slices/wasteAnalysisSlice';
 import SensorCalibration from './SensorCalibration';
 import AnalysisResults from './AnalysisResults';
@@ -48,8 +48,7 @@ const WasteAnalysis: React.FC = () => {
     loading, 
     error, 
     calibrationStatus, 
-    realTimeData,
-    sensorData 
+    realTimeData
   } = useSelector((state: RootState) => state.wasteAnalysis);
   
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -127,7 +126,8 @@ const WasteAnalysis: React.FC = () => {
   };
   
   return (
-    <div className="waste-analysis-page">
+    <ErrorBoundary>
+      <div className="waste-analysis-page tool-page">
       <div className="page-header">
         <Title level={2}>Multi-Modal Waste Analysis System</Title>
         <Text type="secondary">
@@ -136,9 +136,9 @@ const WasteAnalysis: React.FC = () => {
       </div>
       
       {/* Real-time metrics */}
-      <Row gutter={16} className="metrics-row" style={{ marginBottom: '24px' }}>
-        <Col span={6}>
-          <Card>
+      <Row gutter={[16, 16]} className="metrics-row" style={{ marginBottom: '24px' }}>
+        <Col {...RESPONSIVE_CONFIGS.metrics}>
+          <Card variant="shadow" interactive>
             <Statistic
               title="System Efficiency"
               value={realTimeData.efficiency}
@@ -148,8 +148,8 @@ const WasteAnalysis: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={6}>
-          <Card>
+        <Col {...RESPONSIVE_CONFIGS.metrics}>
+          <Card variant="shadow" interactive>
             <Statistic
               title="Throughput"
               value={realTimeData.throughput}
@@ -158,8 +158,8 @@ const WasteAnalysis: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={6}>
-          <Card>
+        <Col {...RESPONSIVE_CONFIGS.metrics}>
+          <Card variant="shadow" interactive>
             <Statistic
               title="Quality Score"
               value={realTimeData.qualityScore}
@@ -169,8 +169,8 @@ const WasteAnalysis: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={6}>
-          <Card>
+        <Col {...RESPONSIVE_CONFIGS.metrics}>
+          <Card variant="shadow" interactive>
             <Statistic
               title="Energy Usage"
               value={realTimeData.energyConsumption}
@@ -181,11 +181,11 @@ const WasteAnalysis: React.FC = () => {
         </Col>
       </Row>
       
-      <Tabs activeKey={activeTab} onChange={setActiveTab} className="analysis-tabs">
+      <Tabs activeKey={activeTab} onChange={setActiveTab} className="tool-tabs">
         <TabPane tab="Analysis" key="analysis">
-          <Row gutter={24}>
-            <Col span={12}>
-              <Card title="Upload Waste Sample" className="upload-card">
+          <Row gutter={[24, 24]}>
+            <Col {...RESPONSIVE_CONFIGS.content}>
+              <Card title="Upload Waste Sample" className="upload-card" variant="bordered">
                 <div className="analysis-mode-selector" style={{ marginBottom: '16px' }}>
                   <Space>
                     <Text strong>Analysis Mode:</Text>
@@ -214,10 +214,10 @@ const WasteAnalysis: React.FC = () => {
                   </div>
                 )}
                 
-                <div className="analysis-actions" style={{ marginTop: 16 }}>
-                  <Space>
+                <div className="action-section">
+                  <div className="action-buttons">
                     <Button 
-                      type="primary" 
+                      variant="primary" 
                       icon={<ScanOutlined />} 
                       onClick={handleAnalysis} 
                       loading={loading}
@@ -226,25 +226,26 @@ const WasteAnalysis: React.FC = () => {
                       Analyze Waste
                     </Button>
                     <Button 
+                      variant="secondary"
                       icon={<SettingOutlined />} 
                       onClick={handleCalibration}
                     >
                       Calibrate Sensors
                     </Button>
-                  </Space>
+                  </div>
                 </div>
                 
                 {/* Calibration Status */}
-                <div className="calibration-status" style={{ marginTop: '16px' }}>
+                <div className="sensor-status">
                   <Text strong>Sensor Status:</Text>
                   <div style={{ marginTop: '8px' }}>
                     {Object.entries(calibrationStatus).map(([sensorId, status]) => (
                       <Tag 
                         key={sensorId} 
                         color={status === 'calibrated' ? 'green' : 'orange'}
-                        style={{ marginBottom: '4px' }}
+                        className="status-tag"
                       >
-                        {sensorId}: {status}
+                        {sensorId}: {String(status)}
                       </Tag>
                     ))}
                   </div>
@@ -252,16 +253,14 @@ const WasteAnalysis: React.FC = () => {
               </Card>
             </Col>
             
-            <Col span={12}>
-              <Card title="Analysis Results" className="results-card">
+            <Col {...RESPONSIVE_CONFIGS.content}>
+              <Card title="Analysis Results" className="results-card" variant="bordered">
                 {loading ? (
-                  <div className="loading-container" style={{ textAlign: 'center', padding: '40px' }}>
-                    <Spin size="large" />
-                    <div style={{ marginTop: '16px' }}>
-                      <Text>Processing multi-modal sensor data...</Text>
-                      <Progress percent={75} size="small" style={{ marginTop: '8px' }} />
-                    </div>
-                  </div>
+                  <LoadingSpinner 
+                    size="large" 
+                    text="Processing multi-modal sensor data..."
+                    style={{ minHeight: '200px' }}
+                  />
                 ) : error ? (
                   <Alert message="Analysis Error" description={error} type="error" showIcon />
                 ) : currentAnalysis ? (
@@ -291,7 +290,8 @@ const WasteAnalysis: React.FC = () => {
           <AnalysisHistory />
         </TabPane>
       </Tabs>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 };
 

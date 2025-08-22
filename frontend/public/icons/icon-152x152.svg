@@ -1,0 +1,11 @@
+<svg width="152" height="152" viewBox="0 0 152 152" xmlns="http://www.w3.org/2000/svg">
+  <rect width="152" height="152" rx="24" fill="#00b96b"/>
+  <g transform="translate(30, 30)">
+    <path d="M46 20L46 70L76 70L76 20L46 20Z" fill="white" opacity="0.9"/>
+    <path d="M20 34L20 70L34 70L34 34L20 34Z" fill="white" opacity="0.7"/>
+    <path d="M56 10L56 26L68 26L68 10L56 10Z" fill="white" opacity="0.8"/>
+    <circle cx="28" cy="20" r="8" fill="white" opacity="0.6"/>
+    <path d="M10 52L28 52L28 62L10 62Z" fill="white" opacity="0.5"/>
+  </g>
+  <text x="76" y="108" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">WMS</text>
+</svg>

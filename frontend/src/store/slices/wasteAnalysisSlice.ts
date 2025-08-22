@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { aiClient } from '../../services/api';
 
 export interface SensorData {
   sensorType: 'visual' | 'spectral' | 'weight' | 'chemical';
@@ -62,24 +62,22 @@ const initialState: WasteAnalysisState = {
 export const analyzeWasteMultiModal = createAsyncThunk(
   'wasteAnalysis/analyzeMultiModal',
   async (request: MultiModalAnalysisRequest) => {
-    const response = await axios.post('/api/waste-analysis/multi-modal', request);
-    return response.data;
+    return await aiClient().analyzeWaste(request);
   }
 );
 
 export const calibrateSensors = createAsyncThunk(
   'wasteAnalysis/calibrateSensors',
   async (sensorIds: string[]) => {
-    const response = await axios.post('/api/waste-analysis/calibrate', { sensorIds });
-    return response.data;
+    const result = await aiClient().calibrateSensors({ sensorIds });
+    return result.sensorStatuses;
   }
 );
 
 export const getRealTimeData = createAsyncThunk(
   'wasteAnalysis/getRealTimeData',
   async () => {
-    const response = await axios.get('/api/waste-analysis/real-time');
-    return response.data;
+    return await aiClient().getRealTimeData();
   }
 );
 

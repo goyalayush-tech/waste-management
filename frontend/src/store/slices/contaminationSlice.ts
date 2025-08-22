@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { aiClient } from '../../services/api';
 
 export enum ContaminationType {
   ORGANIC_IN_PLASTIC = "organic_in_plastic",
@@ -89,32 +89,41 @@ const initialState: ContaminationState = {
 export const detectContamination = createAsyncThunk(
   'contamination/detect',
   async (request: ContaminationDetectionRequest) => {
-    const response = await axios.post('/api/contamination/detect', request);
-    return response.data;
+    return await aiClient().detectContamination(request);
   }
 );
 
 export const getRemediationActions = createAsyncThunk(
   'contamination/getRemediationActions',
   async (contaminationResult: ContaminationResult) => {
-    const response = await axios.post('/api/contamination/remediation-actions', contaminationResult);
-    return response.data;
+    // For now, return the suggestions from the contamination result
+    // In the future, this could call a separate remediation API
+    return contaminationResult.remediationSuggestions.map((suggestion, index) => ({
+      actionType: 'manual',
+      description: suggestion,
+      estimatedCost: Math.random() * 100 + 50,
+      estimatedTime: Math.random() * 60 + 30,
+      successProbability: Math.random() * 0.3 + 0.7,
+      equipmentRequired: ['protective_gear', 'sorting_tools'],
+      safetyRequirements: ['wear_gloves', 'eye_protection']
+    }));
   }
 );
 
 export const flagBatch = createAsyncThunk(
   'contamination/flagBatch',
   async (data: { batchId: string, contaminationResult: ContaminationResult }) => {
-    const response = await axios.post('/api/contamination/flag-batch', data);
-    return response.data;
+    await aiClient().flagBatch(data.batchId, data.contaminationResult);
+    return data;
   }
 );
 
 export const updateBatchStatus = createAsyncThunk(
   'contamination/updateBatchStatus',
   async (data: { batchId: string, status: 'pending' | 'remediated' | 'rejected' }) => {
-    const response = await axios.put(`/api/contamination/batch/${data.batchId}/status`, { status: data.status });
-    return response.data;
+    // For now, just return the data since we don't have a specific API for this
+    // In the future, this could call a batch management API
+    return data;
   }
 );
 

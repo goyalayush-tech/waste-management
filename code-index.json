@@ -1,0 +1,4636 @@
+{
+  "meta": {
+    "generatedAt": "2025-08-18T11:53:04.868Z",
+    "root": "c:\\Users\\Ayush\\delhi-waste-management",
+    "filesCount": 264
+  },
+  "index": [
+    {
+      "file": ".kiro/settings/mcp.json",
+      "ext": ".json",
+      "size": 26
+    },
+    {
+      "file": ".kiro/specs/advanced-waste-management-system/complete-projection-a-to-z.md",
+      "ext": ".md",
+      "size": 22226
+    },
+    {
+      "file": ".kiro/specs/advanced-waste-management-system/design.md",
+      "ext": ".md",
+      "size": 15436
+    },
+    {
+      "file": ".kiro/specs/advanced-waste-management-system/requirements.md",
+      "ext": ".md",
+      "size": 8126
+    },
+    {
+      "file": ".kiro/specs/advanced-waste-management-system/tasks.md",
+      "ext": ".md",
+      "size": 17766
+    },
+    {
+      "file": ".kiro/specs/epr-compliance-system/design.md",
+      "ext": ".md",
+      "size": 12710
+    },
+    {
+      "file": ".kiro/specs/epr-compliance-system/requirements.md",
+      "ext": ".md",
+      "size": 6840
+    },
+    {
+      "file": ".kiro/specs/epr-compliance-system/tasks.md",
+      "ext": ".md",
+      "size": 11390
+    },
+    {
+      "file": ".kiro/specs/user-interface-landing-page/design.md",
+      "ext": ".md",
+      "size": 15887
+    },
+    {
+      "file": ".kiro/specs/user-interface-landing-page/requirements.md",
+      "ext": ".md",
+      "size": 7119
+    },
+    {
+      "file": ".kiro/specs/user-interface-landing-page/tasks.md",
+      "ext": ".md",
+      "size": 14114
+    },
+    {
+      "file": ".kiro/specs/waste-verification-mvp/design.md",
+      "ext": ".md",
+      "size": 9010
+    },
+    {
+      "file": ".kiro/specs/waste-verification-mvp/requirements.md",
+      "ext": ".md",
+      "size": 5187
+    },
+    {
+      "file": ".kiro/specs/waste-verification-mvp/tasks.md",
+      "ext": ".md",
+      "size": 14752
+    },
+    {
+      "file": "ai-services/contamination_detection.py",
+      "ext": ".py",
+      "size": 63247,
+      "imports": [
+        "cv2\r\nimport numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
+        "Sequential\r\nfrom tensorflow.keras.layers import Dense",
+        "Conv2D",
+        "MaxPooling2D",
+        "Flatten",
+        "Dropout",
+        "BatchNormalization\r\nfrom tensorflow.keras.optimizers import Adam\r\nimport logging\r\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional",
+        "Any\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime\r\nfrom dataclasses import dataclass\r\nfrom enum import Enum\r\nimport pickle",
+        ".multi_modal_sensor_fusion",
+        "asyncio\r\n    \r\n    async def test_contamination_detection"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "ContaminationType"
+        },
+        {
+          "type": "class",
+          "name": "ContaminationSeverity"
+        },
+        {
+          "type": "class",
+          "name": "ContaminationResult"
+        },
+        {
+          "type": "class",
+          "name": "RemediationAction"
+        },
+        {
+          "type": "class",
+          "name": "ContaminationDetector"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/dynamic_parameter_optimization.py",
+      "ext": ".py",
+      "size": 60346,
+      "imports": [
+        "numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
+        "Sequential\r\nfrom tensorflow.keras.layers import Dense",
+        "LSTM",
+        "Dropout",
+        "BatchNormalization\r\nfrom tensorflow.keras.optimizers import Adam\r\nimport logging\r\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional",
+        "Any",
+        "Union\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime",
+        "timedelta\r\nfrom dataclasses import dataclass",
+        "field\r\nfrom enum import Enum\r\nimport pickle\r\nfrom scipy.optimize import minimize",
+        "differential_evolution\r\nfrom sklearn.ensemble import RandomForestRegressor\r\nfrom sklearn.preprocessing import StandardScaler\r\nimport os\r\nimport time\r\nimport threading\r\nimport queue\r\nimport warnings",
+        ".multi_modal_sensor_fusion",
+        ".rare_material_detection",
+        "multi_modal_sensor_fusion"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "ProcessingStage"
+        },
+        {
+          "type": "class",
+          "name": "OptimizationObjective"
+        },
+        {
+          "type": "class",
+          "name": "ProcessingParameters"
+        },
+        {
+          "type": "class",
+          "name": "OptimizationResult"
+        },
+        {
+          "type": "class",
+          "name": "DynamicParameterOptimizer"
+        },
+        {
+          "type": "class",
+          "name": "CompositionChange"
+        },
+        {
+          "type": "class",
+          "name": "OperatorAlert"
+        },
+        {
+          "type": "class",
+          "name": "CompositionChangeDetector"
+        },
+        {
+          "type": "class",
+          "name": "OperatorAlertSystem"
+        },
+        {
+          "type": "class",
+          "name": "RealTimeParameterOptimizer"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/dynamic_parameter_optimization_standalone.py",
+      "ext": ".py",
+      "size": 57514,
+      "imports": [
+        "numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
+        "Sequential\r\nfrom tensorflow.keras.layers import Dense",
+        "LSTM",
+        "Dropout",
+        "BatchNormalization\r\nfrom tensorflow.keras.optimizers import Adam\r\nimport logging\r\nimport warnings\r\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional",
+        "Any",
+        "Union\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime",
+        "timedelta\r\nfrom dataclasses import dataclass",
+        "field\r\nfrom enum import Enum\r\nimport pickle\r\nfrom scipy.optimize import minimize",
+        "differential_evolution\r\nfrom sklearn.ensemble import RandomForestRegressor\r\nfrom sklearn.preprocessing import StandardScaler\r\nimport os\r\nimport time\r\nimport threading\r\nimport queue"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "ProcessingStage"
+        },
+        {
+          "type": "class",
+          "name": "OptimizationObjective"
+        },
+        {
+          "type": "class",
+          "name": "ProcessingParameters"
+        },
+        {
+          "type": "class",
+          "name": "OptimizationResult"
+        },
+        {
+          "type": "class",
+          "name": "CompositionChange"
+        },
+        {
+          "type": "class",
+          "name": "OperatorAlert"
+        },
+        {
+          "type": "class",
+          "name": "DynamicParameterOptimizer"
+        },
+        {
+          "type": "class",
+          "name": "CompositionChangeDetector"
+        },
+        {
+          "type": "class",
+          "name": "OperatorAlertSystem"
+        },
+        {
+          "type": "class",
+          "name": "RealTimeParameterOptimizer"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/enhanced_ai_ml_system.py",
+      "ext": ".py",
+      "size": 23040,
+      "imports": [
+        "asyncio\r\nimport logging\r\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional",
+        "Any",
+        "Union\r\nfrom datetime import datetime\r\nfrom dataclasses import dataclass\r\nfrom enum import Enum\r\nimport numpy as np\r\nimport json"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "EnhancedAnalysisResult"
+        },
+        {
+          "type": "class",
+          "name": "EnhancedAIMLSystem"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/examples/dynamic_parameter_optimization_example.py",
+      "ext": ".py",
+      "size": 9635,
+      "imports": [
+        "asyncio\r\nimport sys\r\nimport os\r\nimport json\r\nfrom datetime import datetime\r\nimport time"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "print_parameters"
+        },
+        {
+          "type": "def",
+          "name": "print_optimization_result"
+        },
+        {
+          "type": "def",
+          "name": "alert_callback"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/examples/dynamic_parameter_optimization_standalone_example.py",
+      "ext": ".py",
+      "size": 10124,
+      "imports": [
+        "asyncio\r\nimport sys\r\nimport os\r\nimport json\r\nfrom datetime import datetime\r\nimport time"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "print_parameters"
+        },
+        {
+          "type": "def",
+          "name": "print_optimization_result"
+        },
+        {
+          "type": "def",
+          "name": "alert_callback"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/examples/enhanced_ai_ml_system_example.py",
+      "ext": ".py",
+      "size": 14468,
+      "imports": [
+        "asyncio\r\nimport logging\r\nimport numpy as np\r\nimport matplotlib.pyplot as plt\r\nimport os\r\nimport sys\r\nfrom datetime import datetime\r\nimport json\r\nfrom PIL import Image\r\nimport io\r\nimport random"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "generate_sample_image"
+        },
+        {
+          "type": "def",
+          "name": "generate_spectral_data"
+        },
+        {
+          "type": "def",
+          "name": "generate_weight_data"
+        },
+        {
+          "type": "def",
+          "name": "generate_chemical_data"
+        },
+        {
+          "type": "def",
+          "name": "print_analysis_result"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/image_processing.py",
+      "ext": ".py",
+      "size": 21450,
+      "imports": [
+        "cv2\nimport numpy as np\nfrom PIL import Image",
+        "ImageEnhance",
+        "ImageFilter\nimport tensorflow as tf\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional\nimport logging\nimport base64\nimport io\n\nclass ImageProcessor"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "ImageProcessor"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/multi_modal_sensor_fusion.py",
+      "ext": ".py",
+      "size": 38750,
+      "imports": [
+        "numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model\r\nfrom tensorflow.keras.layers import Dense",
+        "Concatenate",
+        "Input",
+        "Dropout",
+        "BatchNormalization\r\nfrom tensorflow.keras.optimizers import Adam\r\nfrom tensorflow.keras.callbacks import EarlyStopping",
+        "ReduceLROnPlateau\r\nimport cv2\r\nfrom PIL import Image\r\nimport logging\r\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional",
+        "Any\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime\r\nimport io\r\nfrom dataclasses import dataclass\r\nfrom enum import Enum\r\nimport pickle",
+        ".waste_classification_ai",
+        ".image_processing",
+        "asyncio\r\n    \r\n    async def test_fusion"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "SensorType"
+        },
+        {
+          "type": "class",
+          "name": "SensorData"
+        },
+        {
+          "type": "class",
+          "name": "SpectralData"
+        },
+        {
+          "type": "class",
+          "name": "WeightData"
+        },
+        {
+          "type": "class",
+          "name": "ChemicalData"
+        },
+        {
+          "type": "class",
+          "name": "FusionResult"
+        },
+        {
+          "type": "class",
+          "name": "SensorCalibration"
+        },
+        {
+          "type": "class",
+          "name": "MultiModalSensorFusion"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/object_detection.py",
+      "ext": ".py",
+      "size": 8195,
+      "imports": [
+        "cv2\nimport numpy as np\nimport torch\nimport torchvision.transforms as transforms\nfrom ultralytics import YOLO\nimport tensorflow as tf\nfrom PIL import Image\nimport logging\nfrom typing import List",
+        "Dict",
+        "Tuple",
+        "Optional\nimport asyncio\nimport json\nfrom datetime import datetime\nimport base64\nimport io\n\nclass WasteObjectDetector",
+        "PIL"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "WasteObjectDetector"
+        },
+        {
+          "type": "class",
+          "name": "RealTimeDetector"
+        },
+        {
+          "type": "class",
+          "name": "BatchProcessor"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/rare_material_api.py",
+      "ext": ".py",
+      "size": 14630,
+      "imports": [
+        "asyncio\r\nimport json\r\nimport logging\r\nimport base64\r\nfrom typing import Dict",
+        "List",
+        "Any",
+        "Optional\r\nfrom datetime import datetime\r\nfrom fastapi import FastAPI",
+        "HTTPException",
+        "Body",
+        "File",
+        "UploadFile\r\nfrom fastapi.responses import JSONResponse\r\nfrom pydantic import BaseModel",
+        ".multi_modal_sensor_fusion"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "SpectralDataModel"
+        },
+        {
+          "type": "class",
+          "name": "ChemicalDataModel"
+        },
+        {
+          "type": "class",
+          "name": "DetectionRequest"
+        },
+        {
+          "type": "class",
+          "name": "NotificationConfig"
+        },
+        {
+          "type": "class",
+          "name": "HandlingProtocolRequest"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/rare_material_detection.py",
+      "ext": ".py",
+      "size": 70377,
+      "imports": [
+        "numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
+        "Sequential\r\nfrom tensorflow.keras.layers import Dense",
+        "Conv2D",
+        "MaxPooling2D",
+        "Flatten",
+        "Dropout",
+        "BatchNormalization",
+        "LSTM",
+        "Attention\r\nfrom tensorflow.keras.optimizers import Adam\r\nimport cv2\r\nimport logging\r\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional",
+        "Any\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime\r\nfrom dataclasses import dataclass\r\nfrom enum import Enum\r\nimport pickle\r\nimport requests",
+        ".multi_modal_sensor_fusion",
+        "asyncio\r\n    \r\n    async def test_rare_material_detection"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "RareMaterialType"
+        },
+        {
+          "type": "class",
+          "name": "MaterialValue"
+        },
+        {
+          "type": "class",
+          "name": "NotificationPriority"
+        },
+        {
+          "type": "class",
+          "name": "RareMaterial"
+        },
+        {
+          "type": "class",
+          "name": "DetectionResult"
+        },
+        {
+          "type": "class",
+          "name": "HandlingProtocol"
+        },
+        {
+          "type": "class",
+          "name": "RareMaterialDetector"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/README_ENHANCED_AI_ML_SYSTEM.md",
+      "ext": ".md",
+      "size": 5280
+    },
+    {
+      "file": "ai-services/tests/test_contamination_detection.py",
+      "ext": ".py",
+      "size": 25277,
+      "imports": [
+        "pytest\r\nimport numpy as np\r\nimport asyncio\r\nfrom unittest.mock import Mock",
+        "patch",
+        "AsyncMock\r\nimport tempfile\r\nimport os\r\nfrom typing import List",
+        "Dict",
+        "Any",
+        "..contamination_detection",
+        "time",
+        "..contamination_detection",
+        "..contamination_detection"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "MockSpectralData"
+        },
+        {
+          "type": "class",
+          "name": "MockChemicalData"
+        },
+        {
+          "type": "class",
+          "name": "TestContaminationDetectionIntegration"
+        },
+        {
+          "type": "class",
+          "name": "TestContaminationBatchProcessor"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/tests/test_dynamic_parameter_optimization.py",
+      "ext": ".py",
+      "size": 14251,
+      "imports": [
+        "pytest\r\nimport asyncio\r\nimport time\r\nimport numpy as np\r\nfrom datetime import datetime",
+        "timedelta\r\nfrom unittest.mock import MagicMock",
+        "patch\r\nimport sys\r\nimport os\r\nimport json"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "TestDynamicParameterOptimization"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/tests/test_enhanced_ai_ml_system.py",
+      "ext": ".py",
+      "size": 14175,
+      "imports": [
+        "pytest\r\nimport asyncio\r\nimport numpy as np\r\nfrom unittest.mock import MagicMock",
+        "patch\r\nimport os\r\nimport sys\r\nfrom datetime import datetime",
+        "multi_modal_sensor_fusion"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "TestEnhancedAIMLSystem"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/tests/test_multi_modal_fusion.py",
+      "ext": ".py",
+      "size": 19822,
+      "imports": [
+        "pytest\r\nimport numpy as np\r\nimport asyncio\r\nfrom unittest.mock import Mock",
+        "patch",
+        "AsyncMock\r\nfrom datetime import datetime\r\nimport json"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "TestSensorCalibration"
+        },
+        {
+          "type": "class",
+          "name": "TestMultiModalSensorFusion"
+        },
+        {
+          "type": "class",
+          "name": "TestAPIFunctions"
+        },
+        {
+          "type": "class",
+          "name": "TestDataClasses"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/tests/test_rare_material_detection.py",
+      "ext": ".py",
+      "size": 39675,
+      "imports": [
+        "pytest\r\nimport numpy as np\r\nimport asyncio\r\nfrom unittest.mock import Mock",
+        "patch",
+        "AsyncMock\r\nfrom datetime import datetime\r\nimport json\r\nimport cv2",
+        "..multi_modal_sensor_fusion"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "TestRareMaterialDetector"
+        },
+        {
+          "type": "class",
+          "name": "TestAPIFunctions"
+        },
+        {
+          "type": "class",
+          "name": "TestDataClasses"
+        },
+        {
+          "type": "class",
+          "name": "TestIntegrationWorkflow"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/test_contamination_simple.py",
+      "ext": ".py",
+      "size": 10420,
+      "imports": [
+        "asyncio\r\nimport sys\r\nimport os\r\nsys.path.append"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "MockSpectralData"
+        },
+        {
+          "type": "class",
+          "name": "MockChemicalData"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/test_rare_material_api.py",
+      "ext": ".py",
+      "size": 10356,
+      "imports": [
+        "asyncio\r\nimport sys\r\nimport os\r\nimport json\r\nimport base64\r\nimport requests\r\nfrom typing import Dict",
+        "Any\r\nfrom datetime import datetime\r\n\r\nsys.path.append",
+        "multi_modal_sensor_fusion"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "MockSpectralData"
+        },
+        {
+          "type": "class",
+          "name": "MockChemicalData"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/test_rare_material_simple.py",
+      "ext": ".py",
+      "size": 9911,
+      "imports": [
+        "asyncio\r\nimport sys\r\nimport os\r\nsys.path.append"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "MockSpectralData"
+        },
+        {
+          "type": "class",
+          "name": "MockChemicalData"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/video_analytics.py",
+      "ext": ".py",
+      "size": 20399,
+      "imports": [
+        "cv2\nimport numpy as np\nimport tensorflow as tf\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional\nimport asyncio\nimport logging\nfrom datetime import datetime\nimport json\nimport redis\nfrom dataclasses import dataclass\nfrom enum import Enum\n\nclass EventType"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "EventType"
+        },
+        {
+          "type": "class",
+          "name": "VideoEvent"
+        },
+        {
+          "type": "class",
+          "name": "VideoAnalyticsEngine"
+        },
+        {
+          "type": "class",
+          "name": "CameraManager"
+        }
+      ]
+    },
+    {
+      "file": "ai-services/waste_classification_ai.py",
+      "ext": ".py",
+      "size": 15228,
+      "imports": [
+        "cv2\nimport numpy as np\nimport tensorflow as tf\nfrom tensorflow.keras.models import load_model\nfrom tensorflow.keras.preprocessing import image\nimport torch\nimport torchvision.transforms as transforms\nfrom PIL import Image\nimport logging\nfrom typing import Dict",
+        "List",
+        "Tuple",
+        "Optional\nimport asyncio\nimport aiohttp\nimport json\nfrom datetime import datetime\nimport base64\nimport io\n\nclass WasteClassificationAI",
+        "asyncio\n    \n    async def test_classification"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "WasteClassificationAI"
+        }
+      ]
+    },
+    {
+      "file": "backend/.eslintrc.json",
+      "ext": ".json",
+      "size": 464
+    },
+    {
+      "file": "backend/app/models/alert.py",
+      "ext": ".py",
+      "size": 5776,
+      "imports": [
+        "datetime",
+        "app.models"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "AlertType"
+        },
+        {
+          "type": "class",
+          "name": "AlertPriority"
+        },
+        {
+          "type": "class",
+          "name": "AlertStatus"
+        },
+        {
+          "type": "class",
+          "name": "Alert"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/models/blockchain_transaction.py",
+      "ext": ".py",
+      "size": 3458,
+      "imports": [
+        "datetime"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "TransactionType"
+        },
+        {
+          "type": "class",
+          "name": "TransactionStatus"
+        },
+        {
+          "type": "class",
+          "name": "BlockchainTransaction"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/models/collection.py",
+      "ext": ".py",
+      "size": 5297,
+      "imports": [
+        "datetime"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "CollectionStatus"
+        },
+        {
+          "type": "class",
+          "name": "Collection"
+        },
+        {
+          "type": "class",
+          "name": "CollectionBin"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/models/user.py",
+      "ext": ".py",
+      "size": 3813,
+      "imports": [
+        "datetime",
+        "sqlalchemy"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "UserType"
+        },
+        {
+          "type": "class",
+          "name": "User"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/models/vehicle.py",
+      "ext": ".py",
+      "size": 4864,
+      "imports": [
+        "datetime"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "VehicleStatus"
+        },
+        {
+          "type": "class",
+          "name": "Vehicle"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/models/waste_bin.py",
+      "ext": ".py",
+      "size": 4919,
+      "imports": [
+        "datetime"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "BinStatus"
+        },
+        {
+          "type": "class",
+          "name": "WasteBin"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/models/waste_entry.py",
+      "ext": ".py",
+      "size": 3911,
+      "imports": [
+        "datetime"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "WasteType"
+        },
+        {
+          "type": "class",
+          "name": "WasteEntry"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/models/zone.py",
+      "ext": ".py",
+      "size": 2855,
+      "imports": [
+        "datetime"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "Zone"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/models/__init__.py",
+      "ext": ".py",
+      "size": 632,
+      "imports": [
+        ".user",
+        ".waste_bin",
+        ".vehicle",
+        ".alert"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/app/routes/analytics.py",
+      "ext": ".py",
+      "size": 18494,
+      "imports": [
+        "flask",
+        "..utils.decorators",
+        "sys\nfrom pathlib import Path"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "get_dashboard_stats"
+        },
+        {
+          "type": "def",
+          "name": "get_waste_trends"
+        },
+        {
+          "type": "def",
+          "name": "get_collection_efficiency"
+        },
+        {
+          "type": "def",
+          "name": "get_bin_utilization"
+        },
+        {
+          "type": "def",
+          "name": "get_environmental_impact"
+        },
+        {
+          "type": "def",
+          "name": "get_predictive_insights"
+        },
+        {
+          "type": "def",
+          "name": "export_analytics_report"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/routes/auth.py",
+      "ext": ".py",
+      "size": 8814,
+      "imports": [
+        "datetime",
+        "werkzeug.security",
+        "app.utils.validators",
+        "secrets\n        reset_token"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "register"
+        },
+        {
+          "type": "def",
+          "name": "login"
+        },
+        {
+          "type": "def",
+          "name": "refresh"
+        },
+        {
+          "type": "def",
+          "name": "logout"
+        },
+        {
+          "type": "def",
+          "name": "get_current_user"
+        },
+        {
+          "type": "def",
+          "name": "change_password"
+        },
+        {
+          "type": "def",
+          "name": "forgot_password"
+        },
+        {
+          "type": "def",
+          "name": "reset_password"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/routes/bins.py",
+      "ext": ".py",
+      "size": 10760,
+      "imports": [
+        "datetime",
+        "app.utils.decorators",
+        "math"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "get_bins"
+        },
+        {
+          "type": "def",
+          "name": "get_bin"
+        },
+        {
+          "type": "def",
+          "name": "create_bin"
+        },
+        {
+          "type": "def",
+          "name": "update_bin"
+        },
+        {
+          "type": "def",
+          "name": "delete_bin"
+        },
+        {
+          "type": "def",
+          "name": "update_bin_level"
+        },
+        {
+          "type": "def",
+          "name": "empty_bin"
+        },
+        {
+          "type": "def",
+          "name": "get_nearby_bins"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/routes/blockchain.py",
+      "ext": ".py",
+      "size": 2767,
+      "imports": [
+        "flask",
+        "app.utils.decorators"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "get_transactions"
+        },
+        {
+          "type": "def",
+          "name": "issue_reward_token"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/routes/collections.py",
+      "ext": ".py",
+      "size": 16115,
+      "imports": [
+        "flask",
+        "app.utils.decorators",
+        "..services.collection_service"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "get_collections"
+        },
+        {
+          "type": "def",
+          "name": "create_collection"
+        },
+        {
+          "type": "def",
+          "name": "get_collection"
+        },
+        {
+          "type": "def",
+          "name": "update_collection"
+        },
+        {
+          "type": "def",
+          "name": "delete_collection"
+        },
+        {
+          "type": "def",
+          "name": "schedule_collections"
+        },
+        {
+          "type": "def",
+          "name": "get_collection_stats"
+        },
+        {
+          "type": "def",
+          "name": "optimize_routes"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/routes/__init__.py",
+      "ext": ".py",
+      "size": 490,
+      "imports": [
+        ".auth",
+        ".zones",
+        ".waste",
+        ".analytics",
+        ".blockchain"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/app/services/analytics_service.py",
+      "ext": ".py",
+      "size": 19115,
+      "imports": [
+        "pandas as pd\nimport numpy as np\nfrom datetime import datetime",
+        "timedelta\nfrom sqlalchemy import func",
+        "and_",
+        "or_\nfrom typing import Dict",
+        "List",
+        "Any",
+        "Optional\nimport json\nfrom ..models import Bin",
+        "WasteEntry",
+        "Collection",
+        "Zone",
+        "User\nfrom ..utils.database import db\nfrom ..utils.cache import cache_result\nimport plotly.graph_objects as go\nimport plotly.express as px\nfrom plotly.utils import PlotlyJSONEncoder\n\nclass AdvancedAnalyticsService",
+        "sklearn.linear_model"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "AdvancedAnalyticsService"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/services/reporting_service.py",
+      "ext": ".py",
+      "size": 21776,
+      "imports": [
+        "datetime",
+        "reportlab.lib.pagesizes",
+        "reportlab.lib.styles",
+        "io\nimport base64\nfrom sqlalchemy import func",
+        "and_",
+        "or_\nfrom ..models import Bin",
+        "WasteEntry",
+        "Collection",
+        "Zone",
+        "User\nfrom ..database import db\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom io import BytesIO\n\nclass ReportingService"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "ReportingService"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/utils/decorators.py",
+      "ext": ".py",
+      "size": 1908,
+      "imports": [
+        "functools"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "admin_required"
+        },
+        {
+          "type": "def",
+          "name": "collector_required"
+        },
+        {
+          "type": "def",
+          "name": "business_required"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/utils/errors.py",
+      "ext": ".py",
+      "size": 1558,
+      "imports": [
+        "flask",
+        "sqlalchemy.exc"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "register_error_handlers"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/utils/pagination.py",
+      "ext": ".py",
+      "size": 463,
+      "imports": [
+        "flask"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "paginate"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/utils/validators.py",
+      "ext": ".py",
+      "size": 1660,
+      "imports": [
+        "re\n\n\ndef validate_email"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "validate_email"
+        },
+        {
+          "type": "def",
+          "name": "validate_password"
+        },
+        {
+          "type": "def",
+          "name": "validate_phone"
+        },
+        {
+          "type": "def",
+          "name": "validate_gst"
+        },
+        {
+          "type": "def",
+          "name": "validate_coordinates"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/utils/__init__.py",
+      "ext": ".py",
+      "size": 40,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "backend/app/websocket_events.py",
+      "ext": ".py",
+      "size": 2310,
+      "imports": [
+        "flask_socketio"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "handle_bin_connect"
+        },
+        {
+          "type": "def",
+          "name": "handle_bin_disconnect"
+        },
+        {
+          "type": "def",
+          "name": "handle_join_zone"
+        },
+        {
+          "type": "def",
+          "name": "handle_leave_zone"
+        },
+        {
+          "type": "def",
+          "name": "broadcast_bin_update"
+        },
+        {
+          "type": "def",
+          "name": "broadcast_alert"
+        }
+      ]
+    },
+    {
+      "file": "backend/app/__init__.py",
+      "ext": ".py",
+      "size": 3113,
+      "imports": [
+        "os\nimport logging\nfrom logging.handlers import RotatingFileHandler\nfrom flask import Flask\nfrom flask_sqlalchemy import SQLAlchemy\nfrom flask_migrate import Migrate\nfrom flask_cors import CORS\nfrom flask_jwt_extended import JWTManager\nfrom flask_socketio import SocketIO\n\nfrom config import config",
+        "app.utils.errors"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "create_app"
+        },
+        {
+          "type": "def",
+          "name": "register_blueprints"
+        },
+        {
+          "type": "def",
+          "name": "register_error_handlers"
+        },
+        {
+          "type": "def",
+          "name": "setup_logging"
+        }
+      ]
+    },
+    {
+      "file": "backend/config.py",
+      "ext": ".py",
+      "size": 4823,
+      "imports": [
+        "os\nfrom datetime import timedelta\nfrom dotenv import load_dotenv\n\nload_dotenv"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "Config"
+        },
+        {
+          "type": "class",
+          "name": "DevelopmentConfig"
+        },
+        {
+          "type": "class",
+          "name": "ProductionConfig"
+        },
+        {
+          "type": "class",
+          "name": "TestingConfig"
+        }
+      ]
+    },
+    {
+      "file": "backend/docs/FILE_UPLOAD_SYSTEM.md",
+      "ext": ".md",
+      "size": 10705
+    },
+    {
+      "file": "backend/jest.config.js",
+      "ext": ".js",
+      "size": 382,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "backend/jsconfig.json",
+      "ext": ".json",
+      "size": 652
+    },
+    {
+      "file": "backend/package-lock.json",
+      "ext": ".json",
+      "size": 490933
+    },
+    {
+      "file": "backend/package.json",
+      "ext": ".json",
+      "size": 2006
+    },
+    {
+      "file": "backend/src/config/database.js",
+      "ext": ".js",
+      "size": 5062,
+      "imports": [
+        "mongoose",
+        "sequelize",
+        "redis",
+        "dotenv"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/middleware/auth.js",
+      "ext": ".js",
+      "size": 7003,
+      "imports": [
+        "jsonwebtoken",
+        "../models/User.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/middleware/errorHandler.js",
+      "ext": ".js",
+      "size": 1284,
+      "imports": [
+        "mongoose"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/middleware/fileUpload.js",
+      "ext": ".js",
+      "size": 9711,
+      "imports": [
+        "express-rate-limit",
+        "../services/fileUploadService.js",
+        "../services/virusScanService.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/middleware/requestLogger.js",
+      "ext": ".js",
+      "size": 528,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/migrations/001_create_epr_tables.js",
+      "ext": ".js",
+      "size": 12193,
+      "imports": [
+        "sequelize"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/models/BlockchainTransaction.js",
+      "ext": ".js",
+      "size": 12824,
+      "imports": [
+        "mongoose"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/models/epr/AuditResult.js",
+      "ext": ".js",
+      "size": 20477,
+      "imports": [
+        "sequelize"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "AuditResult",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/models/epr/AuditTrail.js",
+      "ext": ".js",
+      "size": 18612,
+      "imports": [
+        "sequelize"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "AuditTrail",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/models/epr/BillingRecord.js",
+      "ext": ".js",
+      "size": 25196,
+      "imports": [
+        "sequelize"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "BillingRecord",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/models/epr/Client.js",
+      "ext": ".js",
+      "size": 16499,
+      "imports": [
+        "sequelize",
+        "bcryptjs",
+        "jsonwebtoken"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "Client",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/models/epr/ComplianceScore.js",
+      "ext": ".js",
+      "size": 22662,
+      "imports": [
+        "sequelize"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "ComplianceScore",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/models/epr/Document.js",
+      "ext": ".js",
+      "size": 17974,
+      "imports": [
+        "sequelize"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "Document",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/models/epr/index.js",
+      "ext": ".js",
+      "size": 677,
+      "imports": [
+        "./Client.js",
+        "./Document.js",
+        "./AuditResult.js",
+        "./RecyclerMaster.js",
+        "./ComplianceScore.js",
+        "./AuditTrail.js",
+        "./BillingRecord.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/models/epr/RecyclerMaster.js",
+      "ext": ".js",
+      "size": 23377,
+      "imports": [
+        "sequelize"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "RecyclerMaster",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/models/index.js",
+      "ext": ".js",
+      "size": 552,
+      "imports": [
+        "./User.js",
+        "./WasteSubmission.js",
+        "./WasteCredit.js",
+        "./BlockchainTransaction.js",
+        "./IPFSMetadata.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/models/IPFSMetadata.js",
+      "ext": ".js",
+      "size": 14738,
+      "imports": [
+        "mongoose"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/models/User.js",
+      "ext": ".js",
+      "size": 15382,
+      "imports": [
+        "mongoose",
+        "bcryptjs",
+        "jsonwebtoken"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/models/WasteCredit.js",
+      "ext": ".js",
+      "size": 15144,
+      "imports": [
+        "mongoose"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/models/WasteSubmission.js",
+      "ext": ".js",
+      "size": 14827,
+      "imports": [
+        "mongoose",
+        "qrcode"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/auth.js",
+      "ext": ".js",
+      "size": 12326,
+      "imports": [
+        "express",
+        "bcryptjs",
+        "jsonwebtoken",
+        "joi",
+        "../models/User.js",
+        "../middleware/auth.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/fileUpload.js",
+      "ext": ".js",
+      "size": 8362,
+      "imports": [
+        "express",
+        "../services/fileUploadService.js",
+        "../middleware/auth.js",
+        "joi"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/subscriptions.js",
+      "ext": ".js",
+      "size": 15740,
+      "imports": [
+        "express",
+        "joi",
+        "bcryptjs",
+        "../models/User.js",
+        "../middleware/auth.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/users.js",
+      "ext": ".js",
+      "size": 12029,
+      "imports": [
+        "express",
+        "joi",
+        "../models/User.js",
+        "../middleware/auth.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/scripts/migrate.js",
+      "ext": ".js",
+      "size": 6355,
+      "imports": [
+        "commander",
+        "../config/database.js",
+        "../utils/connectionUtils.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/server.js",
+      "ext": ".js",
+      "size": 4562,
+      "imports": [
+        "express",
+        "cors",
+        "helmet",
+        "express-rate-limit",
+        "dotenv",
+        "mongoose",
+        "http",
+        "socket.io",
+        "./routes/auth.js",
+        "./routes/users.js",
+        "./routes/subscriptions.js",
+        "./routes/fileUpload.js",
+        "./middleware/errorHandler.js",
+        "./middleware/requestLogger.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/services/fileProcessingQueue.js",
+      "ext": ".js",
+      "size": 10432,
+      "imports": [
+        "bull",
+        "./fileUploadService.js",
+        "../models/WasteSubmission.js",
+        "../models/epr/Document.js",
+        "../models/IPFSMetadata.js"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "FileProcessingQueue",
+          "exported": false
+        },
+        {
+          "type": "class",
+          "name": "file",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/fileUploadService.js",
+      "ext": ".js",
+      "size": 10379,
+      "imports": [
+        "multer",
+        "sharp",
+        "aws-sdk",
+        "ipfs-http-client",
+        "crypto",
+        "path",
+        "fs/promises",
+        "util",
+        "./virusScanService.js"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "FileUploadService",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/virusScanService.js",
+      "ext": ".js",
+      "size": 15370,
+      "imports": [
+        "crypto",
+        "axios",
+        "child_process",
+        "util",
+        "fs/promises",
+        "path",
+        "os"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "VirusScanService",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/tests/auth.test.js",
+      "ext": ".js",
+      "size": 20085,
+      "imports": [
+        "supertest",
+        "mongoose",
+        "jsonwebtoken",
+        "../server.js",
+        "../models/User.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/tests/database.test.js",
+      "ext": ".js",
+      "size": 7457,
+      "imports": [
+        "@jest/globals"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/tests/eprModels.test.js",
+      "ext": ".js",
+      "size": 23711,
+      "imports": [
+        "@jest/globals",
+        "../config/database.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/tests/fileUpload.test.js",
+      "ext": ".js",
+      "size": 16033,
+      "imports": [
+        "supertest",
+        "../server.js",
+        "@jest/globals",
+        "../services/fileUploadService.js",
+        "../services/virusScanService.js",
+        "fs",
+        "path"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/tests/models.test.js",
+      "ext": ".js",
+      "size": 22958,
+      "imports": [
+        "@jest/globals",
+        "mongoose",
+        "../config/database.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/tests/subscriptions.test.js",
+      "ext": ".js",
+      "size": 21801,
+      "imports": [
+        "supertest",
+        "mongoose",
+        "../server.js",
+        "../models/User.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/utils/connectionUtils.js",
+      "ext": ".js",
+      "size": 9074,
+      "imports": [
+        "../config/database.js"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "CacheManager",
+          "exported": false
+        },
+        {
+          "type": "class",
+          "name": "PostgreSQLManager",
+          "exported": false
+        },
+        {
+          "type": "class",
+          "name": "MongoDBManager",
+          "exported": false
+        },
+        {
+          "type": "class",
+          "name": "HealthChecker",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/utils/migrationRunner.js",
+      "ext": ".js",
+      "size": 7423,
+      "imports": [
+        "fs",
+        "path",
+        "url",
+        "../config/database.js"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/tests/setup.js",
+      "ext": ".js",
+      "size": 1054,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/api/server.js",
+      "ext": ".js",
+      "size": 9093,
+      "imports": [
+        "express",
+        "cors",
+        "body-parser",
+        "../services/certificateService",
+        "../services/digitalTwinService",
+        "../services/ipfsService",
+        "../services/webhookService",
+        "dotenv"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "initializeServices",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "startServer",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/AutomatedProposalExecutor.sol",
+      "ext": ".sol",
+      "size": 19493,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "AutomatedProposalExecutor"
+        },
+        {
+          "type": "contract",
+          "name": "QuadraticVotingDAO"
+        },
+        {
+          "type": "contract",
+          "name": "dao"
+        },
+        {
+          "type": "contract",
+          "name": "or"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "functionality"
+        },
+        {
+          "type": "contract",
+          "name": "functionality"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/AutomatedTreasuryExecutor.sol",
+      "ext": ".sol",
+      "size": 9095,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "AutomatedTreasuryExecutor"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/GasOptimizedVotingInterface.sol",
+      "ext": ".sol",
+      "size": 6025,
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "for"
+        },
+        {
+          "type": "contract",
+          "name": "GasOptimizedVotingInterface"
+        },
+        {
+          "type": "contract",
+          "name": "QuadraticVotingDAO"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/interfaces/IAutomatedProposalExecutor.sol",
+      "ext": ".sol",
+      "size": 1174,
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "IAutomatedProposalExecutor"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/ParameterChangeRegistry.sol",
+      "ext": ".sol",
+      "size": 6923,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "ParameterChangeRegistry"
+        },
+        {
+          "type": "contract",
+          "name": "AutomatedProposalExecutor"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/QuadraticVotingDAO.sol",
+      "ext": ".sol",
+      "size": 17888,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "implementing"
+        },
+        {
+          "type": "contract",
+          "name": "QuadraticVotingDAO"
+        },
+        {
+          "type": "contract",
+          "name": "to"
+        },
+        {
+          "type": "contract",
+          "name": "is"
+        },
+        {
+          "type": "contract",
+          "name": "functionality"
+        },
+        {
+          "type": "contract",
+          "name": "functionality"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/QuadraticVotingDAOFactory.sol",
+      "ext": ".sol",
+      "size": 7021,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "for"
+        },
+        {
+          "type": "contract",
+          "name": "QuadraticVotingDAOFactory"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "daoImplementation"
+        },
+        {
+          "type": "contract",
+          "name": "addresses"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/TreasuryManager.sol",
+      "ext": ".sol",
+      "size": 9988,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "TreasuryManager"
+        },
+        {
+          "type": "contract",
+          "name": "AutomatedProposalExecutor"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/VoteWeightCalculator.sol",
+      "ext": ".sol",
+      "size": 4810,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "VoteWeightCalculator"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/WasteCertificateFactory.sol",
+      "ext": ".sol",
+      "size": 9752,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "for"
+        },
+        {
+          "type": "contract",
+          "name": "WasteCertificateFactory"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "for"
+        },
+        {
+          "type": "contract",
+          "name": "address"
+        },
+        {
+          "type": "contract",
+          "name": "does"
+        },
+        {
+          "type": "contract",
+          "name": "does"
+        },
+        {
+          "type": "contract",
+          "name": "does"
+        },
+        {
+          "type": "contract",
+          "name": "does"
+        },
+        {
+          "type": "contract",
+          "name": "WasteCertificateNFT"
+        },
+        {
+          "type": "contract",
+          "name": "for"
+        },
+        {
+          "type": "contract",
+          "name": "does"
+        },
+        {
+          "type": "contract",
+          "name": "for"
+        },
+        {
+          "type": "contract",
+          "name": "for"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/WasteCertificateNFT.sol",
+      "ext": ".sol",
+      "size": 17046,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "for"
+        },
+        {
+          "type": "contract",
+          "name": "WasteCertificateNFT"
+        },
+        {
+          "type": "contract",
+          "name": "owner"
+        },
+        {
+          "type": "contract",
+          "name": "functionality"
+        },
+        {
+          "type": "contract",
+          "name": "functionality"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/contracts/WasteGovernanceToken.sol",
+      "ext": ".sol",
+      "size": 5409,
+      "symbols": [
+        {
+          "type": "contract",
+          "name": "WasteGovernanceToken"
+        }
+      ]
+    },
+    {
+      "file": "blockchain/docs/IPFS_METADATA_STORAGE.md",
+      "ext": ".md",
+      "size": 12069
+    },
+    {
+      "file": "blockchain/docs/REAL_TIME_CERTIFICATE_UPDATES.md",
+      "ext": ".md",
+      "size": 13035
+    },
+    {
+      "file": "blockchain/examples/ipfs-demo.js",
+      "ext": ".js",
+      "size": 12916,
+      "imports": [
+        "../services/metadataSchema"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "IPFSServiceDemo",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "demonstrateIPFSMetadataStorage",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/hardhat.config.js",
+      "ext": ".js",
+      "size": 1441,
+      "imports": [
+        "@nomicfoundation/hardhat-toolbox",
+        "dotenv"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/package-lock.json",
+      "ext": ".json",
+      "size": 492352
+    },
+    {
+      "file": "blockchain/package.json",
+      "ext": ".json",
+      "size": 1185
+    },
+    {
+      "file": "blockchain/scripts/deploy-automated-execution.js",
+      "ext": ".js",
+      "size": 5578,
+      "imports": [
+        "hardhat",
+        "./deploy-dao"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "main",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/scripts/deploy-dao.js",
+      "ext": ".js",
+      "size": 8063,
+      "imports": [
+        "hardhat"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "main",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "call",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/scripts/deploy.js",
+      "ext": ".js",
+      "size": 6586,
+      "imports": [
+        "hardhat"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "main",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/services/certificateService.js",
+      "ext": ".js",
+      "size": 10694,
+      "imports": [
+        "hardhat",
+        "./ipfsService",
+        "./metadataSchema",
+        "dotenv"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "CertificateService",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/services/digitalTwinService.js",
+      "ext": ".js",
+      "size": 29785,
+      "imports": [
+        "axios",
+        "./ipfsService",
+        "uuid",
+        "ws",
+        "dotenv"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "DigitalTwinService",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/services/enhancedWebhookService.js",
+      "ext": ".js",
+      "size": 34705,
+      "imports": [
+        "axios",
+        "./certificateService",
+        "./digitalTwinService",
+        "./ipfsService",
+        "./metadataSchema",
+        "events",
+        "crypto",
+        "uuid",
+        "dotenv"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "EnhancedWebhookService",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/services/ipfsService.js",
+      "ext": ".js",
+      "size": 14695,
+      "imports": [
+        "nft.storage",
+        "ipfs-http-client",
+        "fs",
+        "fs",
+        "path",
+        "crypto",
+        "winston"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "IPFSService",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/services/metadataSchema.js",
+      "ext": ".js",
+      "size": 27006,
+      "imports": [],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "createEnhancedCertificateMetadata",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "for",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "createCertificateMetadata",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "validateEnhancedMetadata",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "to",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "getNestedValue",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "generateMetadataTemplate",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/services/webhookService.js",
+      "ext": ".js",
+      "size": 29196,
+      "imports": [
+        "axios",
+        "./certificateService",
+        "./digitalTwinService",
+        "./ipfsService",
+        "./metadataSchema",
+        "events",
+        "crypto",
+        "dotenv"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "WebhookService",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/test/AutomatedProposalExecution.test.js",
+      "ext": ".js",
+      "size": 26623,
+      "imports": [
+        "chai",
+        "hardhat",
+        "@nomicfoundation/hardhat-network-helpers"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "selector",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/test/certificateLifecycle.test.js",
+      "ext": ".js",
+      "size": 20472,
+      "imports": [
+        "chai",
+        "hardhat",
+        "../services/certificateService",
+        "../services/digitalTwinService",
+        "../services/webhookService",
+        "../services/ipfsService"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/certificateLifecycleEndToEnd.test.js",
+      "ext": ".js",
+      "size": 36652,
+      "imports": [
+        "chai",
+        "hardhat",
+        "sinon",
+        "axios",
+        "../services/certificateService",
+        "../services/digitalTwinService",
+        "../services/enhancedWebhookService",
+        "../services/ipfsService"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "const",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/test/digitalTwinService.test.js",
+      "ext": ".js",
+      "size": 12573,
+      "imports": [
+        "chai",
+        "sinon",
+        "axios",
+        "ws",
+        "../services/digitalTwinService",
+        "../services/ipfsService"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/enhancedWebhookService.test.js",
+      "ext": ".js",
+      "size": 29006,
+      "imports": [
+        "chai",
+        "sinon",
+        "axios",
+        "../services/enhancedWebhookService",
+        "../services/certificateService",
+        "../services/digitalTwinService",
+        "../services/ipfsService"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/enhancedWebhookServiceSimple.test.js",
+      "ext": ".js",
+      "size": 8824,
+      "imports": [
+        "chai",
+        "sinon",
+        "module",
+        "../services/enhancedWebhookService"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/GasOptimizedVotingInterface.test.js",
+      "ext": ".js",
+      "size": 8501,
+      "imports": [
+        "chai",
+        "hardhat"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/ipfsService.integration.test.js",
+      "ext": ".js",
+      "size": 17231,
+      "imports": [
+        "chai",
+        "fs",
+        "fs",
+        "path",
+        "../services/metadataSchema"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/ipfsService.test.js",
+      "ext": ".js",
+      "size": 19693,
+      "imports": [
+        "chai",
+        "sinon",
+        "fs",
+        "fs",
+        "path",
+        "crypto",
+        "nft.storage",
+        "nft.storage",
+        "ipfs-http-client",
+        "../services/ipfsService",
+        "../services/metadataSchema"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "fs",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "blockchain/test/metadataSchema.test.js",
+      "ext": ".js",
+      "size": 19807,
+      "imports": [
+        "chai",
+        "../services/metadataSchema"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/QuadraticVotingDAO.test.js",
+      "ext": ".js",
+      "size": 14279,
+      "imports": [
+        "chai",
+        "hardhat"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/QuadraticVotingDAOFactory.test.js",
+      "ext": ".js",
+      "size": 8544,
+      "imports": [
+        "chai",
+        "hardhat"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/realTimeWebhookTest.test.js",
+      "ext": ".js",
+      "size": 20231,
+      "imports": [
+        "chai",
+        "sinon",
+        "axios",
+        "module",
+        "../services/enhancedWebhookService"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/VoteWeightCalculator.test.js",
+      "ext": ".js",
+      "size": 6529,
+      "imports": [
+        "chai",
+        "hardhat"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/WasteCertificateFactory.test.js",
+      "ext": ".js",
+      "size": 14604,
+      "imports": [
+        "chai",
+        "hardhat"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "blockchain/test/WasteCertificateNFT.test.js",
+      "ext": ".js",
+      "size": 21533,
+      "imports": [
+        "chai",
+        "hardhat"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "DEPENDENCY_FIXES_SUMMARY.md",
+      "ext": ".md",
+      "size": 4466
+    },
+    {
+      "file": "DEPENDENCY_MANAGEMENT.md",
+      "ext": ".md",
+      "size": 3983
+    },
+    {
+      "file": "deploy.sh",
+      "ext": ".sh",
+      "size": 6525
+    },
+    {
+      "file": "docker-compose.dev.yml",
+      "ext": ".yml",
+      "size": 688
+    },
+    {
+      "file": "docker-compose.yml",
+      "ext": ".yml",
+      "size": 4129
+    },
+    {
+      "file": "docs/RENDER_REQUIREMENTS.md",
+      "ext": ".md",
+      "size": 3904
+    },
+    {
+      "file": "frontend/docs/PWA_IMPLEMENTATION.md",
+      "ext": ".md",
+      "size": 8785
+    },
+    {
+      "file": "frontend/index.html",
+      "ext": ".html",
+      "size": 1571
+    },
+    {
+      "file": "frontend/package.json",
+      "ext": ".json",
+      "size": 1933
+    },
+    {
+      "file": "frontend/postcss.config.js",
+      "ext": ".js",
+      "size": 84,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "frontend/public/manifest.json",
+      "ext": ".json",
+      "size": 3336
+    },
+    {
+      "file": "frontend/public/offline.html",
+      "ext": ".html",
+      "size": 6094
+    },
+    {
+      "file": "frontend/public/sw.js",
+      "ext": ".js",
+      "size": 9885,
+      "imports": [],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "handleApiRequest",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "handleImageRequest",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "handleStaticRequest",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "handleNavigationRequest",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "processOfflineQueue",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "processOfflineAction",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "getOfflineActions",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "removeOfflineAction",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/App.css",
+      "ext": ".css",
+      "size": 9441
+    },
+    {
+      "file": "frontend/src/App.tsx",
+      "ext": ".tsx",
+      "size": 2685,
+      "imports": [
+        "react",
+        "react-redux",
+        "antd",
+        "./store/store",
+        "./routes",
+        "./components/Shared",
+        "./components/Onboarding",
+        "./utils/serviceWorker"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Dashboard/QuickActionCenter.tsx",
+      "ext": ".tsx",
+      "size": 16713,
+      "imports": [
+        "react",
+        "antd",
+        "react-redux",
+        "react-router-dom",
+        "../../store/store",
+        "../../store/slices/dashboardSlice"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "WorkflowStep",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "WorkflowShortcut",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Dashboard/Widget.tsx",
+      "ext": ".tsx",
+      "size": 2191,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons",
+        "antd",
+        "../../store/slices/dashboardSlice"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "WidgetProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Help/HelpPanel.tsx",
+      "ext": ".tsx",
+      "size": 10401,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "HelpItem",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "HelpPanelProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Help/HelpTooltip.tsx",
+      "ext": ".tsx",
+      "size": 2367,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "HelpTooltipProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Help/HelpWidget.tsx",
+      "ext": ".tsx",
+      "size": 3282,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons",
+        "./HelpPanel"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "HelpWidgetProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Help/index.ts",
+      "ext": ".ts",
+      "size": 221,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Layout/AppLayout.tsx",
+      "ext": ".tsx",
+      "size": 10415,
+      "imports": [
+        "react",
+        "react-router-dom",
+        "react-redux",
+        "antd",
+        "../Search/SearchBar",
+        "../Notifications/NotificationCenter",
+        "../Status/ConnectionStatus",
+        "../Help",
+        "../PWA/InstallPrompt",
+        "../../store/store",
+        "../../store/slices/navigationSlice"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Layout/Layout.tsx",
+      "ext": ".tsx",
+      "size": 694,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "LayoutProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Layout/SimpleLayout.tsx",
+      "ext": ".tsx",
+      "size": 776,
+      "imports": [
+        "react",
+        "react-router-dom",
+        "antd"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Notifications/NotificationCenter.tsx",
+      "ext": ".tsx",
+      "size": 8997,
+      "imports": [
+        "react"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "Notification",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "NotificationCenterProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Onboarding/GuidedTour.tsx",
+      "ext": ".tsx",
+      "size": 6336,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "TourStep",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "GuidedTourProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Onboarding/index.ts",
+      "ext": ".ts",
+      "size": 256,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Onboarding/OnboardingProvider.tsx",
+      "ext": ".tsx",
+      "size": 10692,
+      "imports": [
+        "react",
+        "antd",
+        "./GuidedTour"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "OnboardingContextType",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "OnboardingProviderProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/PWA/InstallPrompt.tsx",
+      "ext": ".tsx",
+      "size": 7503,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "BeforeInstallPromptEvent",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "InstallPromptProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/PWA/NotificationSettings.tsx",
+      "ext": ".tsx",
+      "size": 10252,
+      "imports": [
+        "react",
+        "../../utils/pushNotifications"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "NotificationSettingsProps",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "NotificationSettings",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/PWA/__tests__/InstallPrompt.test.tsx",
+      "ext": ".tsx",
+      "size": 9245,
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "antd",
+        "../InstallPrompt"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "MockBeforeInstallPromptEvent",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/RealTime/RealTimeWidget.tsx",
+      "ext": ".tsx",
+      "size": 3066,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons",
+        "../../hooks/useRealTimeData"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "RealTimeWidgetProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/RealTime/__tests__/RealTimeWidget.test.tsx",
+      "ext": ".tsx",
+      "size": 8716,
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "../RealTimeWidget",
+        "../../../hooks/useRealTimeData"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Search/SearchBar.tsx",
+      "ext": ".tsx",
+      "size": 9557,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons",
+        "react-router-dom"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SearchOption",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/Button.tsx",
+      "ext": ".tsx",
+      "size": 1882,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SharedButtonProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/Card.tsx",
+      "ext": ".tsx",
+      "size": 1781,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SharedCardProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/ErrorBoundary.tsx",
+      "ext": ".tsx",
+      "size": 4319,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "Props",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "State",
+          "exported": false
+        },
+        {
+          "type": "class",
+          "name": "ErrorBoundary",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/ErrorDisplay.tsx",
+      "ext": ".tsx",
+      "size": 5571,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "ErrorDisplayProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/Form.tsx",
+      "ext": ".tsx",
+      "size": 2931,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SharedFormProps",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "FormFieldProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/index.ts",
+      "ext": ".ts",
+      "size": 1043,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Shared/LoadingSpinner.tsx",
+      "ext": ".tsx",
+      "size": 2238,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "LoadingSpinnerProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/Modal.tsx",
+      "ext": ".tsx",
+      "size": 2141,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SharedModalProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/RetryWrapper.tsx",
+      "ext": ".tsx",
+      "size": 4488,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons",
+        "./ErrorDisplay",
+        "./LoadingSpinner"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "RetryWrapperProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/shared.css",
+      "ext": ".css",
+      "size": 2287
+    },
+    {
+      "file": "frontend/src/components/Shared/SkeletonLoader.tsx",
+      "ext": ".tsx",
+      "size": 3731,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SkeletonLoaderProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Shared/Table.tsx",
+      "ext": ".tsx",
+      "size": 2275,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SharedTableProps",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Status/ConnectionStatus.tsx",
+      "ext": ".tsx",
+      "size": 3180,
+      "imports": [
+        "react",
+        "antd",
+        "../../hooks/useWebSocket"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Upload/DragDropUpload.tsx",
+      "ext": ".tsx",
+      "size": 25863,
+      "imports": [
+        "react",
+        "antd",
+        "antd/es/upload/interface"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "FileUploadProgress",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "DragDropUploadProps",
+          "exported": true
+        },
+        {
+          "type": "type",
+          "name": "based",
+          "exported": false
+        },
+        {
+          "type": "type",
+          "name": "if",
+          "exported": false
+        },
+        {
+          "type": "type",
+          "name": "const",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/Upload/__tests__/DragDropUpload.basic.test.tsx",
+      "ext": ".tsx",
+      "size": 789,
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "vitest",
+        "../DragDropUpload"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/components/Upload/__tests__/DragDropUpload.comprehensive.test.tsx",
+      "ext": ".tsx",
+      "size": 18009,
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "vitest",
+        "../DragDropUpload",
+        "antd"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/hooks/useRealTimeData.ts",
+      "ext": ".ts",
+      "size": 3456,
+      "imports": [
+        "react",
+        "./useWebSocket"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "RealTimeDataConfig",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RealTimeDataState",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/hooks/useWebSocket.ts",
+      "ext": ".ts",
+      "size": 2089,
+      "imports": [
+        "react",
+        "../services/websocketService"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "return",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/hooks/__tests__/useRealTimeData.test.ts",
+      "ext": ".ts",
+      "size": 7909,
+      "imports": [
+        "@testing-library/react",
+        "vitest",
+        "../useRealTimeData",
+        "../useWebSocket"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/hooks/__tests__/useWebSocket.test.ts",
+      "ext": ".ts",
+      "size": 6456,
+      "imports": [
+        "@testing-library/react",
+        "vitest",
+        "../useWebSocket",
+        "../../services/websocketService"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/index.css",
+      "ext": ".css",
+      "size": 701
+    },
+    {
+      "file": "frontend/src/main.tsx",
+      "ext": ".tsx",
+      "size": 244,
+      "imports": [
+        "react",
+        "react-dom/client",
+        "./App.tsx"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/Analytics/Analytics.tsx",
+      "ext": ".tsx",
+      "size": 1285,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/Blockchain/BlockchainCertificates.tsx",
+      "ext": ".tsx",
+      "size": 1351,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/ContaminationDetection/ContaminationDetection.tsx",
+      "ext": ".tsx",
+      "size": 11671,
+      "imports": [
+        "react",
+        "react-redux",
+        "antd/es/upload/interface",
+        "../../store/store",
+        "./ContaminationVisualizer",
+        "./RemediationSuggestions",
+        "./FlaggedBatchesList",
+        "./ContaminationStats"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/ContaminationDetection/ContaminationStats.tsx",
+      "ext": ".tsx",
+      "size": 10410,
+      "imports": [
+        "react",
+        "react-redux",
+        "antd",
+        "../../store/store",
+        "../../store/slices/contaminationSlice",
+        "recharts"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/ContaminationDetection/ContaminationVisualizer.tsx",
+      "ext": ".tsx",
+      "size": 3140,
+      "imports": [
+        "react",
+        "antd",
+        "../../store/slices/contaminationSlice"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "ContaminationVisualizerProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/pages/ContaminationDetection/FlaggedBatchesList.tsx",
+      "ext": ".tsx",
+      "size": 5940,
+      "imports": [
+        "react",
+        "react-redux",
+        "../../store/store",
+        "../../store/slices/contaminationSlice"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/ContaminationDetection/RemediationSuggestions.tsx",
+      "ext": ".tsx",
+      "size": 2084,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "RemediationSuggestionsProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/pages/Dashboard/Dashboard.tsx",
+      "ext": ".tsx",
+      "size": 6374,
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/DigitalTwins/DigitalTwins.tsx",
+      "ext": ".tsx",
+      "size": 1283,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/Landing/LandingPage.tsx",
+      "ext": ".tsx",
+      "size": 14374,
+      "imports": [
+        "react",
+        "react-router-dom",
+        "react-redux",
+        "../../store/store",
+        "../../store/slices/dashboardSlice"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "ToolCardProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/pages/Landing/SimpleLandingPage.tsx",
+      "ext": ".tsx",
+      "size": 9791,
+      "imports": [
+        "react",
+        "react-router-dom"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/NotFound/NotFound.tsx",
+      "ext": ".tsx",
+      "size": 489,
+      "imports": [
+        "react",
+        "antd",
+        "react-router-dom"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/Search/AdvancedSearch.tsx",
+      "ext": ".tsx",
+      "size": 15535,
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../../components/Shared"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "AdvancedSearchFilters",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/pages/Search/SearchResults.tsx",
+      "ext": ".tsx",
+      "size": 14074,
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../../components/Shared"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SearchResult",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/pages/Settings/Settings.tsx",
+      "ext": ".tsx",
+      "size": 1251,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/Test/TestPage.tsx",
+      "ext": ".tsx",
+      "size": 958,
+      "imports": [
+        "react",
+        "antd",
+        "react-router-dom"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/WasteAnalysis/AnalysisHistory.tsx",
+      "ext": ".tsx",
+      "size": 9934,
+      "imports": [
+        "react",
+        "react-redux",
+        "../../store/store",
+        "../../store/slices/wasteAnalysisSlice",
+        "./AnalysisResults"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/WasteAnalysis/AnalysisResults.tsx",
+      "ext": ".tsx",
+      "size": 6428,
+      "imports": [
+        "react",
+        "antd",
+        "../../store/slices/wasteAnalysisSlice"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "AnalysisResultsProps",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/pages/WasteAnalysis/RealTimeMonitoring.tsx",
+      "ext": ".tsx",
+      "size": 10954,
+      "imports": [
+        "react",
+        "react-redux",
+        "antd",
+        "recharts",
+        "../../store/store",
+        "../../store/slices/wasteAnalysisSlice"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/WasteAnalysis/SensorCalibration.tsx",
+      "ext": ".tsx",
+      "size": 9503,
+      "imports": [
+        "react",
+        "react-redux",
+        "../../store/store",
+        "../../store/slices/wasteAnalysisSlice"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/WasteAnalysis/WasteAnalysis.tsx",
+      "ext": ".tsx",
+      "size": 9970,
+      "imports": [
+        "react",
+        "react-redux",
+        "antd/es/upload/interface",
+        "../../store/store",
+        "./SensorCalibration",
+        "./AnalysisResults",
+        "./RealTimeMonitoring",
+        "./AnalysisHistory"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/routes/index.tsx",
+      "ext": ".tsx",
+      "size": 3066,
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../components/Layout/AppLayout",
+        "../pages/Landing/SimpleLandingPage",
+        "../pages/Dashboard/Dashboard",
+        "../pages/WasteAnalysis/WasteAnalysis",
+        "../pages/ContaminationDetection/ContaminationDetection",
+        "../pages/Blockchain/BlockchainCertificates",
+        "../pages/DigitalTwins/DigitalTwins",
+        "../pages/Analytics/Analytics",
+        "../pages/Settings/Settings",
+        "../pages/Search/SearchResults",
+        "../pages/Search/AdvancedSearch",
+        "../pages/NotFound/NotFound"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/services/certificateService.ts",
+      "ext": ".ts",
+      "size": 4401,
+      "imports": [
+        "axios"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "CertificateService",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/digitalTwinService.ts",
+      "ext": ".ts",
+      "size": 17306,
+      "imports": [
+        "axios",
+        "uuid"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "DigitalTwinService",
+          "exported": true
+        },
+        {
+          "type": "type",
+          "name": "if",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/websocketService.ts",
+      "ext": ".ts",
+      "size": 12167,
+      "imports": [
+        "../store/store",
+        "../store/slices/dashboardSlice",
+        "../store/slices/uiSlice"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "WebSocketMessage",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ConnectionStatus",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RealTimeDataUpdate",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "WebSocketService",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/__tests__/digitalTwinService.test.ts",
+      "ext": ".ts",
+      "size": 13117,
+      "imports": [
+        "vitest",
+        "axios",
+        "../digitalTwinService"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/services/__tests__/websocketService.test.ts",
+      "ext": ".ts",
+      "size": 10400,
+      "imports": [
+        "../websocketService",
+        "../../store/store"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "MockWebSocket",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/autonomousSlice.ts",
+      "ext": ".ts",
+      "size": 11317,
+      "imports": [
+        "@reduxjs/toolkit"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "ProcessingEquipment",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ProcessingParameters",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "MaintenanceSchedule",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RLAgent",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "SafetyConstraint",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ProcessingJob",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "PaymentDistribution",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "AutonomousState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/contaminationSlice.ts",
+      "ext": ".ts",
+      "size": 5814,
+      "imports": [
+        "@reduxjs/toolkit",
+        "axios"
+      ],
+      "symbols": [
+        {
+          "type": "enum",
+          "name": "ContaminationType",
+          "exported": true
+        },
+        {
+          "type": "enum",
+          "name": "ContaminationSeverity",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ContaminationLocation",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RemediationAction",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ContaminationResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ContaminationDetectionRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ContaminationState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/dashboardSlice.ts",
+      "ext": ".ts",
+      "size": 9150,
+      "imports": [
+        "@reduxjs/toolkit"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SystemStatistics",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "DashboardWidget",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "QuickAction",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "WorkflowStep",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "WorkflowShortcut",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "UserPreferences",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "DashboardState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/digitalTwinSlice.ts",
+      "ext": ".ts",
+      "size": 11715,
+      "imports": [
+        "@reduxjs/toolkit"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "DigitalTwin",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "TwinState",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "PredictiveModel",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "Prediction",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "SimulationResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "SensorConnection",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "Alert",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "TwinCommunication",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "DigitalTwinState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/metaverseSlice.ts",
+      "ext": ".ts",
+      "size": 8639,
+      "imports": [
+        "@reduxjs/toolkit"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "VirtualFacility",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "InteractiveElement",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "EducationalContent",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "GameFeature",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "GameSession",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "GameTask",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "EducationalProgress",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RealWorldImpact",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "VirtualAsset",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "MetaverseState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/navigationSlice.ts",
+      "ext": ".ts",
+      "size": 1640,
+      "imports": [
+        "@reduxjs/toolkit"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "BreadcrumbItem",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "NavigationState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/quantumSlice.ts",
+      "ext": ".ts",
+      "size": 7695,
+      "imports": [
+        "@reduxjs/toolkit"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "QuantumComputation",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "QuantumOptimizationResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "QuantumPrediction",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "DigitalTwinSimulation",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "QuantumState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/uiSlice.ts",
+      "ext": ".ts",
+      "size": 4402,
+      "imports": [
+        "@reduxjs/toolkit"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "Notification",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "UserPreferences",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "UIState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/slices/wasteAnalysisSlice.ts",
+      "ext": ".ts",
+      "size": 3955,
+      "imports": [
+        "@reduxjs/toolkit",
+        "axios"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "SensorData",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "WasteAnalysisResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "MultiModalAnalysisRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "WasteAnalysisState",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/store/store.ts",
+      "ext": ".ts",
+      "size": 1159,
+      "imports": [
+        "@reduxjs/toolkit",
+        "./slices/navigationSlice",
+        "./slices/dashboardSlice",
+        "./slices/uiSlice"
+      ],
+      "symbols": [
+        {
+          "type": "type",
+          "name": "RootState",
+          "exported": true
+        },
+        {
+          "type": "type",
+          "name": "AppDispatch",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/test/setup.ts",
+      "ext": ".ts",
+      "size": 1199,
+      "imports": [
+        "vitest"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/utils/pushNotifications.ts",
+      "ext": ".ts",
+      "size": 10797,
+      "imports": [
+        "react"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "PushNotificationPayload",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "NotificationAction",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "PushNotificationService",
+          "exported": true
+        },
+        {
+          "type": "function",
+          "name": "usePushNotifications",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/utils/serviceWorker.ts",
+      "ext": ".ts",
+      "size": 7139,
+      "imports": [],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "ServiceWorkerConfig",
+          "exported": true
+        },
+        {
+          "type": "function",
+          "name": "registerSW",
+          "exported": true
+        },
+        {
+          "type": "function",
+          "name": "registerValidSW",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "checkValidServiceWorker",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "unregister",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "OfflineQueue",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "ConnectionMonitor",
+          "exported": true
+        },
+        {
+          "type": "function",
+          "name": "return",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/utils/__tests__/serviceWorker.test.ts",
+      "ext": ".ts",
+      "size": 10144,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/__tests__/pwa.integration.test.tsx",
+      "ext": ".tsx",
+      "size": 9205,
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "react-redux",
+        "react-router-dom",
+        "antd",
+        "vitest",
+        "../store/store",
+        "../components/Layout/AppLayout",
+        "../utils/serviceWorker"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/tailwind.config.js",
+      "ext": ".js",
+      "size": 2053,
+      "imports": [
+        "@tailwindcss/forms",
+        "@tailwindcss/typography"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/tsconfig.json",
+      "ext": ".json",
+      "size": 998
+    },
+    {
+      "file": "frontend/tsconfig.node.json",
+      "ext": ".json",
+      "size": 221
+    },
+    {
+      "file": "frontend/vite.config.ts",
+      "ext": ".ts",
+      "size": 440,
+      "imports": [
+        "vite",
+        "@vitejs/plugin-react",
+        "path"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/vitest.config.ts",
+      "ext": ".ts",
+      "size": 512,
+      "imports": [
+        "vite",
+        "@vitejs/plugin-react",
+        "path"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "ml-models/route_optimization.py",
+      "ext": ".py",
+      "size": 6869,
+      "imports": [
+        "numpy as np\nimport pandas as pd\nfrom sklearn.cluster import KMeans\nfrom sklearn.preprocessing import StandardScaler\nimport joblib\nimport requests\nfrom datetime import datetime",
+        "timedelta\nimport logging\n\nlogging.basicConfig"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "RouteOptimizer"
+        },
+        {
+          "type": "def",
+          "name": "main"
+        }
+      ]
+    },
+    {
+      "file": "ml-models/waste_prediction.py",
+      "ext": ".py",
+      "size": 10102,
+      "imports": [
+        "numpy as np\nimport pandas as pd\nfrom sklearn.ensemble import RandomForestRegressor",
+        "GradientBoostingRegressor\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.metrics import mean_absolute_error",
+        "mean_squared_error",
+        "r2_score\nimport joblib\nimport json\nfrom datetime import datetime",
+        "timedelta\nimport requests\nimport os\n\n\nclass WastePredictionModel",
+        "backend.app.models"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "WastePredictionModel"
+        },
+        {
+          "type": "def",
+          "name": "generate_training_data"
+        },
+        {
+          "type": "def",
+          "name": "train_models"
+        },
+        {
+          "type": "def",
+          "name": "predict_waste_for_zone"
+        }
+      ]
+    },
+    {
+      "file": "package-lock.json",
+      "ext": ".json",
+      "size": 773670
+    },
+    {
+      "file": "package.json",
+      "ext": ".json",
+      "size": 2412
+    },
+    {
+      "file": "README.md",
+      "ext": ".md",
+      "size": 6682
+    },
+    {
+      "file": "scripts/code-index.js",
+      "ext": ".js",
+      "size": 4762,
+      "imports": [
+        "fs",
+        "path"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "walk",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "read",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "extractJSImports",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "extractTSSymbols",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "extractJSSymbols",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "extractPySymbols",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "extractPyImports",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "extractSolSymbols",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "indexFile",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "main",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "scripts/mongo-init.js",
+      "ext": ".js",
+      "size": 1441,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "scripts/postgres-init.sql",
+      "ext": ".sql",
+      "size": 9808
+    },
+    {
+      "file": "scripts/setup-dev.bat",
+      "ext": ".bat",
+      "size": 1830
+    },
+    {
+      "file": "scripts/setup-dev.sh",
+      "ext": ".sh",
+      "size": 1767
+    },
+    {
+      "file": "scripts/verify-dependencies.js",
+      "ext": ".js",
+      "size": 3842,
+      "imports": [
+        "fs",
+        "path"
+      ],
+      "symbols": []
+    }
+  ]
+}

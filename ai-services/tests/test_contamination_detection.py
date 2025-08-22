@@ -12,7 +12,7 @@ import os
 from typing import List, Dict, Any
 
 # Import the contamination detection system
-from ..contamination_detection import (
+    from contamination_detection import (
     ContaminationDetector,
     ContaminationType,
     ContaminationSeverity,
@@ -273,7 +273,7 @@ class TestContaminationDetectionIntegration:
         """Test automated flagging system for contaminated batches"""
         
         # Create batch processor
-        from ..contamination_detection import ContaminationBatchProcessor
+    from contamination_detection import ContaminationBatchProcessor
         batch_processor = ContaminationBatchProcessor(contamination_detector)
         
         # Create test batch with mixed contamination levels

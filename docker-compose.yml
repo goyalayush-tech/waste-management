@@ -1,0 +1,160 @@
+version: '3.8'
+
+services:
+  # MongoDB Database (for waste verification data)
+  mongodb:
+    image: mongo:7.0
+    container_name: integrated-system-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: waste-verification
+    volumes:
+      - mongodb_data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - integrated-system-network
+
+  # PostgreSQL Database (for EPR compliance data)
+  postgresql:
+    image: postgres:16
+    container_name: integrated-system-postgresql
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: epr_compliance
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+      - ./scripts/postgres-init.sql:/docker-entrypoint-initdb.d/postgres-init.sql:ro
+    networks:
+      - integrated-system-network
+
+  # Redis Cache
+  redis:
+    image: redis:7.2-alpine
+    container_name: integrated-system-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - integrated-system-network
+
+  # IPFS Node
+  ipfs:
+    image: ipfs/kubo:latest
+    container_name: integrated-system-ipfs
+    restart: unless-stopped
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    volumes:
+      - ipfs_data:/data/ipfs
+    networks:
+      - integrated-system-network
+
+  # Elasticsearch (for EPR document search)
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: integrated-system-elasticsearch
+    restart: unless-stopped
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - integrated-system-network
+
+  # Backend API Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: integrated-system-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://admin:password@mongodb:27017/waste-verification?authSource=admin
+      - POSTGRES_URI=postgresql://admin:password@postgresql:5432/epr_compliance
+      - REDIS_URL=redis://redis:6379
+      - AI_SERVICE_URL=http://ai-service:8001
+      - IPFS_API_URL=http://ipfs:5001
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb
+      - postgresql
+      - redis
+      - ipfs
+      - elasticsearch
+    networks:
+      - integrated-system-network
+
+  # AI Processing Service
+  ai-service:
+    build:
+      context: ./ai-services
+      dockerfile: Dockerfile.dev
+    container_name: integrated-system-ai
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
+      - HOST=0.0.0.0
+      - DEBUG=true
+    volumes:
+      - ./ai-services:/app
+      - ai_models:/app/models
+    networks:
+      - integrated-system-network
+
+  # Frontend Development Server
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: integrated-system-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3001/api
+      - VITE_WS_URL=http://localhost:3001
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - integrated-system-network
+
+volumes:
+  mongodb_data:
+  postgresql_data:
+  redis_data:
+  ipfs_data:
+  elasticsearch_data:
+  ai_models:
+
+networks:
+  integrated-system-network:
+    driver: bridge

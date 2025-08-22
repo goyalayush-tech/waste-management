@@ -1,5 +1,11 @@
+# Environment files
 .env
 .env.local
+.env.development
+.env.production
+*.env
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
@@ -24,19 +30,34 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-*.log
-*.sqlite
-*.db
+
+# Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.DS_Store
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.vuepress/dist
+
+# Logs
+*.log
+logs/
+ai-services/logs/
+
+# Databases
+*.sqlite
+*.db
+*.db-journal
+
+# Testing
 .pytest_cache/
 coverage/
 .coverage
@@ -44,14 +65,52 @@ htmlcov/
 .nyc_output/
 .cache/
 .parcel-cache/
-dist/
-out/
-.next/
-.nuxt/
-.vuepress/dist
-.serverless/
-.fusebox/
-.dynamodb/
-*.local
+junit.xml
+test-results/
+
+# IDE and editors
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+.dockerignore
+
+# AI Models and data
+ai-services/models/*.pt
+ai-services/models/*.onnx
+ai-services/data/
+*.pkl
+*.joblib
+
+# Blockchain
+blockchain/cache/
+blockchain/artifacts/
+blockchain/.openzeppelin/
+blockchain/typechain-types/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Deployment
 .vercel
 .render
+.netlify/
+
+# Local development
+*.local

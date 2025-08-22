@@ -3,11 +3,13 @@ Dynamic Processing Parameter Optimization System
 Real-time optimization of waste processing parameters based on composition changes
 """
 
+import cv2
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout, BatchNormalization
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 import logging
 from typing import Dict, List, Tuple, Optional, Any, Union
 import asyncio
@@ -26,16 +28,9 @@ import queue
 import warnings
 
 # Import related components
-try:
-    # When imported as a module
-    from .multi_modal_sensor_fusion import FusionResult, SensorType
-    from .contamination_detection import ContaminationResult, ContaminationSeverity
-    from .rare_material_detection import DetectionResult as RareDetectionResult
-except ImportError:
-    # When run directly
-    from multi_modal_sensor_fusion import FusionResult, SensorType
-    from contamination_detection import ContaminationResult, ContaminationSeverity
-    from rare_material_detection import DetectionResult as RareDetectionResult
+from multi_modal_sensor_fusion import FusionResult, SensorType
+from contamination_detection import ContaminationResult, ContaminationSeverity
+from rare_material_detection import DetectionResult as RareDetectionResult
 
 class ProcessingStage(Enum):
     SORTING = "sorting"

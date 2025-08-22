@@ -1,25 +1,25 @@
+import { vi, describe, test, beforeEach, expect } from 'vitest';
 import axios from 'axios';
 import digitalTwinService from '../digitalTwinService';
-import { v4 as uuidv4 } from 'uuid';
 
 // Mock axios
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+vi.mock('axios');
+const mockedAxios = axios as any;
 
-// Mock uuid
-jest.mock('uuid', () => ({
-  v4: jest.fn()
+// Mock uuid - create a simple mock instead of importing the actual library
+const mockUuidv4 = vi.fn();
+vi.mock('uuid', () => ({
+  v4: mockUuidv4
 }));
-const mockedUuidv4 = uuidv4 as jest.MockedFunction<typeof uuidv4>;
 
 describe('Digital Twin Service', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Mock WebSocket
-    global.WebSocket = jest.fn().mockImplementation(() => ({
+    global.WebSocket = vi.fn().mockImplementation(() => ({
       readyState: 1, // OPEN
-      send: jest.fn(),
-      close: jest.fn(),
+      send: vi.fn(),
+      close: vi.fn(),
       onopen: null,
       onmessage: null,
       onerror: null,
@@ -28,7 +28,7 @@ describe('Digital Twin Service', () => {
   });
 
   describe('Digital Twin Creation and Management', () => {
-    it('should create a digital twin', async () => {
+    test('should create a digital twin', async () => {
       // Mock response
       const twinId = 'twin-123';
       mockedAxios.post.mockResolvedValueOnce({ data: { twinId } });
@@ -67,7 +67,7 @@ describe('Digital Twin Service', () => {
       );
     });
     
-    it('should update digital twin state', async () => {
+    test('should update digital twin state', async () => {
       // Mock response
       const twinId = 'twin-123';
       mockedAxios.put.mockResolvedValueOnce({ data: { twinId, status: 'updated' } });
@@ -103,19 +103,19 @@ describe('Digital Twin Service', () => {
   });
   
   describe('WebSocket Communication', () => {
-    it('should initialize WebSocket connection', async () => {
+    test('should initialize WebSocket connection', async () => {
       // Setup WebSocket mock
       const mockWs = {
         readyState: 1, // OPEN
-        send: jest.fn(),
-        close: jest.fn(),
+        send: vi.fn(),
+        close: vi.fn(),
         onopen: null as any,
         onmessage: null as any,
         onerror: null as any,
         onclose: null as any,
       };
       
-      global.WebSocket = jest.fn().mockImplementation(() => mockWs) as any;
+      global.WebSocket = vi.fn().mockImplementation(() => mockWs) as any;
       
       // Execute
       const connectPromise = digitalTwinService.initWebSocketConnection();
@@ -130,19 +130,19 @@ describe('Digital Twin Service', () => {
       expect(global.WebSocket).toHaveBeenCalledWith(expect.stringContaining('/digital-twins'));
     });
     
-    it('should send WebSocket messages', () => {
+    test('should send WebSocket messages', () => {
       // Setup
       const mockWs = {
         readyState: 1, // OPEN
-        send: jest.fn(),
-        close: jest.fn(),
+        send: vi.fn(),
+        close: vi.fn(),
         onopen: null,
         onmessage: null,
         onerror: null,
         onclose: null,
       };
       
-      global.WebSocket = jest.fn().mockImplementation(() => mockWs) as any;
+      global.WebSocket = vi.fn().mockImplementation(() => mockWs) as any;
       
       // Initialize connection
       digitalTwinService.initWebSocketConnection();
@@ -165,9 +165,9 @@ describe('Digital Twin Service', () => {
       }));
     });
     
-    it('should handle WebSocket messages', () => {
+    test('should handle WebSocket messages', () => {
       // Setup
-      const mockHandler = jest.fn();
+      const mockHandler = vi.fn();
       digitalTwinService.registerMessageHandler('test_message', mockHandler);
       
       // Execute
@@ -182,16 +182,16 @@ describe('Digital Twin Service', () => {
   });
   
   describe('Twin-to-Twin Communication', () => {
-    it('should send messages between twins', async () => {
+    test('should send messages between twins', async () => {
       // Mock uuid
       const communicationId = 'comm-123';
-      mockedUuidv4.mockReturnValueOnce(communicationId);
+      mockUuidv4.mockReturnValueOnce(communicationId);
       
       // Mock response
       mockedAxios.post.mockResolvedValueOnce({ data: { communicationId, status: 'sent' } });
       
       // Mock WebSocket send
-      const mockSend = jest.fn();
+      const mockSend = vi.fn();
       (digitalTwinService as any).wsConnection = {
         readyState: 1, // OPEN
         send: mockSend
@@ -237,10 +237,10 @@ describe('Digital Twin Service', () => {
   });
   
   describe('Lifecycle Simulation', () => {
-    it('should create lifecycle simulations', async () => {
+    test('should create lifecycle simulations', async () => {
       // Mock uuid
       const simulationId = 'sim-123';
-      mockedUuidv4.mockReturnValueOnce(simulationId);
+      mockUuidv4.mockReturnValueOnce(simulationId);
       
       // Mock response
       mockedAxios.post.mockResolvedValueOnce({ 
@@ -276,7 +276,7 @@ describe('Digital Twin Service', () => {
       );
     });
     
-    it('should start, stop and get results from simulations', async () => {
+    test('should start, stop and get results from simulations', async () => {
       // Mock responses
       mockedAxios.post.mockResolvedValueOnce({ data: { status: 'running' } });
       mockedAxios.post.mockResolvedValueOnce({ data: { status: 'stopped' } });
@@ -317,7 +317,7 @@ describe('Digital Twin Service', () => {
   });
   
   describe('Waste Transformation Tracking', () => {
-    it('should track waste transformation through digital twins', async () => {
+    test('should track waste transformation through digital twins', async () => {
       // Mock response
       const wasteId = 'waste-123';
       const trackingId = 'track-123';
@@ -341,7 +341,7 @@ describe('Digital Twin Service', () => {
       );
     });
     
-    it('should update waste transformation status', async () => {
+    test('should update waste transformation status', async () => {
       // Mock response
       const wasteId = 'waste-123';
       const twinId = 'twin-2';
@@ -374,10 +374,10 @@ describe('Digital Twin Service', () => {
   });
   
   describe('Alert Management', () => {
-    it('should add alerts to digital twins', async () => {
+    test('should add alerts to digital twins', async () => {
       // Mock uuid
       const alertId = 'alert-123';
-      mockedUuidv4.mockReturnValueOnce(alertId);
+      mockUuidv4.mockReturnValueOnce(alertId);
       
       // Mock response
       mockedAxios.post.mockResolvedValueOnce({ 

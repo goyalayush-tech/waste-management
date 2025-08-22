@@ -1,4 +1,5 @@
 /* Advanced Waste Management System Styles */
+@import './components/Shared/shared.css';
 
 .App {
   text-align: center;
@@ -14,6 +15,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #141414;
   color: #ffffff;
+}
+
+.router-error {
+  padding: 20px;
+  color: red;
 }
 
 /* Page Layout */
@@ -320,4 +326,254 @@ body {
 
 .ant-statistic-content {
   color: #d9d9d9;
+}
+
+
+/* Layout Responsive Styles */
+.desktop-sidebar {
+  display: block !important;
+}
+
+.mobile-drawer {
+  display: none;
+}
+
+.desktop-collapse-button {
+  display: block !important;
+}
+
+.mobile-menu-button {
+  display: none !important;
+}
+
+/* Mobile Responsive Breakpoints */
+@media (max-width: 992px) {
+  .desktop-sidebar {
+    display: none !important;
+  }
+  
+  .mobile-drawer {
+    display: block;
+  }
+  
+  .desktop-collapse-button {
+    display: none !important;
+  }
+  
+  .mobile-menu-button {
+    display: block !important;
+  }
+  
+  /* Adjust layout margins for mobile */
+  .ant-layout {
+    margin-left: 0 !important;
+  }
+}
+
+/* Search Bar Responsive */
+@media (max-width: 768px) {
+  .ant-input-affix-wrapper {
+    width: 200px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .ant-input-affix-wrapper {
+    width: 150px !important;
+  }
+  
+  /* Hide search placeholder text on very small screens */
+  .ant-input::placeholder {
+    font-size: 12px;
+  }
+}
+
+/* Landing Page Responsive */
+.hero-section {
+  padding: 40px 20px !important;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 30px 15px !important;
+  }
+  
+  .hero-section h1 {
+    font-size: 24px !important;
+  }
+  
+  .hero-section h3 {
+    font-size: 18px !important;
+  }
+}
+
+/* Tool Cards Responsive */
+.tool-card {
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 576px) {
+  .tool-card .ant-card-actions {
+    padding: 8px 12px;
+  }
+  
+  .tool-card .ant-card-actions button {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+/* Navigation Menu Responsive */
+.ant-menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.ant-menu-item-icon {
+  margin-right: 8px;
+}
+
+/* Breadcrumb Responsive */
+@media (max-width: 576px) {
+  .ant-breadcrumb {
+    font-size: 12px;
+  }
+  
+  .ant-breadcrumb-link {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* Content Area Responsive */
+@media (max-width: 768px) {
+  .ant-layout-content {
+    margin: 8px 12px !important;
+    padding: 16px !important;
+  }
+}
+
+/* Notification Center Responsive */
+@media (max-width: 576px) {
+  .ant-drawer-content-wrapper {
+    width: 100% !important;
+  }
+}
+
+/* Animation and Transitions */
+.ant-layout-sider {
+  transition: all 0.2s ease;
+}
+
+.ant-menu {
+  transition: all 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark theme scrollbar */
+.ant-layout {
+  scrollbar-width: thin;
+  scrollbar-color: #434343 #1f1f1f;
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.loading-container .ant-spin {
+  margin-bottom: 16px;
+}
+
+/* Error States */
+.error-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.error-container .anticon {
+  font-size: 48px;
+  color: #f5222d;
+  margin-bottom: 16px;
+}
+
+/* Empty States */
+.empty-container {
+  text-align: center;
+  padding: 40px;
+  color: #8c8c8c;
+}
+
+.empty-container .anticon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-24 {
+  margin-top: 24px;
+}
+
+.p-16 {
+  padding: 16px;
+}
+
+.p-24 {
+  padding: 24px;
 }

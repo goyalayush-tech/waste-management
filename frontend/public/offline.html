@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Waste Management System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141414;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 500px;
+            padding: 40px 20px;
+        }
+        
+        .offline-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            opacity: 0.6;
+        }
+        
+        .offline-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #00b96b;
+        }
+        
+        .offline-message {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            opacity: 0.8;
+        }
+        
+        .offline-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .offline-button {
+            background-color: #00b96b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .offline-button:hover {
+            background-color: #009a5a;
+        }
+        
+        .offline-button.secondary {
+            background-color: transparent;
+            border: 1px solid #00b96b;
+            color: #00b96b;
+        }
+        
+        .offline-button.secondary:hover {
+            background-color: #00b96b;
+            color: white;
+        }
+        
+        .offline-features {
+            margin-top: 40px;
+            text-align: left;
+        }
+        
+        .offline-features h3 {
+            color: #00b96b;
+            margin-bottom: 16px;
+        }
+        
+        .offline-features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .offline-features li {
+            padding: 8px 0;
+            opacity: 0.8;
+        }
+        
+        .offline-features li:before {
+            content: "✓ ";
+            color: #00b96b;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: 20px 16px;
+            }
+            
+            .offline-title {
+                font-size: 24px;
+            }
+            
+            .offline-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .offline-button {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">🌱</div>
+        <h1 class="offline-title">You're Offline</h1>
+        <p class="offline-message">
+            It looks like you've lost your internet connection. Don't worry - some features 
+            of the Waste Management System are still available offline.
+        </p>
+        
+        <div class="offline-actions">
+            <button class="offline-button" onclick="tryReconnect()">
+                Try Again
+            </button>
+            <button class="offline-button secondary" onclick="goHome()">
+                Go to Home
+            </button>
+        </div>
+        
+        <div class="offline-features">
+            <h3>Available Offline:</h3>
+            <ul>
+                <li>View cached analysis results</li>
+                <li>Browse previously loaded data</li>
+                <li>Access help documentation</li>
+                <li>Queue actions for when you're back online</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function tryReconnect() {
+            if (navigator.onLine) {
+                window.location.reload();
+            } else {
+                // Check connection status
+                fetch('/', { method: 'HEAD', cache: 'no-cache' })
+                    .then(() => {
+                        window.location.reload();
+                    })
+                    .catch(() => {
+                        alert('Still offline. Please check your internet connection.');
+                    });
+            }
+        }
+        
+        function goHome() {
+            window.location.href = '/';
+        }
+        
+        // Auto-retry when connection is restored
+        window.addEventListener('online', () => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+        
+        // Update UI based on connection status
+        function updateConnectionStatus() {
+            const isOnline = navigator.onLine;
+            const button = document.querySelector('.offline-button');
+            
+            if (isOnline) {
+                button.textContent = 'Reconnected! Click to Continue';
+                button.style.backgroundColor = '#52c41a';
+            } else {
+                button.textContent = 'Try Again';
+                button.style.backgroundColor = '#00b96b';
+            }
+        }
+        
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Initial status check
+        updateConnectionStatus();
+    </script>
+</body>
+</html>

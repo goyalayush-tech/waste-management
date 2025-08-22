@@ -1,5 +1,9 @@
 import React from 'react';
-import { Card, Row, Col, Statistic, Typography, Progress, Alert } from 'antd';
+import { Row, Col, Statistic, Typography, Progress, Alert } from 'antd';
+import Card from '../../components/Shared/Card';
+import ErrorBoundary from '../../components/Shared/ErrorBoundary';
+import { RESPONSIVE_CONFIGS } from '../../utils/responsive';
+import '../shared-styles.css';
 import {
   ExperimentOutlined,
   SafetyCertificateOutlined,
@@ -13,7 +17,8 @@ const { Title, Text } = Typography;
 
 const Dashboard: React.FC = () => {
   return (
-    <div style={{ padding: '24px' }}>
+    <ErrorBoundary>
+      <div className="tool-page">
       <div style={{ marginBottom: '24px' }}>
         <Title level={2}>System Dashboard</Title>
         <Text type="secondary">
@@ -31,8 +36,8 @@ const Dashboard: React.FC = () => {
 
       {/* Key Metrics */}
       <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
-        <Col span={6}>
-          <Card>
+        <Col {...RESPONSIVE_CONFIGS.metrics}>
+          <Card variant="shadow" interactive>
             <Statistic
               title="System Efficiency"
               value={94.2}
@@ -44,8 +49,8 @@ const Dashboard: React.FC = () => {
           </Card>
         </Col>
         
-        <Col span={6}>
-          <Card>
+        <Col {...RESPONSIVE_CONFIGS.metrics}>
+          <Card variant="shadow" interactive>
             <Statistic
               title="Waste Processed Today"
               value={1247}
@@ -56,8 +61,8 @@ const Dashboard: React.FC = () => {
           </Card>
         </Col>
         
-        <Col span={6}>
-          <Card>
+        <Col {...RESPONSIVE_CONFIGS.metrics}>
+          <Card variant="shadow" interactive>
             <Statistic
               title="Contamination Rate"
               value={2.3}
@@ -69,8 +74,8 @@ const Dashboard: React.FC = () => {
           </Card>
         </Col>
         
-        <Col span={6}>
-          <Card>
+        <Col {...RESPONSIVE_CONFIGS.metrics}>
+          <Card variant="shadow" interactive>
             <Statistic
               title="Carbon Credits Generated"
               value={156.7}
@@ -85,11 +90,12 @@ const Dashboard: React.FC = () => {
 
       {/* Feature Cards */}
       <Row gutter={[16, 16]}>
-        <Col span={8}>
+        <Col {...RESPONSIVE_CONFIGS.features}>
           <Card
             title="Multi-Modal Analysis"
             extra={<ExperimentOutlined style={{ color: '#1890ff' }} />}
-            hoverable
+            variant="elevated"
+            interactive
           >
             <Text>
               Advanced AI-powered waste classification using visual, spectral, weight, and chemical sensors
@@ -102,11 +108,12 @@ const Dashboard: React.FC = () => {
           </Card>
         </Col>
         
-        <Col span={8}>
+        <Col {...RESPONSIVE_CONFIGS.features}>
           <Card
             title="Contamination Detection"
             extra={<SafetyCertificateOutlined style={{ color: '#52c41a' }} />}
-            hoverable
+            variant="elevated"
+            interactive
           >
             <Text>
               Real-time contamination detection in recyclable streams with automated flagging
@@ -119,11 +126,12 @@ const Dashboard: React.FC = () => {
           </Card>
         </Col>
         
-        <Col span={8}>
+        <Col {...RESPONSIVE_CONFIGS.features}>
           <Card
             title="Autonomous Processing"
             extra={<RobotOutlined style={{ color: '#faad14' }} />}
-            hoverable
+            variant="elevated"
+            interactive
           >
             <Text>
               AI-controlled equipment with reinforcement learning agents optimizing
@@ -138,11 +146,12 @@ const Dashboard: React.FC = () => {
       </Row>
 
       <Row gutter={[16, 16]} style={{ marginTop: '16px' }}>
-        <Col span={8}>
+        <Col {...RESPONSIVE_CONFIGS.features}>
           <Card
             title="NFT Certificates"
             extra={<SafetyCertificateOutlined style={{ color: '#722ed1' }} />}
-            hoverable
+            variant="elevated"
+            interactive
           >
             <Text>
               Blockchain-based waste processing certificates with immutable proof
@@ -155,11 +164,12 @@ const Dashboard: React.FC = () => {
           </Card>
         </Col>
         
-        <Col span={8}>
+        <Col {...RESPONSIVE_CONFIGS.features}>
           <Card
             title="DeFi Marketplace"
             extra={<DollarOutlined style={{ color: '#13c2c2' }} />}
-            hoverable
+            variant="elevated"
+            interactive
           >
             <Text>
               Trade tokenized carbon credits, stake environmental tokens,
@@ -172,11 +182,12 @@ const Dashboard: React.FC = () => {
           </Card>
         </Col>
         
-        <Col span={8}>
+        <Col {...RESPONSIVE_CONFIGS.features}>
           <Card
             title="Metaverse Integration"
             extra={<GlobalOutlined style={{ color: '#eb2f96' }} />}
-            hoverable
+            variant="elevated"
+            interactive
           >
             <Text>
               Virtual waste management facilities with gamified experiences
@@ -189,7 +200,8 @@ const Dashboard: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 };
 
