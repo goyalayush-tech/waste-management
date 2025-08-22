@@ -10,7 +10,7 @@ from datetime import datetime
 import json
 
 # Import the classes to test
-from ..multi_modal_sensor_fusion import (
+from multi_modal_sensor_fusion import (
     MultiModalSensorFusion,
     SensorCalibration,
     SensorType,

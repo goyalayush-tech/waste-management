@@ -3,24 +3,25 @@ Rare Material Identification and Handling System
 Detects valuable and rare materials in waste streams using advanced AI and spectral analysis
 """
 
+import cv2
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout, BatchNormalization, LSTM, Attention
 from tensorflow.keras.optimizers import Adam
-import cv2
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 import logging
 from typing import Dict, List, Tuple, Optional, Any
 import asyncio
 import json
-from datetime import datetime
-from dataclasses import dataclass
+from datetime import datetime, timedelta
+from dataclasses import dataclass, field
 from enum import Enum
 import pickle
 import requests
 
 # Import multi-modal fusion components
-from .multi_modal_sensor_fusion import SpectralData, ChemicalData, SensorType
+from multi_modal_sensor_fusion import SpectralData, ChemicalData, SensorType
 
 class RareMaterialType(Enum):
     PRECIOUS_METALS = "precious_metals"
@@ -1324,14 +1325,14 @@ if __name__ == "__main__":
             print(f"\nHandling Protocol for {material_type}:")
             print(json.dumps(protocol, indent=2))
     
-    asyncio.run(test_rare_material_detection())    
+    asyncio.run(test_rare_material_detection())
+
 async def customize_handling_protocol(
-        self,
-        base_protocol: HandlingProtocol,
-        quantity: float = 0.0,
-        purity: float = 0.0,
-        custom_requirements: Optional[List[str]] = None
-    ) -> HandlingProtocol:
+    base_protocol: HandlingProtocol,
+    quantity: float = 0.0,
+    purity: float = 0.0,
+    custom_requirements: Optional[List[str]] = None
+) -> HandlingProtocol:
         """
         Customize handling protocol based on quantity, purity, and custom requirements
         """
@@ -1396,158 +1397,159 @@ async def customize_handling_protocol(
             return customized_protocol
             
         except Exception as e:
-            self.logger.error(f"Error customizing handling protocol: {e}")
+            logging.getLogger(__name__).error(f"Error customizing handling protocol: {e}")
             # Return the base protocol if customization fails
             return base_protocol
     
-    async def send_stakeholder_notifications(
-        self,
-        materials: List[RareMaterial],
-        stakeholders: List[str],
-        priority_threshold: NotificationPriority,
-        notification_channels: List[str],
-        custom_message: Optional[str] = None
-    ) -> Dict[str, Any]:
-        """
-        Send notifications to stakeholders about rare material discoveries
-        """
-        try:
-            # Calculate total value of materials
-            total_value = sum(m.market_value_per_kg * m.quantity_detected * (m.purity_percentage / 100.0) for m in materials)
-            
-            # Determine notification priority based on value
-            priority = NotificationPriority.LOW
-            if total_value > 100000:
-                priority = NotificationPriority.CRITICAL
-            elif total_value > 10000:
-                priority = NotificationPriority.URGENT
-            elif total_value > 1000:
-                priority = NotificationPriority.HIGH
-            elif total_value > 100:
-                priority = NotificationPriority.MEDIUM
-            
-            # Check if priority meets threshold
-            if priority.value < priority_threshold.value:
-                return {
-                    "notification_id": "",
-                    "status": "skipped",
-                    "reason": f"Priority {priority.value} below threshold {priority_threshold.value}",
-                    "stakeholders_notified": [],
-                    "channels_used": [],
-                    "priority": priority.value
-                }
-            
-            # Generate notification message
-            message = custom_message if custom_message else self._generate_notification_message(materials, total_value)
-            
-            # In a real system, this would send actual notifications through various channels
-            # For now, we'll simulate the notification process
-            
-            notification_id = f"NOTIFY_{datetime.now().strftime('%Y%m%d%H%M%S')}_{hash(str(materials)) % 10000:04d}"
-            
-            # Log the notification
-            self.logger.info(f"Sending notification {notification_id} to {len(stakeholders)} stakeholders via {notification_channels}")
-            self.logger.info(f"Notification message: {message}")
-            
-            # Return notification results
-            return {
-                "notification_id": notification_id,
-                "status": "sent",
-                "stakeholders_notified": stakeholders,
-                "channels_used": notification_channels,
-                "priority": priority.value,
-                "message": message
-            }
-            
-        except Exception as e:
-            self.logger.error(f"Error sending stakeholder notifications: {e}")
+async def send_stakeholder_notifications(
+    materials: List[RareMaterial],
+    stakeholders: List[str],
+    priority_threshold: NotificationPriority,
+    notification_channels: List[str],
+    custom_message: Optional[str] = None
+) -> Dict[str, Any]:
+    """
+    Send notifications to stakeholders about rare material discoveries
+    """
+    try:
+        # Calculate total value of materials
+        total_value = sum(m.market_value_per_kg * m.quantity_detected * (m.purity_percentage / 100.0) for m in materials)
+
+        # Determine notification priority based on value
+        priority = NotificationPriority.LOW
+        if total_value > 100000:
+            priority = NotificationPriority.CRITICAL
+        elif total_value > 10000:
+            priority = NotificationPriority.URGENT
+        elif total_value > 1000:
+            priority = NotificationPriority.HIGH
+        elif total_value > 100:
+            priority = NotificationPriority.MEDIUM
+
+        # Check if priority meets threshold
+        if priority.value < priority_threshold.value:
             return {
                 "notification_id": "",
-                "status": "failed",
-                "error": str(e),
+                "status": "skipped",
+                "reason": f"Priority {priority.value} below threshold {priority_threshold.value}",
                 "stakeholders_notified": [],
                 "channels_used": [],
-                "priority": NotificationPriority.LOW.value
+                "priority": priority.value
             }
-    
-    def _generate_notification_message(self, materials: List[RareMaterial], total_value: float) -> str:
-        """
-        Generate notification message for stakeholders
-        """
-        # Create message header
-        if len(materials) == 1:
-            material = materials[0]
-            header = f"ALERT: {material.material_name.title()} ({material.material_type.value}) detected"
-        else:
-            header = f"ALERT: {len(materials)} rare materials detected"
-        
-        # Create message body
-        body = f"Total estimated value: ${total_value:.2f}\n\n"
-        
-        # Add details for each material
-        for material in materials:
-            material_value = material.market_value_per_kg * material.quantity_detected * (material.purity_percentage / 100.0)
-            body += f"- {material.material_name.title()}: {material.quantity_detected:.3f}kg at {material.purity_percentage:.1f}% purity (${material_value:.2f})\n"
-        
-        # Add handling instructions
-        if any(m.material_type == RareMaterialType.PRECIOUS_METALS for m in materials):
-            body += "\nSpecial handling required for precious metals. Secure storage needed."
-        
-        if any(m.material_type == RareMaterialType.RARE_EARTH_ELEMENTS for m in materials):
-            body += "\nCAUTION: Rare earth elements detected. Follow radiation safety protocols."
-        
-        # Add timestamp
-        body += f"\n\nTimestamp: {datetime.now().isoformat()}"
-        
-        return f"{header}\n\n{body}"   
- def _create_test_material(
-        self,
-        material_name: str,
-        material_type: RareMaterialType,
-        market_value_per_kg: float,
-        quantity_detected: float,
-        purity_percentage: float
-    ) -> RareMaterial:
-        """
-        Create a test material for testing purposes
-        """
-        # Get chemical formula from database if available
-        chemical_formula = ""
-        if material_type in self.rare_materials_database:
-            if material_name in self.rare_materials_database[material_type]:
-                chemical_formula = self.rare_materials_database[material_type][material_name].get('formula', '')
-        
-        # Determine extraction difficulty based on purity
-        extraction_difficulty = self._assess_extraction_difficulty(material_name, purity_percentage / 100.0)
-        
-        # Determine market demand
-        market_demand = self._assess_market_demand(material_name)
-        
-        # Get applications from database if available
-        applications = []
-        if material_type in self.rare_materials_database:
-            if material_name in self.rare_materials_database[material_type]:
-                applications = self.rare_materials_database[material_type][material_name].get('applications', [])
-        
-        # Determine handling requirements
-        handling_requirements = []
-        if material_type == RareMaterialType.PRECIOUS_METALS:
-            handling_requirements = ["secure_storage", "chain_of_custody"]
-        elif material_type == RareMaterialType.RARE_EARTH_ELEMENTS:
-            handling_requirements = ["radiation_safety", "specialized_containers"]
-        else:
-            handling_requirements = ["standard_storage"]
-        
-        return RareMaterial(
-            material_name=material_name,
-            material_type=material_type,
-            chemical_formula=chemical_formula,
-            market_value_per_kg=market_value_per_kg,
-            purity_percentage=purity_percentage,
-            quantity_detected=quantity_detected,
-            confidence=0.9,  # High confidence for test material
-            extraction_difficulty=extraction_difficulty,
-            market_demand=market_demand,
-            applications=applications,
-            handling_requirements=handling_requirements
-        )
+
+        # Generate notification message
+        message = custom_message if custom_message else _generate_notification_message(materials, total_value)
+
+        # In a real system, this would send actual notifications through various channels
+        # For now, we'll simulate the notification process
+
+        notification_id = f"NOTIFY_{datetime.now().strftime('%Y%m%d%H%M%S')}_{hash(str(materials)) % 10000:04d}"
+
+        # Log the notification
+        logging.getLogger(__name__).info(f"Sending notification {notification_id} to {len(stakeholders)} stakeholders via {notification_channels}")
+        logging.getLogger(__name__).info(f"Notification message: {message}")
+
+        # Return notification results
+        return {
+            "notification_id": notification_id,
+            "status": "sent",
+            "stakeholders_notified": stakeholders,
+            "channels_used": notification_channels,
+            "priority": priority.value,
+            "message": message
+        }
+
+    except Exception as e:
+        logging.getLogger(__name__).error(f"Error sending stakeholder notifications: {e}")
+        return {
+            "notification_id": "",
+            "status": "failed",
+            "error": str(e),
+            "stakeholders_notified": [],
+            "channels_used": [],
+            "priority": NotificationPriority.LOW.value
+        }
+
+
+def _generate_notification_message(materials: List[RareMaterial], total_value: float) -> str:
+    """
+    Generate notification message for stakeholders
+    """
+    # Create message header
+    if len(materials) == 1:
+        material = materials[0]
+        header = f"ALERT: {material.material_name.title()} ({material.material_type.value}) detected"
+    else:
+        header = f"ALERT: {len(materials)} rare materials detected"
+
+    # Create message body
+    body = f"Total estimated value: ${total_value:.2f}\n\n"
+
+    # Add details for each material
+    for material in materials:
+        material_value = material.market_value_per_kg * material.quantity_detected * (material.purity_percentage / 100.0)
+        body += f"- {material.material_name.title()}: {material.quantity_detected:.3f}kg at {material.purity_percentage:.1f}% purity (${material_value:.2f})\n"
+
+    # Add handling instructions
+    if any(m.material_type == RareMaterialType.PRECIOUS_METALS for m in materials):
+        body += "\nSpecial handling required for precious metals. Secure storage needed."
+
+    if any(m.material_type == RareMaterialType.RARE_EARTH_ELEMENTS for m in materials):
+        body += "\nCAUTION: Rare earth elements detected. Follow radiation safety protocols."
+
+    # Add timestamp
+    body += f"\n\nTimestamp: {datetime.now().isoformat()}"
+
+    return f"{header}\n\n{body}"
+
+
+def _create_test_material(
+    material_name: str,
+    material_type: RareMaterialType,
+    market_value_per_kg: float,
+    quantity_detected: float,
+    purity_percentage: float
+) -> RareMaterial:
+    """
+    Create a test material for testing purposes
+    """
+    # Get chemical formula from database if available
+    chemical_formula = ""
+    if material_type in rare_material_detector.rare_materials_database:
+        if material_name in rare_material_detector.rare_materials_database[material_type]:
+            chemical_formula = rare_material_detector.rare_materials_database[material_type][material_name].get('formula', '')
+
+    # Determine extraction difficulty based on purity
+    extraction_difficulty = rare_material_detector._assess_extraction_difficulty(material_name, purity_percentage / 100.0)
+
+    # Determine market demand
+    market_demand = rare_material_detector._assess_market_demand(material_name)
+
+    # Get applications from database if available
+    applications = []
+    if material_type in rare_material_detector.rare_materials_database:
+        if material_name in rare_material_detector.rare_materials_database[material_type]:
+            applications = rare_material_detector.rare_materials_database[material_type][material_name].get('applications', [])
+
+    # Determine handling requirements
+    handling_requirements = []
+    if material_type == RareMaterialType.PRECIOUS_METALS:
+        handling_requirements = ["secure_storage", "chain_of_custody"]
+    elif material_type == RareMaterialType.RARE_EARTH_ELEMENTS:
+        handling_requirements = ["radiation_safety", "specialized_containers"]
+    else:
+        handling_requirements = ["standard_storage"]
+
+    return RareMaterial(
+        material_name=material_name,
+        material_type=material_type,
+        chemical_formula=chemical_formula,
+        market_value_per_kg=market_value_per_kg,
+        purity_percentage=purity_percentage,
+        quantity_detected=quantity_detected,
+        confidence=0.9,  # High confidence for test material
+        extraction_difficulty=extraction_difficulty,
+        market_demand=market_demand,
+        applications=applications,
+        handling_requirements=handling_requirements
+    )

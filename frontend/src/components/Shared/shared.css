@@ -1,0 +1,124 @@
+/* Shared Component Styles */
+
+/* Card Styles */
+.shared-card {
+  transition: all 0.3s ease;
+}
+
+.shared-card.interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Table Styles */
+.shared-table.bordered .ant-table {
+  border: 1px solid #d9d9d9;
+}
+
+.shared-table.bordered .ant-table-thead > tr > th,
+.shared-table.bordered .ant-table-tbody > tr > td {
+  border-right: 1px solid #d9d9d9;
+}
+
+.shared-table.striped .ant-table-tbody > tr:nth-child(even) > td {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Dark theme overrides for shared components */
+.ant-table-dark .shared-table.striped .ant-table-tbody > tr:nth-child(even) > td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Form Styles */
+.ant-form-compact .ant-form-item {
+  margin-bottom: 12px !important;
+}
+
+.ant-form-comfortable .ant-form-item {
+  margin-bottom: 32px !important;
+}
+
+/* Button Styles */
+.ant-btn-success {
+  background-color: #52c41a;
+  border-color: #52c41a;
+  color: #fff;
+}
+
+.ant-btn-success:hover,
+.ant-btn-success:focus {
+  background-color: #73d13d;
+  border-color: #73d13d;
+  color: #fff;
+}
+
+.ant-btn-warning {
+  background-color: #faad14;
+  border-color: #faad14;
+  color: #fff;
+}
+
+.ant-btn-warning:hover,
+.ant-btn-warning:focus {
+  background-color: #ffc53d;
+  border-color: #ffc53d;
+  color: #fff;
+}
+
+.ant-btn-danger {
+  background-color: #f5222d;
+  border-color: #f5222d;
+  color: #fff;
+}
+
+.ant-btn-danger:hover,
+.ant-btn-danger:focus {
+  background-color: #ff4d4f;
+  border-color: #ff4d4f;
+  color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .shared-card {
+    margin-bottom: 16px;
+  }
+  
+  .shared-table .ant-table {
+    font-size: 12px;
+  }
+  
+  .shared-table .ant-table-thead > tr > th,
+  .shared-table .ant-table-tbody > tr > td {
+    padding: 8px;
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

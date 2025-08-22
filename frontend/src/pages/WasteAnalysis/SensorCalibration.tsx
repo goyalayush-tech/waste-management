@@ -21,7 +21,7 @@ import {
   ExclamationCircleOutlined,
   CameraOutlined,
   ExperimentOutlined,
-  ScaleOutlined,
+  ApartmentOutlined,
   BgColorsOutlined
 } from '@ant-design/icons';
 import { RootState } from '../../store/store';
@@ -69,7 +69,7 @@ const SensorCalibration: React.FC = () => {
     {
       id: 'weight_1',
       name: 'Weight Sensor',
-      icon: <ScaleOutlined />,
+      icon: <ApartmentOutlined />,
       description: 'Precision scale with density calculation',
       status: calibrationStatus['weight_1'] || 'uncalibrated',
       calibrationSteps: [

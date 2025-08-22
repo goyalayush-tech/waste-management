@@ -17,19 +17,19 @@ import numpy as np
 import json
 
 # Import specialized subsystems
-from .multi_modal_sensor_fusion import (
+from multi_modal_sensor_fusion import (
     MultiModalSensorFusion, SensorData, SensorType, 
     SpectralData, WeightData, ChemicalData, FusionResult
 )
-from .contamination_detection import (
+from contamination_detection import (
     ContaminationDetector, ContaminationResult, 
     ContaminationType, ContaminationSeverity
 )
-from .rare_material_detection import (
+from rare_material_detection import (
     RareMaterialDetector, DetectionResult as RareDetectionResult,
     RareMaterialType, MaterialValue, NotificationPriority
 )
-from .dynamic_parameter_optimization import (
+from dynamic_parameter_optimization import (
     DynamicParameterOptimizer, ProcessingParameters, OptimizationResult,
     ProcessingStage, OptimizationObjective
 )

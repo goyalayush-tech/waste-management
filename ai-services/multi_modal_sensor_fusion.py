@@ -3,13 +3,13 @@ Multi-Modal Sensor Fusion System for Advanced Waste Classification
 Combines visual, spectral, weight, and chemical sensor data for 98%+ accuracy
 """
 
+import cv2
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, Concatenate, Input, Dropout, BatchNormalization
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-import cv2
 from PIL import Image
 import logging
 from typing import Dict, List, Tuple, Optional, Any
@@ -22,9 +22,9 @@ from enum import Enum
 import pickle
 
 # Import existing AI services
-from .waste_classification_ai import WasteClassificationAI
-from .object_detection import WasteObjectDetector
-from .image_processing import ImageProcessor
+from waste_classification_ai import WasteClassificationAI
+from object_detection import WasteObjectDetector
+from image_processing import ImageProcessor
 
 class SensorType(Enum):
     VISUAL = "visual"

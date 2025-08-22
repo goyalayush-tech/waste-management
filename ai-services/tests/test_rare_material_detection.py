@@ -10,18 +10,18 @@ from datetime import datetime
 import json
 import cv2
 
-# Import the classes to test
-from ..rare_material_detection import (
-    RareMaterialDetector,
-    RareMaterialType,
-    MaterialValue,
-    RareMaterial,
-    DetectionResult,
-    HandlingProtocol,
-    detect_rare_materials_api,
-    get_handling_protocol
-)
-from ..multi_modal_sensor_fusion import SpectralData, ChemicalData
+# Import the classes to test   
+from rare_material_detection import (
+            RareMaterialDetector,
+            RareMaterialType,
+            MaterialValue,
+            RareMaterial,
+            DetectionResult,
+            HandlingProtocol,
+            detect_rare_materials_api,
+            get_handling_protocol
+        )
+from multi_modal_sensor_fusion import SpectralData, ChemicalData
 
 class TestRareMaterialDetector:
     """Test rare material detection functionality"""

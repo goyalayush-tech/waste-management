@@ -19,7 +19,7 @@ from enum import Enum
 import pickle
 
 # Import multi-modal fusion components
-from .multi_modal_sensor_fusion import SpectralData, ChemicalData, SensorType
+from multi_modal_sensor_fusion import SpectralData, ChemicalData, SensorType
 
 class ContaminationType(Enum):
     ORGANIC_IN_PLASTIC = "organic_in_plastic"
@@ -1011,8 +1011,8 @@ if __name__ == "__main__":
             print(json.dumps(remediation, indent=2))
     
     asyncio.run(test_contamination_detection())
-c
-lass ContaminationBatchProcessor:
+
+class ContaminationBatchProcessor:
     """Processes batches of waste items and flags contaminated batches"""
     
     def __init__(self, contamination_detector: ContaminationDetector):

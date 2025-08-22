@@ -5,7 +5,7 @@ import {
   WarningOutlined, 
   InfoCircleOutlined,
   DollarOutlined,
-  LeafOutlined
+  EnvironmentOutlined
 } from '@ant-design/icons';
 import { WasteAnalysisResult } from '../../store/slices/wasteAnalysisSlice';
 
@@ -71,7 +71,7 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
         <Col span={8}>
           <Card size="small" className="metric-card">
             <div className="metric-content">
-              <LeafOutlined style={{ fontSize: '24px', color: '#52c41a' }} />
+              <EnvironmentOutlined style={{ fontSize: '24px', color: '#52c41a' }} />
               <div className="metric-info">
                 <Text strong>{analysis.carbonFootprint.toFixed(2)} kg</Text>
                 <Text type="secondary" style={{ display: 'block' }}>Carbon Footprint</Text>

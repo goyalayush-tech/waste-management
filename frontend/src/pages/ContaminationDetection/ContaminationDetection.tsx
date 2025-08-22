@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { 
-  Card, 
-  Button, 
   Upload, 
   message, 
   Spin, 
@@ -16,6 +14,12 @@ import {
   Row, 
   Col 
 } from 'antd';
+import Card from '../../components/Shared/Card';
+import Button from '../../components/Shared/Button';
+import LoadingSpinner from '../../components/Shared/LoadingSpinner';
+import ErrorBoundary from '../../components/Shared/ErrorBoundary';
+import { RESPONSIVE_CONFIGS } from '../../utils/responsive';
+import '../shared-styles.css';
 import { 
   UploadOutlined, 
   ScanOutlined, 
@@ -148,17 +152,18 @@ const ContaminationDetection: React.FC = () => {
   };
   
   return (
-    <div className="contamination-detection-page">
+    <ErrorBoundary>
+      <div className="contamination-detection-page tool-page">
       <Title level={2}>Advanced Contamination Detection System</Title>
       <Text type="secondary">
         Detect contamination in recyclable streams with 98%+ accuracy using multi-modal analysis
       </Text>
       
-      <Tabs activeKey={activeTab} onChange={setActiveTab} className="contamination-tabs">
+      <Tabs activeKey={activeTab} onChange={setActiveTab} className="tool-tabs">
         <TabPane tab="Detection" key="detection">
-          <Row gutter={24}>
-            <Col span={12}>
-              <Card title="Upload Waste Image" className="upload-card">
+          <Row gutter={[24, 24]}>
+            <Col {...RESPONSIVE_CONFIGS.content}>
+              <Card title="Upload Waste Image" className="upload-card" variant="bordered">
                 <Upload {...uploadProps} listType="picture">
                   <Button icon={<UploadOutlined />}>Select Image</Button>
                 </Upload>
@@ -169,27 +174,30 @@ const ContaminationDetection: React.FC = () => {
                   </div>
                 )}
                 
-                <div className="detection-actions" style={{ marginTop: 16 }}>
-                  <Button 
-                    type="primary" 
-                    icon={<ScanOutlined />} 
-                    onClick={handleDetection} 
-                    loading={loading}
-                    disabled={!imagePreview}
-                  >
-                    Detect Contamination
-                  </Button>
+                <div className="action-section">
+                  <div className="action-buttons">
+                    <Button 
+                      variant="primary" 
+                      icon={<ScanOutlined />} 
+                      onClick={handleDetection} 
+                      loading={loading}
+                      disabled={!imagePreview}
+                    >
+                      Detect Contamination
+                    </Button>
+                  </div>
                 </div>
               </Card>
             </Col>
             
-            <Col span={12}>
-              <Card title="Detection Results" className="results-card">
+            <Col {...RESPONSIVE_CONFIGS.content}>
+              <Card title="Detection Results" className="results-card" variant="bordered">
                 {loading ? (
-                  <div className="loading-container">
-                    <Spin size="large" />
-                    <Text>Analyzing waste composition...</Text>
-                  </div>
+                  <LoadingSpinner 
+                    size="large" 
+                    text="Analyzing waste composition..."
+                    style={{ minHeight: '200px' }}
+                  />
                 ) : error ? (
                   <Alert message="Error" description={error} type="error" showIcon />
                 ) : currentResult ? (
@@ -198,12 +206,14 @@ const ContaminationDetection: React.FC = () => {
                       <Tag color={currentResult.contaminationDetected ? 'red' : 'green'} className="status-tag">
                         {currentResult.contaminationDetected ? 'Contamination Detected' : 'No Contamination'}
                       </Tag>
-                      <Text strong>Confidence: </Text>
-                      <Progress 
-                        percent={Math.round(currentResult.confidence * 100)} 
-                        size="small" 
-                        status={currentResult.confidence > 0.7 ? "success" : "active"} 
-                      />
+                      <div className="confidence-indicator">
+                        <Text strong>Confidence: </Text>
+                        <Progress 
+                          percent={Math.round(currentResult.confidence * 100)} 
+                          size="small" 
+                          status={currentResult.confidence > 0.7 ? "success" : "active"} 
+                        />
+                      </div>
                     </div>
                     
                     {currentResult.contaminationDetected && (
@@ -212,41 +222,51 @@ const ContaminationDetection: React.FC = () => {
                         
                         <div className="contamination-details">
                           <div className="detail-item">
-                            <Text strong>Severity: </Text>
-                            <Tag color={getSeverityColor(currentResult.severityLevel)}>
-                              {getSeverityText(currentResult.severityLevel)}
-                            </Tag>
+                            <span className="detail-label">Severity:</span>
+                            <div className="detail-value">
+                              <Tag color={getSeverityColor(currentResult.severityLevel)}>
+                                {getSeverityText(currentResult.severityLevel)}
+                              </Tag>
+                            </div>
                           </div>
                           
                           <div className="detail-item">
-                            <Text strong>Affected Area: </Text>
-                            <Progress 
-                              percent={Math.round(currentResult.affectedAreaPercentage)} 
-                              size="small" 
-                              status={currentResult.affectedAreaPercentage > 50 ? "exception" : "active"} 
-                            />
+                            <span className="detail-label">Affected Area:</span>
+                            <div className="detail-value">
+                              <Progress 
+                                percent={Math.round(currentResult.affectedAreaPercentage)} 
+                                size="small" 
+                                status={currentResult.affectedAreaPercentage > 50 ? "exception" : "active"} 
+                              />
+                            </div>
                           </div>
                           
                           <div className="detail-item">
-                            <Text strong>Quality Degradation: </Text>
-                            <Progress 
-                              percent={Math.round(currentResult.qualityDegradation * 100)} 
-                              size="small" 
-                              status={currentResult.qualityDegradation > 0.5 ? "exception" : "active"} 
-                            />
+                            <span className="detail-label">Quality Degradation:</span>
+                            <div className="detail-value">
+                              <Progress 
+                                percent={Math.round(currentResult.qualityDegradation * 100)} 
+                                size="small" 
+                                status={currentResult.qualityDegradation > 0.5 ? "exception" : "active"} 
+                              />
+                            </div>
                           </div>
                           
                           <div className="detail-item">
-                            <Text strong>Economic Impact: </Text>
-                            <Text type="danger">${currentResult.economicImpact.toFixed(2)}</Text>
+                            <span className="detail-label">Economic Impact:</span>
+                            <div className="detail-value">
+                              <Text type="danger">${currentResult.economicImpact.toFixed(2)}</Text>
+                            </div>
                           </div>
                           
                           <div className="detail-item">
-                            <Text strong>Contamination Types: </Text>
-                            <div className="contamination-types">
-                              {currentResult.contaminationTypes.map((type) => (
-                                <Tag key={type} color="blue">{type.replace(/_/g, ' ')}</Tag>
-                              ))}
+                            <span className="detail-label">Contamination Types:</span>
+                            <div className="detail-value">
+                              <div className="contamination-types">
+                                {currentResult.contaminationTypes.map((type) => (
+                                  <Tag key={type} color="blue">{type.replace(/_/g, ' ')}</Tag>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -261,11 +281,10 @@ const ContaminationDetection: React.FC = () => {
                               placeholder="Enter Batch ID" 
                               value={batchId}
                               onChange={(e) => setBatchId(e.target.value)}
-                              style={{ padding: '4px 8px' }}
+                              className="batch-input"
                             />
                             <Button 
-                              type="primary" 
-                              danger 
+                              variant="danger" 
                               icon={<WarningOutlined />} 
                               onClick={handleFlagBatch}
                             >
@@ -287,14 +306,14 @@ const ContaminationDetection: React.FC = () => {
           </Row>
           
           {currentResult?.contaminationDetected && (
-            <Row gutter={24} style={{ marginTop: 24 }}>
-              <Col span={12}>
+            <Row gutter={[24, 24]} style={{ marginTop: 24 }}>
+              <Col {...RESPONSIVE_CONFIGS.content}>
                 <ContaminationVisualizer 
                   imageUrl={imagePreview || ''} 
                   contaminationLocations={currentResult.contaminationLocations}
                 />
               </Col>
-              <Col span={12}>
+              <Col {...RESPONSIVE_CONFIGS.content}>
                 <RemediationSuggestions suggestions={currentResult.remediationSuggestions} />
               </Col>
             </Row>
@@ -309,7 +328,8 @@ const ContaminationDetection: React.FC = () => {
           <ContaminationStats />
         </TabPane>
       </Tabs>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 };
 

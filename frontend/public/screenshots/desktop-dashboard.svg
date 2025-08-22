@@ -1,0 +1,58 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#141414"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1280" height="64" fill="#1f1f1f"/>
+  <text x="40" y="40" fill="#00b96b" font-family="Arial, sans-serif" font-size="20" font-weight="bold">Waste Management System</text>
+  
+  <!-- Sidebar -->
+  <rect x="0" y="64" width="240" height="656" fill="#262626"/>
+  <rect x="20" y="84" width="200" height="40" rx="4" fill="#00b96b" opacity="0.2"/>
+  <text x="30" y="108" fill="#00b96b" font-family="Arial, sans-serif" font-size="14">Dashboard</text>
+  
+  <!-- Main Content -->
+  <rect x="260" y="84" width="1000" height="616" fill="#141414"/>
+  
+  <!-- Stats Cards -->
+  <rect x="280" y="104" width="230" height="120" rx="8" fill="#1f1f1f"/>
+  <text x="300" y="130" fill="#8c8c8c" font-family="Arial, sans-serif" font-size="12">Waste Processed Today</text>
+  <text x="300" y="160" fill="#00b96b" font-family="Arial, sans-serif" font-size="32" font-weight="bold">2,847 kg</text>
+  
+  <rect x="530" y="104" width="230" height="120" rx="8" fill="#1f1f1f"/>
+  <text x="550" y="130" fill="#8c8c8c" font-family="Arial, sans-serif" font-size="12">System Efficiency</text>
+  <text x="550" y="160" fill="#52c41a" font-family="Arial, sans-serif" font-size="32" font-weight="bold">94.2%</text>
+  
+  <rect x="780" y="104" width="230" height="120" rx="8" fill="#1f1f1f"/>
+  <text x="800" y="130" fill="#8c8c8c" font-family="Arial, sans-serif" font-size="12">Contamination Rate</text>
+  <text x="800" y="160" fill="#faad14" font-family="Arial, sans-serif" font-size="32" font-weight="bold">3.1%</text>
+  
+  <rect x="1030" y="104" width="230" height="120" rx="8" fill="#1f1f1f"/>
+  <text x="1050" y="130" fill="#8c8c8c" font-family="Arial, sans-serif" font-size="12">Carbon Credits</text>
+  <text x="1050" y="160" fill="#1890ff" font-family="Arial, sans-serif" font-size="32" font-weight="bold">156</text>
+  
+  <!-- Chart Area -->
+  <rect x="280" y="244" width="480" height="300" rx="8" fill="#1f1f1f"/>
+  <text x="300" y="270" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Waste Processing Trends</text>
+  
+  <!-- Chart Lines -->
+  <path d="M300 500L350 480L400 460L450 440L500 420L550 400L600 380L650 360L700 340" stroke="#00b96b" stroke-width="3" fill="none"/>
+  <path d="M300 520L350 510L400 500L450 490L500 480L550 470L600 460L650 450L700 440" stroke="#1890ff" stroke-width="3" fill="none"/>
+  
+  <!-- Tool Cards -->
+  <rect x="780" y="244" width="230" height="140" rx="8" fill="#1f1f1f"/>
+  <text x="800" y="270" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="bold">AI Analysis</text>
+  <circle cx="820" cy="300" r="8" fill="#52c41a"/>
+  <text x="840" y="306" fill="#52c41a" font-family="Arial, sans-serif" font-size="12">Active</text>
+  
+  <rect x="1030" y="244" width="230" height="140" rx="8" fill="#1f1f1f"/>
+  <text x="1050" y="270" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Contamination Detection</text>
+  <circle cx="1070" cy="300" r="8" fill="#faad14"/>
+  <text x="1090" y="306" fill="#faad14" font-family="Arial, sans-serif" font-size="12">Warning</text>
+  
+  <!-- Recent Activity -->
+  <rect x="280" y="564" width="980" height="116" rx="8" fill="#1f1f1f"/>
+  <text x="300" y="590" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Recent Activity</text>
+  <text x="300" y="620" fill="#8c8c8c" font-family="Arial, sans-serif" font-size="12">• Batch #2847 processed successfully</text>
+  <text x="300" y="640" fill="#8c8c8c" font-family="Arial, sans-serif" font-size="12">• Contamination detected in Batch #2846</text>
+  <text x="300" y="660" fill="#8c8c8c" font-family="Arial, sans-serif" font-size="12">• Certificate generated for Batch #2845</text>
+</svg>

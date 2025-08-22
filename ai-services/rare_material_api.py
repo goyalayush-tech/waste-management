@@ -14,7 +14,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # Import detection system
-from .rare_material_detection import (
+from rare_material_detection import (
     RareMaterialDetector,
     RareMaterialType,
     MaterialValue,
@@ -23,7 +23,12 @@ from .rare_material_detection import (
     HandlingProtocol,
     NotificationPriority
 )
-from .multi_modal_sensor_fusion import SpectralData, ChemicalData
+from multi_modal_sensor_fusion import SpectralData, ChemicalData
+from rare_material_detection import (
+    detect_rare_materials_api,
+    get_handling_protocol
+)
+from multi_modal_sensor_fusion import SpectralData, ChemicalData
 
 # Initialize logger
 logger = logging.getLogger(__name__)

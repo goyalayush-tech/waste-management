@@ -1,0 +1,343 @@
+/* Shared styles for all tool pages */
+
+/* Page Layout */
+.tool-page {
+  padding: 0;
+  background: transparent;
+}
+
+.page-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.page-header h2 {
+  margin-bottom: 8px;
+  color: #262626;
+  font-weight: 600;
+}
+
+.page-header .ant-typography {
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+/* Metrics and Statistics */
+.metrics-row {
+  margin-bottom: 24px;
+}
+
+.metrics-row .shared-card {
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.metrics-row .shared-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Tool Tabs */
+.tool-tabs {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.tool-tabs .ant-tabs-nav {
+  margin-bottom: 24px;
+}
+
+.tool-tabs .ant-tabs-tab {
+  font-weight: 500;
+}
+
+/* Upload Areas */
+.upload-card {
+  height: 100%;
+  min-height: 400px;
+}
+
+.upload-card .ant-upload {
+  width: 100%;
+}
+
+.upload-card .ant-upload-list {
+  margin-top: 16px;
+}
+
+.image-preview {
+  margin-top: 16px;
+  text-align: center;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  padding: 8px;
+  background: #fafafa;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 4px;
+}
+
+/* Results Areas */
+.results-card {
+  height: 100%;
+  min-height: 400px;
+}
+
+.results-card .ant-card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 40px;
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 40px;
+  color: #8c8c8c;
+}
+
+.no-results .anticon {
+  margin-bottom: 16px;
+}
+
+/* Action Areas */
+.action-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Status Indicators */
+.status-tag {
+  font-weight: 500;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.confidence-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.severity-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+/* Detail Items */
+.detail-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
+  padding: 8px 0;
+}
+
+.detail-item:not(:last-child) {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #595959;
+  min-width: 120px;
+}
+
+.detail-value {
+  flex: 1;
+  text-align: right;
+}
+
+/* Contamination Types */
+.contamination-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.contamination-types .ant-tag {
+  margin: 2px;
+}
+
+/* Sensor Status */
+.sensor-status {
+  margin-top: 16px;
+}
+
+.sensor-status .ant-tag {
+  margin: 2px 4px 2px 0;
+}
+
+/* Batch Flagging */
+.batch-flagging {
+  margin-top: 16px;
+  padding: 16px;
+  background: #fff7e6;
+  border: 1px solid #ffd591;
+  border-radius: 6px;
+}
+
+.batch-flagging h5 {
+  margin-bottom: 12px;
+  color: #d46b08;
+}
+
+.batch-input {
+  padding: 4px 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .metrics-row .ant-col {
+    margin-bottom: 16px;
+  }
+  
+  .tool-tabs {
+    padding: 12px;
+  }
+  
+  .upload-card,
+  .results-card {
+    min-height: 300px;
+  }
+  
+  .action-buttons {
+    justify-content: center;
+  }
+  
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .detail-value {
+    text-align: left;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header {
+    text-align: center;
+  }
+  
+  .metrics-row .ant-col {
+    margin-bottom: 12px;
+  }
+  
+  .contamination-types {
+    justify-content: center;
+  }
+}
+
+/* Animation and Transitions */
+.shared-card.interactive {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shared-card.interactive:hover {
+  transform: translateY(-4px);
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus and Accessibility */
+.shared-card:focus-within {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+.action-buttons button:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .page-header {
+    border-bottom-color: #000;
+  }
+  
+  .detail-item:not(:last-child) {
+    border-bottom-color: #000;
+  }
+  
+  .shared-card {
+    border-color: #000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .shared-card.interactive,
+  .fade-in,
+  .slide-up {
+    animation: none;
+    transition: none;
+  }
+  
+  .shared-card.interactive:hover {
+    transform: none;
+  }
+}
