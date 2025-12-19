@@ -1,0 +1,386 @@
+/* WasteAnalysis Styles */
+
+/* Main Container */
+.mainContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Bubbles */
+.bgBubble1 {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 160px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.bgBubble2 {
+  position: absolute;
+  top: 60%;
+  right: 15%;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+/* Hero Section */
+.heroSection {
+  padding: 60px 0 40px;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.heroCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  margin: 0 auto;
+  max-width: 1000px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.timeDisplay {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+  font-family: monospace;
+}
+
+.heroTitle {
+  color: white !important;
+  margin-bottom: 12px !important;
+  font-size: 2.8rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  color: #e0e7ff !important;
+  font-weight: 400 !important;
+  margin-bottom: 24px !important;
+  font-size: 1.3rem !important;
+  opacity: 0.9;
+}
+
+.heroDescription {
+  font-size: 17px;
+  color: #f0f4ff;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.primaryButtonWrapper {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  border-radius: 25px;
+  padding: 2px;
+}
+
+.primaryButton {
+  height: 48px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 23px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%) !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+.secondaryButton {
+  height: 48px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 23px;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Stats */
+.statsRow {
+  margin-top: 40px;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValueGreen {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #4ade80;
+  margin-bottom: 8px;
+}
+
+.statValueBlue {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #60a5fa;
+  margin-bottom: 8px;
+}
+
+.statValueOrange {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+.statValuePink {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ec4899;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* Section Container */
+.sectionContainer {
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.sectionContainerLarge {
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+
+.sectionContainerXl {
+  padding: 0 20px;
+  margin-bottom: 60px;
+}
+
+/* Section Headers */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  margin-bottom: 12px !important;
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sectionSubtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Alert */
+.alertTitle {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.alertCard {
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Tool Cards */
+.toolCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 24px;
+  height: 100%;
+}
+
+.toolIconBlue {
+  font-size: 32px;
+  color: #3b82f6;
+  margin-bottom: 16px;
+}
+
+.toolIconGreen {
+  font-size: 32px;
+  color: #10b981;
+  margin-bottom: 16px;
+}
+
+.toolIconOrange {
+  font-size: 32px;
+  color: #f59e0b;
+  margin-bottom: 16px;
+}
+
+.toolIconPurple {
+  font-size: 32px;
+  color: #8b5cf6;
+  margin-bottom: 16px;
+}
+
+.toolTitle {
+  margin-bottom: 8px !important;
+  color: #1a1a1a !important;
+}
+
+.toolDescription {
+  color: #666;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.toolButtonBlue {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  border: none !important;
+}
+
+.toolButtonGreen {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border: none !important;
+}
+
+.toolButtonOrange {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  border: none !important;
+}
+
+.toolButtonPurple {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+  border: none !important;
+}
+
+/* Tabs Card */
+.tabsCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Tab Content */
+.tabContent {
+  padding: 20px 0;
+}
+
+.tabTitle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.uploadCard {
+  border-radius: 12px;
+  border: 2px dashed #d9d9d9;
+  text-align: center;
+  padding: 40px;
+}
+
+.uploadIcon {
+  font-size: 48px;
+  color: #d9d9d9;
+  margin-bottom: 16px;
+}
+
+.uploadButton {
+  margin-top: 16px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+}
+
+.cameraCard {
+  border-radius: 12px;
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.cameraIcon {
+  font-size: 48px;
+  color: #3b82f6;
+  margin-bottom: 16px;
+}
+
+.cameraDescription {
+  margin-bottom: 16px;
+  display: block;
+}
+
+.cameraButton {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  border: none !important;
+}
+
+/* Footer */
+.footer {
+  padding: 30px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerContent {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footerTitle {
+  color: white !important;
+  margin-bottom: 12px !important;
+}
+
+.footerDescription {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+.footerButton {
+  color: rgba(255, 255, 255, 0.8) !important;
+  border: none !important;
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

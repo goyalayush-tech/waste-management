@@ -1,0 +1,153 @@
+/* SearchResults.module.css */
+/* Styles for the Search Results page component */
+
+/* Main container */
+.searchResultsPage {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header section */
+.header {
+  margin-bottom: 24px;
+}
+
+/* Filters card */
+.filtersCard {
+  margin-bottom: 24px;
+  border-radius: 8px;
+}
+
+/* Full width select */
+.fullWidth {
+  width: 100%;
+}
+
+/* Result icons */
+.resultIcon {
+  font-size: 24px;
+  margin-top: 4px;
+}
+
+.resultIconTool {
+  composes: resultIcon;
+  color: #1890ff;
+}
+
+.resultIconData {
+  composes: resultIcon;
+  color: #52c41a;
+}
+
+.resultIconDoc {
+  composes: resultIcon;
+  color: #faad14;
+}
+
+.resultIconUser {
+  composes: resultIcon;
+  color: #722ed1;
+}
+
+.resultIconDefault {
+  composes: resultIcon;
+  color: #d9d9d9;
+}
+
+/* Highlight text */
+.highlight {
+  background-color: #fff2b8;
+  padding: 0 2px;
+}
+
+/* Empty results */
+.emptyContainer {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+/* List item */
+.listItem {
+  padding: 16px 0;
+}
+
+/* Result card */
+.resultCard {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.resultCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Result content layout */
+.resultContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Icon container */
+.iconContainer {
+  font-size: 24px;
+  margin-top: 4px;
+}
+
+/* Result details */
+.resultDetails {
+  flex: 1;
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Title styles */
+.resultTitle {
+  margin: 0 0 8px 0;
+}
+
+.resultCategory {
+  font-size: 12px;
+}
+
+/* Meta section */
+.resultMeta {
+  text-align: right;
+}
+
+.resultDate {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin-bottom: 4px;
+}
+
+/* Description */
+.resultDescription {
+  margin: 8px 0;
+  color: #666;
+}
+
+/* Preview text */
+.resultPreview {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #8c8c8c;
+}
+
+/* Tags container */
+.tagsContainer {
+  margin-top: 12px;
+}
+
+/* Pagination */
+.paginationContainer {
+  text-align: center;
+  margin-top: 24px;
+}

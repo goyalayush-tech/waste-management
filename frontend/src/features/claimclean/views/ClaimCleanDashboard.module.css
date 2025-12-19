@@ -1,0 +1,353 @@
+/* ClaimClean Dashboard Styles */
+
+/* Loading State */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.loadingBubble {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.loadingSpinnerWhite {
+  color: white;
+}
+
+/* Main Container */
+.mainContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+/* Background Bubbles */
+.bgBubble1 {
+  position: absolute;
+  top: 15%;
+  left: 8%;
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: float 5s ease-in-out infinite;
+}
+
+.bgBubble2 {
+  position: absolute;
+  top: 70%;
+  right: 12%;
+  width: 140px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  animation: float 7s ease-in-out infinite reverse;
+}
+
+.bgBubble3 {
+  position: absolute;
+  bottom: 25%;
+  left: 15%;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  animation: float 9s ease-in-out infinite;
+}
+
+/* Hero Section */
+.heroSection {
+  padding: 40px 0 30px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.heroCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 0 auto;
+  max-width: 800px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.timeDisplay {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.heroTitle {
+  color: white !important;
+  margin-bottom: 12px !important;
+  font-size: 2.8rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  color: #e0e7ff !important;
+  font-weight: 400 !important;
+  margin-bottom: 20px !important;
+  font-size: 1.3rem !important;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.newClaimButtonWrapper {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  border-radius: 25px;
+  padding: 2px;
+}
+
+.newClaimButton {
+  height: 44px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 23px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%) !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+.reportsButton {
+  height: 44px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 23px;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+}
+
+.refreshButton {
+  height: 44px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 23px;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+}
+
+.errorAlert {
+  margin-top: 16px;
+  border-radius: 12px;
+}
+
+/* Section Container */
+.sectionContainer {
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.sectionContainerNoMargin {
+  padding: 0 20px;
+}
+
+/* Section Headers */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  margin-bottom: 12px !important;
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sectionSubtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+}
+
+/* Stat Cards */
+.statCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 20px;
+}
+
+.statCardTitle {
+  color: #666;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Icon Styles */
+.iconPrimary {
+  color: #667eea;
+  font-size: 20px;
+}
+
+.iconSuccess {
+  color: #52c41a;
+  font-size: 20px;
+}
+
+.iconWarning {
+  color: #faad14;
+  font-size: 20px;
+}
+
+.iconDanger {
+  color: #ff4d4f;
+  font-size: 20px;
+}
+
+.iconInfo {
+  color: #0284C7;
+  font-size: 20px;
+}
+
+/* Progress */
+.progressMarginTop {
+  margin-top: 12px;
+}
+
+/* Quick Actions Card */
+.quickActionsCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.newClaimButtonSmall {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%) !important;
+  border: none !important;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.actionButton {
+  border-radius: 8px;
+  height: 40px;
+  font-weight: 500;
+}
+
+/* Alert Styles */
+.alertTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.alertCard {
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Card */
+.tableCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.viewAllLink {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.tableTransparent {
+  background: transparent;
+}
+
+/* Table Cell Styles */
+.tableTextDefault {
+  color: #1a1a1a;
+}
+
+.tableTextBold {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.tableTextMuted {
+  color: #666;
+}
+
+.tagBold {
+  font-weight: 600;
+}
+
+.scoreBold {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.claimIdLink {
+  padding: 0;
+  height: auto;
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Ant Design Overrides */
+:global(.ant-table-tbody > tr:hover > td) {
+  background: rgba(102, 126, 234, 0.05) !important;
+}
+
+:global(.ant-card-body) {
+  background: transparent !important;
+}

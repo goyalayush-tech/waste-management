@@ -8,9 +8,13 @@ services:
       - ./backend:/app
       - /app/node_modules
     command: npm run dev
+    # environment:
+    #   - NODE_ENV=development
+    #   - DEBUG=waste-verification:*
     environment:
-      - NODE_ENV=development
-      - DEBUG=waste-verification:*
+      NODE_ENV: development
+      DEBUG: waste-verification:*
+      CLAIM_AUDIT_AI_URL: http://claim-audit-ai:8000
 
   ai-service:
     build:
@@ -22,6 +26,15 @@ services:
       - DEBUG=true
       - LOG_LEVEL=DEBUG
 
+  claim-audit-ai:
+    build:
+      target: development
+    volumes:
+      - ./ai-services:/app
+    command: uvicorn claim_audit_service:app --reload --host 0.0.0.0 --port 8000
+    environment:
+      - CLAIM_AUDIT_FETCH_TIMEOUT=10
+
   frontend:
     build:
       target: development
@@ -31,3 +44,38 @@ services:
     command: npm run dev -- --host 0.0.0.0
     environment:
       - VITE_DEBUG=true
+
+  # MQTT Broker (Eclipse Mosquitto) for dev
+  mqtt:
+    image: eclipse-mosquitto:2
+    container_name: dev-mqtt
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - mosquitto_data_dev:/mosquitto/data
+      - mosquitto_log_dev:/mosquitto/log
+
+  # IoT Simulator (optional dev service)
+  iot-simulator:
+    image: python:3.11-slim
+    container_name: dev-iot-simulator
+    working_dir: /app
+    command: bash -lc "pip install -r requirements.txt && python main.py"
+    environment:
+      - MQTT_BROKER_HOST=mqtt
+      - MQTT_BROKER_PORT=1883
+      - MQTT_TOPIC=iot/waste_management/data
+      - AREA_GEOJSON_PATH=data/delhi_area.geojson
+      - NUM_BINS=10
+      - NUM_VEHICLES=3
+      - SIMULATION_INTERVAL_SECONDS=10
+    volumes:
+      - ./iot-simulator:/app
+    depends_on:
+      - mqtt
+
+volumes:
+  mosquitto_data_dev:
+  mosquitto_log_dev:

@@ -8,6 +8,8 @@ export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as SkeletonLoader } from './SkeletonLoader';
 export { default as ErrorDisplay } from './ErrorDisplay';
 export { default as RetryWrapper } from './RetryWrapper';
+export { default as UnifiedLoading } from './UnifiedLoading';
+export { default as PageHeader } from './PageHeader';
 
 export type { SharedButtonProps } from './Button';
 export type { SharedCardProps } from './Card';
@@ -18,3 +20,5 @@ export type { LoadingSpinnerProps } from './LoadingSpinner';
 export type { SkeletonLoaderProps } from './SkeletonLoader';
 export type { ErrorDisplayProps } from './ErrorDisplay';
 export type { RetryWrapperProps } from './RetryWrapper';
+export type { UnifiedLoadingProps } from './UnifiedLoading';
+export type { PageHeaderProps } from './PageHeader';

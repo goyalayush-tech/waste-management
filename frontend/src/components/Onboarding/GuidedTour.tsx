@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Tour, Button, Space, Typography, Progress, Card } from 'antd';
 import {
-  PlayCircleOutlined,
-  PauseCircleOutlined,
   StepForwardOutlined,
   StepBackwardOutlined,
   CloseOutlined,
@@ -10,7 +8,7 @@ import {
   InfoCircleOutlined
 } from '@ant-design/icons';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 export interface TourStep {
   target: string;
@@ -43,14 +41,12 @@ const GuidedTour: React.FC<GuidedTourProps> = ({
   allowSkip = true,
 }) => {
   const [current, setCurrent] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
   useEffect(() => {
     if (open) {
       setCurrent(0);
       setCompletedSteps([]);
-      setIsPlaying(true);
     }
   }, [open]);
 
@@ -68,20 +64,6 @@ const GuidedTour: React.FC<GuidedTourProps> = ({
         }
         return newCompleted;
       });
-    }
-  };
-
-  const handleNext = () => {
-    if (current < steps.length - 1) {
-      handleStepChange(current + 1);
-    } else {
-      handleFinish();
-    }
-  };
-
-  const handlePrev = () => {
-    if (current > 0) {
-      handleStepChange(current - 1);
     }
   };
 
@@ -154,7 +136,7 @@ const GuidedTour: React.FC<GuidedTourProps> = ({
               percent={Math.round(((currentStep + 1) / total) * 100)}
               size="small"
               status={currentStep === total - 1 ? 'success' : 'active'}
-              format={(percent) => `${currentStep + 1}/${total}`}
+              format={() => `${currentStep + 1}/${total}`}
             />
           </div>
         )}
@@ -213,22 +195,22 @@ const GuidedTour: React.FC<GuidedTourProps> = ({
   };
 
   return (
-    <Tour
-      open={open}
-      onClose={onClose}
-      steps={tourSteps}
-      current={current}
-      onChange={handleStepChange}
-      type="primary"
-      arrow={true}
-      placement="bottom"
-      mask={{
-        style: {
-          boxShadow: 'inset 0 0 15px #333',
-        },
-      }}
-      renderPanel={customRenderPanel}
-    />
+    <>
+      <Tour
+        open={open}
+        onClose={onClose}
+        current={current}
+        onChange={handleStepChange}
+        type="primary"
+        steps={tourSteps as any}
+        mask={{
+          style: {
+            boxShadow: 'inset 0 0 15px #333',
+          },
+        } as any}
+        renderPanel={customRenderPanel as any}
+      />
+    </>
   );
 };
 

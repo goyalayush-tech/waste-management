@@ -1,0 +1,96 @@
+.reportsPage {
+  padding: 24px;
+}
+
+/* Header */
+.header {
+  margin-bottom: 24px;
+}
+
+.headerTitle {
+  margin: 0 !important;
+  color: #1B5E20 !important;
+}
+
+.headerIcon {
+  margin-right: 8px;
+}
+
+/* Stats Section */
+.statsRow {
+  margin-bottom: 24px;
+}
+
+.statIconGreen {
+  color: #1B5E20;
+}
+
+.statIconSuccess {
+  color: #52c41a;
+}
+
+.statIconWarning {
+  color: #faad14;
+}
+
+/* Filters */
+.filtersCard {
+  margin-bottom: 16px;
+}
+
+/* Table */
+.claimLink {
+  padding: 0;
+}
+
+.scoreText {
+  font-weight: bold;
+}
+
+.scoreProgress {
+  width: 60px;
+}
+
+.hashText {
+  font-size: 11px;
+}
+
+.submitButton {
+  background-color: #1B5E20;
+  border-color: #1B5E20;
+}
+
+.submitButton:hover {
+  background-color: #2E7D32;
+  border-color: #2E7D32;
+}
+
+.exportButton {
+  background-color: #1B5E20;
+  border-color: #1B5E20;
+}
+
+.exportButton:hover {
+  background-color: #2E7D32;
+  border-color: #2E7D32;
+}
+
+/* Help Section */
+.helpCard {
+  margin-top: 16px;
+}
+
+.guidelineSuccess {
+  color: #52c41a;
+  margin-right: 8px;
+}
+
+.guidelineWarning {
+  color: #faad14;
+  margin-right: 8px;
+}
+
+.guidelineLink {
+  color: #1677ff;
+  margin-right: 8px;
+}

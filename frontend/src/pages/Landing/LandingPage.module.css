@@ -1,0 +1,464 @@
+/* LandingPage.module.css */
+
+/* ===== ToolCard Component ===== */
+.toolCard {
+  height: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.toolCardButton {
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+}
+
+.toolCardAvatar {
+  font-size: 28px;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+}
+
+.toolCardTitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.toolCardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.toolCardStatusText {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.toolCardDescription {
+  margin-bottom: 16px;
+  color: #666;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.toolCardStats {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.toolCardStatsLabel {
+  font-size: 13px;
+}
+
+.toolCardStatsValue {
+  font-size: 15px;
+}
+
+/* ===== Main Landing Page ===== */
+.landingPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated Background Elements */
+.floatingCircle1 {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floatingCircle2 {
+  position: absolute;
+  top: 60%;
+  right: 15%;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.floatingCircle3 {
+  position: absolute;
+  bottom: 20%;
+  left: 20%;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  animation: float 10s ease-in-out infinite;
+}
+
+/* ===== Hero Section ===== */
+.heroSection {
+  padding: 80px 0 60px;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.heroCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 60px 40px;
+  margin: 0 auto;
+  max-width: 1200px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.liveTime {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+  font-family: monospace;
+}
+
+.heroTitle {
+  color: white;
+  margin-bottom: 16px;
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  color: #e0e7ff;
+  font-weight: 400;
+  margin-bottom: 32px;
+  font-size: 1.5rem;
+  opacity: 0.9;
+}
+
+.heroDescription {
+  font-size: 20px;
+  color: #f0f4ff;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.heroButtons {
+  margin-bottom: 40px;
+}
+
+.launchButton {
+  height: 56px;
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  border: none;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+  transition: all 0.3s ease;
+}
+
+.analysisButton {
+  height: 56px;
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 28px;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+/* ===== Key Stats ===== */
+.statItem {
+  text-align: center;
+}
+
+.statValueGreen {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #4ade80;
+  margin-bottom: 8px;
+}
+
+.statValueBlue {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #60a5fa;
+  margin-bottom: 8px;
+}
+
+.statValueOrange {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+.statValuePink {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ec4899;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ===== System Status Alert ===== */
+.alertSection {
+  padding: 0 24px;
+  margin-bottom: 40px;
+}
+
+.alertMessage {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.systemAlert {
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Real-time Statistics ===== */
+.metricsSection {
+  padding: 0 24px;
+  margin-bottom: 60px;
+}
+
+.metricsCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.metricsCardTitle {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.iconSuccess {
+  color: #52c41a;
+  font-size: 20px;
+}
+
+.metricItem {
+  text-align: center;
+  padding: 20px;
+}
+
+.metricLabel {
+  color: #666;
+  font-size: 14px;
+}
+
+.progressMarginTop {
+  margin-top: 12px;
+}
+
+/* ===== Tool Categories Section ===== */
+.toolsSection {
+  padding: 0 24px;
+  margin-bottom: 60px;
+}
+
+.toolsSectionHeader {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.toolsSectionTitle {
+  margin-bottom: 16px;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.toolsSectionDescription {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dividerWhite {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== Quick Start Guide ===== */
+.quickStartSection {
+  padding: 0 24px;
+  margin-bottom: 80px;
+}
+
+.quickStartCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.quickStartTitle {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.stepCardTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.stepCardBlue {
+  border-radius: 12px;
+  height: 100%;
+  border: none;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.stepCardGreen {
+  border-radius: 12px;
+  height: 100%;
+  border: none;
+  background: linear-gradient(135deg, #f6ffed 0%, #b7eb8f 100%);
+}
+
+.stepCardPurple {
+  border-radius: 12px;
+  height: 100%;
+  border: none;
+  background: linear-gradient(135deg, #f9f0ff 0%, #d3adf7 100%);
+}
+
+.stepCardText {
+  line-height: 1.6;
+  color: #374151;
+}
+
+.stepCardButtonWrapper {
+  margin-top: 16px;
+}
+
+.stepButtonBlue {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  border: none;
+}
+
+.stepButtonGreen {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+  border: none;
+}
+
+.stepButtonPurple {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #722ed1 0%, #531dab 100%);
+  border: none;
+}
+
+/* ===== Footer ===== */
+.footer {
+  padding: 40px 24px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerTitle {
+  color: white;
+  margin-bottom: 16px;
+}
+
+.footerDescription {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 24px;
+}
+
+.footerButton {
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+}
+
+.footerCopyright {
+  margin-top: 24px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== valueStyle (kept as inline for Ant Design Statistic) ===== */
+/* Note: valueStyle prop on Ant Design Statistic requires inline objects */
+
+/* Dynamic color styles for icons */
+.iconGreen {
+  color: #52c41a;
+}
+
+.iconBlue {
+  color: #1890ff;
+}
+
+.iconWarning {
+  color: #faad14;
+}
+
+.iconDanger {
+  color: #cf1322;
+}
+
+.iconPink {
+  color: #eb2f96;
+}
+
+.iconDarkGreen {
+  color: #3f8600;
+}
+
+/* ===== Keyframe Animations ===== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

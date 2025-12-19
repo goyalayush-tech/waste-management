@@ -8,6 +8,7 @@ import {
   CloseOutlined,
   CheckCircleOutlined
 } from '@ant-design/icons';
+import styles from './InstallPrompt.module.css';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -175,48 +176,49 @@ const InstallPrompt: React.FC<InstallPromptProps> = ({
       width={500}
       centered
       closable={false}
+      className={styles.modal}
     >
-      <div style={{ textAlign: 'center', padding: '20px 0' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>
+      <div className={styles.modalContent}>
+        <div className={styles.emoji}>
           🌱
         </div>
         
-        <Title level={3} style={{ marginBottom: '8px' }}>
+        <Title level={3} className={styles.title}>
           Install Waste Management App
         </Title>
         
-        <Text type="secondary" style={{ fontSize: '16px', display: 'block', marginBottom: '24px' }}>
+        <Text type="secondary" className={styles.subtitle}>
           Get the full app experience with offline access and notifications
         </Text>
 
-        <Row gutter={16} style={{ marginBottom: '24px' }}>
+        <Row gutter={16} className={styles.featuresRow}>
           <Col span={8}>
-            <Card size="small" style={{ textAlign: 'center', border: 'none' }}>
-              <WifiOutlined style={{ fontSize: '24px', color: '#00b96b', marginBottom: '8px' }} />
-              <div style={{ fontSize: '12px' }}>Works Offline</div>
+            <Card size="small" className={styles.featureCard}>
+              <WifiOutlined className={styles.featureIcon} />
+              <div className={styles.featureText}>Works Offline</div>
             </Card>
           </Col>
           <Col span={8}>
-            <Card size="small" style={{ textAlign: 'center', border: 'none' }}>
-              <BellOutlined style={{ fontSize: '24px', color: '#00b96b', marginBottom: '8px' }} />
-              <div style={{ fontSize: '12px' }}>Push Notifications</div>
+            <Card size="small" className={styles.featureCard}>
+              <BellOutlined className={styles.featureIcon} />
+              <div className={styles.featureText}>Push Notifications</div>
             </Card>
           </Col>
           <Col span={8}>
-            <Card size="small" style={{ textAlign: 'center', border: 'none' }}>
-              <MobileOutlined style={{ fontSize: '24px', color: '#00b96b', marginBottom: '8px' }} />
-              <div style={{ fontSize: '12px' }}>App-like Experience</div>
+            <Card size="small" className={styles.featureCard}>
+              <MobileOutlined className={styles.featureIcon} />
+              <div className={styles.featureText}>App-like Experience</div>
             </Card>
           </Col>
         </Row>
 
-        <Space direction="vertical" style={{ width: '100%' }}>
+        <Space direction="vertical" className={styles.buttonContainer}>
           <Button
             type="primary"
             size="large"
             icon={<DownloadOutlined />}
             onClick={handleInstallClick}
-            style={{ width: '100%', height: '48px', fontSize: '16px' }}
+            className={styles.installButton}
           >
             Install App
           </Button>
@@ -226,13 +228,13 @@ const InstallPrompt: React.FC<InstallPromptProps> = ({
             size="small"
             icon={<CloseOutlined />}
             onClick={handleDismiss}
-            style={{ color: '#8c8c8c' }}
+            className={styles.dismissButton}
           >
             Maybe Later
           </Button>
         </Space>
 
-        <div style={{ marginTop: '16px', fontSize: '12px', color: '#8c8c8c' }}>
+        <div className={styles.footer}>
           Free • No app store required • Instant updates
         </div>
       </div>

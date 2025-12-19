@@ -171,7 +171,9 @@ router.post('/login', sensitiveOperationLimit(5), async (req, res) => {
       });
     }
 
-    // Check MFA for enterprise roles
+    // Check MFA for enterprise roles (DISABLED FOR DEMO)
+    // In production, uncomment this block to enforce MFA
+    /*
     const mfaRequiredRoles = ['admin', 'epr-client', 'auditor'];
     if (mfaRequiredRoles.includes(user.role) && !mfaToken) {
       return res.status(403).json({
@@ -180,6 +182,7 @@ router.post('/login', sensitiveOperationLimit(5), async (req, res) => {
         requiresMFA: true
       });
     }
+    */
 
     // TODO: Verify MFA token if provided
     if (mfaToken) {

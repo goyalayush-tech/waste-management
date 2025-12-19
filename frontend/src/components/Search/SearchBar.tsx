@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Input, AutoComplete, Typography, Space, Tag } from 'antd';
 import { SearchOutlined, FileTextOutlined, ToolOutlined, DatabaseOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import styles from './SearchBar.module.css';
 
 const { Text } = Typography;
 
@@ -26,10 +27,10 @@ const SearchBar: React.FC = () => {
       value: 'waste-analysis',
       label: (
         <Space>
-          <ToolOutlined style={{ color: '#1890ff' }} />
+          <ToolOutlined className={styles.toolIcon} />
           <div>
             <div>Waste Analysis</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               Multi-modal AI waste classification
             </Text>
           </div>
@@ -42,10 +43,10 @@ const SearchBar: React.FC = () => {
       value: 'contamination-detection',
       label: (
         <Space>
-          <ToolOutlined style={{ color: '#52c41a' }} />
+          <ToolOutlined className={styles.toolIconGreen} />
           <div>
             <div>Contamination Detection</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               Real-time contamination analysis
             </Text>
           </div>
@@ -58,10 +59,10 @@ const SearchBar: React.FC = () => {
       value: 'blockchain-certificates',
       label: (
         <Space>
-          <ToolOutlined style={{ color: '#722ed1' }} />
+          <ToolOutlined className={styles.toolIconPurple} />
           <div>
             <div>Blockchain Certificates</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               NFT waste processing certificates
             </Text>
           </div>
@@ -74,10 +75,10 @@ const SearchBar: React.FC = () => {
       value: 'dashboard',
       label: (
         <Space>
-          <ToolOutlined style={{ color: '#faad14' }} />
+          <ToolOutlined className={styles.toolIconOrange} />
           <div>
             <div>Dashboard</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               System overview and metrics
             </Text>
           </div>
@@ -90,10 +91,10 @@ const SearchBar: React.FC = () => {
       value: 'analytics',
       label: (
         <Space>
-          <ToolOutlined style={{ color: '#13c2c2' }} />
+          <ToolOutlined className={styles.toolIconCyan} />
           <div>
             <div>Analytics</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               Comprehensive reporting and insights
             </Text>
           </div>
@@ -107,10 +108,10 @@ const SearchBar: React.FC = () => {
       value: 'waste-batches',
       label: (
         <Space>
-          <DatabaseOutlined style={{ color: '#1890ff' }} />
+          <DatabaseOutlined className={styles.dataIcon} />
           <div>
             <div>Waste Batches</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               Processing records and history
             </Text>
           </div>
@@ -122,10 +123,10 @@ const SearchBar: React.FC = () => {
       value: 'contamination-reports',
       label: (
         <Space>
-          <DatabaseOutlined style={{ color: '#f5222d' }} />
+          <DatabaseOutlined className={styles.dataIconRed} />
           <div>
             <div>Contamination Reports</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               Flagged batches and remediation
             </Text>
           </div>
@@ -137,10 +138,10 @@ const SearchBar: React.FC = () => {
       value: 'nft-certificates',
       label: (
         <Space>
-          <DatabaseOutlined style={{ color: '#722ed1' }} />
+          <DatabaseOutlined className={styles.dataIconPurple} />
           <div>
             <div>NFT Certificates</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               Blockchain certificate records
             </Text>
           </div>
@@ -153,10 +154,10 @@ const SearchBar: React.FC = () => {
       value: 'user-guide',
       label: (
         <Space>
-          <FileTextOutlined style={{ color: '#52c41a' }} />
+          <FileTextOutlined className={styles.docIconGreen} />
           <div>
             <div>User Guide</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               Complete system documentation
             </Text>
           </div>
@@ -168,10 +169,10 @@ const SearchBar: React.FC = () => {
       value: 'api-documentation',
       label: (
         <Space>
-          <FileTextOutlined style={{ color: '#1890ff' }} />
+          <FileTextOutlined className={styles.docIconBlue} />
           <div>
             <div>API Documentation</div>
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+            <Text type="secondary" className={styles.optionSecondary}>
               Developer API reference
             </Text>
           </div>
@@ -205,8 +206,8 @@ const SearchBar: React.FC = () => {
       groupedOptions.push({
         value: 'tools-header',
         label: (
-          <div style={{ padding: '4px 0', borderBottom: '1px solid #f0f0f0' }}>
-            <Text strong style={{ color: '#1890ff' }}>Tools & Features</Text>
+          <div className={styles.groupHeader}>
+            <Text strong className={styles.toolsHeader}>Tools & Features</Text>
           </div>
         ),
         category: 'tool',
@@ -218,8 +219,8 @@ const SearchBar: React.FC = () => {
       groupedOptions.push({
         value: 'data-header',
         label: (
-          <div style={{ padding: '4px 0', borderBottom: '1px solid #f0f0f0' }}>
-            <Text strong style={{ color: '#52c41a' }}>Data & Records</Text>
+          <div className={styles.groupHeader}>
+            <Text strong className={styles.dataHeader}>Data & Records</Text>
           </div>
         ),
         category: 'data',
@@ -231,8 +232,8 @@ const SearchBar: React.FC = () => {
       groupedOptions.push({
         value: 'docs-header',
         label: (
-          <div style={{ padding: '4px 0', borderBottom: '1px solid #f0f0f0' }}>
-            <Text strong style={{ color: '#faad14' }}>Documentation</Text>
+          <div className={styles.groupHeader}>
+            <Text strong className={styles.docsHeader}>Documentation</Text>
           </div>
         ),
         category: 'documentation',
@@ -284,7 +285,7 @@ const SearchBar: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ width: '300px', marginLeft: '16px' }}>
+    <div className={styles.container}>
       <AutoComplete
         ref={inputRef}
         value={searchValue}
@@ -300,25 +301,21 @@ const SearchBar: React.FC = () => {
           setTimeout(() => setFocused(false), 200);
         }}
         style={{ width: '100%' }}
-        dropdownStyle={{ maxHeight: '400px', overflow: 'auto' }}
+        styles={{ popup: { root: { maxHeight: '400px', overflow: 'auto' } } }}
       >
         <Input
           placeholder="Search tools, data, docs... (Ctrl+K)"
-          prefix={<SearchOutlined style={{ color: '#8c8c8c' }} />}
+          prefix={<SearchOutlined className={styles.searchPrefix} />}
           suffix={
             focused && (
-              <Tag size="small" style={{ fontSize: '10px', lineHeight: '14px' }}>
+              <Tag size="small" className={styles.escTag}>
                 ESC
               </Tag>
             )
           }
           onKeyDown={handleKeyDown}
           onPressEnter={(e) => handleSearch((e.target as HTMLInputElement).value)}
-          style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            borderColor: 'rgba(255, 255, 255, 0.3)',
-            color: 'white',
-          }}
+          className={styles.searchInput}
         />
       </AutoComplete>
     </div>

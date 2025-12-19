@@ -1,0 +1,16 @@
+id,name,organization,location,state,region,capacity,certifications,email,phone,status
+REC-001,EcoCycle Mumbai,EcoCycle Pvt Ltd,Mumbai,Maharashtra,West,5000,"ISO 14001,EPR,CPCB",contact@ecocycle.in,+91-9876543210,active
+REC-002,GreenLoop Bengaluru,GreenLoop Industries,Bengaluru,Karnataka,South,4500,"ISO 14001,EPR",info@greenloop.co.in,+91-9876543211,active
+REC-003,Rx-204 Delhi,Recyclex Solutions,Delhi,Delhi,North,6000,"ISO 14001,EPR,SPCB",ops@recyclex.in,+91-9876543212,active
+REC-004,CleanEarth Chennai,CleanEarth Recyclers,Chennai,Tamil Nadu,South,3800,"EPR,TNPCB",hello@cleanearth.in,+91-9876543213,active
+REC-005,RecycleMax Pune,RecycleMax Corp,Pune,Maharashtra,West,4200,"ISO 14001,EPR",contact@recyclemax.in,+91-9876543214,active
+REC-006,GreenWave Kolkata,GreenWave Enterprises,Kolkata,West Bengal,East,3500,"EPR,WBPCB",info@greenwave.in,+91-9876543215,active
+REC-007,EcoProcess Ahmedabad,EcoProcess Industries,Ahmedabad,Gujarat,West,5500,"ISO 14001,EPR,GPCB",ops@ecoprocess.in,+91-9876543216,active
+REC-008,PlastiCycle Hyderabad,PlastiCycle Tech,Hyderabad,Telangana,South,4000,"EPR,TSPCB",contact@plasticycle.in,+91-9876543217,active
+REC-009,ReNew Jaipur,ReNew Recycling,Jaipur,Rajasthan,North,3200,"EPR,RSPCB",hello@renewrecycling.in,+91-9876543218,active
+REC-010,CircularPlas Lucknow,CircularPlas Solutions,Lucknow,Uttar Pradesh,North,4800,"ISO 14001,EPR",info@circularplas.in,+91-9876543219,active
+REC-011,WasteWise Kochi,WasteWise Kerala,Kochi,Kerala,South,2800,"EPR,KSPCB",contact@wastewise.in,+91-9876543220,active
+REC-012,EcoVert Chandigarh,EcoVert Industries,Chandigarh,Punjab,North,3000,"ISO 14001,EPR",ops@ecovert.in,+91-9876543221,active
+REC-013,GreenCycle Indore,GreenCycle MP,Indore,Madhya Pradesh,Central,3600,"EPR,MPPCB",info@greencycle.in,+91-9876543222,active
+REC-014,RecyclePro Nagpur,RecyclePro Solutions,Nagpur,Maharashtra,West,2500,"EPR,MPCB",hello@recyclepro.in,+91-9876543223,active
+REC-015,PlastiGreen Surat,PlastiGreen Gujarat,Surat,Gujarat,West,4100,"ISO 14001,EPR",contact@plastigreen.in,+91-9876543224,active

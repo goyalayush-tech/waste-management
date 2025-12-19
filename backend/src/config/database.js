@@ -14,18 +14,18 @@ dotenv.config();
 
 // MongoDB Configuration
 const mongoConfig = {
-  uri: process.env.MONGODB_URI || 'mongodb+srv://Ayush2:anil7000@bidding-db.cdc86ks.mongodb.net/waste-verification-mvp?retryWrites=true&w=majority',
+  uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/waste-db',
   options: {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     maxPoolSize: 10,
     serverSelectionTimeoutMS: 5000,
     socketTimeoutMS: 45000,
+    retryWrites: true,
+    w: 'majority',
   },
 };
 
 // PostgreSQL Configuration
-const postgresUri = process.env.POSTGRES_URI || 'postgresql://neondb_owner:npg_wFSf6xjcqE5a@ep-solitary-shape-a1nvnfdl-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require';
+const postgresUri = process.env.POSTGRES_URI || process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/compliance_db';
 
 const postgresConfig = {
   dialect: 'postgres',
@@ -37,10 +37,12 @@ const postgresConfig = {
     idle: 10000,
   },
   dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false, // Required for NeonDB connections
-    },
+    ssl: process.env.NODE_ENV === 'production' 
+      ? {
+          require: true,
+          rejectUnauthorized: false,
+        }
+      : false, // Disable SSL for development/local environments
   },
 };
 
@@ -71,8 +73,30 @@ export const connectMongoDB = async () => {
   if (mongoConnection) {
     return mongoConnection;
   }
-  mongoConnection = await mongoose.connect(mongoConfig.uri, mongoConfig.options);
-  return mongoConnection;
+  
+  let lastError;
+  const maxRetries = 3;
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(`Attempting MongoDB connection (${attempt}/${maxRetries})...`);
+      mongoConnection = await mongoose.connect(mongoConfig.uri, mongoConfig.options);
+      console.log('✓ MongoDB connected successfully');
+      return mongoConnection;
+    } catch (error) {
+      lastError = error;
+      console.warn(`✗ MongoDB connection attempt ${attempt} failed:`, error.message);
+      
+      if (attempt < maxRetries) {
+        const waitTime = Math.min(1000 * Math.pow(2, attempt - 1), 10000);
+        console.log(`Retrying in ${waitTime}ms...`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
+    }
+  }
+  
+  console.error('Failed to connect to MongoDB after retries:', lastError.message);
+  throw lastError;
 };
 
 /**
@@ -82,9 +106,31 @@ export const connectPostgreSQL = async () => {
   if (postgresConnection) {
     return postgresConnection;
   }
-  postgresConnection = new Sequelize(postgresUri, postgresConfig);
-  await postgresConnection.authenticate();
-  return postgresConnection;
+  
+  let lastError;
+  const maxRetries = 3;
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(`Attempting PostgreSQL connection (${attempt}/${maxRetries})...`);
+      postgresConnection = new Sequelize(postgresUri, postgresConfig);
+      await postgresConnection.authenticate();
+      console.log('✓ PostgreSQL connected successfully');
+      return postgresConnection;
+    } catch (error) {
+      lastError = error;
+      console.warn(`✗ PostgreSQL connection attempt ${attempt} failed:`, error.message);
+      
+      if (attempt < maxRetries) {
+        const waitTime = Math.min(1000 * Math.pow(2, attempt - 1), 10000);
+        console.log(`Retrying in ${waitTime}ms...`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
+    }
+  }
+  
+  console.error('Failed to connect to PostgreSQL after retries:', lastError.message);
+  throw lastError;
 };
 
 /**
@@ -105,16 +151,28 @@ export const connectRedis = async () => {
  * Initialize all database connections
  */
 export const initializeDatabases = async () => {
-  const [mongo, postgres] = await Promise.all([
-    connectMongoDB(),
-    connectPostgreSQL(),
-    // connectRedis(),
-  ]);
-  return {
-    mongodb: mongo,
-    postgresql: postgres,
-    // redis: redis,
-  };
+  try {
+    // MongoDB is required
+    const mongo = await connectMongoDB();
+    
+    // PostgreSQL is optional - try to connect but don't fail if unavailable
+    let postgres = null;
+    try {
+      postgres = await connectPostgreSQL();
+    } catch (error) {
+      console.warn('⚠️  PostgreSQL connection failed but continuing without it:', error.message);
+      console.warn('⚠️  Some EPR compliance features will be unavailable.');
+    }
+    
+    return {
+      mongodb: mongo,
+      postgresql: postgres,
+      // redis: redis,
+    };
+  } catch (error) {
+    console.error('Failed to initialize databases:', error.message);
+    throw error;
+  }
 };
 
 /**

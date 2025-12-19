@@ -37,9 +37,9 @@ class WebSocketService {
   private heartbeatTimeout: NodeJS.Timeout | null = null;
   private messageQueue: WebSocketMessage[] = [];
   private subscribers: Map<string, (data: any) => void> = new Map();
-  private url: string = 'ws://localhost:8080/ws';
+  private url: string = import.meta.env.VITE_WEBSOCKET_URL || 'http://localhost:3001';
 
-  connect(url: string = 'ws://localhost:8080/ws') {
+  connect(url: string = import.meta.env.VITE_WEBSOCKET_URL || 'http://localhost:3001') {
     if (this.isConnecting || (this.ws && this.ws.readyState === WebSocket.CONNECTING)) {
       return Promise.resolve();
     }

@@ -1,0 +1,295 @@
+/* AuditorConsole Component Styles */
+
+/* Container */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating circles animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.floatingCircle1 {
+  position: absolute;
+  top: 8%;
+  left: 4%;
+  width: 250px;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floatingCircle2 {
+  position: absolute;
+  top: 70%;
+  right: 6%;
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.floatingCircle3 {
+  position: absolute;
+  bottom: 12%;
+  left: 25%;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  animation: float 10s ease-in-out infinite;
+}
+
+/* Content Wrapper */
+.contentWrapper {
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.contentContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.headerSection {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.pageTitle {
+  color: white !important;
+  margin-bottom: 16px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pageTitleIcon {
+  margin-right: 12px;
+}
+
+.pageSubtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+}
+
+/* Card Styles */
+.card {
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+.cardContent {
+  padding: 20px;
+}
+
+.cardTitle {
+  margin-bottom: 20px !important;
+  color: #1e3c72 !important;
+}
+
+.cardTitleIcon {
+  margin-right: 8px;
+}
+
+/* Form Fields */
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.formGroupLarge {
+  margin-bottom: 20px;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.formInput {
+  border-radius: 8px;
+}
+
+/* Buttons */
+.primaryButton {
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+  border: none !important;
+  height: 48px !important;
+  font-size: 16px !important;
+}
+
+.completeButton {
+  border-radius: 6px !important;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border: none !important;
+}
+
+/* Stats Row */
+.statsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statValue {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e3c72;
+}
+
+.statValueGreen {
+  font-size: 20px;
+  color: #10b981;
+}
+
+.statValueOrange {
+  font-size: 20px;
+  color: #f59e0b;
+}
+
+.statValueGray {
+  font-size: 20px;
+  color: #6b7280;
+}
+
+/* Loading State */
+.loadingWrapper {
+  text-align: center;
+  padding: 40px;
+}
+
+/* List Item */
+.listItem {
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.listItemContent {
+  width: 100%;
+}
+
+.listItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.listItemInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.listItemTitle {
+  color: #1e3c72;
+}
+
+.listItemMeta {
+  margin-bottom: 8px;
+}
+
+.listItemMetaIcon {
+  margin-right: 4px;
+  color: #6b7280;
+}
+
+.listItemMetaText {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.tagSmall {
+  font-size: 12px;
+}
+
+.scoreGreen {
+  color: #10b981;
+}
+
+.scoreOrange {
+  color: #f59e0b;
+}
+
+.scoreRed {
+  color: #ef4444;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  color: #d1d5db;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  color: #6b7280 !important;
+  margin-bottom: 8px !important;
+}
+
+.emptyText {
+  color: #9ca3af;
+}
+
+/* Status Messages */
+.successMessage {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+.successIcon {
+  color: #10b981;
+  margin-right: 8px;
+}
+
+.successText {
+  color: #10b981;
+}
+
+.errorMessage {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+.errorIcon {
+  color: #ef4444;
+  margin-right: 8px;
+}
+
+.errorText {
+  color: #ef4444;
+}
+
+/* Utility */
+.fullWidth {
+  width: 100%;
+}

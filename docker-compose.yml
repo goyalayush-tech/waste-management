@@ -88,14 +88,25 @@ services:
     restart: unless-stopped
     ports:
       - "3001:3001"
+    # environment:
+    #   - NODE_ENV=development
+    #   - MONGODB_URI=mongodb://admin:password@mongodb:27017/waste-verification?authSource=admin
+    #   - POSTGRES_URI=postgresql://admin:password@postgresql:5432/epr_compliance
+    #   - REDIS_URL=redis://redis:6379
+    #   - AI_SERVICE_URL=http://ai-service:8001
+    #   - IPFS_API_URL=http://ipfs:5001
+    #   - ELASTICSEARCH_URL=http://elasticsearch:9200
+    #   - CLAIM_AUDIT_AI_URL=http://claim-audit-ai:8000
     environment:
-      - NODE_ENV=development
-      - MONGODB_URI=mongodb://admin:password@mongodb:27017/waste-verification?authSource=admin
-      - POSTGRES_URI=postgresql://admin:password@postgresql:5432/epr_compliance
-      - REDIS_URL=redis://redis:6379
-      - AI_SERVICE_URL=http://ai-service:8001
-      - IPFS_API_URL=http://ipfs:5001
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      NODE_ENV: development
+      MONGODB_URI: mongodb://admin:password@mongodb:27017/waste-verification?authSource=admin
+      POSTGRES_URI: postgresql://admin:password@postgresql:5432/epr_compliance
+      REDIS_URL: redis://redis:6379
+      AI_SERVICE_URL: http://ai-service:8001
+      IPFS_API_URL: http://ipfs:5001
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      CLAIM_AUDIT_AI_URL: http://claim-audit-ai:8000
+  # - CLAIM_AUDIT_AI_URL=http://claim-audit-ai:8000
     volumes:
       - ./backend:/app
       - /app/node_modules
@@ -105,6 +116,7 @@ services:
       - redis
       - ipfs
       - elasticsearch
+      - claim-audit-ai
     networks:
       - integrated-system-network
 
@@ -124,6 +136,27 @@ services:
     volumes:
       - ./ai-services:/app
       - ai_models:/app/models
+    networks:
+      - integrated-system-network
+
+  claim-audit-ai:
+    build:
+      context: ./ai-services
+      dockerfile: Dockerfile.dev
+    container_name: claimclean-audit-ai
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      - CLAIM_AUDIT_FETCH_TIMEOUT=10
+    command: uvicorn claim_audit_service:app --host 0.0.0.0 --port 8000
+    volumes:
+      - ./ai-services:/app
+      - ai_models:/app/models
+    depends_on:
+      - ai-service # ensure shared dependencies start first
     networks:
       - integrated-system-network
 
@@ -147,6 +180,41 @@ services:
     networks:
       - integrated-system-network
 
+  # MQTT Broker (Eclipse Mosquitto)
+  mqtt:
+    image: eclipse-mosquitto:2
+    container_name: integrated-system-mqtt
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    networks:
+      - integrated-system-network
+
+  # IoT Simulator (optional)
+  iot-simulator:
+    image: python:3.11-slim
+    container_name: integrated-system-iot-simulator
+    working_dir: /app
+    command: bash -lc "pip install -r requirements.txt && python main.py"
+    environment:
+      - MQTT_BROKER_HOST=mqtt
+      - MQTT_BROKER_PORT=1883
+      - MQTT_TOPIC=iot/waste_management/data
+      - AREA_GEOJSON_PATH=data/delhi_area.geojson
+      - NUM_BINS=20
+      - NUM_VEHICLES=5
+      - SIMULATION_INTERVAL_SECONDS=10
+    volumes:
+      - ./iot-simulator:/app
+    depends_on:
+      - mqtt
+    networks:
+      - integrated-system-network
+
 volumes:
   mongodb_data:
   postgresql_data:
@@ -154,6 +222,8 @@ volumes:
   ipfs_data:
   elasticsearch_data:
   ai_models:
+  mosquitto_data:
+  mosquitto_log:
 
 networks:
   integrated-system-network:

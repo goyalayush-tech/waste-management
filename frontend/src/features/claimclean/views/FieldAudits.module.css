@@ -1,0 +1,119 @@
+.fieldAuditsPage {
+  padding: 24px;
+}
+
+/* Header */
+.header {
+  margin-bottom: 24px;
+}
+
+.headerTitle {
+  margin: 0 !important;
+  color: #1B5E20 !important;
+}
+
+.headerIcon {
+  margin-right: 8px;
+}
+
+/* Stats Cards */
+.statsRow {
+  margin-bottom: 24px;
+}
+
+.statCard {
+  text-align: center;
+}
+
+.statBadge {
+  margin-top: 8px;
+}
+
+.statLabel {
+  color: #666;
+}
+
+/* Main Table */
+.mainCard {
+  margin-bottom: 16px;
+}
+
+.newAssignmentButton {
+  background-color: #1B5E20;
+  border-color: #1B5E20;
+}
+
+.newAssignmentButton:hover {
+  background-color: #2E7D32;
+  border-color: #2E7D32;
+}
+
+/* Table Columns */
+.claimLink {
+  padding: 0;
+}
+
+.partnerAvatar {
+  margin-right: 8px;
+}
+
+.partnerTag {
+  font-size: 10px;
+}
+
+/* Modal */
+.assignModal {
+  width: 600px;
+}
+
+.formItem {
+  margin-bottom: 16px;
+}
+
+.inputPrefix {
+  color: #8c8c8c;
+}
+
+.selectOption {
+  display: flex;
+  align-items: center;
+}
+
+.optionAvatar {
+  margin-right: 8px;
+}
+
+.optionTag {
+  margin-left: 8px;
+}
+
+.datePicker {
+  width: 100%;
+}
+
+.textArea {
+  resize: vertical;
+}
+
+.formDivider {
+  margin: 24px 0;
+}
+
+.formActions {
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.cancelButton {
+  margin-right: 8px;
+}
+
+.assignButton {
+  background-color: #1B5E20;
+  border-color: #1B5E20;
+}
+
+.assignButton:hover {
+  background-color: #2E7D32;
+  border-color: #2E7D32;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -26,9 +26,15 @@ import {
   ArrowRightOutlined,
   CheckCircleOutlined,
   WarningOutlined,
+  RocketOutlined,
+  HeartOutlined,
+  EnvironmentOutlined,
+  BulbOutlined,
+  TeamOutlined,
 } from '@ant-design/icons';
 import { RootState } from '../../store/store';
 import { updateSystemStats } from '../../store/slices/dashboardSlice';
+import styles from './LandingPage.module.css';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -91,15 +97,18 @@ const ToolCard: React.FC<ToolCardProps> = ({
   return (
     <Card
       hoverable
-      style={{
-        height: '100%',
-        borderLeft: `4px solid ${color}`,
-      }}
+      className={styles.toolCard}
+      style={{ borderLeft: `4px solid ${color}` }}
       actions={[
         <Button
           type="primary"
           icon={<ArrowRightOutlined />}
           onClick={() => navigate(route)}
+          className={styles.toolCardButton}
+          style={{
+            background: `linear-gradient(135deg, ${color} 0%, ${color}dd 100%)`,
+            boxShadow: `0 4px 12px ${color}40`,
+          }}
         >
           Open Tool
         </Button>,
@@ -107,19 +116,22 @@ const ToolCard: React.FC<ToolCardProps> = ({
     >
       <Card.Meta
         avatar={
-          <div style={{ fontSize: '24px', color }}>
+          <div 
+            className={styles.toolCardAvatar}
+            style={{ color, background: `${color}15` }}
+          >
             {icon}
           </div>
         }
         title={
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span>{title}</span>
+          <div className={styles.toolCardTitleContainer}>
+            <span className={styles.toolCardTitle}>{title}</span>
             <Badge
               color={getStatusColor()}
               text={
                 <Space size={4}>
                   {getStatusIcon()}
-                  <Text style={{ fontSize: '12px' }}>{statusText}</Text>
+                  <Text className={styles.toolCardStatusText}>{statusText}</Text>
                 </Space>
               }
             />
@@ -127,13 +139,16 @@ const ToolCard: React.FC<ToolCardProps> = ({
         }
         description={
           <div>
-            <Paragraph style={{ marginBottom: '12px', color: '#666' }}>
+            <Paragraph className={styles.toolCardDescription}>
               {description}
             </Paragraph>
             {stats && (
-              <div style={{ marginTop: '8px' }}>
-                <Text strong style={{ color }}>{stats.label}: </Text>
-                <Text strong>{stats.value}</Text>
+              <div 
+                className={styles.toolCardStats}
+                style={{ background: `${color}08`, border: `1px solid ${color}20` }}
+              >
+                <Text strong className={styles.toolCardStatsLabel} style={{ color }}>{stats.label}: </Text>
+                <Text strong className={styles.toolCardStatsValue}>{stats.value}</Text>
               </div>
             )}
           </div>
@@ -147,6 +162,15 @@ const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const systemStats = useSelector((state: RootState) => state.dashboard.systemStats);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Update time every second for live clock
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Mock real-time updates using Redux
   useEffect(() => {
@@ -243,148 +267,220 @@ const LandingPage: React.FC = () => {
   ];
 
   return (
-    <div style={{ padding: '0' }}>
+    <div className={styles.landingPage}>
+      {/* Animated Background Elements */}
+      <div className={styles.floatingCircle1} />
+      <div className={styles.floatingCircle2} />
+      <div className={styles.floatingCircle3} />
+
       {/* Hero Section */}
-      <div
-        style={{
-          background: 'linear-gradient(135deg, #001529 0%, #003a5c 100%)',
-          padding: '60px 0',
-          textAlign: 'center',
-          color: 'white',
-          marginBottom: '40px',
-        }}
-      >
-        <Title level={1} style={{ color: 'white', marginBottom: '16px' }}>
-          🌱 Advanced Waste Management System
-        </Title>
-        <Title level={3} style={{ color: '#91d5ff', fontWeight: 'normal', marginBottom: '24px' }}>
-          AI-Powered • Blockchain-Enabled • Quantum-Enhanced
-        </Title>
-        <Paragraph style={{ fontSize: '18px', color: '#b7d7f0', maxWidth: '800px', margin: '0 auto 32px' }}>
-          Transform waste management with cutting-edge AI, blockchain technology, and real-time analytics.
-          Achieve 98%+ accuracy in waste classification, automated contamination detection, and immutable
-          environmental impact tracking.
-        </Paragraph>
-        <Space size="large">
-          <Button
-            type="primary"
-            size="large"
-            icon={<ArrowRightOutlined />}
-            onClick={() => navigate('/dashboard')}
-          >
-            Open Dashboard
-          </Button>
-          <Button
-            size="large"
-            style={{ color: 'white', borderColor: 'white' }}
-            onClick={() => navigate('/waste-analysis')}
-          >
-            Start Analysis
-          </Button>
-        </Space>
+      <div className={styles.heroSection}>
+        <div className={styles.heroCard}>
+          {/* Live Time Display */}
+          <div className={styles.liveTime}>
+            {currentTime.toLocaleDateString()} • {currentTime.toLocaleTimeString()}
+          </div>
+
+          <Title level={1} className={styles.heroTitle}>
+            🌱 Smart Waste Revolution
+          </Title>
+
+          <Title level={3} className={styles.heroSubtitle}>
+            AI-Powered • Blockchain-Enabled • Future-Ready
+          </Title>
+
+          <Paragraph className={styles.heroDescription}>
+            Transform Delhi's waste management with cutting-edge AI, blockchain technology,
+            and real-time analytics. Achieve 98%+ accuracy in waste classification,
+            automated contamination detection, and immutable environmental impact tracking.
+          </Paragraph>
+
+          <Space size="large" className={styles.heroButtons}>
+            <Button
+              type="primary"
+              size="large"
+              icon={<RocketOutlined />}
+              onClick={() => navigate('/app/dashboard')}
+              className={styles.launchButton}
+            >
+              Launch Dashboard
+            </Button>
+            <Button
+              size="large"
+              icon={<BulbOutlined />}
+              onClick={() => navigate('/app/waste-analysis')}
+              className={styles.analysisButton}
+            >
+              Start Analysis
+            </Button>
+          </Space>
+
+          {/* Key Stats */}
+          <Row gutter={[32, 24]} justify="center">
+            <Col xs={12} sm={6}>
+              <div className={styles.statItem}>
+                <div className={styles.statValueGreen}>98.2%</div>
+                <div className={styles.statLabel}>AI Accuracy</div>
+              </div>
+            </Col>
+            <Col xs={12} sm={6}>
+              <div className={styles.statItem}>
+                <div className={styles.statValueBlue}>2,847</div>
+                <div className={styles.statLabel}>Certificates</div>
+              </div>
+            </Col>
+            <Col xs={12} sm={6}>
+              <div className={styles.statItem}>
+                <div className={styles.statValueOrange}>+23%</div>
+                <div className={styles.statLabel}>Efficiency</div>
+              </div>
+            </Col>
+            <Col xs={12} sm={6}>
+              <div className={styles.statItem}>
+                <div className={styles.statValuePink}>24/7</div>
+                <div className={styles.statLabel}>Monitoring</div>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </div>
 
       {/* System Status Alert */}
-      <Alert
-        message="System Status: Fully Operational"
-        description="All AI models active, blockchain connected, sensors calibrated. Real-time processing at optimal performance."
-        type="success"
-        showIcon
-        style={{ marginBottom: '32px' }}
-      />
+      <div className={styles.alertSection}>
+        <Alert
+          message={
+            <span className={styles.alertMessage}>
+              ✨ System Status: Fully Operational
+            </span>
+          }
+          description="All AI models active, blockchain connected, sensors calibrated. Real-time processing at optimal performance."
+          type="success"
+          showIcon
+          className={styles.systemAlert}
+        />
+      </div>
 
       {/* Real-time Statistics */}
-      <Card
-        title={
-          <Space>
-            <ThunderboltOutlined style={{ color: '#52c41a' }} />
-            <span>Real-Time System Metrics</span>
-          </Space>
-        }
-        style={{ marginBottom: '32px' }}
-      >
-        <Row gutter={[16, 16]}>
-          <Col xs={12} sm={8} md={6} lg={4}>
-            <Statistic
-              title="System Efficiency"
-              value={systemStats.efficiency}
-              suffix="%"
-              valueStyle={{ color: '#3f8600' }}
-              prefix={<ThunderboltOutlined />}
-            />
-            <Progress
-              percent={systemStats.efficiency}
-              size="small"
-              showInfo={false}
-              strokeColor="#52c41a"
-            />
-          </Col>
-          <Col xs={12} sm={8} md={6} lg={4}>
-            <Statistic
-              title="Waste Processed Today"
-              value={systemStats.wasteProcessed}
-              suffix="kg"
-              prefix={<ExperimentOutlined />}
-            />
-            <Progress percent={78} size="small" showInfo={false} />
-          </Col>
-          <Col xs={12} sm={8} md={6} lg={4}>
-            <Statistic
-              title="Contamination Rate"
-              value={systemStats.contaminationRate}
-              suffix="%"
-              valueStyle={{ color: systemStats.contaminationRate > 5 ? '#cf1322' : '#faad14' }}
-              prefix={<SafetyCertificateOutlined />}
-            />
-            <Progress
-              percent={systemStats.contaminationRate}
-              size="small"
-              status={systemStats.contaminationRate > 5 ? 'exception' : 'active'}
-              showInfo={false}
-            />
-          </Col>
-          <Col xs={12} sm={8} md={6} lg={4}>
-            <Statistic
-              title="CO₂ Credits Generated"
-              value={systemStats.carbonCredits}
-              suffix="tons"
-              valueStyle={{ color: '#1890ff' }}
-              prefix={<DollarOutlined />}
-            />
-            <Progress percent={85} size="small" showInfo={false} strokeColor="#1890ff" />
-          </Col>
-          <Col xs={12} sm={8} md={6} lg={4}>
-            <Statistic
-              title="Active Users"
-              value={systemStats.activeUsers}
-              prefix={<GlobalOutlined />}
-            />
-            <Progress percent={67} size="small" showInfo={false} strokeColor="#eb2f96" />
-          </Col>
-          <Col xs={12} sm={8} md={6} lg={4}>
-            <Statistic
-              title="System Uptime"
-              value={systemStats.systemUptime}
-              suffix="%"
-              valueStyle={{ color: '#3f8600' }}
-              prefix={<CheckCircleOutlined />}
-            />
-            <Progress
-              percent={systemStats.systemUptime}
-              size="small"
-              showInfo={false}
-              strokeColor="#52c41a"
-            />
-          </Col>
-        </Row>
-      </Card>
+      <div className={styles.metricsSection}>
+        <Card
+          title={
+            <Space>
+              <ThunderboltOutlined className={styles.iconSuccess} />
+              <span className={styles.metricsCardTitle}>Real-Time System Metrics</span>
+            </Space>
+          }
+          className={styles.metricsCard}
+        >
+          <Row gutter={[24, 24]}>
+            <Col xs={12} sm={8} md={6} lg={4}>
+              <div className={styles.metricItem}>
+                <Statistic
+                  title={<span className={styles.metricLabel}>System Efficiency</span>}
+                  value={systemStats.efficiency}
+                  suffix="%"
+                  valueStyle={{ color: '#3f8600', fontSize: '24px', fontWeight: '800' }}
+                  prefix={<ThunderboltOutlined className={styles.iconGreen} />}
+                />
+                <Progress
+                  percent={systemStats.efficiency}
+                  size="small"
+                  showInfo={false}
+                  strokeColor="#52c41a"
+                  className={styles.progressMarginTop}
+                />
+              </div>
+            </Col>
+            <Col xs={12} sm={8} md={6} lg={4}>
+              <div className={styles.metricItem}>
+                <Statistic
+                  title={<span className={styles.metricLabel}>Waste Processed Today</span>}
+                  value={systemStats.wasteProcessed}
+                  suffix="kg"
+                  valueStyle={{ color: '#1890ff', fontSize: '24px', fontWeight: '800' }}
+                  prefix={<ExperimentOutlined className={styles.iconBlue} />}
+                />
+                <Progress percent={78} size="small" showInfo={false} className={styles.progressMarginTop} />
+              </div>
+            </Col>
+            <Col xs={12} sm={8} md={6} lg={4}>
+              <div className={styles.metricItem}>
+                <Statistic
+                  title={<span className={styles.metricLabel}>Contamination Rate</span>}
+                  value={systemStats.contaminationRate}
+                  suffix="%"
+                  valueStyle={{
+                    color: systemStats.contaminationRate > 5 ? '#cf1322' : '#faad14',
+                    fontSize: '24px',
+                    fontWeight: '800'
+                  }}
+                  prefix={<SafetyCertificateOutlined style={{ color: systemStats.contaminationRate > 5 ? '#cf1322' : '#faad14' }} />}
+                />
+                <Progress
+                  percent={systemStats.contaminationRate}
+                  size="small"
+                  status={systemStats.contaminationRate > 5 ? 'exception' : 'active'}
+                  showInfo={false}
+                  className={styles.progressMarginTop}
+                />
+              </div>
+            </Col>
+            <Col xs={12} sm={8} md={6} lg={4}>
+              <div className={styles.metricItem}>
+                <Statistic
+                  title={<span className={styles.metricLabel}>CO₂ Credits Generated</span>}
+                  value={systemStats.carbonCredits}
+                  suffix="tons"
+                  valueStyle={{ color: '#1890ff', fontSize: '24px', fontWeight: '800' }}
+                  prefix={<DollarOutlined className={styles.iconBlue} />}
+                />
+                <Progress percent={85} size="small" showInfo={false} strokeColor="#1890ff" className={styles.progressMarginTop} />
+              </div>
+            </Col>
+            <Col xs={12} sm={8} md={6} lg={4}>
+              <div className={styles.metricItem}>
+                <Statistic
+                  title={<span className={styles.metricLabel}>Active Users</span>}
+                  value={systemStats.activeUsers}
+                  valueStyle={{ color: '#eb2f96', fontSize: '24px', fontWeight: '800' }}
+                  prefix={<GlobalOutlined className={styles.iconPink} />}
+                />
+                <Progress percent={67} size="small" showInfo={false} strokeColor="#eb2f96" className={styles.progressMarginTop} />
+              </div>
+            </Col>
+            <Col xs={12} sm={8} md={6} lg={4}>
+              <div className={styles.metricItem}>
+                <Statistic
+                  title={<span className={styles.metricLabel}>System Uptime</span>}
+                  value={systemStats.systemUptime}
+                  suffix="%"
+                  valueStyle={{ color: '#3f8600', fontSize: '24px', fontWeight: '800' }}
+                  prefix={<CheckCircleOutlined className={styles.iconDarkGreen} />}
+                />
+                <Progress
+                  percent={systemStats.systemUptime}
+                  size="small"
+                  showInfo={false}
+                  strokeColor="#52c41a"
+                  className={styles.progressMarginTop}
+                />
+              </div>
+            </Col>
+          </Row>
+        </Card>
+      </div>
 
       {/* Tool Categories */}
-      <div style={{ marginBottom: '32px' }}>
-        <Title level={2} style={{ marginBottom: '24px' }}>
-          🛠️ Available Tools & Services
-        </Title>
-        <Row gutter={[16, 16]}>
+      <div className={styles.toolsSection}>
+        <div className={styles.toolsSectionHeader}>
+          <Title level={2} className={styles.toolsSectionTitle}>
+            🛠️ Available Tools & Services
+          </Title>
+          <Paragraph className={styles.toolsSectionDescription}>
+            Explore our comprehensive suite of AI-powered tools designed for modern waste management
+          </Paragraph>
+        </div>
+
+        <Row gutter={[24, 24]}>
           {toolCategories.map((tool, index) => (
             <Col xs={24} sm={12} lg={8} key={index}>
               <ToolCard {...tool} />
@@ -393,67 +489,114 @@ const LandingPage: React.FC = () => {
         </Row>
       </div>
 
-      <Divider />
+      <Divider className={styles.dividerWhite} />
 
       {/* Quick Start Guide */}
-      <Card
-        title="🚀 Quick Start Guide"
-        style={{ marginBottom: '32px' }}
-      >
-        <Row gutter={[24, 24]}>
-          <Col xs={24} md={8}>
-            <Card size="small" title="1. Upload Waste Sample">
-              <Text>
-                Navigate to Waste Analysis and upload an image of your waste sample
-                for AI-powered classification and contamination detection.
-              </Text>
-              <div style={{ marginTop: '12px' }}>
-                <Button
-                  type="link"
-                  icon={<ArrowRightOutlined />}
-                  onClick={() => navigate('/waste-analysis')}
-                >
-                  Start Analysis
-                </Button>
-              </div>
-            </Card>
-          </Col>
-          <Col xs={24} md={8}>
-            <Card size="small" title="2. Monitor Dashboard">
-              <Text>
-                View real-time system metrics, processing status, and alerts
-                from the comprehensive dashboard interface.
-              </Text>
-              <div style={{ marginTop: '12px' }}>
-                <Button
-                  type="link"
-                  icon={<ArrowRightOutlined />}
-                  onClick={() => navigate('/dashboard')}
-                >
-                  Open Dashboard
-                </Button>
-              </div>
-            </Card>
-          </Col>
-          <Col xs={24} md={8}>
-            <Card size="small" title="3. View Certificates">
-              <Text>
-                Access blockchain-based NFT certificates for processed waste
-                and track environmental impact achievements.
-              </Text>
-              <div style={{ marginTop: '12px' }}>
-                <Button
-                  type="link"
-                  icon={<ArrowRightOutlined />}
-                  onClick={() => navigate('/blockchain/certificates')}
-                >
-                  View Certificates
-                </Button>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-      </Card>
+      <div className={styles.quickStartSection}>
+        <Card
+          title={
+            <span className={styles.quickStartTitle}>
+              🚀 Quick Start Guide
+            </span>
+          }
+          className={styles.quickStartCard}
+        >
+          <Row gutter={[32, 32]}>
+            <Col xs={24} md={8}>
+              <Card
+                size="small"
+                title={<span className={styles.stepCardTitle}>1. 📸 Upload Waste Sample</span>}
+                className={styles.stepCardBlue}
+              >
+                <Text className={styles.stepCardText}>
+                  Navigate to Waste Analysis and upload an image of your waste sample
+                  for AI-powered classification and contamination detection.
+                </Text>
+                <div className={styles.stepCardButtonWrapper}>
+                  <Button
+                    type="primary"
+                    icon={<ArrowRightOutlined />}
+                    onClick={() => navigate('/app/waste-analysis')}
+                    className={styles.stepButtonBlue}
+                  >
+                    Start Analysis
+                  </Button>
+                </div>
+              </Card>
+            </Col>
+            <Col xs={24} md={8}>
+              <Card
+                size="small"
+                title={<span className={styles.stepCardTitle}>2. 📊 Monitor Dashboard</span>}
+                className={styles.stepCardGreen}
+              >
+                <Text className={styles.stepCardText}>
+                  View real-time system metrics, processing status, and alerts
+                  from the comprehensive dashboard interface.
+                </Text>
+                <div className={styles.stepCardButtonWrapper}>
+                  <Button
+                    type="primary"
+                    icon={<ArrowRightOutlined />}
+                    onClick={() => navigate('/app/dashboard')}
+                    className={styles.stepButtonGreen}
+                  >
+                    Open Dashboard
+                  </Button>
+                </div>
+              </Card>
+            </Col>
+            <Col xs={24} md={8}>
+              <Card
+                size="small"
+                title={<span className={styles.stepCardTitle}>3. 🏆 View Certificates</span>}
+                className={styles.stepCardPurple}
+              >
+                <Text className={styles.stepCardText}>
+                  Access blockchain-based NFT certificates for processed waste
+                  and track environmental impact achievements.
+                </Text>
+                <div className={styles.stepCardButtonWrapper}>
+                  <Button
+                    type="primary"
+                    icon={<ArrowRightOutlined />}
+                    onClick={() => navigate('/app/blockchain/certificates')}
+                    className={styles.stepButtonPurple}
+                  >
+                    View Certificates
+                  </Button>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        </Card>
+      </div>
+
+      {/* Footer */}
+      <div className={styles.footer}>
+        <div className={styles.footerContent}>
+          <Title level={4} className={styles.footerTitle}>
+            🌱 Delhi Waste Management System
+          </Title>
+          <Paragraph className={styles.footerDescription}>
+            Revolutionizing waste management with AI, blockchain, and real-time analytics
+          </Paragraph>
+          <Space size="large">
+            <Button type="text" className={styles.footerButton} icon={<HeartOutlined />}>
+              Made with love for Delhi
+            </Button>
+            <Button type="text" className={styles.footerButton} icon={<EnvironmentOutlined />}>
+              Sustainable Future
+            </Button>
+            <Button type="text" className={styles.footerButton} icon={<TeamOutlined />}>
+              Community Driven
+            </Button>
+          </Space>
+          <div className={styles.footerCopyright}>
+            © 2025 Delhi Waste Management. Building a cleaner, greener future.
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

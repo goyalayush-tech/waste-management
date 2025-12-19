@@ -1,0 +1,378 @@
+/* BlockchainCertificates.module.css */
+
+/* ===== Main Container ===== */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== Floating Circles ===== */
+.floatingCircle1 {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 160px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floatingCircle2 {
+  position: absolute;
+  top: 60%;
+  right: 15%;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.floatingCircle3 {
+  position: absolute;
+  bottom: 25%;
+  left: 70%;
+  width: 90px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ===== Hero Section ===== */
+.heroSection {
+  padding: 60px 0 40px;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.heroCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  margin: 0 auto;
+  max-width: 1100px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.liveTime {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+  font-family: monospace;
+}
+
+.heroTitle {
+  color: white;
+  margin-bottom: 12px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  color: #e0e7ff;
+  font-weight: 400;
+  margin-bottom: 24px;
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+.heroDescription {
+  font-size: 17px;
+  color: #f0f4ff;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.buttonWrapper {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  border-radius: 25px;
+  padding: 2px;
+}
+
+.primaryButton {
+  height: 48px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 23px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  border: none;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+.secondaryButton {
+  height: 48px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 23px;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* ===== Key Stats ===== */
+.statsRow {
+  margin-top: 40px;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValueGreen {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #4ade80;
+  margin-bottom: 8px;
+}
+
+.statValueBlue {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #60a5fa;
+  margin-bottom: 8px;
+}
+
+.statValueOrange {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+.statValuePink {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ec4899;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* ===== System Status Alert ===== */
+.alertSection {
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.alertBox {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border: none;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.alertIcon {
+  color: #52c41a;
+  font-size: 20px;
+}
+
+.alertTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.alertDescription {
+  font-size: 13px;
+  color: #666;
+}
+
+/* ===== Certificate Features Section ===== */
+.featuresSection {
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  margin-bottom: 12px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sectionDescription {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.featureCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 24px;
+  height: 100%;
+}
+
+.featureIconPurple {
+  font-size: 32px;
+  color: #722ed1;
+  margin-bottom: 16px;
+}
+
+.featureIconGreen {
+  font-size: 32px;
+  color: #10b981;
+  margin-bottom: 16px;
+}
+
+.featureIconOrange {
+  font-size: 32px;
+  color: #f59e0b;
+  margin-bottom: 16px;
+}
+
+.featureIconBlue {
+  font-size: 32px;
+  color: #3b82f6;
+  margin-bottom: 16px;
+}
+
+.featureTitle {
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+
+.featureDescription {
+  color: #666;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.tagSmall {
+  font-size: 12px;
+}
+
+/* ===== Main Certificate Interface ===== */
+.certificateSection {
+  padding: 0 20px;
+  margin-bottom: 60px;
+}
+
+.certificateCard {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.certificateContent {
+  text-align: center;
+  padding: 40px;
+}
+
+.certificateIcon {
+  font-size: 64px;
+  color: #722ed1;
+  margin-bottom: 16px;
+}
+
+.certificateTitle {
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+.certificateDescription {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin: 0 auto 32px;
+}
+
+.mintButton {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  height: 48px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.browseButton {
+  border-radius: 8px;
+  color: #667eea;
+  border: 2px solid #667eea;
+  height: 48px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ===== Footer ===== */
+.footer {
+  padding: 30px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerContent {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footerTitle {
+  color: white;
+  margin-bottom: 12px;
+}
+
+.footerDescription {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+.footerButton {
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+}
+
+/* ===== Keyframe Animations ===== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

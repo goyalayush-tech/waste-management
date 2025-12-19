@@ -13,19 +13,19 @@ const ToolsLandingPage: React.FC = () => {
         This is the landing page for all available tools. Please select a tool to get started.
       </Paragraph>
       <div className={styles.toolGrid}>
-        <Card title="Waste Analysis" style={{ width: 300 }}>
+        <Card title="Waste Analysis" className={styles.toolCard}>
           <p>Analyze waste composition and characteristics.</p>
           <Link to="/tools/waste-analysis">Go to Waste Analysis</Link>
         </Card>
-        <Card title="Contamination Detection" style={{ width: 300 }}>
+        <Card title="Contamination Detection" className={styles.toolCard}>
           <p>Detect contaminants in waste streams.</p>
           <Link to="/tools/contamination-detection">Go to Contamination Detection</Link>
         </Card>
-        <Card title="Dashboard" style={{ width: 300 }}>
+        <Card title="Dashboard" className={styles.toolCard}>
           <p>View key metrics and system status.</p>
           <Link to="/dashboard">Go to Dashboard</Link>
         </Card>
-        <Card title="EPR Document Upload" style={{ width: 300 }}>
+        <Card title="EPR Document Upload" className={styles.toolCard}>
           <p>Upload invoices and weighbridge slips for OCR and compliance.</p>
           <Link to="/epr/upload">Go to EPR Upload</Link>
         </Card>

@@ -27,10 +27,10 @@ const SimpleLandingPage: React.FC = () => {
             <nav className="hidden md:flex items-center gap-8">
               <a className="text-[#111418] text-sm font-medium hover:text-primary-600" href="#features">Features</a>
               <a className="text-[#111418] text-sm font-medium hover:text-primary-600" href="#metrics">Metrics</a>
-              <a className="text-[#111418] text-sm font-medium hover:text-primary-600" href="#contact" onClick={(e)=>{e.preventDefault();navigate('/dashboard');}}>Dashboard</a>
+              <a className="text-[#111418] text-sm font-medium hover:text-primary-600" href="#contact" onClick={(e)=>{e.preventDefault();navigate('/app/dashboard');}}>Dashboard</a>
             </nav>
             <button
-              onClick={()=>navigate('/dashboard')}
+              onClick={()=>navigate('/app/dashboard')}
               className="flex items-center justify-center rounded-lg h-10 px-4 bg-[#0d80f2] text-white text-sm font-bold shadow hover:bg-[#0b6ecf] transition-colors"
             >
               <span className="truncate">Request Demo</span>
@@ -53,7 +53,7 @@ const SimpleLandingPage: React.FC = () => {
                   </p>
                 </div>
                 <button
-                  onClick={()=>navigate('/dashboard')}
+                  onClick={()=>navigate('/app/dashboard')}
                   className="flex items-center justify-center rounded-lg h-11 md:h-12 px-6 bg-[#0d80f2] text-white text-sm md:text-base font-bold hover:bg-[#0b6ecf] transition-colors"
                 >
                   Learn More
@@ -125,7 +125,7 @@ const SimpleLandingPage: React.FC = () => {
                 Ready to Transform Your Waste Management?
               </h2>
               <button
-                onClick={()=>navigate('/dashboard')}
+                onClick={()=>navigate('/app/dashboard')}
                 className="flex items-center justify-center rounded-lg h-11 md:h-12 px-6 bg-[#0d80f2] text-white text-sm md:text-base font-bold hover:bg-[#0b6ecf] transition-colors"
               >
                 Request a Demo

@@ -19,9 +19,7 @@ import {
   MenuUnfoldOutlined,
   HomeOutlined,
   DashboardOutlined,
-  ExperimentOutlined,
   SafetyCertificateOutlined,
-  BlockOutlined,
   LineChartOutlined,
   SettingOutlined,
   UserOutlined,
@@ -29,6 +27,7 @@ import {
   LogoutOutlined,
   SearchOutlined,
   WifiOutlined,
+  AuditOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import SearchBar from '../Search/SearchBar';
@@ -42,23 +41,29 @@ import { toggleSidebar, setMobileMenuOpen } from '../../store/slices/navigationS
 const { Header, Sider, Content } = Layout;
 const { Text } = Typography;
 
-// Navigation menu items (original paths)
+// Navigation menu items (ClaimClean only)
 const menuItems: MenuProps['items'] = [
-  { key: '/', icon: <HomeOutlined />, label: 'Home' },
-  { key: '/dashboard', icon: <DashboardOutlined />, label: 'Dashboard' },
-  { key: '/waste-analysis', icon: <ExperimentOutlined />, label: 'Waste Analysis' },
-  { key: '/contamination-detection', icon: <SafetyCertificateOutlined />, label: 'Contamination Detection' },
+  { key: '/app/claimclean/dashboard', icon: <DashboardOutlined />, label: 'Dashboard' },
   {
-    key: '/blockchain',
-    icon: <BlockOutlined />,
-    label: 'Blockchain',
+    key: '/app/claimclean/claims',
+    icon: <AuditOutlined />,
+    label: 'Claims Management',
     children: [
-      { key: '/blockchain/certificates', label: 'NFT Certificates' },
-      { key: '/blockchain/digital-twins', label: 'Digital Twins' },
+      { key: '/app/claimclean/claims', label: 'All Claims' },
+      { key: '/app/claimclean/claims/new', label: 'New Claim' },
     ],
   },
-  { key: '/analytics', icon: <LineChartOutlined />, label: 'Analytics' },
-  { key: '/settings', icon: <SettingOutlined />, label: 'Settings' },
+  {
+    key: '/app/claimclean/audits',
+    icon: <SafetyCertificateOutlined />,
+    label: 'Audits',
+    children: [
+      { key: '/app/claimclean/audits/console', label: 'AI Audit Queue' },
+      { key: '/app/claimclean/audits/field', label: 'Field Audits' },
+    ],
+  },
+  { key: '/app/claimclean/reports', icon: <LineChartOutlined />, label: 'Reports' },
+  { key: '/app/claimclean/admin', icon: <SettingOutlined />, label: 'Administration' },
 ];
 
 // User dropdown menu
@@ -84,18 +89,21 @@ const userMenuItems: MenuProps['items'] = [
   },
 ];
 
-// Breadcrumb mapping (original)
+// Breadcrumb mapping (ClaimClean paths)
 const breadcrumbNameMap: Record<string, string> = {
   '/': 'Home',
-  '/landing': 'Welcome',
-  '/dashboard': 'Dashboard',
-  '/waste-analysis': 'Waste Analysis',
-  '/contamination-detection': 'Contamination Detection',
-  '/blockchain': 'Blockchain',
-  '/blockchain/certificates': 'NFT Certificates',
-  '/blockchain/digital-twins': 'Digital Twins',
-  '/analytics': 'Analytics',
-  '/settings': 'Settings',
+  '/app': 'ClaimClean',
+  '/app/claimclean': 'ClaimClean',
+  '/app/claimclean/dashboard': 'Dashboard',
+  '/app/claimclean/claims': 'Claims Management',
+  '/app/claimclean/claims/new': 'New Claim',
+  '/app/claimclean/audits': 'Audits',
+  '/app/claimclean/audits/console': 'AI Audit Queue',
+  '/app/claimclean/audits/field': 'Field Audits',
+  '/app/claimclean/reports': 'Reports',
+  '/app/claimclean/admin': 'Administration',
+  '/app/search': 'Search',
+  '/app/search/advanced': 'Advanced Search',
 };
 
 const AppLayout: React.FC = () => {
@@ -125,8 +133,8 @@ const AppLayout: React.FC = () => {
   const breadcrumbItems = [
     {
       title: (
-  <span onClick={() => navigate('/') } className="breadcrumb-link">
-          <HomeOutlined /> Home
+  <span onClick={() => navigate('/app/claimclean/dashboard') } className="breadcrumb-link">
+          <HomeOutlined /> ClaimClean
         </span>
       ),
     },
@@ -153,10 +161,10 @@ const AppLayout: React.FC = () => {
   const handleUserMenuClick = ({ key }: { key: string }) => {
     switch (key) {
       case 'profile':
-        navigate('/profile');
+        navigate('/app/settings');
         break;
       case 'settings':
-        navigate('/settings');
+        navigate('/app/settings');
         break;
       case 'logout':
         // Handle logout logic
@@ -172,7 +180,11 @@ const AppLayout: React.FC = () => {
       selectedKeys={[location.pathname]}
       items={menuItems}
       onClick={handleMenuClick}
-      style={{ height: '100%', borderRight: 0 }}
+      style={{
+        height: '100%',
+        borderRight: 0,
+        background: 'transparent'
+      }}
     />
   );
 
@@ -196,6 +208,7 @@ const AppLayout: React.FC = () => {
           top: 0,
           bottom: 0,
           zIndex: 100,
+          background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
         }}
         className="desktop-sidebar"
       >
@@ -205,17 +218,20 @@ const AppLayout: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            borderBottom: '1px solid #303030',
+            borderBottom: '1px solid rgba(255,255,255,0.2)',
+            background: 'rgba(255,255,255,0.1)',
+            backdropFilter: 'blur(10px)',
           }}
         >
           <Text
             style={{
-              color: '#00b96b',
+              color: 'white',
               fontWeight: 'bold',
               fontSize: sidebarCollapsed ? '16px' : '18px',
+              textShadow: '0 2px 4px rgba(0,0,0,0.3)',
             }}
           >
-            {sidebarCollapsed ? '🌱' : '🌱 WMS'}
+            {sidebarCollapsed ? '🌱' : '🌱 ClaimClean'}
           </Text>
         </div>
         {sidebarContent}
@@ -223,11 +239,21 @@ const AppLayout: React.FC = () => {
 
       {/* Mobile Drawer */}
       <Drawer
-        title="🌱 Waste Management System"
+        title="🌱 ClaimClean System"
         placement="left"
         onClose={() => dispatch(setMobileMenuOpen(false))}
         open={mobileMenuOpen}
-        bodyStyle={{ padding: 0 }}
+        styles={{
+          body: {
+            padding: 0,
+            background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)'
+          },
+          header: {
+            background: 'rgba(255,255,255,0.1)',
+            borderBottom: '1px solid rgba(255,255,255,0.2)',
+            color: 'white'
+          }
+        }}
         className="mobile-drawer"
       >
         {sidebarContent}
@@ -238,7 +264,7 @@ const AppLayout: React.FC = () => {
         <Header
           style={{
             padding: '0 16px',
-            background: '#001529',
+            background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -246,6 +272,7 @@ const AppLayout: React.FC = () => {
             top: 0,
             zIndex: 99,
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+            borderBottom: '1px solid rgba(255,255,255,0.2)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center' }}>

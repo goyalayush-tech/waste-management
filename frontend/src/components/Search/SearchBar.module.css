@@ -1,0 +1,83 @@
+.container {
+  width: 300px;
+  margin-left: 16px;
+}
+
+/* Group Headers */
+.groupHeader {
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.toolsHeader {
+  color: #1890ff;
+}
+
+.dataHeader {
+  color: #52c41a;
+}
+
+.docsHeader {
+  color: #faad14;
+}
+
+/* Search Input */
+.searchInput {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.searchPrefix {
+  color: #8c8c8c;
+}
+
+.escTag {
+  font-size: 10px;
+  line-height: 14px;
+}
+
+/* Option Icons */
+.toolIcon {
+  color: #1890ff;
+}
+
+.toolIconGreen {
+  color: #52c41a;
+}
+
+.toolIconPurple {
+  color: #722ed1;
+}
+
+.toolIconOrange {
+  color: #faad14;
+}
+
+.toolIconCyan {
+  color: #13c2c2;
+}
+
+.dataIcon {
+  color: #1890ff;
+}
+
+.dataIconRed {
+  color: #f5222d;
+}
+
+.dataIconPurple {
+  color: #722ed1;
+}
+
+.docIconGreen {
+  color: #52c41a;
+}
+
+.docIconBlue {
+  color: #1890ff;
+}
+
+.optionSecondary {
+  font-size: 12px;
+}

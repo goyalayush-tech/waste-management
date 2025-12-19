@@ -1,0 +1,142 @@
+/* AnalysisResults.module.css */
+/* Styles for the Analysis Results component */
+
+/* Main container */
+.analysisResults {
+  padding: 24px;
+}
+
+/* Classification header */
+.classificationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(135deg, #f0f5ff 0%, #e6f7ff 100%);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.classificationInfo {
+  flex: 1;
+}
+
+/* Title with no margin */
+.classificationTitle {
+  margin: 0;
+}
+
+/* Confidence indicator */
+.confidenceIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confidenceLabel {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Metrics grid */
+.metricsGrid {
+  margin-bottom: 16px;
+}
+
+.metricCard {
+  height: 100%;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.metricCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.metricContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metricIcon {
+  font-size: 24px;
+}
+
+.metricIconBlue {
+  font-size: 24px;
+  color: #1890ff;
+}
+
+.metricIconGreen {
+  font-size: 24px;
+  color: #52c41a;
+}
+
+.metricIconOrange {
+  font-size: 24px;
+  color: #faad14;
+}
+
+.metricInfo {
+  flex: 1;
+}
+
+.metricLabel {
+  display: block;
+}
+
+/* Material composition */
+.materialComposition {
+  margin-bottom: 16px;
+}
+
+.compositionBars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.compositionItem {
+  padding: 8px 0;
+}
+
+.compositionLabel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+/* Contamination section */
+.contaminationSection {
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+}
+
+.titleIcon {
+  margin-right: 8px;
+}
+
+/* Sensor contributions */
+.sensorContributions {
+  margin-bottom: 16px;
+}
+
+.sensorTag {
+  width: 100%;
+  text-align: center;
+}
+
+/* Processing recommendations */
+.processingRecommendations {
+  margin-bottom: 16px;
+}
+
+.recommendationIcon {
+  color: #52c41a;
+}

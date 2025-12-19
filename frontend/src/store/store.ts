@@ -4,6 +4,7 @@ import dashboardReducer from './slices/dashboardSlice';
 import uiReducer from './slices/uiSlice';
 import wasteAnalysisReducer from './slices/wasteAnalysisSlice';
 import contaminationReducer from './slices/contaminationSlice';
+import claimCleanReducer from './slices/claimCleanSlice';
 
 // Create placeholder reducers for existing slices
 const createPlaceholderReducer = () => (state = {}) => state;
@@ -15,7 +16,10 @@ export const store = configureStore({
     dashboard: dashboardReducer,
     ui: uiReducer,
     
-    // Existing slices
+    // Phase 1: ClaimClean slice
+    claimClean: claimCleanReducer,
+    
+    // Existing slices (preserved for future phases)
     wasteAnalysis: wasteAnalysisReducer,
     contamination: contaminationReducer,
     metaverse: createPlaceholderReducer(),
