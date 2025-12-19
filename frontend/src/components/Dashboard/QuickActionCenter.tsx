@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, Button, Row, Col, Typography, Tooltip, Modal, Form, Input, Select, Space, Tag, Divider } from 'antd';
 import {
   ExperimentOutlined,
@@ -10,7 +10,6 @@ import {
   StarOutlined,
   StarFilled,
   DeleteOutlined,
-  EditOutlined,
   PlayCircleOutlined,
   FileTextOutlined,
   DashboardOutlined,
@@ -21,7 +20,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store/store';
-import { addQuickAction, removeQuickAction, updateQuickAction, addWorkflowShortcut, removeWorkflowShortcut } from '../../store/slices/dashboardSlice';
+import { addQuickAction, updateQuickAction, addWorkflowShortcut, updateWorkflowShortcut } from '../../store/slices/dashboardSlice';
+import styles from './QuickActionCenter.module.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -61,7 +61,7 @@ const iconMap: Record<string, React.ReactNode> = {
 const QuickActionCenter: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { quickActions, workflowShortcuts, userPreferences } = useSelector((state: RootState) => state.dashboard);
+  const { quickActions, workflowShortcuts } = useSelector((state: RootState) => state.dashboard);
   
   const [customizeModalVisible, setCustomizeModalVisible] = useState(false);
   const [workflowModalVisible, setWorkflowModalVisible] = useState(false);
@@ -130,12 +130,6 @@ const QuickActionCenter: React.FC = () => {
     setCustomizeModalVisible(true);
   };
 
-  const handleEditAction = (action: any) => {
-    setEditingAction(action);
-    form.setFieldsValue(action);
-    setCustomizeModalVisible(true);
-  };
-
   const handleSaveAction = async () => {
     try {
       const values = await form.validateFields();
@@ -160,10 +154,6 @@ const QuickActionCenter: React.FC = () => {
     }
   };
 
-  const handleDeleteAction = (actionId: string) => {
-    dispatch(removeQuickAction(actionId));
-  };
-
   const handleCreateWorkflow = async () => {
     try {
       const values = await workflowForm.validateFields();
@@ -184,9 +174,9 @@ const QuickActionCenter: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '16px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-        <Title level={4} style={{ margin: 0 }}>Quick Actions</Title>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <Title level={4} className={styles.headerTitle}>Quick Actions</Title>
         <Space>
           <Button 
             icon={<PlusOutlined />} 
@@ -206,45 +196,42 @@ const QuickActionCenter: React.FC = () => {
       </div>
 
       {/* Quick Action Buttons */}
-      <Row gutter={[8, 8]} style={{ marginBottom: '24px' }}>
+      <Row gutter={[8, 8]} className={styles.actionsGrid}>
         {sortedActions.slice(0, 8).map((action) => (
           <Col key={action.id} xs={12} sm={8} md={6} lg={4} xl={3}>
             <Card
               size="small"
               hoverable
-              style={{ 
-                textAlign: 'center',
-                border: action.isPinned ? `2px solid ${action.color}` : undefined,
-                position: 'relative'
-              }}
+              className={action.isPinned ? styles.actionCardPinned : styles.actionCard}
+              style={action.isPinned ? { border: `2px solid ${action.color}` } : undefined}
               bodyStyle={{ padding: '12px 8px' }}
               onClick={() => handleActionClick(action)}
             >
-              <div style={{ position: 'absolute', top: 4, right: 4 }}>
+              <div className={styles.pinButton}>
                 <Button
                   type="text"
                   size="small"
-                  icon={action.isPinned ? <StarFilled style={{ color: '#faad14' }} /> : <StarOutlined />}
+                  icon={action.isPinned ? <StarFilled className={styles.pinnedStar} /> : <StarOutlined />}
                   onClick={(e) => {
                     e.stopPropagation();
-                    handlePinAction(action.id, action.isPinned);
+                    handlePinAction(action.id, action.isPinned || false);
                   }}
                 />
               </div>
               
-              <div style={{ fontSize: '24px', color: action.color, marginBottom: '8px' }}>
+              <div className={styles.actionIcon} style={{ color: action.color }}>
                 {iconMap[action.icon] || <DashboardOutlined />}
               </div>
               
               <Tooltip title={action.description}>
-                <Text strong style={{ fontSize: '12px', display: 'block' }}>
+                <Text strong className={styles.actionLabel}>
                   {action.label}
                 </Text>
               </Tooltip>
               
-              {action.usageCount > 0 && (
-                <Tag size="small" style={{ marginTop: '4px', fontSize: '10px' }}>
-                  {action.usageCount} uses
+              {action.usageCount && action.usageCount > 0 && (
+                <Tag>
+                  {(action.usageCount || 0) + ' uses'}
                 </Tag>
               )}
             </Card>
@@ -256,8 +243,8 @@ const QuickActionCenter: React.FC = () => {
       {sortedWorkflows.length > 0 && (
         <>
           <Divider />
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <Title level={4} style={{ margin: 0 }}>Workflow Shortcuts</Title>
+          <div className={styles.workflowHeader}>
+            <Title level={4} className={styles.workflowTitle}>Workflow Shortcuts</Title>
             <Text type="secondary">Multi-step guided processes</Text>
           </div>
 
@@ -267,10 +254,7 @@ const QuickActionCenter: React.FC = () => {
                 <Card
                   size="small"
                   hoverable
-                  style={{ 
-                    border: workflow.isPinned ? '2px solid #1890ff' : undefined,
-                    position: 'relative'
-                  }}
+                  className={workflow.isPinned ? styles.workflowCardPinned : styles.workflowCard}
                   actions={[
                     <Button 
                       type="primary" 
@@ -282,11 +266,11 @@ const QuickActionCenter: React.FC = () => {
                     </Button>
                   ]}
                 >
-                  <div style={{ position: 'absolute', top: 8, right: 8 }}>
+                  <div className={styles.workflowPinButton}>
                     <Button
                       type="text"
                       size="small"
-                      icon={workflow.isPinned ? <StarFilled style={{ color: '#faad14' }} /> : <StarOutlined />}
+                      icon={workflow.isPinned ? <StarFilled className={styles.pinnedStar} /> : <StarOutlined />}
                       onClick={(e) => {
                         e.stopPropagation();
                         handlePinWorkflow(workflow.id, workflow.isPinned);
@@ -294,11 +278,11 @@ const QuickActionCenter: React.FC = () => {
                     />
                   </div>
                   
-                  <Title level={5} style={{ marginBottom: '8px' }}>
+                  <Title level={5} className={styles.workflowName}>
                     {workflow.name}
                   </Title>
                   
-                  <Text type="secondary" style={{ fontSize: '12px', display: 'block', marginBottom: '8px' }}>
+                  <Text type="secondary" className={styles.workflowDescription}>
                     {workflow.description}
                   </Text>
                   
@@ -309,8 +293,8 @@ const QuickActionCenter: React.FC = () => {
                   </Space>
                   
                   {workflow.usageCount > 0 && (
-                    <div style={{ marginTop: '8px' }}>
-                      <Text type="secondary" style={{ fontSize: '11px' }}>
+                    <div className={styles.workflowUsage}>
+                      <Text type="secondary" className={styles.workflowUsageText}>
                         Used {workflow.usageCount} times
                       </Text>
                     </div>

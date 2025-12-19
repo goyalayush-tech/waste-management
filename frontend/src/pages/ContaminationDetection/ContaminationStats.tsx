@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Card, Row, Col, Statistic, Progress, Typography, Table, Tag } from 'antd';
+import { Card, Row, Col, Statistic, Typography, Table, Tag } from 'antd';
 import { 
   WarningOutlined, 
   CheckCircleOutlined, 
@@ -9,9 +9,8 @@ import {
 } from '@ant-design/icons';
 import { RootState } from '../../store/store';
 import { ContaminationType, ContaminationSeverity } from '../../store/slices/contaminationSlice';
-import { PieChart, Pie, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ResponsiveContainer } from 'recharts';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 const ContaminationStats: React.FC = () => {
   const { detectionHistory, flaggedBatches } = useSelector((state: RootState) => state.contamination);
@@ -23,7 +22,6 @@ const ContaminationStats: React.FC = () => {
   
   const remediatedBatches = flaggedBatches.filter(batch => batch.status === 'remediated').length;
   const pendingBatches = flaggedBatches.filter(batch => batch.status === 'pending').length;
-  const rejectedBatches = flaggedBatches.filter(batch => batch.status === 'rejected').length;
   
   // Calculate contamination types distribution
   const contaminationTypesCount: Record<string, number> = {};
@@ -34,66 +32,7 @@ const ContaminationStats: React.FC = () => {
       });
     }
   });
-  
-  const contaminationTypesData = Object.entries(contaminationTypesCount).map(([type, count]) => ({
-    name: type.replace(/_/g, ' '),
-    value: count
-  }));
-  
-  // Calculate severity distribution
-  const severityCount: Record<string, number> = {
-    'None': 0,
-    'Low': 0,
-    'Medium': 0,
-    'High': 0,
-    'Critical': 0
-  };
-  
-  detectionHistory.forEach(result => {
-    if (result.contaminationDetected) {
-      switch (result.severityLevel) {
-        case ContaminationSeverity.NONE:
-          severityCount['None']++;
-          break;
-        case ContaminationSeverity.LOW:
-          severityCount['Low']++;
-          break;
-        case ContaminationSeverity.MEDIUM:
-          severityCount['Medium']++;
-          break;
-        case ContaminationSeverity.HIGH:
-          severityCount['High']++;
-          break;
-        case ContaminationSeverity.CRITICAL:
-          severityCount['Critical']++;
-          break;
-      }
-    }
-  });
-  
-  const severityData = Object.entries(severityCount).map(([severity, count]) => ({
-    name: severity,
-    value: count
-  }));
-  
-  // Economic impact over time
-  const economicImpactData = detectionHistory
-    .filter(result => result.contaminationDetected)
-    .map((result, index) => ({
-      name: `Detection ${index + 1}`,
-      impact: result.economicImpact
-    }));
-  
-  // Colors for charts
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
-  const SEVERITY_COLORS = {
-    'None': '#52c41a',
-    'Low': '#1890ff',
-    'Medium': '#faad14',
-    'High': '#f5222d',
-    'Critical': '#722ed1'
-  };
-  
+
   return (
     <div className="contamination-stats">
       <Row gutter={[16, 16]}>
@@ -142,51 +81,17 @@ const ContaminationStats: React.FC = () => {
       <Row gutter={[16, 16]} style={{ marginTop: '16px' }}>
         <Col span={12}>
           <Card title="Contamination Types Distribution">
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={contaminationTypesData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                >
-                  {contaminationTypesData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(value) => [`${value} detections`, 'Count']} />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
+            <div style={{ width: '100%', height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5', border: '1px dashed #d9d9d9' }}>
+              <Text>Contamination Types Distribution Chart</Text>
+            </div>
           </Card>
         </Col>
         
         <Col span={12}>
           <Card title="Contamination Severity Distribution">
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={severityData.filter(item => item.value > 0)}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                >
-                  {severityData.map((entry) => (
-                    <Cell key={`cell-${entry.name}`} fill={SEVERITY_COLORS[entry.name as keyof typeof SEVERITY_COLORS]} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(value) => [`${value} detections`, 'Count']} />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
+            <div style={{ width: '100%', height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5', border: '1px dashed #d9d9d9' }}>
+              <Text>Contamination Severity Distribution Chart</Text>
+            </div>
           </Card>
         </Col>
       </Row>
@@ -194,24 +99,9 @@ const ContaminationStats: React.FC = () => {
       <Row gutter={[16, 16]} style={{ marginTop: '16px' }}>
         <Col span={24}>
           <Card title="Economic Impact Over Time">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart
-                data={economicImpactData}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip formatter={(value) => [`$${value}`, 'Economic Impact']} />
-                <Legend />
-                <Bar dataKey="impact" fill="#8884d8" name="Economic Impact ($)" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div style={{ width: '100%', height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5', border: '1px dashed #d9d9d9' }}>
+              <Text>Economic Impact Over Time Chart</Text>
+            </div>
           </Card>
         </Col>
       </Row>

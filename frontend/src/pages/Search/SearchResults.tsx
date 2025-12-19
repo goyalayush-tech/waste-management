@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { 
   Card, 
-  Input, 
   List, 
   Typography, 
   Space, 
@@ -10,11 +9,9 @@ import {
   Button, 
   Row, 
   Col, 
-  Divider,
   Empty,
   Pagination,
-  Select,
-  Checkbox
+  Select
 } from 'antd';
 import {
   SearchOutlined,
@@ -26,6 +23,7 @@ import {
   FilterOutlined
 } from '@ant-design/icons';
 import { LoadingSpinner, ErrorDisplay } from '../../components/Shared';
+import styles from './SearchResults.module.css';
 
 const { Title, Text, Paragraph } = Typography;
 const { Option } = Select;
@@ -177,15 +175,15 @@ const SearchResults: React.FC = () => {
   const getResultIcon = (type: string) => {
     switch (type) {
       case 'tool':
-        return <ToolOutlined style={{ color: '#1890ff' }} />;
+        return <ToolOutlined className={styles.resultIconTool} />;
       case 'data':
-        return <DatabaseOutlined style={{ color: '#52c41a' }} />;
+        return <DatabaseOutlined className={styles.resultIconData} />;
       case 'documentation':
-        return <FileTextOutlined style={{ color: '#faad14' }} />;
+        return <FileTextOutlined className={styles.resultIconDoc} />;
       case 'user':
-        return <UserOutlined style={{ color: '#722ed1' }} />;
+        return <UserOutlined className={styles.resultIconUser} />;
       default:
-        return <FileTextOutlined style={{ color: '#d9d9d9' }} />;
+        return <FileTextOutlined className={styles.resultIconDefault} />;
     }
   };
 
@@ -217,7 +215,7 @@ const SearchResults: React.FC = () => {
     
     return parts.map((part, index) => 
       regex.test(part) ? (
-        <mark key={index} style={{ backgroundColor: '#fff2b8', padding: '0 2px' }}>
+        <mark key={index} className={styles.highlight}>
           {part}
         </mark>
       ) : part
@@ -225,8 +223,8 @@ const SearchResults: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px', maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '24px' }}>
+    <div className={styles.searchResultsPage}>
+      <div className={styles.header}>
         <Title level={2}>
           <SearchOutlined /> Search Results
         </Title>
@@ -238,7 +236,7 @@ const SearchResults: React.FC = () => {
       </div>
 
       {/* Search Filters */}
-      <Card style={{ marginBottom: '24px' }}>
+      <Card className={styles.filtersCard}>
         <Row gutter={16} align="middle">
           <Col span={4}>
             <Space>
@@ -250,7 +248,7 @@ const SearchResults: React.FC = () => {
             <Select
               value={category}
               onChange={(value) => handleFilterChange('category', value)}
-              style={{ width: '100%' }}
+              className={styles.fullWidth}
             >
               <Option value="all">All Categories</Option>
               <Option value="tool">Tools</Option>
@@ -264,7 +262,7 @@ const SearchResults: React.FC = () => {
             <Select
               value={sortBy}
               onChange={(value) => handleFilterChange('sort', value)}
-              style={{ width: '100%' }}
+              className={styles.fullWidth}
             >
               <Option value="relevance">Relevance</Option>
               <Option value="date">Date</Option>
@@ -278,7 +276,7 @@ const SearchResults: React.FC = () => {
                 setPageSize(value);
                 handleFilterChange('size', value.toString());
               }}
-              style={{ width: '100%' }}
+              className={styles.fullWidth}
             >
               <Option value={10}>10 per page</Option>
               <Option value={20}>20 per page</Option>
@@ -288,8 +286,8 @@ const SearchResults: React.FC = () => {
           <Col span={5}>
             <Button
               type="default"
-              onClick={() => navigate('/search/advanced')}
-              style={{ width: '100%' }}
+              onClick={() => navigate('/app/search/advanced')}
+              className={styles.fullWidth}
             >
               Advanced Search
             </Button>
@@ -311,7 +309,7 @@ const SearchResults: React.FC = () => {
         <Empty
           description={
             <div>
-              <div style={{ fontSize: '16px', marginBottom: '8px' }}>
+              <div className={styles.emptyContainer}>
                 No results found
               </div>
               <Text type="secondary">
@@ -325,30 +323,30 @@ const SearchResults: React.FC = () => {
           <List
             dataSource={results}
             renderItem={(result) => (
-              <List.Item style={{ padding: '16px 0' }}>
+              <List.Item className={styles.listItem}>
                 <Card
                   hoverable
-                  style={{ width: '100%', cursor: 'pointer' }}
+                  className={styles.resultCard}
                   onClick={() => handleResultClick(result)}
                 >
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                    <div style={{ fontSize: '24px', marginTop: '4px' }}>
+                  <div className={styles.resultContent}>
+                    <div className={styles.iconContainer}>
                       {getResultIcon(result.type)}
                     </div>
                     
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div className={styles.resultDetails}>
+                      <div className={styles.resultHeader}>
                         <div>
-                          <Title level={4} style={{ margin: '0 0 8px 0' }}>
+                          <Title level={4} className={styles.resultTitle}>
                             {highlightText(result.title, query)}
                           </Title>
-                          <Text type="secondary" style={{ fontSize: '12px' }}>
+                          <Text type="secondary" className={styles.resultCategory}>
                             {result.category} • {result.type.toUpperCase()}
                           </Text>
                         </div>
                         
-                        <div style={{ textAlign: 'right' }}>
-                          <div style={{ fontSize: '12px', color: '#8c8c8c', marginBottom: '4px' }}>
+                        <div className={styles.resultMeta}>
+                          <div className={styles.resultDate}>
                             <ClockCircleOutlined /> {result.lastUpdated.toLocaleDateString()}
                           </div>
                           <Tag color="blue">
@@ -357,23 +355,23 @@ const SearchResults: React.FC = () => {
                         </div>
                       </div>
                       
-                      <Paragraph style={{ margin: '8px 0', color: '#666' }}>
+                      <Paragraph className={styles.resultDescription}>
                         {highlightText(result.description, query)}
                       </Paragraph>
                       
                       {result.preview && (
                         <Paragraph 
                           ellipsis={{ rows: 2 }} 
-                          style={{ margin: '8px 0', fontSize: '14px', color: '#8c8c8c' }}
+                          className={styles.resultPreview}
                         >
                           {highlightText(result.preview, query)}
                         </Paragraph>
                       )}
                       
                       {result.tags && (
-                        <div style={{ marginTop: '12px' }}>
+                        <div className={styles.tagsContainer}>
                           {result.tags.map(tag => (
-                            <Tag key={tag} size="small">
+                            <Tag key={tag}>
                               {highlightText(tag, query)}
                             </Tag>
                           ))}
@@ -387,7 +385,7 @@ const SearchResults: React.FC = () => {
           />
           
           {/* Pagination */}
-          <div style={{ textAlign: 'center', marginTop: '24px' }}>
+          <div className={styles.paginationContainer}>
             <Pagination
               current={currentPage}
               total={totalResults}

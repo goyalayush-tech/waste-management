@@ -1,295 +1,356 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { 
-  Upload, 
-  message, 
-  Tabs, 
-  Row, 
-  Col, 
-  Statistic, 
-  Alert, 
-  Space, 
-  Typography, 
-  Tag
+import {
+  Row,
+  Col,
+  Alert,
+  Space,
+  Typography,
+  Card as AntCard,
+  Tabs
 } from 'antd';
-import Card from '../../components/Shared/Card';
-import Button from '../../components/Shared/Button';
-import LoadingSpinner from '../../components/Shared/LoadingSpinner';
-import ErrorBoundary from '../../components/Shared/ErrorBoundary';
-import { RESPONSIVE_CONFIGS } from '../../utils/responsive';
+import { Button, ErrorBoundary } from '../../components/Shared';
 import '../shared-styles.css';
-import { 
-  UploadOutlined, 
-  ScanOutlined, 
-  SettingOutlined, 
-  LineChartOutlined,
+import styles from './WasteAnalysis.module.css';
+
+const { Title, Text, Paragraph } = Typography;
+import {
+  UploadOutlined,
+  ScanOutlined,
   ExperimentOutlined,
+  CameraOutlined,
+  BarChartOutlined,
+  SyncOutlined,
+  TrophyOutlined,
   ThunderboltOutlined
 } from '@ant-design/icons';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
-import { RootState } from '../../store/store';
-import { 
-  analyzeWasteMultiModal, 
-  calibrateSensors, 
-  getRealTimeData
-} from '../../store/slices/wasteAnalysisSlice';
 import SensorCalibration from './SensorCalibration';
-import AnalysisResults from './AnalysisResults';
-import RealTimeMonitoring from './RealTimeMonitoring';
 import AnalysisHistory from './AnalysisHistory';
 
-const { Title, Text } = Typography;
-const { TabPane } = Tabs;
-
 const WasteAnalysis: React.FC = () => {
-  const dispatch = useDispatch();
-  const { 
-    currentAnalysis, 
-    loading, 
-    error, 
-    calibrationStatus, 
-    realTimeData
-  } = useSelector((state: RootState) => state.wasteAnalysis);
-  
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState('analysis');
-  const [analysisMode, setAnalysisMode] = useState<'single' | 'multi'>('single');
-  
-  useEffect(() => {
-    // Fetch real-time data every 5 seconds
-    const interval = setInterval(() => {
-      dispatch(getRealTimeData() as any);
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, [dispatch]);
-  
-  const uploadProps: UploadProps = {
-    onRemove: (file) => {
-      const index = fileList.indexOf(file);
-      const newFileList = fileList.slice();
-      newFileList.splice(index, 1);
-      setFileList(newFileList);
-      setImagePreview(null);
-    },
-    beforeUpload: (file) => {
-      if (!file.type.startsWith('image/')) {
-        message.error('You can only upload image files!');
-        return Upload.LIST_IGNORE;
-      }
-      
-      const reader = new FileReader();
-      reader.readAsDataURL(file as RcFile);
-      reader.onload = () => {
-        setImagePreview(reader.result as string);
-      };
-      
-      setFileList([file]);
-      return false;
-    },
-    fileList,
-    maxCount: 1,
-  };
-  
-  const handleAnalysis = async () => {
-    if (!imagePreview) {
-      message.error('Please upload an image first');
-      return;
-    }
-    
-    try {
-      await dispatch(analyzeWasteMultiModal({
-        visualData: imagePreview.split(',')[1], // Remove data URL prefix
-        // Add other sensor data if available
-      }) as any);
-      
-      message.success('Analysis completed successfully!');
-    } catch (err) {
-      console.error('Error during analysis:', err);
-    }
-  };
-  
-  const handleCalibration = async () => {
-    try {
-      await dispatch(calibrateSensors(['visual_1', 'spectral_1', 'weight_1', 'chemical_1']) as any);
-      message.success('Sensor calibration completed!');
-    } catch (err) {
-      console.error('Error during calibration:', err);
-    }
-  };
-  
-  const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.9) return '#52c41a';
-    if (confidence >= 0.7) return '#faad14';
-    return '#f5222d';
-  };
-  
-  return (
-    <ErrorBoundary>
-      <div className="waste-analysis-page tool-page">
-      <div className="page-header">
-        <Title level={2}>Multi-Modal Waste Analysis System</Title>
-        <Text type="secondary">
-          Advanced AI-powered waste classification with 98%+ accuracy using sensor fusion
-        </Text>
-      </div>
-      
-      {/* Real-time metrics */}
-      <Row gutter={[16, 16]} className="metrics-row" style={{ marginBottom: '24px' }}>
-        <Col {...RESPONSIVE_CONFIGS.metrics}>
-          <Card variant="shadow" interactive>
-            <Statistic
-              title="System Efficiency"
-              value={realTimeData.efficiency}
-              suffix="%"
-              valueStyle={{ color: '#3f8600' }}
-              prefix={<ThunderboltOutlined />}
-            />
-          </Card>
-        </Col>
-        <Col {...RESPONSIVE_CONFIGS.metrics}>
-          <Card variant="shadow" interactive>
-            <Statistic
-              title="Throughput"
-              value={realTimeData.throughput}
-              suffix="items/hr"
-              prefix={<LineChartOutlined />}
-            />
-          </Card>
-        </Col>
-        <Col {...RESPONSIVE_CONFIGS.metrics}>
-          <Card variant="shadow" interactive>
-            <Statistic
-              title="Quality Score"
-              value={realTimeData.qualityScore}
-              suffix="/100"
-              valueStyle={{ color: getConfidenceColor(realTimeData.qualityScore / 100) }}
-              prefix={<ExperimentOutlined />}
-            />
-          </Card>
-        </Col>
-        <Col {...RESPONSIVE_CONFIGS.metrics}>
-          <Card variant="shadow" interactive>
-            <Statistic
-              title="Energy Usage"
-              value={realTimeData.energyConsumption}
-              suffix="kWh"
-              prefix={<SettingOutlined />}
-            />
-          </Card>
-        </Col>
-      </Row>
-      
-      <Tabs activeKey={activeTab} onChange={setActiveTab} className="tool-tabs">
-        <TabPane tab="Analysis" key="analysis">
-          <Row gutter={[24, 24]}>
-            <Col {...RESPONSIVE_CONFIGS.content}>
-              <Card title="Upload Waste Sample" className="upload-card" variant="bordered">
-                <div className="analysis-mode-selector" style={{ marginBottom: '16px' }}>
-                  <Space>
-                    <Text strong>Analysis Mode:</Text>
-                    <Button 
-                      type={analysisMode === 'single' ? 'primary' : 'default'}
-                      onClick={() => setAnalysisMode('single')}
-                    >
-                      Single Modal
-                    </Button>
-                    <Button 
-                      type={analysisMode === 'multi' ? 'primary' : 'default'}
-                      onClick={() => setAnalysisMode('multi')}
-                    >
-                      Multi-Modal
-                    </Button>
-                  </Space>
-                </div>
-                
-                <Upload {...uploadProps} listType="picture">
-                  <Button icon={<UploadOutlined />}>Select Image</Button>
-                </Upload>
-                
-                {imagePreview && (
-                  <div className="image-preview">
-                    <img src={imagePreview} alt="Preview" style={{ maxWidth: '100%', marginTop: 16 }} />
-                  </div>
-                )}
-                
-                <div className="action-section">
-                  <div className="action-buttons">
-                    <Button 
-                      variant="primary" 
-                      icon={<ScanOutlined />} 
-                      onClick={handleAnalysis} 
-                      loading={loading}
-                      disabled={!imagePreview}
-                    >
-                      Analyze Waste
-                    </Button>
-                    <Button 
-                      variant="secondary"
-                      icon={<SettingOutlined />} 
-                      onClick={handleCalibration}
-                    >
-                      Calibrate Sensors
-                    </Button>
-                  </div>
-                </div>
-                
-                {/* Calibration Status */}
-                <div className="sensor-status">
-                  <Text strong>Sensor Status:</Text>
-                  <div style={{ marginTop: '8px' }}>
-                    {Object.entries(calibrationStatus).map(([sensorId, status]) => (
-                      <Tag 
-                        key={sensorId} 
-                        color={status === 'calibrated' ? 'green' : 'orange'}
-                        className="status-tag"
-                      >
-                        {sensorId}: {String(status)}
-                      </Tag>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            </Col>
-            
-            <Col {...RESPONSIVE_CONFIGS.content}>
-              <Card title="Analysis Results" className="results-card" variant="bordered">
-                {loading ? (
-                  <LoadingSpinner 
-                    size="large" 
-                    text="Processing multi-modal sensor data..."
-                    style={{ minHeight: '200px' }}
-                  />
-                ) : error ? (
-                  <Alert message="Analysis Error" description={error} type="error" showIcon />
-                ) : currentAnalysis ? (
-                  <AnalysisResults analysis={currentAnalysis} />
-                ) : (
-                  <div className="no-results" style={{ textAlign: 'center', padding: '40px' }}>
-                    <ExperimentOutlined style={{ fontSize: 48, color: '#1890ff' }} />
-                    <div style={{ marginTop: '16px' }}>
-                      <Text>Upload a waste sample and start analysis</Text>
-                    </div>
-                  </div>
-                )}
-              </Card>
+
+  const tabItems = [
+    {
+      label: (
+        <span>
+          <UploadOutlined />
+          Quick Analysis
+        </span>
+      ),
+      key: '1',
+      children: (
+        <div className={styles.tabContent}>
+          <Title level={4} className={styles.tabTitle}>
+            Upload Your Waste Sample
+          </Title>
+          <Row justify="center">
+            <Col xs={24} md={16} lg={12}>
+              <AntCard className={styles.uploadCard}>
+                <UploadOutlined className={styles.uploadIcon} />
+                <Title level={5}>Drag & Drop or Click to Upload</Title>
+                <Text type="secondary">
+                  Supported formats: JPG, PNG, JPEG (Max: 10MB)
+                </Text>
+                <br />
+                <Button
+                  type="primary"
+                  icon={<UploadOutlined />}
+                  size="large"
+                  className={styles.uploadButton}
+                >
+                  Choose File
+                </Button>
+              </AntCard>
             </Col>
           </Row>
-        </TabPane>
-        
-        <TabPane tab="Real-time Monitoring" key="monitoring">
-          <RealTimeMonitoring />
-        </TabPane>
-        
-        <TabPane tab="Sensor Calibration" key="calibration">
+        </div>
+      )
+    },
+    {
+      label: (
+        <span>
+          <ScanOutlined />
+          Live Camera
+        </span>
+      ),
+      key: '2',
+      children: (
+        <div className={styles.tabContent}>
+          <Title level={4} className={styles.tabTitle}>
+            Real-Time Camera Analysis
+          </Title>
+          <Row justify="center">
+            <Col xs={24} md={16} lg={12}>
+              <AntCard className={styles.cameraCard}>
+                <ScanOutlined className={styles.cameraIcon} />
+                <Title level={5}>Camera Access Required</Title>
+                <Text type="secondary" className={styles.cameraDescription}>
+                  Allow camera access for real-time waste analysis
+                </Text>
+                <Button
+                  type="primary"
+                  icon={<ScanOutlined />}
+                  size="large"
+                  className={styles.cameraButton}
+                >
+                  Enable Camera
+                </Button>
+              </AntCard>
+            </Col>
+          </Row>
+        </div>
+      )
+    },
+    {
+      label: (
+        <span>
+          <ExperimentOutlined />
+          Sensor Calibration
+        </span>
+      ),
+      key: '3',
+      children: (
+        <div className={styles.tabContent}>
           <SensorCalibration />
-        </TabPane>
-        
-        <TabPane tab="Analysis History" key="history">
+        </div>
+      )
+    },
+    {
+      label: (
+        <span>
+          <BarChartOutlined />
+          Analysis History
+        </span>
+      ),
+      key: '4',
+      children: (
+        <div className={styles.tabContent}>
           <AnalysisHistory />
-        </TabPane>
-      </Tabs>
+        </div>
+      )
+    }
+  ];
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Update time every second for live clock
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <ErrorBoundary>
+      <div className={styles.mainContainer}>
+        {/* Animated Background Elements */}
+        <div className={styles.bgBubble1} />
+        <div className={styles.bgBubble2} />
+
+        {/* Hero Section */}
+        <div className={styles.heroSection}>
+          <div className={styles.heroCard}>
+            {/* Live Time Display */}
+            <div className={styles.timeDisplay}>
+              {currentTime.toLocaleDateString()} • {currentTime.toLocaleTimeString()}
+            </div>
+
+            <Title level={1} className={styles.heroTitle}>
+              🔬 AI Waste Analysis
+            </Title>
+
+            <Title level={3} className={styles.heroSubtitle}>
+              Multi-Modal • Real-Time • 98% Accuracy
+            </Title>
+
+            <Paragraph className={styles.heroDescription}>
+              Advanced AI-powered waste classification using visual, spectral, weight, and chemical sensors.
+              Upload samples for instant analysis and real-time processing optimization.
+            </Paragraph>
+
+            <Space size="large">
+              <div className={styles.primaryButtonWrapper}>
+                <Button
+                  type="primary"
+                  size="large"
+                  icon={<CameraOutlined />}
+                  className={styles.primaryButton}
+                >
+                  Upload Sample
+                </Button>
+              </div>
+              <Button
+                size="large"
+                icon={<BarChartOutlined />}
+                className={styles.secondaryButton}
+              >
+                View Analytics
+              </Button>
+            </Space>
+
+            {/* Key Stats */}
+            <Row gutter={[32, 24]} justify="center" className={styles.statsRow}>
+              <Col xs={12} sm={6}>
+                <div className={styles.statItem}>
+                  <div className={styles.statValueGreen}>98.2%</div>
+                  <div className={styles.statLabel}>Accuracy Rate</div>
+                </div>
+              </Col>
+              <Col xs={12} sm={6}>
+                <div className={styles.statItem}>
+                  <div className={styles.statValueBlue}>1,247</div>
+                  <div className={styles.statLabel}>Samples Today</div>
+                </div>
+              </Col>
+              <Col xs={12} sm={6}>
+                <div className={styles.statItem}>
+                  <div className={styles.statValueOrange}>4</div>
+                  <div className={styles.statLabel}>Modal Sensors</div>
+                </div>
+              </Col>
+              <Col xs={12} sm={6}>
+                <div className={styles.statItem}>
+                  <div className={styles.statValuePink}><SyncOutlined spin /></div>
+                  <div className={styles.statLabel}>Real-Time</div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </div>
+
+        {/* System Status Alert */}
+        <div className={styles.sectionContainer}>
+          <Alert
+            message={<span className={styles.alertTitle}>🔬 Analysis System Active</span>}
+            description="Multi-modal sensors calibrated, AI models loaded, real-time processing enabled."
+            type="success"
+            showIcon
+            className={styles.alertCard}
+          />
+        </div>
+
+        {/* Analysis Tools */}
+        <div className={styles.sectionContainerLarge}>
+          <div className={styles.sectionHeader}>
+            <Title level={2} className={styles.sectionTitle}>
+              🛠️ Analysis Tools
+            </Title>
+            <Paragraph className={styles.sectionSubtitle}>
+              Choose your analysis method and upload samples for instant AI-powered classification
+            </Paragraph>
+          </div>
+
+          <Row gutter={[20, 20]}>
+            <Col xs={24} sm={12} lg={6}>
+              <AntCard className={styles.toolCard}>
+                <UploadOutlined className={styles.toolIconBlue} />
+                <Title level={4} className={styles.toolTitle}>Image Upload</Title>
+                <Text className={styles.toolDescription}>
+                  Upload waste images for visual analysis
+                </Text>
+                <Button
+                  type="primary"
+                  icon={<UploadOutlined />}
+                  className={styles.toolButtonBlue}
+                >
+                  Upload Image
+                </Button>
+              </AntCard>
+            </Col>
+
+            <Col xs={24} sm={12} lg={6}>
+              <AntCard className={styles.toolCard}>
+                <ScanOutlined className={styles.toolIconGreen} />
+                <Title level={4} className={styles.toolTitle}>Live Scan</Title>
+                <Text className={styles.toolDescription}>
+                  Real-time camera analysis
+                </Text>
+                <Button
+                  type="primary"
+                  icon={<ScanOutlined />}
+                  className={styles.toolButtonGreen}
+                >
+                  Start Scan
+                </Button>
+              </AntCard>
+            </Col>
+
+            <Col xs={24} sm={12} lg={6}>
+              <AntCard className={styles.toolCard}>
+                <ExperimentOutlined className={styles.toolIconOrange} />
+                <Title level={4} className={styles.toolTitle}>Multi-Modal</Title>
+                <Text className={styles.toolDescription}>
+                  Combined sensor analysis
+                </Text>
+                <Button
+                  type="primary"
+                  icon={<ExperimentOutlined />}
+                  className={styles.toolButtonOrange}
+                >
+                  Full Analysis
+                </Button>
+              </AntCard>
+            </Col>
+
+            <Col xs={24} sm={12} lg={6}>
+              <AntCard className={styles.toolCard}>
+                <BarChartOutlined className={styles.toolIconPurple} />
+                <Title level={4} className={styles.toolTitle}>Analytics</Title>
+                <Text className={styles.toolDescription}>
+                  View analysis history and trends
+                </Text>
+                <Button
+                  type="primary"
+                  icon={<BarChartOutlined />}
+                  className={styles.toolButtonPurple}
+                >
+                  View Analytics
+                </Button>
+              </AntCard>
+            </Col>
+          </Row>
+        </div>
+
+        {/* Analysis Tabs */}
+        <div className={styles.sectionContainerXl}>
+          <AntCard className={styles.tabsCard}>
+            <Tabs items={tabItems} defaultActiveKey="1" size="large" />
+          </AntCard>
+        </div>
+
+        {/* Footer */}
+        <div className={styles.footer}>
+          <div className={styles.footerContent}>
+            <Title level={4} className={styles.footerTitle}>
+              🔬 Advanced AI Analysis
+            </Title>
+            <Paragraph className={styles.footerDescription}>
+              Powered by multi-modal sensors and cutting-edge machine learning algorithms
+            </Paragraph>
+            <Space size="large">
+              <Button
+                type="text"
+                className={styles.footerButton}
+                icon={<TrophyOutlined />}
+              >
+                98% Accuracy
+              </Button>
+              <Button
+                type="text"
+                className={styles.footerButton}
+                icon={<ThunderboltOutlined />}
+              >
+                Real-Time Processing
+              </Button>
+              <Button
+                type="text"
+                className={styles.footerButton}
+                icon={<ExperimentOutlined />}
+              >
+                Multi-Modal Analysis
+              </Button>
+            </Space>
+          </div>
+        </div>
       </div>
     </ErrorBoundary>
   );

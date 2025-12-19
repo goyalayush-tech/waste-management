@@ -1,0 +1,54 @@
+/* AnalysisHistory.module.css */
+/* Styles for the Analysis History component */
+
+/* Main container */
+.analysisHistory {
+  padding: 24px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+}
+
+/* Header section */
+.historyHeader {
+  margin-bottom: 24px;
+}
+
+/* Summary statistics row */
+.summaryRow {
+  margin-bottom: 24px;
+}
+
+/* Statistics card */
+.statCard {
+  height: 100%;
+  border-radius: 8px;
+}
+
+/* Confidence value colors */
+.confidenceHigh {
+  color: green !important;
+}
+
+.confidenceMedium {
+  color: orange !important;
+}
+
+.confidenceLow {
+  color: red !important;
+}
+
+/* Filters card */
+.filtersCard {
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+/* Full width select/picker */
+.fullWidth {
+  width: 100%;
+}
+
+/* Results card */
+.resultsCard {
+  border-radius: 8px;
+}

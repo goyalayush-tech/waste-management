@@ -1,0 +1,241 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.loadingContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.errorContent {
+  text-align: center;
+}
+
+.errorIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.errorTitle {
+  color: white !important;
+}
+
+.errorText {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Floating Circles Animation */
+.floatingCircle1 {
+  position: absolute;
+  top: 15%;
+  left: 8%;
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floatingCircle2 {
+  position: absolute;
+  top: 60%;
+  right: 10%;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.floatingCircle3 {
+  position: absolute;
+  bottom: 20%;
+  left: 15%;
+  width: 90px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  animation: float 10s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.content {
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.contentWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.headerSection {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.headerTitle {
+  color: white !important;
+  margin-bottom: 16px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.headerIcon {
+  margin-right: 12px;
+}
+
+.headerSubtitle {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 18px !important;
+  margin-bottom: 32px !important;
+}
+
+.statsSection {
+  margin-bottom: 40px;
+}
+
+.statLabel {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Action Buttons */
+.actionsSection {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.createButton {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  height: 48px;
+  font-size: 16px;
+  padding: 0 24px;
+}
+
+.createButtonLink {
+  color: white;
+}
+
+.createButtonLink:hover {
+  color: white;
+}
+
+.auditorButton {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  height: 48px;
+  font-size: 16px;
+  padding: 0 24px;
+}
+
+.auditorButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.auditorButtonLink {
+  color: white;
+}
+
+.auditorButtonLink:hover {
+  color: white;
+}
+
+/* Claim Cards */
+.claimCard {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.claimCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cardContent {
+  padding: 20px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.statusTag {
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.cardTitle {
+  margin-bottom: 12px !important;
+  color: #1e3c72 !important;
+}
+
+.cardField {
+  margin-bottom: 12px;
+}
+
+.cardDate {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.emptyIcon {
+  font-size: 48px;
+  color: #d1d5db;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  color: #6b7280 !important;
+  margin-bottom: 8px !important;
+}
+
+.emptyText {
+  color: #9ca3af;
+}

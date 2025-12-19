@@ -1,0 +1,62 @@
+/* SensorCalibration.module.css */
+/* Styles for the Sensor Calibration component */
+
+/* Main container */
+.sensorCalibration {
+  padding: 24px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+}
+
+/* Header section */
+.calibrationHeader {
+  margin-bottom: 24px;
+}
+
+/* Actions section */
+.calibrationActions {
+  margin-bottom: 24px;
+}
+
+/* Sensor card */
+.sensorCard {
+  height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.sensorCard:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Calibration steps */
+.calibrationSteps {
+  margin-top: 16px;
+}
+
+.stepsList {
+  margin-top: 8px;
+  padding-left: 20px;
+}
+
+/* Alert spacing */
+.alertSpacing {
+  margin-top: 16px;
+}
+
+/* Calibration progress modal */
+.calibrationProgress {
+  padding: 16px 0;
+}
+
+.progressCircle {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Progress complete alert */
+.progressCompleteAlert {
+  margin-top: 16px;
+}

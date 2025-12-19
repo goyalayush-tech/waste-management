@@ -10,6 +10,7 @@ import {
   CloseOutlined,
   LinkOutlined
 } from '@ant-design/icons';
+import styles from './HelpPanel.module.css';
 
 const { Title, Text, Paragraph } = Typography;
 const { Panel } = Collapse;
@@ -169,15 +170,16 @@ const HelpPanel: React.FC<HelpPanelProps> = ({
           onClick={onClose}
         />
       }
+      className={styles.drawer}
     >
       {/* Search and Filters */}
-      <div style={{ marginBottom: '16px' }}>
+      <div className={styles.searchSection}>
         <Input
           placeholder="Search help articles..."
           prefix={<SearchOutlined />}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ marginBottom: '12px' }}
+          className={styles.searchInput}
         />
         
         <Space wrap>
@@ -185,7 +187,7 @@ const HelpPanel: React.FC<HelpPanelProps> = ({
             <Tag
               key={category}
               color={selectedCategory === category ? 'blue' : 'default'}
-              style={{ cursor: 'pointer' }}
+              className={styles.categoryTag}
               onClick={() => setSelectedCategory(category)}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -196,20 +198,20 @@ const HelpPanel: React.FC<HelpPanelProps> = ({
 
       {/* Context-specific help */}
       {context !== 'general' && (
-        <Card size="small" style={{ marginBottom: '16px', backgroundColor: '#f6ffed' }}>
+        <Card size="small" className={styles.contextCard}>
           <Space>
-            <BulbOutlined style={{ color: '#52c41a' }} />
+            <BulbOutlined className={styles.contextIcon} />
             <Text strong>Context Help: {context}</Text>
           </Space>
-          <Paragraph style={{ margin: '8px 0 0 0', fontSize: '12px' }}>
+          <Paragraph className={styles.contextDescription}>
             Showing help relevant to your current page. Use the search above to find more topics.
           </Paragraph>
         </Card>
       )}
 
       {/* Quick Actions */}
-      <div style={{ marginBottom: '16px' }}>
-        <Space direction="vertical" style={{ width: '100%' }}>
+      <div className={styles.quickActions}>
+        <Space direction="vertical" className={styles.actionButtons}>
           <Button
             type="primary"
             icon={<MessageOutlined />}
@@ -236,7 +238,7 @@ const HelpPanel: React.FC<HelpPanelProps> = ({
       <Divider />
 
       {/* FAQ Section */}
-      <div style={{ marginBottom: '24px' }}>
+      <div className={styles.faqSection}>
         <Title level={4}>Frequently Asked Questions</Title>
         <Collapse size="small" ghost>
           {faqItems.map((faq, index) => (
@@ -250,23 +252,20 @@ const HelpPanel: React.FC<HelpPanelProps> = ({
       <Divider />
 
       {/* Help Articles */}
-      <div>
+      <div className={styles.articlesSection}>
         <Title level={4}>Help Articles ({filteredItems.length})</Title>
         <List
           dataSource={filteredItems}
           renderItem={(item) => (
             <List.Item
-              style={{ 
-                cursor: item.url ? 'pointer' : 'default',
-                padding: '12px 0',
-              }}
+              className={`${styles.articleItem} ${item.url ? styles.clickableItem : ''}`}
               onClick={() => handleItemClick(item)}
             >
               <List.Item.Meta
                 avatar={getItemIcon(item)}
                 title={
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Text strong style={{ fontSize: '14px' }}>
+                  <div className={styles.articleTitle}>
+                    <Text strong className={styles.articleTitleText}>
                       {item.title}
                     </Text>
                     {item.difficulty && (
@@ -277,10 +276,10 @@ const HelpPanel: React.FC<HelpPanelProps> = ({
                   </div>
                 }
                 description={
-                  <div>
+                  <div className={styles.articleDescription}>
                     <Paragraph
                       ellipsis={{ rows: 2 }}
-                      style={{ margin: '4px 0 8px 0', fontSize: '12px', color: '#666' }}
+                      className={styles.articleContent}
                     >
                       {item.content}
                     </Paragraph>
@@ -300,9 +299,9 @@ const HelpPanel: React.FC<HelpPanelProps> = ({
       </div>
 
       {filteredItems.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>
-          <QuestionCircleOutlined style={{ fontSize: '48px', marginBottom: '16px' }} />
-          <div>No help articles found</div>
+        <div className={styles.emptyState}>
+          <QuestionCircleOutlined className={styles.emptyIcon} />
+          <div className={styles.emptyText}>No help articles found</div>
           <Text type="secondary">Try adjusting your search terms</Text>
         </div>
       )}

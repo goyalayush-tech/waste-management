@@ -23,6 +23,7 @@
     "test:backend": "cd backend && npm test",
     "test:blockchain": "cd blockchain && npm test",
     "test:ai": "cd ai-services && python -m pytest",
+    "test:e2e": "cd frontend && npm run test:e2e",
     "build": "npm run build:frontend",
     "build:frontend": "cd frontend && npm run build",
     "lint": "npm run lint:frontend && npm run lint:backend",

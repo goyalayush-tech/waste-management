@@ -1,6 +1,7 @@
 import multer from 'multer';
 import sharp from 'sharp';
-import AWS from 'aws-sdk';
+import { S3Client, PutObjectCommand, GetObjectCommand, HeadBucketCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { create as createIPFS } from 'ipfs-http-client';
 import crypto from 'crypto';
 import path from 'path';
@@ -16,11 +17,25 @@ class FileUploadService {
   }
 
   initializeAWS() {
-    this.s3 = new AWS.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      region: process.env.AWS_REGION || 'us-east-1'
-    });
+    const region = process.env.AWS_REGION || 'us-east-1';
+    const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+    
+    // Initialize S3 client with v3 SDK
+    if (accessKeyId && secretAccessKey) {
+      this.s3Client = new S3Client({
+        region,
+        credentials: {
+          accessKeyId,
+          secretAccessKey
+        }
+      });
+      this.s3Enabled = true;
+    } else {
+      console.warn('AWS credentials not configured. S3 uploads will be disabled.');
+      this.s3Enabled = false;
+    }
+    
     this.bucketName = process.env.AWS_S3_BUCKET || 'waste-verification-documents';
   }
 
@@ -219,6 +234,10 @@ class FileUploadService {
   // Upload to AWS S3 for EPR documents with encryption
   async uploadToS3(buffer, filename, metadata = {}) {
     try {
+      if (!this.s3Enabled) {
+        throw new Error('S3 is not configured. Please set AWS credentials in environment variables.');
+      }
+
       const fileHash = crypto.createHash('sha256').update(buffer).digest('hex');
       const key = `documents/${Date.now()}-${fileHash}-${filename}`;
 
@@ -236,11 +255,13 @@ class FileUploadService {
         }
       };
 
-      const result = await this.s3.upload(uploadParams).promise();
+      const command = new PutObjectCommand(uploadParams);
+      const result = await this.s3Client.send(command);
+      const s3Url = `https://${this.bucketName}.s3.${process.env.AWS_REGION || 'us-east-1'}.amazonaws.com/${key}`;
 
       return {
         s3Key: key,
-        s3Url: result.Location,
+        s3Url,
         fileHash,
         etag: result.ETag,
         metadata: {
@@ -260,13 +281,16 @@ class FileUploadService {
   // Generate secure download URL for S3 objects
   async generateSecureDownloadUrl(s3Key, expiresIn = 3600) {
     try {
-      const params = {
-        Bucket: this.bucketName,
-        Key: s3Key,
-        Expires: expiresIn
-      };
+      if (!this.s3Enabled) {
+        throw new Error('S3 is not configured.');
+      }
 
-      const url = await this.s3.getSignedUrlPromise('getObject', params);
+      const command = new GetObjectCommand({
+        Bucket: this.bucketName,
+        Key: s3Key
+      });
+
+      const url = await getSignedUrl(this.s3Client, command, { expiresIn });
       return url;
     } catch (error) {
       throw new Error(`Failed to generate download URL: ${error.message}`);

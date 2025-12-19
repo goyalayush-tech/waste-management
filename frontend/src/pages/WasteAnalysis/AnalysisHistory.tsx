@@ -26,6 +26,7 @@ import {
 import { RootState } from '../../store/store';
 import { WasteAnalysisResult } from '../../store/slices/wasteAnalysisSlice';
 import AnalysisResults from './AnalysisResults';
+import styles from './AnalysisHistory.module.css';
 
 const { Title, Text } = Typography;
 const { RangePicker } = DatePicker;
@@ -47,6 +48,12 @@ const AnalysisHistory: React.FC = () => {
     if (confidence >= 0.9) return 'green';
     if (confidence >= 0.7) return 'orange';
     return 'red';
+  };
+  
+  const getConfidenceClassName = (confidence: number) => {
+    if (confidence >= 0.9) return styles.confidenceHigh;
+    if (confidence >= 0.7) return styles.confidenceMedium;
+    return styles.confidenceLow;
   };
   
   const getConfidenceText = (confidence: number) => {
@@ -167,8 +174,8 @@ const AnalysisHistory: React.FC = () => {
     filteredHistory.reduce((sum, a) => sum + a.qualityScore, 0) / totalAnalyses : 0;
   
   return (
-    <div className="analysis-history">
-      <div className="history-header">
+    <div className={styles.analysisHistory}>
+      <div className={styles.historyHeader}>
         <Title level={3}>Analysis History</Title>
         <Text type="secondary">
           View and analyze historical waste classification results
@@ -176,7 +183,7 @@ const AnalysisHistory: React.FC = () => {
       </div>
       
       {/* Summary Statistics */}
-      <Row gutter={16} style={{ marginBottom: '24px' }}>
+      <Row gutter={16} className={styles.summaryRow}>
         <Col span={6}>
           <Card>
             <Statistic
@@ -193,7 +200,7 @@ const AnalysisHistory: React.FC = () => {
               value={avgConfidence * 100}
               suffix="%"
               precision={1}
-              valueStyle={{ color: getConfidenceColor(avgConfidence) }}
+              className={getConfidenceClassName(avgConfidence)}
             />
           </Card>
         </Col>
@@ -220,7 +227,7 @@ const AnalysisHistory: React.FC = () => {
       </Row>
       
       {/* Filters */}
-      <Card title="Filters" style={{ marginBottom: '16px' }}>
+      <Card title="Filters" className={styles.filtersCard}>
         <Row gutter={16}>
           <Col span={6}>
             <Input
@@ -233,7 +240,7 @@ const AnalysisHistory: React.FC = () => {
           <Col span={6}>
             <Select
               placeholder="Filter by classification"
-              style={{ width: '100%' }}
+              className={styles.fullWidth}
               value={filters.classification}
               onChange={(value) => setFilters({ ...filters, classification: value })}
               allowClear
@@ -248,7 +255,7 @@ const AnalysisHistory: React.FC = () => {
           <Col span={6}>
             <Select
               placeholder="Confidence range"
-              style={{ width: '100%' }}
+              className={styles.fullWidth}
               value={filters.confidenceRange}
               onChange={(value) => setFilters({ ...filters, confidenceRange: value })}
               allowClear
@@ -260,7 +267,7 @@ const AnalysisHistory: React.FC = () => {
           </Col>
           <Col span={6}>
             <RangePicker
-              style={{ width: '100%' }}
+              className={styles.fullWidth}
               onChange={(dates) => setFilters({ ...filters, dateRange: dates })}
             />
           </Col>

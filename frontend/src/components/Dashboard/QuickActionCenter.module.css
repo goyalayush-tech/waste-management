@@ -1,0 +1,102 @@
+.container {
+  padding: 16px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.headerTitle {
+  margin: 0 !important;
+}
+
+/* Action Cards Grid */
+.actionsGrid {
+  margin-bottom: 24px;
+}
+
+/* Action Card */
+.actionCard {
+  text-align: center;
+  position: relative;
+}
+
+.actionCardPinned {
+  text-align: center;
+  position: relative;
+}
+
+.pinButton {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.pinnedStar {
+  color: #faad14;
+}
+
+.actionIcon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.actionLabel {
+  font-size: 12px;
+  display: block;
+}
+
+.usageTag {
+  margin-top: 4px;
+  font-size: 10px;
+}
+
+/* Workflow Section */
+.workflowHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.workflowTitle {
+  margin: 0 !important;
+}
+
+/* Workflow Card */
+.workflowCard {
+  position: relative;
+}
+
+.workflowCardPinned {
+  position: relative;
+  border: 2px solid #1890ff;
+}
+
+.workflowPinButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.workflowName {
+  margin-bottom: 8px !important;
+}
+
+.workflowDescription {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.workflowUsage {
+  margin-top: 8px;
+}
+
+.workflowUsageText {
+  font-size: 11px;
+}

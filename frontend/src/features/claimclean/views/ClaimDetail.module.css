@@ -1,0 +1,311 @@
+/* ClaimDetail Component Styles */
+
+/* Container */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating circles animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.floatingCircle1 {
+  position: absolute;
+  top: 12%;
+  left: 6%;
+  width: 220px;
+  height: 220px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floatingCircle2 {
+  position: absolute;
+  top: 65%;
+  right: 7%;
+  width: 160px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.floatingCircle3 {
+  position: absolute;
+  bottom: 18%;
+  left: 18%;
+  width: 110px;
+  height: 110px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  animation: float 10s ease-in-out infinite;
+}
+
+/* Loading state */
+.loadingContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Error state */
+.errorContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.errorContent {
+  text-align: center;
+}
+
+.errorIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.errorTitle {
+  color: white !important;
+}
+
+.errorText {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Main content */
+.mainContent {
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.maxWidthContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.headerSection {
+  margin-bottom: 40px;
+}
+
+.backButton {
+  color: white !important;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.backButtonLink {
+  color: white;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.headerTitle {
+  color: white !important;
+  margin-bottom: 8px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.headerSubtext {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+}
+
+.statusWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.statusTag {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+/* Cards */
+.card {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.cardContent {
+  padding: 20px;
+}
+
+.cardTitle {
+  margin-bottom: 20px !important;
+  color: #1e3c72 !important;
+}
+
+/* Audit score */
+.scoreContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.scoreValue {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.scoreValueGreen {
+  color: #10b981;
+}
+
+.scoreValueYellow {
+  color: #f59e0b;
+}
+
+.scoreValueRed {
+  color: #ef4444;
+}
+
+.scoreLabel {
+  color: #6b7280;
+}
+
+/* Issues list */
+.issuesTitle {
+  margin-bottom: 12px !important;
+  color: #1e3c72 !important;
+}
+
+.issueItem {
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.issueContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.issueIcon {
+  margin-top: 2px;
+}
+
+.issueMessage {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* No issues state */
+.noIssuesContainer {
+  text-align: center;
+  padding: 20px;
+}
+
+.noIssuesIcon {
+  font-size: 32px;
+  color: #10b981;
+  margin-bottom: 8px;
+}
+
+.noIssuesText {
+  color: #10b981;
+}
+
+/* Empty state */
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  color: #d1d5db;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  color: #6b7280 !important;
+  margin-bottom: 8px !important;
+}
+
+.emptyText {
+  color: #9ca3af;
+}
+
+/* Report viewer */
+.reportContainer {
+  background: #1f2937;
+  border-radius: 8px;
+  padding: 20px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.reportCode {
+  color: #10b981;
+  font-size: 14px;
+  font-family: monospace;
+  margin: 0;
+}
+
+/* Task list */
+.taskItem {
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.taskContent {
+  width: 100%;
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.taskTitle {
+  color: #1e3c72;
+}
+
+.taskScore {
+  margin-bottom: 8px;
+}
+
+.taskIssuesHeader {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.taskIssueItem {
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.01);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.taskIssueText {
+  font-size: 12px;
+}

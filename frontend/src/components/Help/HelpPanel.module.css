@@ -1,0 +1,129 @@
+.drawer {
+  width: 450px;
+}
+
+/* Search and Filters */
+.searchSection {
+  margin-bottom: 16px;
+}
+
+.searchInput {
+  margin-bottom: 12px;
+}
+
+.filterTags {
+  margin-bottom: 8px;
+}
+
+/* Context Help */
+.contextCard {
+  margin-bottom: 16px;
+  background-color: #f6ffed;
+}
+
+.contextIcon {
+  color: #52c41a;
+}
+
+/* Quick Actions */
+.quickActions {
+  margin-bottom: 16px;
+}
+
+.chatButton {
+  margin-bottom: 8px;
+}
+
+/* FAQ Section */
+.faqSection {
+  margin-bottom: 24px;
+}
+
+.faqTitle {
+  margin-bottom: 16px !important;
+}
+
+/* Help Articles */
+.articlesSection {
+  margin-bottom: 16px;
+}
+
+.articlesTitle {
+  margin-bottom: 16px !important;
+}
+
+.articleItem {
+  cursor: pointer;
+  padding: 12px 0;
+}
+
+.articleItemNoUrl {
+  cursor: default;
+}
+
+.articleMeta {
+  margin-bottom: 8px;
+}
+
+.articleTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.articleDifficulty {
+  margin-left: 8px;
+}
+
+.articleDescription {
+  margin: 4px 0 8px 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.articleTags {
+  margin-top: 8px;
+}
+
+/* Icons */
+.videoIcon {
+  color: #f5222d;
+}
+
+.linkIcon {
+  color: #1890ff;
+}
+
+.bookIcon {
+  color: #52c41a;
+}
+
+/* Difficulty Tags */
+.beginnerTag {
+  color: green;
+}
+
+.intermediateTag {
+  color: orange;
+}
+
+.advancedTag {
+  color: red;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.emptyText {
+  margin-bottom: 8px;
+}

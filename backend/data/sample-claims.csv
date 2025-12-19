@@ -1,0 +1,26 @@
+brand_id,recycler_id,facility_id,period_from,period_to,weight_kg,status,plastic_type,score
+HUL India,EcoCycle Mumbai,fac-mum-01,2024-11-01,2024-11-30,12500,verified,PET,85
+Nestlé India,GreenLoop Bengaluru,fac-blr-02,2024-11-01,2024-11-30,8300,verified,HDPE,78
+PepsiCo India,Rx-204 Delhi,fac-del-03,2024-11-01,2024-11-30,15200,submitted,mixed,
+Coca-Cola India,CleanEarth Chennai,fac-chn-04,2024-11-01,2024-11-30,9800,verified,PET,92
+P&G India,RecycleMax Pune,fac-pun-05,2024-11-01,2024-11-30,7600,auditing,LDPE,65
+ITC Limited,GreenWave Kolkata,fac-kol-06,2024-11-01,2024-11-30,11200,verified,PP,81
+Dabur India,EcoProcess Ahmedabad,fac-ahm-07,2024-11-01,2024-11-30,6500,submitted,mixed,
+Marico Limited,PlastiCycle Hyderabad,fac-hyd-08,2024-11-01,2024-11-30,8900,verified,PET,88
+Britannia Industries,ReNew Jaipur,fac-jai-09,2024-11-01,2024-11-30,5400,rejected,HDPE,42
+Godrej Consumer,CircularPlas Lucknow,fac-luk-10,2024-11-01,2024-11-30,7100,verified,PVC,76
+HUL India,GreenLoop Bengaluru,fac-blr-02,2024-12-01,2024-12-31,14200,submitted,PET,
+Nestlé India,EcoCycle Mumbai,fac-mum-01,2024-12-01,2024-12-31,9500,auditing,HDPE,71
+PepsiCo India,CleanEarth Chennai,fac-chn-04,2024-12-01,2024-12-31,18300,verified,mixed,83
+Coca-Cola India,RecycleMax Pune,fac-pun-05,2024-12-01,2024-12-31,12100,verified,PET,89
+P&G India,EcoProcess Ahmedabad,fac-ahm-07,2024-12-01,2024-12-31,8200,submitted,LDPE,
+Parle Products,PlastiCycle Hyderabad,fac-hyd-08,2024-10-01,2024-10-31,6800,verified,PP,79
+Amul,ReNew Jaipur,fac-jai-09,2024-10-01,2024-10-31,4200,verified,HDPE,84
+Haldiram's,CircularPlas Lucknow,fac-luk-10,2024-10-01,2024-10-31,5600,verified,mixed,77
+Tata Consumer,EcoCycle Mumbai,fac-mum-01,2024-10-01,2024-10-31,9100,auditing,PET,68
+Hindustan Zinc,GreenLoop Bengaluru,fac-blr-02,2024-10-01,2024-10-31,3800,submitted,HDPE,
+Asian Paints,Rx-204 Delhi,fac-del-03,2024-09-01,2024-09-30,7200,verified,mixed,86
+Berger Paints,CleanEarth Chennai,fac-chn-04,2024-09-01,2024-09-30,4500,verified,PVC,82
+Pidilite Industries,GreenWave Kolkata,fac-kol-06,2024-09-01,2024-09-30,6100,rejected,LDPE,38
+Emami Limited,RecycleMax Pune,fac-pun-05,2024-09-01,2024-09-30,5300,verified,PP,91
+Bajaj Consumer,EcoProcess Ahmedabad,fac-ahm-07,2024-09-01,2024-09-30,4800,verified,PET,75

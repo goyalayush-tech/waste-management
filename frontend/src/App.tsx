@@ -5,6 +5,7 @@ import { store } from './store/store';
 import AppRouter from './routes';
 import { ErrorBoundary } from './components/Shared';
 import { OnboardingProvider } from './components/Onboarding';
+import { AuthProvider } from './hooks/useAuth';
 import { registerSW } from './utils/serviceWorker';
 import { configureApiClients } from './services/api';
 import ApiStatus from './components/Debug/ApiStatus';
@@ -59,23 +60,34 @@ const App: React.FC = () => {
   try {
     return (
       <Provider store={store}>
-        <ConfigProvider
-          theme={{
-            algorithm: theme.darkAlgorithm,
-            token: {
-              colorPrimary: '#00b96b',
-              colorBgBase: '#141414',
-              colorTextBase: '#ffffff',
-            },
-          }}
-        >
-          <ErrorBoundary showDetails={process.env.NODE_ENV === 'development'}>
-            <OnboardingProvider>
-              <AppRouter />
-              {process.env.NODE_ENV === 'development' && <ApiStatus />}
-            </OnboardingProvider>
-          </ErrorBoundary>
-        </ConfigProvider>
+        <AuthProvider>
+          <ConfigProvider
+            theme={{
+              algorithm: theme.defaultAlgorithm,
+              token: {
+                colorPrimary: '#1B5E20', // Forest Green (ClaimClean primary)
+                colorSuccess: '#16A34A', // Success green
+                colorWarning: '#F59E0B', // Amber for warnings
+                colorError: '#EF4444', // Critical red
+                colorInfo: '#0284C7', // Info blue
+                colorBgBase: '#ffffff',
+                colorTextBase: '#000000',
+                colorBgContainer: '#ffffff',
+                colorBgElevated: '#ffffff',
+                colorBorder: '#d9d9d9',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                borderRadius: 8,
+              },
+            }}
+          >
+            <ErrorBoundary showDetails={process.env.NODE_ENV === 'development'}>
+              <OnboardingProvider>
+                <AppRouter />
+                {process.env.NODE_ENV === 'development' && <ApiStatus />}
+              </OnboardingProvider>
+            </ErrorBoundary>
+          </ConfigProvider>
+        </AuthProvider>
       </Provider>
     );
   } catch (error) {

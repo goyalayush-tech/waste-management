@@ -1,8 +1,8 @@
 {
   "meta": {
-    "generatedAt": "2025-08-18T11:53:04.868Z",
-    "root": "c:\\Users\\Ayush\\delhi-waste-management",
-    "filesCount": 264
+    "generatedAt": "2025-08-24T11:15:29.998Z",
+    "root": "D:\\GitHub\\delhi-waste-management",
+    "filesCount": 331
   },
   "index": [
     {
@@ -58,7 +58,7 @@
     {
       "file": ".kiro/specs/user-interface-landing-page/tasks.md",
       "ext": ".md",
-      "size": 14114
+      "size": 14132
     },
     {
       "file": ".kiro/specs/waste-verification-mvp/design.md",
@@ -76,9 +76,18 @@
       "size": 14752
     },
     {
+      "file": "ai-services/conftest.py",
+      "ext": ".py",
+      "size": 198,
+      "imports": [
+        "sys\r\nimport os"
+      ],
+      "symbols": []
+    },
+    {
       "file": "ai-services/contamination_detection.py",
       "ext": ".py",
-      "size": 63247,
+      "size": 63246,
       "imports": [
         "cv2\r\nimport numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
         "Sequential\r\nfrom tensorflow.keras.layers import Dense",
@@ -91,7 +100,7 @@
         "Tuple",
         "Optional",
         "Any\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime\r\nfrom dataclasses import dataclass\r\nfrom enum import Enum\r\nimport pickle",
-        ".multi_modal_sensor_fusion",
+        "multi_modal_sensor_fusion",
         "asyncio\r\n    \r\n    async def test_contamination_detection"
       ],
       "symbols": [
@@ -114,19 +123,24 @@
         {
           "type": "class",
           "name": "ContaminationDetector"
+        },
+        {
+          "type": "class",
+          "name": "ContaminationBatchProcessor"
         }
       ]
     },
     {
       "file": "ai-services/dynamic_parameter_optimization.py",
       "ext": ".py",
-      "size": 60346,
+      "size": 60099,
       "imports": [
-        "numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
+        "cv2\r\nimport numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
         "Sequential\r\nfrom tensorflow.keras.layers import Dense",
         "LSTM",
         "Dropout",
-        "BatchNormalization\r\nfrom tensorflow.keras.optimizers import Adam\r\nimport logging\r\nfrom typing import Dict",
+        "BatchNormalization\r\nfrom tensorflow.keras.optimizers import Adam\r\nfrom tensorflow.keras.callbacks import EarlyStopping",
+        "ReduceLROnPlateau\r\nimport logging\r\nfrom typing import Dict",
         "List",
         "Tuple",
         "Optional",
@@ -135,8 +149,6 @@
         "timedelta\r\nfrom dataclasses import dataclass",
         "field\r\nfrom enum import Enum\r\nimport pickle\r\nfrom scipy.optimize import minimize",
         "differential_evolution\r\nfrom sklearn.ensemble import RandomForestRegressor\r\nfrom sklearn.preprocessing import StandardScaler\r\nimport os\r\nimport time\r\nimport threading\r\nimport queue\r\nimport warnings",
-        ".multi_modal_sensor_fusion",
-        ".rare_material_detection",
         "multi_modal_sensor_fusion"
       ],
       "symbols": [
@@ -247,7 +259,7 @@
     {
       "file": "ai-services/enhanced_ai_ml_system.py",
       "ext": ".py",
-      "size": 23040,
+      "size": 23036,
       "imports": [
         "asyncio\r\nimport logging\r\nfrom typing import Dict",
         "List",
@@ -363,20 +375,19 @@
     {
       "file": "ai-services/multi_modal_sensor_fusion.py",
       "ext": ".py",
-      "size": 38750,
+      "size": 38747,
       "imports": [
-        "numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model\r\nfrom tensorflow.keras.layers import Dense",
+        "cv2\r\nimport numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model\r\nfrom tensorflow.keras.layers import Dense",
         "Concatenate",
         "Input",
         "Dropout",
         "BatchNormalization\r\nfrom tensorflow.keras.optimizers import Adam\r\nfrom tensorflow.keras.callbacks import EarlyStopping",
-        "ReduceLROnPlateau\r\nimport cv2\r\nfrom PIL import Image\r\nimport logging\r\nfrom typing import Dict",
+        "ReduceLROnPlateau\r\nfrom PIL import Image\r\nimport logging\r\nfrom typing import Dict",
         "List",
         "Tuple",
         "Optional",
         "Any\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime\r\nimport io\r\nfrom dataclasses import dataclass\r\nfrom enum import Enum\r\nimport pickle",
-        ".waste_classification_ai",
-        ".image_processing",
+        "waste_classification_ai",
         "asyncio\r\n    \r\n    async def test_fusion"
       ],
       "symbols": [
@@ -443,7 +454,7 @@
     {
       "file": "ai-services/rare_material_api.py",
       "ext": ".py",
-      "size": 14630,
+      "size": 14795,
       "imports": [
         "asyncio\r\nimport json\r\nimport logging\r\nimport base64\r\nfrom typing import Dict",
         "List",
@@ -453,7 +464,8 @@
         "Body",
         "File",
         "UploadFile\r\nfrom fastapi.responses import JSONResponse\r\nfrom pydantic import BaseModel",
-        ".multi_modal_sensor_fusion"
+        "multi_modal_sensor_fusion",
+        "multi_modal_sensor_fusion"
       ],
       "symbols": [
         {
@@ -481,9 +493,9 @@
     {
       "file": "ai-services/rare_material_detection.py",
       "ext": ".py",
-      "size": 70377,
+      "size": 69899,
       "imports": [
-        "numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
+        "cv2\r\nimport numpy as np\r\nimport tensorflow as tf\r\nfrom tensorflow.keras.models import Model",
         "Sequential\r\nfrom tensorflow.keras.layers import Dense",
         "Conv2D",
         "MaxPooling2D",
@@ -491,12 +503,15 @@
         "Dropout",
         "BatchNormalization",
         "LSTM",
-        "Attention\r\nfrom tensorflow.keras.optimizers import Adam\r\nimport cv2\r\nimport logging\r\nfrom typing import Dict",
+        "Attention\r\nfrom tensorflow.keras.optimizers import Adam\r\nfrom tensorflow.keras.callbacks import EarlyStopping",
+        "ReduceLROnPlateau\r\nimport logging\r\nfrom typing import Dict",
         "List",
         "Tuple",
         "Optional",
-        "Any\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime\r\nfrom dataclasses import dataclass\r\nfrom enum import Enum\r\nimport pickle\r\nimport requests",
-        ".multi_modal_sensor_fusion",
+        "Any\r\nimport asyncio\r\nimport json\r\nfrom datetime import datetime",
+        "timedelta\r\nfrom dataclasses import dataclass",
+        "field\r\nfrom enum import Enum\r\nimport pickle\r\nimport requests",
+        "multi_modal_sensor_fusion",
         "asyncio\r\n    \r\n    async def test_rare_material_detection"
       ],
       "symbols": [
@@ -527,6 +542,14 @@
         {
           "type": "class",
           "name": "RareMaterialDetector"
+        },
+        {
+          "type": "def",
+          "name": "_generate_notification_message"
+        },
+        {
+          "type": "def",
+          "name": "_create_test_material"
         }
       ]
     },
@@ -538,14 +561,14 @@
     {
       "file": "ai-services/tests/test_contamination_detection.py",
       "ext": ".py",
-      "size": 25277,
+      "size": 25273,
       "imports": [
         "pytest\r\nimport numpy as np\r\nimport asyncio\r\nfrom unittest.mock import Mock",
         "patch",
         "AsyncMock\r\nimport tempfile\r\nimport os\r\nfrom typing import List",
         "Dict",
         "Any",
-        "..contamination_detection",
+        "contamination_detection",
         "time",
         "..contamination_detection",
         "..contamination_detection"
@@ -604,7 +627,7 @@
     {
       "file": "ai-services/tests/test_multi_modal_fusion.py",
       "ext": ".py",
-      "size": 19822,
+      "size": 19820,
       "imports": [
         "pytest\r\nimport numpy as np\r\nimport asyncio\r\nfrom unittest.mock import Mock",
         "patch",
@@ -632,12 +655,12 @@
     {
       "file": "ai-services/tests/test_rare_material_detection.py",
       "ext": ".py",
-      "size": 39675,
+      "size": 39746,
       "imports": [
         "pytest\r\nimport numpy as np\r\nimport asyncio\r\nfrom unittest.mock import Mock",
         "patch",
         "AsyncMock\r\nfrom datetime import datetime\r\nimport json\r\nimport cv2",
-        "..multi_modal_sensor_fusion"
+        "multi_modal_sensor_fusion"
       ],
       "symbols": [
         {
@@ -657,6 +680,13 @@
           "name": "TestIntegrationWorkflow"
         }
       ]
+    },
+    {
+      "file": "ai-services/tests/__init__.py",
+      "ext": ".py",
+      "size": 94,
+      "imports": [],
+      "symbols": []
     },
     {
       "file": "ai-services/test_contamination_simple.py",
@@ -760,6 +790,22 @@
           "name": "WasteClassificationAI"
         }
       ]
+    },
+    {
+      "file": "ai-services/__init__.py",
+      "ext": ".py",
+      "size": 188,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "ai_services/__init__.py",
+      "ext": ".py",
+      "size": 1614,
+      "imports": [
+        "importlib.util\r\nimport importlib.machinery\r\nimport sys\r\nimport os\r\nfrom types import ModuleType\r\n\r\nROOT"
+      ],
+      "symbols": []
     },
     {
       "file": "backend/.eslintrc.json",
@@ -1339,6 +1385,13 @@
       ]
     },
     {
+      "file": "backend/babel.config.cjs",
+      "ext": ".cjs",
+      "size": 145,
+      "imports": [],
+      "symbols": []
+    },
+    {
       "file": "backend/config.py",
       "ext": ".py",
       "size": 4823,
@@ -1372,7 +1425,7 @@
     {
       "file": "backend/jest.config.js",
       "ext": ".js",
-      "size": 382,
+      "size": 456,
       "imports": [],
       "symbols": []
     },
@@ -1382,6 +1435,15 @@
       "size": 652
     },
     {
+      "file": "backend/mongodb-schemas.js",
+      "ext": ".js",
+      "size": 4544,
+      "imports": [
+        "mongoose"
+      ],
+      "symbols": []
+    },
+    {
       "file": "backend/package-lock.json",
       "ext": ".json",
       "size": 490933
@@ -1389,12 +1451,17 @@
     {
       "file": "backend/package.json",
       "ext": ".json",
-      "size": 2006
+      "size": 2145
+    },
+    {
+      "file": "backend/postgres-schema.sql",
+      "ext": ".sql",
+      "size": 2598
     },
     {
       "file": "backend/src/config/database.js",
       "ext": ".js",
-      "size": 5062,
+      "size": 3532,
       "imports": [
         "mongoose",
         "sequelize",
@@ -1633,9 +1700,39 @@
       "symbols": []
     },
     {
+      "file": "backend/src/routes/admin.js",
+      "ext": ".js",
+      "size": 6090,
+      "imports": [
+        "express",
+        "uuid"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/ai.js",
+      "ext": ".js",
+      "size": 9927,
+      "imports": [
+        "express",
+        "uuid"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/audit.js",
+      "ext": ".js",
+      "size": 1703,
+      "imports": [
+        "express",
+        "uuid"
+      ],
+      "symbols": []
+    },
+    {
       "file": "backend/src/routes/auth.js",
       "ext": ".js",
-      "size": 12326,
+      "size": 12366,
       "imports": [
         "express",
         "bcryptjs",
@@ -1647,14 +1744,150 @@
       "symbols": []
     },
     {
+      "file": "backend/src/routes/authStub.js",
+      "ext": ".js",
+      "size": 9047,
+      "imports": [
+        "express",
+        "jsonwebtoken"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "authenticateToken",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/routes/billing.js",
+      "ext": ".js",
+      "size": 1595,
+      "imports": [
+        "express",
+        "uuid"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/clients.js",
+      "ext": ".js",
+      "size": 2134,
+      "imports": [
+        "express"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/compliance.js",
+      "ext": ".js",
+      "size": 2215,
+      "imports": [
+        "express"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/digitalTwins.js",
+      "ext": ".js",
+      "size": 9410,
+      "imports": [
+        "express",
+        "uuid"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/documents.js",
+      "ext": ".js",
+      "size": 7789,
+      "imports": [
+        "express",
+        "multer",
+        "uuid",
+        "path",
+        "fs/promises"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "scanFileForViruses",
+          "exported": false
+        }
+      ]
+    },
+    {
       "file": "backend/src/routes/fileUpload.js",
       "ext": ".js",
-      "size": 8362,
+      "size": 8378,
       "imports": [
         "express",
         "../services/fileUploadService.js",
         "../middleware/auth.js",
         "joi"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/health.js",
+      "ext": ".js",
+      "size": 4947,
+      "imports": [
+        "express",
+        "mongoose",
+        "../config/database.js",
+        "fs",
+        "path"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/ocr.js",
+      "ext": ".js",
+      "size": 6792,
+      "imports": [
+        "express",
+        "uuid"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "const",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "const",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "backend/src/routes/quantum.js",
+      "ext": ".js",
+      "size": 966,
+      "imports": [
+        "express"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/recyclers.js",
+      "ext": ".js",
+      "size": 2184,
+      "imports": [
+        "express",
+        "uuid"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "backend/src/routes/reports.js",
+      "ext": ".js",
+      "size": 1338,
+      "imports": [
+        "express",
+        "uuid"
       ],
       "symbols": []
     },
@@ -1684,6 +1917,16 @@
       "symbols": []
     },
     {
+      "file": "backend/src/scripts/check_postgres.js",
+      "ext": ".js",
+      "size": 578,
+      "imports": [
+        "sequelize",
+        "../config/database.js"
+      ],
+      "symbols": []
+    },
+    {
       "file": "backend/src/scripts/migrate.js",
       "ext": ".js",
       "size": 6355,
@@ -1697,7 +1940,7 @@
     {
       "file": "backend/src/server.js",
       "ext": ".js",
-      "size": 4562,
+      "size": 6550,
       "imports": [
         "express",
         "cors",
@@ -1705,14 +1948,29 @@
         "express-rate-limit",
         "dotenv",
         "mongoose",
+        "./config/database.js",
         "http",
         "socket.io",
         "./routes/auth.js",
         "./routes/users.js",
         "./routes/subscriptions.js",
         "./routes/fileUpload.js",
+        "./routes/documents.js",
+        "./routes/ocr.js",
+        "./routes/health.js",
+        "./routes/ai.js",
+        "./routes/authStub.js",
+        "./routes/audit.js",
+        "./routes/recyclers.js",
+        "./routes/compliance.js",
+        "./routes/clients.js",
+        "./routes/billing.js",
+        "./routes/reports.js",
         "./middleware/errorHandler.js",
-        "./middleware/requestLogger.js"
+        "./middleware/requestLogger.js",
+        "./routes/digitalTwins.js",
+        "./routes/quantum.js",
+        "./routes/admin.js"
       ],
       "symbols": []
     },
@@ -1764,6 +2022,41 @@
       ]
     },
     {
+      "file": "backend/src/services/ocrService.js",
+      "ext": ".js",
+      "size": 5067,
+      "imports": [
+        "uuid"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "processOcrAsync",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "startOcr",
+          "exported": true
+        },
+        {
+          "type": "function",
+          "name": "getJobByDocumentId",
+          "exported": true
+        },
+        {
+          "type": "function",
+          "name": "getResult",
+          "exported": true
+        },
+        {
+          "type": "function",
+          "name": "getStatus",
+          "exported": true
+        }
+      ]
+    },
+    {
       "file": "backend/src/services/virusScanService.js",
       "ext": ".js",
       "size": 15370,
@@ -1783,6 +2076,16 @@
           "exported": false
         }
       ]
+    },
+    {
+      "file": "backend/src/tests/apiStubs.test.js",
+      "ext": ".js",
+      "size": 7479,
+      "imports": [
+        "supertest",
+        "../server.js"
+      ],
+      "symbols": []
     },
     {
       "file": "backend/src/tests/auth.test.js",
@@ -1899,7 +2202,7 @@
     {
       "file": "backend/tests/setup.js",
       "ext": ".js",
-      "size": 1054,
+      "size": 1180,
       "imports": [],
       "symbols": []
     },
@@ -2721,6 +3024,11 @@
       "symbols": []
     },
     {
+      "file": "code-index.json",
+      "ext": ".json",
+      "size": 104716
+    },
+    {
       "file": "DEPENDENCY_FIXES_SUMMARY.md",
       "ext": ".md",
       "size": 4466
@@ -2738,12 +3046,17 @@
     {
       "file": "docker-compose.dev.yml",
       "ext": ".yml",
-      "size": 688
+      "size": 1611
     },
     {
       "file": "docker-compose.yml",
       "ext": ".yml",
-      "size": 4129
+      "size": 5132
+    },
+    {
+      "file": "docs/COMMON_TASKS.md",
+      "ext": ".md",
+      "size": 14023
     },
     {
       "file": "docs/RENDER_REQUIREMENTS.md",
@@ -2758,12 +3071,12 @@
     {
       "file": "frontend/index.html",
       "ext": ".html",
-      "size": 1571
+      "size": 2013
     },
     {
       "file": "frontend/package.json",
       "ext": ".json",
-      "size": 1933
+      "size": 2054
     },
     {
       "file": "frontend/postcss.config.js",
@@ -2833,12 +3146,12 @@
     {
       "file": "frontend/src/App.css",
       "ext": ".css",
-      "size": 9441
+      "size": 9498
     },
     {
       "file": "frontend/src/App.tsx",
       "ext": ".tsx",
-      "size": 2685,
+      "size": 3082,
       "imports": [
         "react",
         "react-redux",
@@ -2847,7 +3160,9 @@
         "./routes",
         "./components/Shared",
         "./components/Onboarding",
-        "./utils/serviceWorker"
+        "./utils/serviceWorker",
+        "./services/api",
+        "./components/Debug/ApiStatus"
       ],
       "symbols": []
     },
@@ -2896,9 +3211,31 @@
       ]
     },
     {
+      "file": "frontend/src/components/Debug/ApiStatus.tsx",
+      "ext": ".tsx",
+      "size": 7190,
+      "imports": [
+        "react",
+        "antd",
+        "../../services/api"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "ServiceStatus",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "ApiStatusState",
+          "exported": false
+        }
+      ]
+    },
+    {
       "file": "frontend/src/components/Help/HelpPanel.tsx",
       "ext": ".tsx",
-      "size": 10401,
+      "size": 10385,
       "imports": [
         "react",
         "antd"
@@ -2961,7 +3298,7 @@
     {
       "file": "frontend/src/components/Layout/AppLayout.tsx",
       "ext": ".tsx",
-      "size": 10415,
+      "size": 10294,
       "imports": [
         "react",
         "react-router-dom",
@@ -3390,11 +3727,12 @@
     {
       "file": "frontend/src/components/Upload/DragDropUpload.tsx",
       "ext": ".tsx",
-      "size": 25863,
+      "size": 27923,
       "imports": [
         "react",
         "antd",
-        "antd/es/upload/interface"
+        "antd/es/upload/interface",
+        "@/services/api"
       ],
       "symbols": [
         {
@@ -3514,7 +3852,7 @@
     {
       "file": "frontend/src/index.css",
       "ext": ".css",
-      "size": 701
+      "size": 696
     },
     {
       "file": "frontend/src/main.tsx",
@@ -3526,6 +3864,61 @@
         "./App.tsx"
       ],
       "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/Admin/AdminDashboard.tsx",
+      "ext": ".tsx",
+      "size": 6032,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "AdminStats",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "ActivityItem",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "AlertItem",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/pages/Admin/AdminLayout.tsx",
+      "ext": ".tsx",
+      "size": 2729,
+      "imports": [
+        "react",
+        "antd",
+        "react-router-dom"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/Admin/UserManagement.tsx",
+      "ext": ".tsx",
+      "size": 5496,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "User",
+          "exported": false
+        }
+      ]
     },
     {
       "file": "frontend/src/pages/Analytics/Analytics.tsx",
@@ -3552,10 +3945,15 @@
     {
       "file": "frontend/src/pages/ContaminationDetection/ContaminationDetection.tsx",
       "ext": ".tsx",
-      "size": 11671,
+      "size": 12919,
       "imports": [
         "react",
         "react-redux",
+        "../../components/Shared/Card",
+        "../../components/Shared/Button",
+        "../../components/Shared/LoadingSpinner",
+        "../../components/Shared/ErrorBoundary",
+        "../../utils/responsive",
         "antd/es/upload/interface",
         "../../store/store",
         "./ContaminationVisualizer",
@@ -3628,10 +4026,13 @@
     {
       "file": "frontend/src/pages/Dashboard/Dashboard.tsx",
       "ext": ".tsx",
-      "size": 6374,
+      "size": 7177,
       "imports": [
         "react",
-        "antd"
+        "antd",
+        "../../components/Shared/Card",
+        "../../components/Shared/ErrorBoundary",
+        "../../utils/responsive"
       ],
       "symbols": []
     },
@@ -3643,6 +4044,115 @@
         "react",
         "antd",
         "@ant-design/icons"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/DigitalTwins/QuantumAndTwinsDemo.tsx",
+      "ext": ".tsx",
+      "size": 8574,
+      "imports": [
+        "react",
+        "antd",
+        "@/services/api/apiClientFactory"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/EPR/BillingPage.tsx",
+      "ext": ".tsx",
+      "size": 2141,
+      "imports": [
+        "react",
+        "@/services/api",
+        "antd"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/EPR/ClientsPage.tsx",
+      "ext": ".tsx",
+      "size": 1162,
+      "imports": [
+        "react",
+        "@/services/api",
+        "antd"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/EPR/CompliancePage.tsx",
+      "ext": ".tsx",
+      "size": 1118,
+      "imports": [
+        "react",
+        "@/services/api",
+        "antd"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/EPR/DocumentDetail.tsx",
+      "ext": ".tsx",
+      "size": 2334,
+      "imports": [
+        "react",
+        "react-router-dom",
+        "@/services/api",
+        "antd"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/EPR/DocumentsList.tsx",
+      "ext": ".tsx",
+      "size": 1543,
+      "imports": [
+        "react",
+        "@/services/api",
+        "antd",
+        "react-router-dom"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/EPR/DocumentUpload.module.css",
+      "ext": ".css",
+      "size": 104
+    },
+    {
+      "file": "frontend/src/pages/EPR/DocumentUpload.tsx",
+      "ext": ".tsx",
+      "size": 5640,
+      "imports": [
+        "react",
+        "antd",
+        "@ant-design/icons",
+        "antd",
+        "@/services/api",
+        "./DocumentUpload.module.css"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/EPR/EprLanding.tsx",
+      "ext": ".tsx",
+      "size": 1209,
+      "imports": [
+        "react",
+        "antd",
+        "react-router-dom"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/EPR/RecyclersPage.tsx",
+      "ext": ".tsx",
+      "size": 1547,
+      "imports": [
+        "react",
+        "@/services/api",
+        "antd"
       ],
       "symbols": []
     },
@@ -3668,7 +4178,7 @@
     {
       "file": "frontend/src/pages/Landing/SimpleLandingPage.tsx",
       "ext": ".tsx",
-      "size": 9791,
+      "size": 12601,
       "imports": [
         "react",
         "react-router-dom"
@@ -3732,6 +4242,11 @@
       "symbols": []
     },
     {
+      "file": "frontend/src/pages/shared-styles.css",
+      "ext": ".css",
+      "size": 5465
+    },
+    {
       "file": "frontend/src/pages/Test/TestPage.tsx",
       "ext": ".tsx",
       "size": 958,
@@ -3739,6 +4254,23 @@
         "react",
         "antd",
         "react-router-dom"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/pages/Tools/ToolsLandingPage.module.css",
+      "ext": ".css",
+      "size": 68
+    },
+    {
+      "file": "frontend/src/pages/Tools/ToolsLandingPage.tsx",
+      "ext": ".tsx",
+      "size": 1424,
+      "imports": [
+        "react",
+        "antd",
+        "react-router-dom",
+        "./ToolsLandingPage.module.css"
       ],
       "symbols": []
     },
@@ -3758,7 +4290,7 @@
     {
       "file": "frontend/src/pages/WasteAnalysis/AnalysisResults.tsx",
       "ext": ".tsx",
-      "size": 6428,
+      "size": 6442,
       "imports": [
         "react",
         "antd",
@@ -3789,7 +4321,7 @@
     {
       "file": "frontend/src/pages/WasteAnalysis/SensorCalibration.tsx",
       "ext": ".tsx",
-      "size": 9503,
+      "size": 9511,
       "imports": [
         "react",
         "react-redux",
@@ -3801,10 +4333,15 @@
     {
       "file": "frontend/src/pages/WasteAnalysis/WasteAnalysis.tsx",
       "ext": ".tsx",
-      "size": 9970,
+      "size": 10360,
       "imports": [
         "react",
         "react-redux",
+        "../../components/Shared/Card",
+        "../../components/Shared/Button",
+        "../../components/Shared/LoadingSpinner",
+        "../../components/Shared/ErrorBoundary",
+        "../../utils/responsive",
         "antd/es/upload/interface",
         "../../store/store",
         "./SensorCalibration",
@@ -3817,12 +4354,12 @@
     {
       "file": "frontend/src/routes/index.tsx",
       "ext": ".tsx",
-      "size": 3066,
+      "size": 5488,
       "imports": [
         "react",
         "react-router-dom",
         "../components/Layout/AppLayout",
-        "../pages/Landing/SimpleLandingPage",
+        "../pages/Landing/LandingPage",
         "../pages/Dashboard/Dashboard",
         "../pages/WasteAnalysis/WasteAnalysis",
         "../pages/ContaminationDetection/ContaminationDetection",
@@ -3832,8 +4369,373 @@
         "../pages/Settings/Settings",
         "../pages/Search/SearchResults",
         "../pages/Search/AdvancedSearch",
-        "../pages/NotFound/NotFound"
+        "../pages/NotFound/NotFound",
+        "../pages/EPR/DocumentUpload",
+        "../pages/EPR/EprLanding",
+        "../pages/EPR/DocumentsList",
+        "../pages/EPR/DocumentDetail",
+        "../pages/EPR/CompliancePage",
+        "../pages/EPR/RecyclersPage",
+        "../pages/EPR/ClientsPage",
+        "../pages/EPR/BillingPage"
       ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/services/api/aiClient.ts",
+      "ext": ".ts",
+      "size": 6078,
+      "imports": [
+        "./baseClient"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "WasteAnalysisRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "WasteAnalysisResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ContaminationDetectionRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ContaminationLocation",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ContaminationResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RareMaterilaDetectionRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RareMaterialResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "SensorCalibrationRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "SensorCalibrationResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RealTimeDataResponse",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "AiApiClient",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/api/apiClientFactory.ts",
+      "ext": ".ts",
+      "size": 9096,
+      "imports": [
+        "./aiClient",
+        "./eprClient",
+        "./blockchainClient",
+        "./authClient",
+        "./quantumClient",
+        "./mocks/aiMockClient"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "export",
+          "exported": false
+        },
+        {
+          "type": "interface",
+          "name": "ApiClientConfig",
+          "exported": false
+        },
+        {
+          "type": "class",
+          "name": "ApiClientFactory",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/api/authClient.ts",
+      "ext": ".ts",
+      "size": 9103,
+      "imports": [
+        "./baseClient"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "LoginRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "LoginResponse",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RegisterRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "User",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RefreshTokenRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RefreshTokenResponse",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ForgotPasswordRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ResetPasswordRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ChangePasswordRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "UpdateProfileRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "InviteUserRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "VerifyEmailRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "TwoFactorSetupResponse",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "TwoFactorVerifyRequest",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "AuthApiClient",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/api/baseClient.ts",
+      "ext": ".ts",
+      "size": 5636,
+      "imports": [
+        "axios"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "ApiConfig",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ApiError",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "BaseApiClient",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/api/blockchainClient.ts",
+      "ext": ".ts",
+      "size": 11613,
+      "imports": [
+        "./baseClient"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "WasteCertificate",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "DigitalTwin",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "CarbonCredit",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "StakingPool",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "StakingPosition",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "Transaction",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "WalletInfo",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "BlockchainApiClient",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/api/eprClient.ts",
+      "ext": ".ts",
+      "size": 10478,
+      "imports": [
+        "./baseClient"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "DocumentUploadRequest",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "DocumentUploadResponse",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "Document",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "OcrResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "AuditResult",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "RecyclerMaster",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "ComplianceScore",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "Client",
+          "exported": true
+        },
+        {
+          "type": "interface",
+          "name": "BillingRecord",
+          "exported": true
+        },
+        {
+          "type": "class",
+          "name": "EprApiClient",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/api/index.ts",
+      "ext": ".ts",
+      "size": 1292,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/services/api/mocks/aiMockClient.ts",
+      "ext": ".ts",
+      "size": 11079,
+      "imports": [],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "AiMockClient",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/api/quantumClient.ts",
+      "ext": ".ts",
+      "size": 768,
+      "imports": [
+        "./baseClient"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "QuantumApiClient",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/services/api/__tests__/apiClients.test.ts",
+      "ext": ".ts",
+      "size": 7300,
+      "imports": [],
       "symbols": []
     },
     {
@@ -3984,10 +4886,10 @@
     {
       "file": "frontend/src/store/slices/contaminationSlice.ts",
       "ext": ".ts",
-      "size": 5814,
+      "size": 6229,
       "imports": [
         "@reduxjs/toolkit",
-        "axios"
+        "../../services/api"
       ],
       "symbols": [
         {
@@ -4270,10 +5172,10 @@
     {
       "file": "frontend/src/store/slices/wasteAnalysisSlice.ts",
       "ext": ".ts",
-      "size": 3955,
+      "size": 3855,
       "imports": [
         "@reduxjs/toolkit",
-        "axios"
+        "../../services/api"
       ],
       "symbols": [
         {
@@ -4301,12 +5203,14 @@
     {
       "file": "frontend/src/store/store.ts",
       "ext": ".ts",
-      "size": 1159,
+      "size": 1265,
       "imports": [
         "@reduxjs/toolkit",
         "./slices/navigationSlice",
         "./slices/dashboardSlice",
-        "./slices/uiSlice"
+        "./slices/uiSlice",
+        "./slices/wasteAnalysisSlice",
+        "./slices/contaminationSlice"
       ],
       "symbols": [
         {
@@ -4356,6 +5260,21 @@
         {
           "type": "function",
           "name": "usePushNotifications",
+          "exported": true
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/utils/responsive.ts",
+      "ext": ".ts",
+      "size": 3182,
+      "imports": [
+        "react"
+      ],
+      "symbols": [
+        {
+          "type": "interface",
+          "name": "ResponsiveConfig",
           "exported": true
         }
       ]
@@ -4416,6 +5335,72 @@
       "symbols": []
     },
     {
+      "file": "frontend/src/vite-env.d.ts",
+      "ext": ".ts",
+      "size": 158,
+      "imports": [],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/__tests__/apiClientFactory.test.ts",
+      "ext": ".ts",
+      "size": 4637,
+      "imports": [
+        "vitest",
+        "../services/api/apiClientFactory",
+        "../services/api/aiClient",
+        "../services/api/eprClient",
+        "../services/api/blockchainClient",
+        "../services/api/authClient",
+        "../services/api/quantumClient",
+        "../services/api/mocks/aiMockClient"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/__tests__/Dashboard.test.tsx",
+      "ext": ".tsx",
+      "size": 8565,
+      "imports": [
+        "vitest",
+        "@testing-library/react",
+        "react-redux",
+        "@reduxjs/toolkit",
+        "../pages/Dashboard/Dashboard",
+        "../store/slices/dashboardSlice"
+      ],
+      "symbols": []
+    },
+    {
+      "file": "frontend/src/__tests__/DragDropUpload.test.tsx",
+      "ext": ".tsx",
+      "size": 8980,
+      "imports": [
+        "vitest",
+        "@testing-library/react",
+        "antd",
+        "../components/Upload/DragDropUpload",
+        "@/services/api"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "expect",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/__tests__/eprClient.simple.test.ts",
+      "ext": ".ts",
+      "size": 6904,
+      "imports": [
+        "vitest",
+        "../services/api/eprClient"
+      ],
+      "symbols": []
+    },
+    {
       "file": "frontend/src/__tests__/pwa.integration.test.tsx",
       "ext": ".tsx",
       "size": 9205,
@@ -4455,7 +5440,7 @@
     {
       "file": "frontend/vite.config.ts",
       "ext": ".ts",
-      "size": 440,
+      "size": 1684,
       "imports": [
         "vite",
         "@vitejs/plugin-react",
@@ -4473,6 +5458,93 @@
         "path"
       ],
       "symbols": []
+    },
+    {
+      "file": "iot-simulator/main.py",
+      "ext": ".py",
+      "size": 1987,
+      "imports": [
+        "os\r\nimport time\r\nfrom dotenv import load_dotenv\r\nfrom apscheduler.schedulers.background import BackgroundScheduler\r\n\r\nfrom simulators.smart_bin_simulator import SmartBinSimulator\r\nfrom simulators.waste_collection_vehicle_simulator import WasteCollectionVehicleSimulator\r\nfrom utils import load_geojson_area\r\n\r\nload_dotenv"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "main"
+        }
+      ]
+    },
+    {
+      "file": "iot-simulator/README.md",
+      "ext": ".md",
+      "size": 886
+    },
+    {
+      "file": "iot-simulator/simulators/base_simulator.py",
+      "ext": ".py",
+      "size": 2745,
+      "imports": [
+        "json\r\nimport os\r\nimport random\r\nimport time\r\nimport uuid\r\nfrom abc import ABC",
+        "abstractmethod\r\n\r\nimport paho.mqtt.client as mqtt\r\nfrom dotenv import load_dotenv\r\n\r\nload_dotenv"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "BaseSimulator"
+        }
+      ]
+    },
+    {
+      "file": "iot-simulator/simulators/smart_bin_simulator.py",
+      "ext": ".py",
+      "size": 1946,
+      "imports": [
+        "random\r\nfrom datetime import datetime",
+        "timezone\r\n\r\nfrom simulators.base_simulator import BaseSimulator\r\nfrom utils import generate_random_point_in_polygon",
+        "load_geojson_area\r\n\r\n\r\nclass SmartBinSimulator"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "SmartBinSimulator"
+        }
+      ]
+    },
+    {
+      "file": "iot-simulator/simulators/waste_collection_vehicle_simulator.py",
+      "ext": ".py",
+      "size": 2044,
+      "imports": [
+        "random\r\nfrom datetime import datetime",
+        "timezone\r\n\r\nfrom simulators.base_simulator import BaseSimulator\r\nfrom utils import generate_random_point_in_polygon\r\n\r\n\r\nclass WasteCollectionVehicleSimulator"
+      ],
+      "symbols": [
+        {
+          "type": "class",
+          "name": "WasteCollectionVehicleSimulator"
+        }
+      ]
+    },
+    {
+      "file": "iot-simulator/utils.py",
+      "ext": ".py",
+      "size": 1670,
+      "imports": [
+        "geojson\r\nimport numpy as np\r\n\r\ndef load_geojson_area"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "load_geojson_area"
+        },
+        {
+          "type": "def",
+          "name": "generate_random_point_in_polygon"
+        },
+        {
+          "type": "def",
+          "name": "is_point_in_polygon"
+        }
+      ]
     },
     {
       "file": "ml-models/route_optimization.py",
@@ -4494,9 +5566,26 @@
       ]
     },
     {
+      "file": "ml-models/tests/test_waste_prediction.py",
+      "ext": ".py",
+      "size": 1254,
+      "imports": [
+        "os\r\nimport sys\r\nimport importlib",
+        "pandas as pd\r\n    from waste_prediction import WastePredictionModel",
+        "generate_training_data\r\nexcept Exception as e",
+        "pytest"
+      ],
+      "symbols": [
+        {
+          "type": "def",
+          "name": "test_train_save_load_predict"
+        }
+      ]
+    },
+    {
       "file": "ml-models/waste_prediction.py",
       "ext": ".py",
-      "size": 10102,
+      "size": 10880,
       "imports": [
         "numpy as np\nimport pandas as pd\nfrom sklearn.ensemble import RandomForestRegressor",
         "GradientBoostingRegressor\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.metrics import mean_absolute_error",
@@ -4532,12 +5621,53 @@
     {
       "file": "package.json",
       "ext": ".json",
-      "size": 2412
+      "size": 2467
     },
     {
       "file": "README.md",
       "ext": ".md",
-      "size": 6682
+      "size": 6790
+    },
+    {
+      "file": "scripts/code-index-query.js",
+      "ext": ".js",
+      "size": 2244,
+      "imports": [
+        "fs",
+        "path"
+      ],
+      "symbols": [
+        {
+          "type": "function",
+          "name": "loadIndex",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "searchBySymbol",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "searchByImport",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "searchByFile",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "searchByExt",
+          "exported": false
+        },
+        {
+          "type": "function",
+          "name": "main",
+          "exported": false
+        }
+      ]
     },
     {
       "file": "scripts/code-index.js",

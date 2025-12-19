@@ -3,7 +3,11 @@ import { AiApiClient } from './aiClient';
 import { EprApiClient } from './eprClient';
 import { BlockchainApiClient } from './blockchainClient';
 import { AuthApiClient } from './authClient';
+import QuantumApiClient from './quantumClient';
 import { AiMockClient } from './mocks/aiMockClient';
+import { EprMockClient } from './mocks/eprMockClient';
+import { BlockchainMockClient } from './mocks/blockchainMockClient';
+import { AuthMockClient } from './mocks/authMockClient';
 
 // Configuration interface
 export interface ApiClientConfig {
@@ -46,6 +50,7 @@ export class ApiClientFactory {
     blockchain?: BlockchainApiClient;
     auth?: AuthApiClient;
   } = {};
+  quantum?: QuantumApiClient;
 
   private constructor(config: ApiClientConfig = {}) {
     this.config = { ...defaultConfig, ...config };
@@ -84,12 +89,15 @@ export class ApiClientFactory {
   // Get EPR API client
   getEprClient(): EprApiClient {
     if (!this.clients.epr) {
-      this.clients.epr = new EprApiClient({
-        baseURL: this.config.baseUrls?.epr,
-        timeout: this.config.timeout,
-        retries: this.config.retries,
-        useMock: this.config.useMockEpr,
-      });
+      if (this.config.useMockEpr) {
+        this.clients.epr = new EprMockClient();
+      } else {
+        this.clients.epr = new EprApiClient({
+          baseURL: this.config.baseUrls?.epr,
+          timeout: this.config.timeout,
+          retries: this.config.retries,
+        });
+      }
     }
     return this.clients.epr;
   }
@@ -97,12 +105,15 @@ export class ApiClientFactory {
   // Get Blockchain API client
   getBlockchainClient(): BlockchainApiClient {
     if (!this.clients.blockchain) {
-      this.clients.blockchain = new BlockchainApiClient({
-        baseURL: this.config.baseUrls?.blockchain,
-        timeout: this.config.timeout,
-        retries: this.config.retries,
-        useMock: this.config.useMockBlockchain,
-      });
+      if (this.config.useMockBlockchain) {
+        this.clients.blockchain = new BlockchainMockClient();
+      } else {
+        this.clients.blockchain = new BlockchainApiClient({
+          baseURL: this.config.baseUrls?.blockchain,
+          timeout: this.config.timeout,
+          retries: this.config.retries,
+        });
+      }
     }
     return this.clients.blockchain;
   }
@@ -110,14 +121,31 @@ export class ApiClientFactory {
   // Get Auth API client
   getAuthClient(): AuthApiClient {
     if (!this.clients.auth) {
-      this.clients.auth = new AuthApiClient({
-        baseURL: this.config.baseUrls?.auth,
-        timeout: this.config.timeout,
-        retries: this.config.retries,
-        useMock: this.config.useMockAuth,
-      });
+      if (this.config.useMockAuth) {
+        this.clients.auth = new AuthMockClient();
+      } else {
+        this.clients.auth = new AuthApiClient({
+          baseURL: this.config.baseUrls?.auth,
+          timeout: this.config.timeout,
+          retries: this.config.retries,
+        });
+      }
     }
     return this.clients.auth;
+  }
+
+  // Get Quantum API client
+  getQuantumClient(): QuantumApiClient {
+    const selfAny = this as any;
+    if (!selfAny.clients || !selfAny.clients.quantum) {
+      if (!selfAny.clients) selfAny.clients = {};
+      selfAny.clients.quantum = new QuantumApiClient({
+        baseURL: this.config.baseUrls?.epr || process.env.REACT_APP_API_BASE_URL,
+        timeout: this.config.timeout,
+        retries: this.config.retries,
+      });
+    }
+    return selfAny.clients.quantum as QuantumApiClient;
   }
 
   // Health check all services
@@ -190,6 +218,7 @@ export const aiClient = () => apiClientFactory.getAiClient();
 export const eprClient = () => apiClientFactory.getEprClient();
 export const blockchainClient = () => apiClientFactory.getBlockchainClient();
 export const authClient = () => apiClientFactory.getAuthClient();
+export const quantumClient = () => apiClientFactory.getQuantumClient();
 
 // Environment-based configuration helper
 export const configureApiClients = (overrides: Partial<ApiClientConfig> = {}) => {

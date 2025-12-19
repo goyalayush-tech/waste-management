@@ -8,6 +8,7 @@ import {
   EnvironmentOutlined
 } from '@ant-design/icons';
 import { WasteAnalysisResult } from '../../store/slices/wasteAnalysisSlice';
+import styles from './AnalysisResults.module.css';
 
 const { Title, Text } = Typography;
 
@@ -29,16 +30,16 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
   };
   
   return (
-    <div className="analysis-results">
+    <div className={styles.analysisResults}>
       {/* Main Classification */}
-      <div className="classification-header">
-        <div className="classification-info">
-          <Title level={4} style={{ margin: 0 }}>
+      <div className={styles.classificationHeader}>
+        <div className={styles.classificationInfo}>
+          <Title level={4} className={styles.classificationTitle}>
             {analysis.classification.replace(/_/g, ' ').toUpperCase()}
           </Title>
           <Text type="secondary">Primary Classification</Text>
         </div>
-        <div className="confidence-indicator">
+        <div className={styles.confidenceIndicator}>
           <Progress
             type="circle"
             percent={Math.round(analysis.confidence * 100)}
@@ -46,7 +47,7 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
             status={getConfidenceStatus(analysis.confidence)}
             strokeColor={getConfidenceColor(analysis.confidence)}
           />
-          <Text strong style={{ display: 'block', textAlign: 'center', marginTop: '8px' }}>
+          <Text strong className={styles.confidenceLabel}>
             Confidence
           </Text>
         </div>
@@ -55,38 +56,38 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
       <Divider />
       
       {/* Key Metrics */}
-      <Row gutter={16} className="metrics-grid">
+      <Row gutter={16} className={styles.metricsGrid}>
         <Col span={8}>
-          <Card size="small" className="metric-card">
-            <div className="metric-content">
-              <DollarOutlined style={{ fontSize: '24px', color: '#1890ff' }} />
-              <div className="metric-info">
+          <Card size="small" className={styles.metricCard}>
+            <div className={styles.metricContent}>
+              <DollarOutlined className={styles.metricIconBlue} />
+              <div className={styles.metricInfo}>
                 <Text strong>${analysis.valueEstimate.toFixed(2)}</Text>
-                <Text type="secondary" style={{ display: 'block' }}>Estimated Value</Text>
+                <Text type="secondary" className={styles.metricLabel}>Estimated Value</Text>
               </div>
             </div>
           </Card>
         </Col>
         
         <Col span={8}>
-          <Card size="small" className="metric-card">
-            <div className="metric-content">
-              <EnvironmentOutlined style={{ fontSize: '24px', color: '#52c41a' }} />
-              <div className="metric-info">
+          <Card size="small" className={styles.metricCard}>
+            <div className={styles.metricContent}>
+              <EnvironmentOutlined className={styles.metricIconGreen} />
+              <div className={styles.metricInfo}>
                 <Text strong>{analysis.carbonFootprint.toFixed(2)} kg</Text>
-                <Text type="secondary" style={{ display: 'block' }}>Carbon Footprint</Text>
+                <Text type="secondary" className={styles.metricLabel}>Carbon Footprint</Text>
               </div>
             </div>
           </Card>
         </Col>
         
         <Col span={8}>
-          <Card size="small" className="metric-card">
-            <div className="metric-content">
-              <CheckCircleOutlined style={{ fontSize: '24px', color: '#faad14' }} />
-              <div className="metric-info">
+          <Card size="small" className={styles.metricCard}>
+            <div className={styles.metricContent}>
+              <CheckCircleOutlined className={styles.metricIconOrange} />
+              <div className={styles.metricInfo}>
                 <Text strong>{Math.round(analysis.qualityScore)}/100</Text>
-                <Text type="secondary" style={{ display: 'block' }}>Quality Score</Text>
+                <Text type="secondary" className={styles.metricLabel}>Quality Score</Text>
               </div>
             </div>
           </Card>
@@ -96,12 +97,12 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
       <Divider />
       
       {/* Material Composition */}
-      <div className="material-composition">
+      <div className={styles.materialComposition}>
         <Title level={5}>Material Composition</Title>
-        <div className="composition-bars">
+        <div className={styles.compositionBars}>
           {Object.entries(analysis.materialComposition).map(([material, percentage]) => (
-            <div key={material} className="composition-item">
-              <div className="composition-label">
+            <div key={material} className={styles.compositionItem}>
+              <div className={styles.compositionLabel}>
                 <Text>{material.replace(/_/g, ' ')}</Text>
                 <Text strong>{(percentage * 100).toFixed(1)}%</Text>
               </div>
@@ -119,9 +120,9 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
       <Divider />
       
       {/* Contamination Level */}
-      <div className="contamination-section">
+      <div className={styles.contaminationSection}>
         <Title level={5}>
-          <WarningOutlined style={{ marginRight: '8px' }} />
+          <WarningOutlined className={styles.titleIcon} />
           Contamination Analysis
         </Title>
         <Progress
@@ -137,16 +138,16 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
       <Divider />
       
       {/* Sensor Contributions */}
-      <div className="sensor-contributions">
+      <div className={styles.sensorContributions}>
         <Title level={5}>
-          <InfoCircleOutlined style={{ marginRight: '8px' }} />
+          <InfoCircleOutlined className={styles.titleIcon} />
           Sensor Contributions
         </Title>
         <Row gutter={8}>
           {Object.entries(analysis.sensorContributions).map(([sensor, contribution]) => (
             <Col span={6} key={sensor}>
               <Tooltip title={`${sensor} sensor contributed ${(contribution * 100).toFixed(1)}% to the analysis`}>
-                <Tag color="blue" style={{ width: '100%', textAlign: 'center' }}>
+                <Tag color="blue" className={styles.sensorTag}>
                   {sensor}: {(contribution * 100).toFixed(0)}%
                 </Tag>
               </Tooltip>
@@ -158,7 +159,7 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
       <Divider />
       
       {/* Processing Recommendations */}
-      <div className="processing-recommendations">
+      <div className={styles.processingRecommendations}>
         <Title level={5}>Processing Recommendations</Title>
         <List
           size="small"
@@ -166,7 +167,7 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ analysis }) => {
           renderItem={(item, index) => (
             <List.Item>
               <List.Item.Meta
-                avatar={<CheckCircleOutlined style={{ color: '#52c41a' }} />}
+                avatar={<CheckCircleOutlined className={styles.recommendationIcon} />}
                 title={`Step ${index + 1}`}
                 description={item}
               />

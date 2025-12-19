@@ -12,23 +12,14 @@ import {
   Row,
   Col,
   Divider,
-  Tag,
-  Checkbox,
   Slider,
   Switch
 } from 'antd';
-import {
-  SearchOutlined,
-  ClearOutlined,
-  FilterOutlined,
-  SaveOutlined,
-  HistoryOutlined
-} from '@ant-design/icons';
-import { Form as SharedForm, FormField } from '../../components/Shared';
+import { SearchOutlined, FilterOutlined, ClearOutlined, SaveOutlined, HistoryOutlined } from '@ant-design/icons';
+import styles from './AdvancedSearch.module.css';
 
 const { Title, Text } = Typography;
 const { RangePicker } = DatePicker;
-const { Option } = Select;
 
 interface AdvancedSearchFilters {
   query: string;
@@ -139,7 +130,7 @@ const AdvancedSearch: React.FC = () => {
     }
     
     // Navigate to search results
-    navigate(`/search?${searchParams.toString()}`);
+    navigate(`/app/search?${searchParams.toString()}`);
   };
 
   const handleClear = () => {
@@ -171,8 +162,8 @@ const AdvancedSearch: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px', maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '24px' }}>
+    <div className={styles.advancedSearchPage}>
+      <div className={styles.header}>
         <Title level={2}>
           <FilterOutlined /> Advanced Search
         </Title>
@@ -307,7 +298,7 @@ const AdvancedSearch: React.FC = () => {
                     name="dateRange"
                     label="Date Range"
                   >
-                    <RangePicker style={{ width: '100%' }} />
+                    <RangePicker className={styles.fullWidth} />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -361,7 +352,7 @@ const AdvancedSearch: React.FC = () => {
               </Row>
 
               {/* Action Buttons */}
-              <div style={{ marginTop: '24px' }}>
+              <div className={styles.actionButtons}>
                 <Space>
                   <Button
                     type="primary"
@@ -408,15 +399,10 @@ const AdvancedSearch: React.FC = () => {
                 {savedSearches.map(search => (
                   <div
                     key={search.id}
-                    style={{
-                      padding: '8px',
-                      border: '1px solid #f0f0f0',
-                      borderRadius: '4px',
-                      marginBottom: '8px',
-                    }}
+                    className={styles.savedSearchItem}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Text strong style={{ fontSize: '12px' }}>
+                    <div className={styles.savedSearchHeader}>
+                      <Text strong className={styles.savedSearchName}>
                         {search.name}
                       </Text>
                       <Button
@@ -428,15 +414,15 @@ const AdvancedSearch: React.FC = () => {
                         ×
                       </Button>
                     </div>
-                    <Text type="secondary" style={{ fontSize: '11px' }}>
+                    <Text type="secondary" className={styles.savedSearchDate}>
                       {search.createdAt.toLocaleDateString()}
                     </Text>
-                    <div style={{ marginTop: '4px' }}>
+                    <div className={styles.savedSearchActions}>
                       <Button
                         type="link"
                         size="small"
                         onClick={() => handleLoadSavedSearch(search)}
-                        style={{ padding: 0, height: 'auto' }}
+                        className={styles.loadButton}
                       >
                         Load
                       </Button>
@@ -448,14 +434,14 @@ const AdvancedSearch: React.FC = () => {
           </Card>
 
           {/* Search Tips */}
-          <Card title="Search Tips" size="small" style={{ marginTop: '16px' }}>
-            <div style={{ fontSize: '12px' }}>
-              <div style={{ marginBottom: '8px' }}>
+          <Card title="Search Tips" size="small" className={styles.searchTipsCard}>
+            <div className={styles.searchTips}>
+              <div className={styles.searchTipItem}>
                 <Text strong>Boolean Operators:</Text>
                 <br />
                 <Text code>AND</Text>, <Text code>OR</Text>, <Text code>NOT</Text>
               </div>
-              <div style={{ marginBottom: '8px' }}>
+              <div className={styles.searchTipItem}>
                 <Text strong>Wildcards:</Text>
                 <br />
                 <Text code>*</Text> for multiple characters

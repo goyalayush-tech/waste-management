@@ -1,6 +1,9 @@
 /**
  * User model for waste verification system
- * Supports vendor, buyer, and admin roles
+ * Supports vendor, buy    avatar: {
+      type: String,
+      default: null,
+    },and admin roles
  */
 
 import mongoose from 'mongoose';
@@ -16,24 +19,24 @@ const userSchema = new Schema({
     unique: true,
     lowercase: true,
     trim: true,
-    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email']
+    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email'],
   },
   
   password: {
     type: String,
     required: [true, 'Password is required'],
     minlength: [8, 'Password must be at least 8 characters long'],
-    select: false // Don't include password in queries by default
+    select: false, // Don't include password in queries by default
   },
   
   role: {
     type: String,
     enum: {
       values: ['vendor', 'buyer', 'admin', 'epr-client', 'auditor'],
-      message: 'Role must be vendor, buyer, admin, epr-client, or auditor'
+      message: 'Role must be vendor, buyer, admin, epr-client, or auditor',
     },
     required: [true, 'User role is required'],
-    default: 'vendor'
+    default: 'vendor',
   },
   
   profile: {
@@ -41,19 +44,19 @@ const userSchema = new Schema({
       type: String,
       required: [true, 'Name is required'],
       trim: true,
-      maxlength: [100, 'Name cannot exceed 100 characters']
+      maxlength: [100, 'Name cannot exceed 100 characters'],
     },
     
     organization: {
       type: String,
       trim: true,
-      maxlength: [200, 'Organization name cannot exceed 200 characters']
+      maxlength: [200, 'Organization name cannot exceed 200 characters'],
     },
     
     phone: {
       type: String,
       trim: true,
-      match: [/^[\+]?[1-9][\d]{0,15}$/, 'Please enter a valid phone number']
+      match: [/^[+]?[1-9][\d]{0,15}$/, 'Please enter a valid phone number'],
     },
     
     address: {
@@ -61,187 +64,177 @@ const userSchema = new Schema({
       city: String,
       state: String,
       country: String,
-      zipCode: String
+      zipCode: String,
     },
     
     walletAddress: {
       type: String,
       trim: true,
       match: [/^0x[a-fA-F0-9]{40}$/, 'Please enter a valid Ethereum wallet address'],
-      sparse: true // Allow multiple null values but unique non-null values
+      sparse: true, // Allow multiple null values but unique non-null values
     },
     
     avatar: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
-  
+
   verification: {
     isEmailVerified: {
       type: Boolean,
-      default: false
-    },
-    
-    emailVerificationToken: {
+      default: false,
+    },    emailVerificationToken: {
       type: String,
-      select: false
+      select: false,
     },
-    
+
     emailVerificationExpires: {
       type: Date,
-      select: false
+      select: false,
     },
-    
+
     isPhoneVerified: {
       type: Boolean,
-      default: false
+      default: false,
     },
     
     kycStatus: {
       type: String,
       enum: ['pending', 'verified', 'rejected'],
-      default: 'pending'
+      default: 'pending',
     },
-    
+
     kycDocuments: [{
       type: String,
       documentType: String,
-      uploadedAt: Date
-    }],
-
-    // Multi-factor authentication
+      uploadedAt: Date,
+    }],    // Multi-factor authentication
     mfa: {
       enabled: {
         type: Boolean,
-        default: false
+        default: false,
       },
-      
+
       secret: {
         type: String,
-        select: false
+        select: false,
       },
-      
+
       backupCodes: [{
         code: String,
         used: {
           type: Boolean,
-          default: false
+          default: false,
         },
-        usedAt: Date
+        usedAt: Date,
       }],
-      
+
       lastUsed: Date,
-      
+
       methods: [{
         type: String,
         enum: ['totp', 'sms', 'email'],
         enabled: {
           type: Boolean,
-          default: false
-        }
-      }]
-    }
+          default: false,
+        },
+      }],
+    },
   },
-  
+
   preferences: {
     notifications: {
       email: {
         type: Boolean,
-        default: true
+        default: true,
       },
       sms: {
         type: Boolean,
-        default: false
+        default: false,
       },
       push: {
         type: Boolean,
-        default: true
-      }
+        default: true,
+      },
     },
-    
+
     language: {
       type: String,
       default: 'en',
-      enum: ['en', 'hi', 'es', 'fr']
+      enum: ['en', 'hi', 'es', 'fr'],
     },
-    
+
     timezone: {
       type: String,
-      default: 'UTC'
-    }
-  },
-
-  // EPR Client subscription management
+      default: 'UTC',
+    },
+  },  // EPR Client subscription management
   subscription: {
     tier: {
       type: String,
       enum: ['basic', 'professional', 'enterprise'],
-      default: 'basic'
+      default: 'basic',
     },
-    
+
     status: {
       type: String,
       enum: ['active', 'inactive', 'cancelled', 'past_due'],
-      default: 'active'
+      default: 'active',
     },
-    
+
     startDate: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+    },    endDate: {
+      type: Date,
     },
-    
-    endDate: {
-      type: Date
-    },
-    
+
     features: {
       maxTonnagePerMonth: {
         type: Number,
-        default: 100 // Basic tier limit
+        default: 100, // Basic tier limit
       },
-      
+
       maxApiCallsPerMonth: {
         type: Number,
-        default: 1000 // Basic tier limit
+        default: 1000, // Basic tier limit
       },
-      
+
       advancedAnalytics: {
         type: Boolean,
-        default: false
+        default: false,
       },
-      
+
       customBranding: {
         type: Boolean,
-        default: false
+        default: false,
       },
-      
+
       prioritySupport: {
         type: Boolean,
-        default: false
+        default: false,
       },
-      
+
       multiFactorAuth: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
-    
+
     usage: {
       tonnageThisMonth: {
         type: Number,
-        default: 0
+        default: 0,
       },
-      
+
       apiCallsThisMonth: {
         type: Number,
-        default: 0
-      },
-      
-      lastResetDate: {
+        default: 0,
+      },      lastResetDate: {
         type: Date,
-        default: Date.now
-      }
+        default: Date.now,
+      },
     },
     
     billing: {
@@ -249,8 +242,8 @@ const userSchema = new Schema({
       stripeSubscriptionId: String,
       lastPaymentDate: Date,
       nextPaymentDate: Date,
-      paymentMethod: String
-    }
+      paymentMethod: String,
+    },
   },
 
   // Team management for EPR clients
@@ -258,106 +251,104 @@ const userSchema = new Schema({
     members: [{
       userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
       },
       role: {
         type: String,
         enum: ['owner', 'admin', 'member', 'viewer'],
-        default: 'member'
+        default: 'member',
       },
       invitedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
       },
       invitedAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
       },
       joinedAt: Date,
       permissions: [{
         type: String,
-        enum: ['view_reports', 'upload_documents', 'manage_team', 'billing']
-      }]
+        enum: ['view_reports', 'upload_documents', 'manage_team', 'billing'],
+      }],
     }],
-    
+
     invitations: [{
       email: String,
       role: {
         type: String,
         enum: ['admin', 'member', 'viewer'],
-        default: 'member'
+        default: 'member',
       },
       token: String,
       invitedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
       },
       invitedAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
       },
       expiresAt: {
         type: Date,
-        default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
+        default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
       },
       status: {
         type: String,
         enum: ['pending', 'accepted', 'expired'],
-        default: 'pending'
-      }
-    }]
+        default: 'pending',
+      },
+    }],
   },
   
   stats: {
     totalSubmissions: {
       type: Number,
-      default: 0
+      default: 0,
     },
-    
+
     verifiedSubmissions: {
       type: Number,
-      default: 0
+      default: 0,
     },
-    
+
     totalCreditsEarned: {
       type: Number,
-      default: 0
+      default: 0,
     },
-    
+
     totalCreditsPurchased: {
       type: Number,
-      default: 0
-    },
-    
-    lastLoginAt: {
+      default: 0,
+    },    lastLoginAt: {
       type: Date,
-      default: null
+      default: null,
     },
-    
+
     loginCount: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
-  
+
   status: {
     type: String,
     enum: ['active', 'inactive', 'suspended', 'banned'],
-    default: 'active'
+    default: 'active',
   },
-  
+
   resetPasswordToken: {
     type: String,
-    select: false
+    select: false,
   },
-  
+
   resetPasswordExpires: {
     type: Date,
-    select: false
-  }
+    select: false,
+  },
 }, {
   timestamps: true,
-  toJSON: { 
+  toJSON: {
     virtuals: true,
     transform: function(doc, ret) {
       delete ret.password;
@@ -366,15 +357,15 @@ const userSchema = new Schema({
       delete ret.verification.emailVerificationToken;
       delete ret.verification.emailVerificationExpires;
       return ret;
-    }
+    },
   },
-  toObject: { virtuals: true }
+  toObject: { virtuals: true },
 });
 
 // Indexes for better performance
-userSchema.index({ email: 1 });
+// Note: email index is automatically created by unique: true constraint
 userSchema.index({ role: 1 });
-userSchema.index({ 'profile.walletAddress': 1 }, { sparse: true });
+// Note: profile.walletAddress index is automatically created by sparse: true constraint
 userSchema.index({ status: 1 });
 userSchema.index({ createdAt: -1 });
 
@@ -426,7 +417,7 @@ userSchema.methods.generateAuthToken = function() {
     id: this._id,
     email: this.email,
     role: this.role,
-    isVerified: this.isVerified
+    isVerified: this.isVerified,
   };
   
   return jwt.sign(
@@ -434,7 +425,7 @@ userSchema.methods.generateAuthToken = function() {
     process.env.JWT_SECRET || 'fallback-secret',
     { 
       expiresIn: process.env.JWT_EXPIRES_IN || '7d',
-      issuer: 'waste-verification-mvp'
+      issuer: 'waste-verification-mvp',
     }
   );
 };
@@ -473,7 +464,7 @@ userSchema.methods.checkSubscriptionLimits = function() {
     apiUsed: subscription.usage.apiCallsThisMonth,
     apiRemaining: Math.max(0, subscription.features.maxApiCallsPerMonth - subscription.usage.apiCallsThisMonth),
     canUpload: subscription.usage.tonnageThisMonth < subscription.features.maxTonnagePerMonth,
-    canMakeApiCall: subscription.usage.apiCallsThisMonth < subscription.features.maxApiCallsPerMonth
+    canMakeApiCall: subscription.usage.apiCallsThisMonth < subscription.features.maxApiCallsPerMonth,
   };
 };
 
@@ -504,7 +495,7 @@ userSchema.methods.generateTeamInvitationToken = function(email, role = 'member'
     email,
     role,
     token: bcrypt.hashSync(invitationToken, 10),
-    invitedBy: this._id
+    invitedBy: this._id,
   });
   
   return invitationToken;
@@ -515,7 +506,7 @@ userSchema.methods.canInviteTeamMembers = function() {
   const maxMembers = {
     basic: 3,
     professional: 10,
-    enterprise: 50
+    enterprise: 50,
   };
   
   const currentMembers = this.team.members.length;
@@ -546,18 +537,18 @@ userSchema.statics.getUserStats = async function() {
             $cond: [
               { $and: [
                 { $eq: ['$verification.isEmailVerified', true] },
-                { $eq: ['$verification.kycStatus', 'verified'] }
+                { $eq: ['$verification.kycStatus', 'verified'] },
               ]},
               1,
-              0
-            ]
-          }
+              0,
+            ],
+          },
         },
         active: {
           $sum: {
-            $cond: [{ $eq: ['$status', 'active'] }, 1, 0]
-          }
-        }
+            $cond: [{ $eq: ['$status', 'active'] }, 1, 0],
+          },
+        },
       }
     }
   ]);
@@ -574,7 +565,7 @@ userSchema.statics.searchUsers = function(query, options = {}) {
     sortOrder = -1,
     role,
     status,
-    verified
+    verified,
   } = options;
   
   const searchQuery = {};
@@ -583,7 +574,7 @@ userSchema.statics.searchUsers = function(query, options = {}) {
     searchQuery.$or = [
       { 'profile.name': { $regex: query, $options: 'i' } },
       { email: { $regex: query, $options: 'i' } },
-      { 'profile.organization': { $regex: query, $options: 'i' } }
+      { 'profile.organization': { $regex: query, $options: 'i' } },
     ];
   }
   
@@ -616,7 +607,7 @@ userSchema.path('profile.walletAddress').validate(async function(walletAddress) 
   if (!this.isNew && !this.isModified('profile.walletAddress')) return true;
   
   const walletCount = await mongoose.models.User.countDocuments({ 
-    'profile.walletAddress': walletAddress 
+    'profile.walletAddress': walletAddress,
   });
   return !walletCount;
 }, 'Wallet address already exists');

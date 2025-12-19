@@ -15,13 +15,13 @@ const TestPage: React.FC = () => {
       </Paragraph>
       
       <Space direction="vertical" size="large">
-        <Button type="primary" onClick={() => navigate('/dashboard')}>
+        <Button type="primary" onClick={() => navigate('/app/dashboard')}>
           Go to Dashboard
         </Button>
-        <Button onClick={() => navigate('/waste-analysis')}>
+        <Button onClick={() => navigate('/app/waste-analysis')}>
           Go to Waste Analysis
         </Button>
-        <Button onClick={() => navigate('/contamination-detection')}>
+        <Button onClick={() => navigate('/app/contamination-detection')}>
           Go to Contamination Detection
         </Button>
       </Space>

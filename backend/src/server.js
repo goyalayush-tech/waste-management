@@ -13,6 +13,7 @@ import mongoose from 'mongoose';
 import { initializeDatabases } from './config/database.js';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import path from 'path';
 
 // Import routes
 import authRoutes from './routes/auth.js';
@@ -30,6 +31,7 @@ import complianceRoutes from './routes/compliance.js';
 import clientsRoutes from './routes/clients.js';
 import billingRoutes from './routes/billing.js';
 import reportsRoutes from './routes/reports.js';
+import claimCleanRoutes from './modules/claimclean/routes.js';
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
@@ -81,6 +83,9 @@ app.use(cors({
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Static uploads (including ClaimClean document storage)
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // Request logging
 app.use(requestLogger);
@@ -136,6 +141,15 @@ app.use('/api/compliance', complianceRoutes);
 app.use('/api/clients', clientsRoutes);
 app.use('/api/billing', billingRoutes);
 app.use('/api/reports', reportsRoutes);
+app.use('/api/v1/claimclean', claimCleanRoutes);
+import digitalTwinsRoutes from './routes/digitalTwins.js';
+import quantumRoutes from './routes/quantum.js';
+import adminRoutes from './routes/admin.js';
+import importRoutes from './routes/import.js';
+app.use('/api/digital-twins', digitalTwinsRoutes);
+app.use('/api/quantum', quantumRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/import', importRoutes);
 
 // 404 handler
 app.use('*', (req, res) => {
@@ -151,10 +165,7 @@ app.use(errorHandler);
 // Database connection
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/waste-verification-mvp', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/waste-verification-mvp');
     
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {

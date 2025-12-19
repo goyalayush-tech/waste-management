@@ -1,0 +1,145 @@
+.complianceDashboard {
+  padding: 24px;
+}
+
+/* Key Metrics Cards */
+.metricsRow {
+  margin-bottom: 24px;
+}
+
+/* Charts Row */
+.chartsRow {
+  margin-bottom: 24px;
+}
+
+.trendCard {
+  height: 300px;
+}
+
+.riskCard {
+  height: 300px;
+}
+
+.noRiskContainer {
+  text-align: center;
+  padding: 40px;
+}
+
+.noRiskIcon {
+  font-size: 48px;
+  color: #52c41a;
+}
+
+.noRiskText {
+  margin-top: 16px;
+}
+
+/* Recommendations */
+.recommendationsCard {
+  margin-bottom: 24px;
+}
+
+.recommendationAvatar {
+  background-color: #ff4d4f;
+}
+
+.recommendationAvatarHigh {
+  background-color: #fa8c16;
+}
+
+.recommendationAvatarMedium {
+  background-color: #faad14;
+}
+
+.recommendationTag {
+  margin-left: 8px;
+}
+
+.recommendationTagCritical {
+  color: red;
+}
+
+.recommendationTagHigh {
+  color: orange;
+}
+
+.recommendationTagGold {
+  color: gold;
+}
+
+/* Audit History */
+.auditHistoryCard {
+  margin-bottom: 16px;
+}
+
+.auditHistoryActions {
+  margin-bottom: 16px;
+}
+
+.newAuditButton {
+  margin-right: 8px;
+}
+
+/* Table Columns */
+.documentId {
+  font-family: monospace;
+}
+
+.auditTypeTag {
+  margin-left: 8px;
+}
+
+.scoreProgress {
+  width: 100px;
+}
+
+.riskLevelTag {
+  margin-left: 8px;
+}
+
+.findingsBadge {
+  margin-right: 8px;
+}
+
+.criticalBadge {
+  background-color: #ff4d4f;
+}
+
+.highBadge {
+  background-color: #fa8c16;
+}
+
+.mediumBadge {
+  background-color: #faad14;
+}
+
+.viewDetailsButton {
+  padding: 0;
+}
+
+/* Tabs Content */
+.uploadCard {
+  margin-bottom: 16px;
+}
+
+.uploadAlert {
+  margin-bottom: 24px;
+}
+
+.uploadPlaceholder {
+  text-align: center;
+  padding: 40px;
+}
+
+.rulesCard {
+  margin-bottom: 16px;
+}
+
+.rulesAlert {
+  margin-bottom: 24px;
+}
+
+.rulesPlaceholder {
+  text-align: center;
+  padding: 40px;
+}

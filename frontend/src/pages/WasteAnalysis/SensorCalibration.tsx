@@ -26,6 +26,7 @@ import {
 } from '@ant-design/icons';
 import { RootState } from '../../store/store';
 import { calibrateSensors, updateCalibrationStatus } from '../../store/slices/wasteAnalysisSlice';
+import styles from './SensorCalibration.module.css';
 
 const { Title, Text } = Typography;
 const { Step } = Steps;
@@ -158,15 +159,15 @@ const SensorCalibration: React.FC = () => {
   const selectedSensorData = sensorTypes.find(s => s.id === selectedSensor);
   
   return (
-    <div className="sensor-calibration">
-      <div className="calibration-header">
+    <div className={styles.sensorCalibration}>
+      <div className={styles.calibrationHeader}>
         <Title level={3}>Sensor Calibration</Title>
         <Text type="secondary">
           Calibrate sensors to ensure 98%+ accuracy in waste classification
         </Text>
       </div>
       
-      <div className="calibration-actions" style={{ marginBottom: '24px' }}>
+      <div className={styles.calibrationActions}>
         <Space>
           <Button 
             type="primary" 
@@ -208,13 +209,13 @@ const SensorCalibration: React.FC = () => {
                   {sensor.status === 'calibrated' ? 'Recalibrate' : 'Calibrate'}
                 </Button>
               }
-              className="sensor-card"
+              className={styles.sensorCard}
             >
               <Text type="secondary">{sensor.description}</Text>
               
-              <div className="calibration-steps" style={{ marginTop: '16px' }}>
+              <div className={styles.calibrationSteps}>
                 <Text strong>Calibration Steps:</Text>
-                <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
+                <ul className={styles.stepsList}>
                   {sensor.calibrationSteps.map((step, index) => (
                     <li key={index}>
                       <Text type="secondary">{step}</Text>
@@ -229,7 +230,7 @@ const SensorCalibration: React.FC = () => {
                   description="This sensor is properly calibrated and ready for analysis."
                   type="success"
                   showIcon
-                  style={{ marginTop: '16px' }}
+                  className={styles.alertSpacing}
                 />
               )}
               
@@ -239,7 +240,7 @@ const SensorCalibration: React.FC = () => {
                   description="There was an error during calibration. Please try again."
                   type="error"
                   showIcon
-                  style={{ marginTop: '16px' }}
+                  className={styles.alertSpacing}
                 />
               )}
             </Card>
@@ -256,8 +257,8 @@ const SensorCalibration: React.FC = () => {
         width={600}
       >
         {selectedSensorData && (
-          <div className="calibration-progress">
-            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+          <div className={styles.calibrationProgress}>
+            <div className={styles.progressCircle}>
               <Progress
                 type="circle"
                 percent={Math.round(calibrationProgress)}
@@ -289,7 +290,7 @@ const SensorCalibration: React.FC = () => {
                 description="Sensor has been successfully calibrated and is ready for use."
                 type="success"
                 showIcon
-                style={{ marginTop: '16px' }}
+                className={styles.progressCompleteAlert}
               />
             )}
           </div>

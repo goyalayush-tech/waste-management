@@ -1,92 +1,54 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import AppLayout from '../components/Layout/AppLayout';
-import LandingPage from '../pages/Landing/LandingPage';
-import Dashboard from '../pages/Dashboard/Dashboard';
-import WasteAnalysis from '../pages/WasteAnalysis/WasteAnalysis';
-import ContaminationDetection from '../pages/ContaminationDetection/ContaminationDetection';
-import BlockchainCertificates from '../pages/Blockchain/BlockchainCertificates';
-import DigitalTwins from '../pages/DigitalTwins/DigitalTwins';
-import Analytics from '../pages/Analytics/Analytics';
-import Settings from '../pages/Settings/Settings';
 import SearchResults from '../pages/Search/SearchResults';
 import AdvancedSearch from '../pages/Search/AdvancedSearch';
 import NotFound from '../pages/NotFound/NotFound';
-import DocumentUpload from '../pages/EPR/DocumentUpload';
-import EprLanding from '../pages/EPR/EprLanding';
-import DocumentsList from '../pages/EPR/DocumentsList';
-import DocumentDetail from '../pages/EPR/DocumentDetail';
-import CompliancePage from '../pages/EPR/CompliancePage';
-import RecyclersPage from '../pages/EPR/RecyclersPage';
-import ClientsPage from '../pages/EPR/ClientsPage';
-import BillingPage from '../pages/EPR/BillingPage';
+import ClaimCleanLandingPage from '../pages/Landing/ClaimCleanLandingPage';
+import LoginPage from '../pages/Auth/LoginPage';
+import SignupPage from '../pages/Auth/SignupPage';
+import claimCleanRoutes from '../features/claimclean/routes';
 
-// Route configuration
-export const router = createBrowserRouter([
-    // Public landing route
+// Create router configuration function
+const createRouterConfig = () => [
+    // Landing page as root - show ClaimClean landing
+    {
+        path: '/',
+        element: <ClaimCleanLandingPage />,
+        errorElement: <NotFound />,
+    },
+    // Separate landing route for direct access
     {
         path: '/landing',
-        element: <LandingPage />,
+        element: <ClaimCleanLandingPage />,
+        errorElement: <NotFound />,
+    },
+    // Authentication routes
+    {
+        path: '/auth/login',
+        element: <LoginPage />,
         errorElement: <NotFound />,
     },
     {
-        path: '/',
+        path: '/auth/signup',
+        element: <SignupPage />,
+        errorElement: <NotFound />,
+    },
+    {
+        path: '/app',
         element: <AppLayout />,
         children: [
             {
                 index: true,
-                element: <Navigate to="/landing" replace />,
+                element: <Navigate to="/app/claimclean/dashboard" replace />,
             },
+            // Legacy routes redirected to ClaimClean
             {
                 path: 'dashboard',
-                element: <Dashboard />,
+                element: <Navigate to="/app/claimclean/dashboard" replace />,
             },
-            {
-                path: 'waste-analysis',
-                element: <WasteAnalysis />,
-            },
-            {
-                path: 'contamination-detection',
-                element: <ContaminationDetection />,
-            },
-            {
-                path: 'blockchain',
-                children: [
-                    {
-                        index: true,
-                        element: <BlockchainCertificates />,
-                    },
-                    {
-                        path: 'certificates',
-                        element: <BlockchainCertificates />,
-                    },
-                    {
-                        path: 'digital-twins',
-                        element: <DigitalTwins />,
-                    },
-                ],
-            },
-            {
-                path: 'analytics',
-                element: <Analytics />,
-            },
-            {
-                path: 'settings',
-                element: <Settings />,
-            },
-            {
-                path: 'epr',
-                children: [
-                    { index: true, element: <EprLanding /> },
-                    { path: 'upload', element: <DocumentUpload /> },
-                    { path: 'documents', element: <DocumentsList /> },
-                    { path: 'documents/:id', element: <DocumentDetail /> },
-                    { path: 'compliance', element: <CompliancePage /> },
-                    { path: 'recyclers', element: <RecyclersPage /> },
-                    { path: 'clients', element: <ClientsPage /> },
-                    { path: 'billing', element: <BillingPage /> },
-                ],
-            },
+            // ClaimClean routes
+            claimCleanRoutes,
             {
                 path: 'search',
                 element: <SearchResults />,
@@ -98,10 +60,12 @@ export const router = createBrowserRouter([
         ],
         errorElement: <NotFound />,
     },
-]);
+];
 
-// Router Provider Component
+// Router Provider Component with memoized router
 const AppRouter: React.FC = () => {
+    const router = useMemo(() => createBrowserRouter(createRouterConfig()), []);
+
     try {
         return <RouterProvider router={router} />;
     } catch (error) {

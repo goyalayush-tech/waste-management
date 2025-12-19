@@ -1,0 +1,72 @@
+/* AdvancedSearch.module.css */
+/* Styles for the Advanced Search page component */
+
+/* Main container */
+.advancedSearchPage {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header section */
+.header {
+  margin-bottom: 24px;
+}
+
+/* Full width date picker */
+.fullWidth {
+  width: 100%;
+}
+
+/* Action buttons container */
+.actionButtons {
+  margin-top: 24px;
+}
+
+/* Saved search item */
+.savedSearchItem {
+  padding: 8px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.savedSearchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.savedSearchName {
+  font-size: 12px;
+}
+
+.savedSearchDate {
+  font-size: 11px;
+}
+
+.savedSearchActions {
+  margin-top: 4px;
+}
+
+.loadButton {
+  padding: 0;
+  height: auto;
+}
+
+/* Search tips card */
+.searchTipsCard {
+  margin-top: 16px;
+}
+
+.searchTips {
+  font-size: 12px;
+}
+
+.searchTipItem {
+  margin-bottom: 8px;
+}
+
+.searchTipItemLast {
+  margin-bottom: 0;
+}

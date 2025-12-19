@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Upload, Button, Progress, message, Card, Typography, Space, Row, Col, Tag, Alert, Tooltip, Badge } from 'antd';
 import { 
   UploadOutlined, 
@@ -9,12 +9,12 @@ import {
   FileImageOutlined,
   FilePdfOutlined,
   LoadingOutlined,
-  CheckCircleOutlined,
   ExclamationCircleOutlined,
   FolderOpenOutlined,
   ReloadOutlined
 } from '@ant-design/icons';
 import type { UploadFile, UploadProps } from 'antd/es/upload/interface';
+import { eprClient } from '@/services/api';
 
 const { Dragger } = Upload;
 const { Text, Title } = Typography;
@@ -130,68 +130,57 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
         setFileList(uploadedFiles);
         onUploadComplete?.(uploadedFiles);
         message.success('Files uploaded successfully!');
-      } else {
-        // Default upload simulation with individual file progress
+      } else if (uploadType === 'epr-documents') {
+        // Use real backend for EPR document uploads
+        const client = eprClient();
+
         const uploadPromises = fileList.map(async (file, index) => {
           try {
-            // Simulate individual file upload with progress
-            for (let progress = 0; progress <= 100; progress += Math.random() * 20) {
-              await new Promise(resolve => setTimeout(resolve, 50));
-              
-              setUploadProgressList(prev => 
-                prev.map((item, i) => 
-                  i === index 
-                    ? { ...item, progress: Math.min(progress, 100) }
-                    : item
-                )
-              );
-            }
+            const origin = file.originFileObj!;
+            const res = await client.uploadDocument(
+              {
+                file: origin as File,
+                documentType: 'other',
+                metadata: { originalName: file.name },
+              },
+              (p) => {
+                setUploadProgressList(prev =>
+                  prev.map((item, i) => (i === index ? { ...item, progress: p } : item))
+                );
+              }
+            );
 
-            // Simulate API call for this file
-            await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
-
-            // Mark as successful
-            setUploadProgressList(prev => 
-              prev.map((item, i) => 
-                i === index 
-                  ? { ...item, progress: 100, status: 'success' }
-                  : item
-              )
+            setUploadProgressList(prev =>
+              prev.map((item, i) => (i === index ? { ...item, progress: 100, status: 'success' } : item))
             );
 
             return {
               ...file,
               status: 'done' as const,
-              response: { url: `https://example.com/uploads/${file.name}` }
+              response: { documentId: res.documentId, status: res.status },
             };
           } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Upload failed';
-            
-            setUploadProgressList(prev => 
-              prev.map((item, i) => 
-                i === index 
-                  ? { ...item, status: 'error', error: errorMessage }
-                  : item
-              )
+
+            setUploadProgressList(prev =>
+              prev.map((item, i) => (i === index ? { ...item, status: 'error', error: errorMessage } : item))
             );
-            
             setFailedUploads(prev => [...prev, file.uid]);
             onUploadError?.(errorMessage, file.name);
-            
+
             return {
               ...file,
               status: 'error' as const,
-              error: errorMessage
+              error: errorMessage,
             };
           }
         });
 
         const uploadedFiles = await Promise.all(uploadPromises);
         setFileList(uploadedFiles);
-        
         const successfulUploads = uploadedFiles.filter(file => file.status === 'done');
         const failedCount = uploadedFiles.length - successfulUploads.length;
-        
+
         if (failedCount === 0) {
           message.success('All files uploaded successfully!');
           onUploadComplete?.(uploadedFiles);
@@ -201,6 +190,42 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
         } else {
           message.error('All uploads failed');
         }
+      } else {
+        // Previous default simulated upload logic (kept for reference)
+        // NOTE: This block simulates per-file progress and success; preserved as per request.
+        // const uploadPromises = fileList.map(async (file, index) => {
+        //   try {
+        //     for (let progress = 0; progress <= 100; progress += Math.random() * 20) {
+        //       await new Promise(resolve => setTimeout(resolve, 50));
+        //       setUploadProgressList(prev => prev.map((item, i) => (i === index ? { ...item, progress: Math.min(progress, 100) } : item)));
+        //     }
+        //     await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
+        //     setUploadProgressList(prev => prev.map((item, i) => (i === index ? { ...item, progress: 100, status: 'success' } : item)));
+        //     return { ...file, status: 'done' as const, response: { url: `https://example.com/uploads/${file.name}` } };
+        //   } catch (error) {
+        //     const errorMessage = error instanceof Error ? error.message : 'Upload failed';
+        //     setUploadProgressList(prev => prev.map((item, i) => (i === index ? { ...item, status: 'error', error: errorMessage } : item)));
+        //     setFailedUploads(prev => [...prev, file.uid]);
+        //     onUploadError?.(errorMessage, file.name);
+        //     return { ...file, status: 'error' as const, error: errorMessage };
+        //   }
+        // });
+        // const uploadedFiles = await Promise.all(uploadPromises);
+        // setFileList(uploadedFiles);
+        // const successfulUploads = uploadedFiles.filter(file => file.status === 'done');
+        // const failedCount = uploadedFiles.length - successfulUploads.length;
+        // if (failedCount === 0) {
+        //   message.success('All files uploaded successfully!');
+        //   onUploadComplete?.(uploadedFiles);
+        // } else if (successfulUploads.length > 0) {
+        //   message.warning(`${successfulUploads.length} files uploaded successfully, ${failedCount} failed`);
+        //   onUploadComplete?.(successfulUploads);
+        // } else {
+        //   message.error('All uploads failed');
+        // }
+
+        // For non-EPR uploads, leave as no-op for now
+        message.info('Upload handler not configured for this upload type.');
       }
 
       // Notify parent of progress updates
@@ -251,7 +276,7 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
               uid: `camera-${Date.now()}`,
               name: `camera-capture-${Date.now()}.jpg`,
               status: 'done',
-              originFileObj: file,
+              originFileObj: file as any,
               size: file.size,
               type: file.type,
               // Store GPS data in file metadata
@@ -274,7 +299,7 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
               uid: `camera-${Date.now()}`,
               name: `camera-capture-${Date.now()}.jpg`,
               status: 'done',
-              originFileObj: file,
+              originFileObj: file as any,
               size: file.size,
               type: file.type
             };
@@ -289,7 +314,7 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
           uid: `camera-${Date.now()}`,
           name: `camera-capture-${Date.now()}.jpg`,
           status: 'done',
-          originFileObj: file,
+          originFileObj: file as any,
           size: file.size,
           type: file.type
         };
@@ -335,7 +360,7 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
           uid: `bulk-${Date.now()}-${index}`,
           name: file.name,
           status: 'done',
-          originFileObj: file,
+          originFileObj: file as any,
           size: file.size,
           type: file.type
         });
@@ -435,8 +460,6 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
       handleFileChange(newFileList);
     },
     onDrop: () => setDragActive(false),
-    onDragEnter: () => setDragActive(true),
-    onDragLeave: () => setDragActive(false),
     showUploadList: false,
     accept
   };
@@ -583,13 +606,13 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
                                 />
                               )}
                               
-                              <Tag color={getStatusColor(file)} size="small">
+                              <Tag color={getStatusColor(file)}>
                                 {getFileStatus(file)}
                               </Tag>
                               
                               {file.response?.gps && (
                                 <Tooltip title={`GPS: ${file.response.gps.latitude.toFixed(6)}, ${file.response.gps.longitude.toFixed(6)}`}>
-                                  <Tag color="blue" size="small">GPS</Tag>
+                                  <Tag color="blue">GPS</Tag>
                                 </Tooltip>
                               )}
                             </Space>
@@ -608,7 +631,7 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({
               message="Uploading files..."
               description={
                 <Space direction="vertical" style={{ width: '100%' }}>
-                  {uploadProgressList.map((progress, index) => (
+                  {uploadProgressList.map((progress) => (
                     <div key={progress.fileName}>
                       <Text style={{ fontSize: 12 }}>{progress.fileName}</Text>
                       <Progress 
