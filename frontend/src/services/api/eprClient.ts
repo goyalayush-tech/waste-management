@@ -376,4 +376,19 @@ export class EprApiClient extends BaseApiClient {
   }> {
     return this.get(`/reports/status/${reportId}`);
   }
+
+  // Waste Claims
+  async createClaim(data: FormData): Promise<{ claim_id: string; status: string; message: string }> {
+    return this.post('/waste/claims', data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    });
+  }
+
+  async getClaims(): Promise<{ claims: any[] }> {
+      return this.get('/waste/claims');
+  }
+
+  async getDashboardStats(): Promise<any> {
+      return this.get('/waste/stats');
+  }
 }

@@ -1,51 +1,57 @@
 import React, { useMemo } from 'react';
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import AppLayout from '../components/Layout/AppLayout';
+import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
+// import AppLayout from '../components/Layout/AppLayout';
 import SearchResults from '../pages/Search/SearchResults';
 import AdvancedSearch from '../pages/Search/AdvancedSearch';
 import NotFound from '../pages/NotFound/NotFound';
-import ClaimCleanLandingPage from '../pages/Landing/ClaimCleanLandingPage';
-import LoginPage from '../pages/Auth/LoginPage';
-import SignupPage from '../pages/Auth/SignupPage';
+import ModernLandingPage from '../pages/ModernLandingPage';
+import ModernLoginPage from '../pages/ModernLoginPage';
+import ModernSignupPage from '../pages/ModernSignupPage';
+import ModernDashboardPage from '../pages/ModernDashboardPage';
 import claimCleanRoutes from '../features/claimclean/routes';
+import ProtectedRoute from '../components/Auth/ProtectedRoute';
 
 // Create router configuration function
 const createRouterConfig = () => [
-    // Landing page as root - show ClaimClean landing
+    // Landing page as root - show Modern landing
     {
         path: '/',
-        element: <ClaimCleanLandingPage />,
+        element: <ModernLandingPage />,
         errorElement: <NotFound />,
     },
     // Separate landing route for direct access
     {
         path: '/landing',
-        element: <ClaimCleanLandingPage />,
+        element: <ModernLandingPage />,
         errorElement: <NotFound />,
     },
     // Authentication routes
     {
         path: '/auth/login',
-        element: <LoginPage />,
+        element: <ModernLoginPage />,
         errorElement: <NotFound />,
     },
     {
         path: '/auth/signup',
-        element: <SignupPage />,
+        element: <ModernSignupPage />,
         errorElement: <NotFound />,
     },
     {
         path: '/app',
-        element: <AppLayout />,
+        element: <ProtectedRoute><Outlet /></ProtectedRoute>,
         children: [
             {
                 index: true,
-                element: <Navigate to="/app/claimclean/dashboard" replace />,
+                element: <Navigate to="/app/dashboard" replace />,
+            },
+            {
+                path: 'dashboard',
+                element: <ModernDashboardPage />,
             },
             // Legacy routes redirected to ClaimClean
             {
-                path: 'dashboard',
-                element: <Navigate to="/app/claimclean/dashboard" replace />,
+                path: 'claimclean/dashboard',
+                element: <Navigate to="/app/dashboard" replace />,
             },
             // ClaimClean routes
             claimCleanRoutes,

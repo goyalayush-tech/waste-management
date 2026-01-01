@@ -63,18 +63,18 @@ const App: React.FC = () => {
         <AuthProvider>
           <ConfigProvider
             theme={{
-              algorithm: theme.defaultAlgorithm,
+              algorithm: theme.darkAlgorithm,
               token: {
-                colorPrimary: '#1B5E20', // Forest Green (ClaimClean primary)
+                colorPrimary: '#00F0FF', // Electric Cyan
                 colorSuccess: '#16A34A', // Success green
                 colorWarning: '#F59E0B', // Amber for warnings
                 colorError: '#EF4444', // Critical red
-                colorInfo: '#0284C7', // Info blue
-                colorBgBase: '#ffffff',
-                colorTextBase: '#000000',
-                colorBgContainer: '#ffffff',
-                colorBgElevated: '#ffffff',
-                colorBorder: '#d9d9d9',
+                colorInfo: '#3B82F6', // Tech Blue
+                colorBgBase: '#050505',
+                colorTextBase: '#ffffff',
+                colorBgContainer: '#0A0A0A',
+                colorBgElevated: '#1F2937',
+                colorBorder: '#1F2937',
                 fontFamily: 'Inter, system-ui, sans-serif',
                 borderRadius: 8,
               },
