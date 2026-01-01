@@ -5,8 +5,8 @@
   text-align: center;
 }
 
-/* Global Styles */
-body {
+/* Global Styles - Commented out to allow index.css (Tailwind) to control theme */
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -15,7 +15,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffffff;
   color: #000000;
-}
+} */
 
 .router-error {
   padding: 20px;

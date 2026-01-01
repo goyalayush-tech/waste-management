@@ -107,8 +107,11 @@ export interface TwoFactorVerifyRequest {
 
 export class AuthApiClient extends BaseApiClient {
   constructor(config: Omit<ApiConfig, 'baseURL'> & { baseURL?: string } = {}) {
+    const resolvedBaseURL = [config.baseURL, process.env.REACT_APP_AUTH_API_URL, 'http://localhost:8000/api/auth']
+      .find((candidate) => typeof candidate === 'string' && candidate.trim().length > 0) as string;
+
     super({
-      baseURL: config.baseURL || process.env.REACT_APP_AUTH_API_URL || 'http://localhost:8000/api/auth',
+      baseURL: resolvedBaseURL,
       ...config,
     });
   }
